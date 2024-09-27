@@ -1,0 +1,14 @@
+.out
+.exe
+*
+!/**/
+!*.*
+CMakeLists.txt
+*.txt
+cmake-build-debug/
+build/
+build/**/*
+build/*
+.idea
+.idea/*
+.idea/**/*
