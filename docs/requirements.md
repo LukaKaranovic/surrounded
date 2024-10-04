@@ -434,7 +434,7 @@ Here are some of the choices a user may have to make throughout the game:
 
 John has finished his homework and needs a way to relax and wind down for the remaining 2 hours of his day. After all of his tough linear algebra homework, he wants something engaging but not mentally challenging, so he boots up Surrounded, starts up a game with the “start” button, and dies at round 22. Satisfied with his performance, John closes the game by pressing “quit” on the game over screen.
 
-## <a name="featprio"></a>Feature prioritisation
+## <a name="featprio"></a>Feature Prioritization
 
 Since this is our first time doing game development, it is difficult to gauge how much time doing certain tasks will take. Additionally, it is a busy semester for a lot of us so it is difficult to know how much time we will have to dedicate to developing our game. These two factors can impact how much we add to our game drastically. 
 
