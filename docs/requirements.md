@@ -323,7 +323,7 @@ The main starting menu of Surrounded will display the title centred at the top o
 * Load Game: Loads the last saved game (stretch goal)
 * Quit: Closes the game
 
-![Main Menu](mainmenu.png)
+![Main Menu](Images/mainmenu.png)
 Fig. 1
 
 *Note: The quit button should be below the load/save button, it was forgotten in image creation.*
@@ -351,7 +351,7 @@ The player may choose to *press the escape key* at any time during the gameplay 
 * Player health bar
 * Boss health bar (only on boss rounds)
 
-![Gameplay Screen](gameplayscreen.png)
+![Gameplay Screen](Images/gameplayscreen.png)
 Fig. 2
 
 *Note: The player will normally be in the centre of the screen.*
@@ -369,7 +369,7 @@ The pause menu accessible during gameplay through the escape key consists of a l
 * Score display: Shows your current score
 
 
-![Pause Menu](pausemenu.png)
+![Pause Menu](Images/pausemenu.png)
 Fig. 3
 
 ### Item Selection Pop-up
@@ -397,7 +397,7 @@ Once the player reaches 0 health the game will transition to the game over scree
 * Leaderboard: View the leaderboard (stretch goal)
 
 
-![Game Over](gameoverscreen.png)
+![Game Over](Images/gameoverscreen.png)
 Fig. 4
 
 ### <a name="stats"></a>Stats and Upgrades Menu:
@@ -409,7 +409,7 @@ The Stats and Upgrades Menu is accessible through either the pause menu or game 
 * Each item the player currently has, the description of the item, and how many of that item they have
 * The player’s current stats
 
-![Stats and Upgrades Menu](statsandupgrades.png)
+![Stats and Upgrades Menu](Images/statsandupgrades.png)
 
 ### Player navigation guide/flow chart:
 * Players will start through the main menu, once they select the start game option they will be brought to the gameplay screen.
@@ -417,7 +417,7 @@ The Stats and Upgrades Menu is accessible through either the pause menu or game 
 * During the game loop, the item selection screen will pop up once after a round, after selecting an item, the player will be brought back to the gameplay screen.
 * If a player dies in the game loop, the game over screen UI will appear over the players gameplay screen, giving them the option to return back to the main menu.
 
-![img](uiflowchart.png)
+![img](Images/uiflowchart.png)
 Fig. 5
 
 * Leaderboard is omitted for now as it is a stretch goal.
