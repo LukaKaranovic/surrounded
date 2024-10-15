@@ -52,16 +52,29 @@ public class EnemyController : MonoBehaviour
         bullet.GetComponent<Rigidbody2D>().AddForce(firePoint.up * fireForce, ForceMode2D.Impulse);
     }
 
-   public void TakeDamage(int damage)
-{
-    health -= damage;
-    Debug.Log("Enemy health: " + health); // Debug message to track health
+    public void takeDamage(int damage) {
+        health -= damage;
+        Debug.Log("Enemy health: " + health); // debug message to track health
 
-    if (health <= 0)
-    {
-        Debug.Log("Enemy destroyed!");
-        Destroy(gameObject);
+        if (health <= 0) {
+            Debug.Log("Enemy destroyed!");
+            Destroy(gameObject);
+        }
     }
-}
+
+/*
+   public void TakeDamage(int damage)
+    {
+        health -= damage;
+        Debug.Log("Enemy health: " + health); // Debug message to track health
+
+        if (health <= 0)
+        {
+            Debug.Log("Enemy destroyed!");
+            Destroy(gameObject);
+        }
+    }
+
+    */
 
 }

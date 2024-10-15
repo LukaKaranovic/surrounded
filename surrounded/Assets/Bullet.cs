@@ -23,11 +23,24 @@ public class Bullet : MonoBehaviour
             EnemyController enemy = other.GetComponent<EnemyController>();
             if (enemy != null)
             {
-                enemy.TakeDamage(damage); // Apply damage to the enemy
+                enemy.takeDamage(damage); // Apply damage to the enemy
                 Debug.Log("Enemy took damage! Remaining health: " + enemy.health);
             }
 
             // Destroy the bullet after impact
+            Destroy(gameObject);
+        }
+
+        if (other.CompareTag("Player")) {
+            Debug.Log("Bullet hit player!");
+
+            PlayerController player = other.GetComponent<PlayerController>();
+            if (player != null) {
+                player.takeDamage(damage);
+                Debug.Log("Player took damage!");
+            }
+
+            //Destroy bullet after impact
             Destroy(gameObject);
         }
     }

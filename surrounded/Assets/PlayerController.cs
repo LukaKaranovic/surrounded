@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb;
     public Weapon weapon;
 
+    public int health;
+
     Vector2 moveDirection;
     Vector2 mousePosition;
 
@@ -31,5 +33,16 @@ public class PlayerController : MonoBehaviour
         Vector2 aimDirection = mousePosition - rb.position;
         float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
         rb.rotation = aimAngle;
+    }
+
+    public void takeDamage(int damage) {
+
+        health -= damage;
+
+        Debug.Log("Player taking damage! Health: " + health);
+
+        if (health <= 0) {
+            Application.Quit();
+        }
     }
 }
