@@ -61,20 +61,36 @@ public class EnemyController : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-/*
-   public void TakeDamage(int damage)
+    /**
+     * Code for inter-ship collisions.
+     * @param other a Collision2D object containing 
+     */
+    public void OnCollisionEnter2D(Collision2D other)
     {
-        health -= damage;
-        Debug.Log("Enemy health: " + health); // Debug message to track health
-
-        if (health <= 0)
+        if (other.gameObject.CompareTag("Bullet"))
         {
-            Debug.Log("Enemy destroyed!");
+            // do nothing, redundant. handled by Bullet
+            return;
+        }
+
+        if (other.gameObject.CompareTag("Player"))
+        {
+            // get enemy
+            PlayerController player = other.gameObject.GetComponent<PlayerController>();
+            
+            // damage both heavily
+            player.takeDamage(50);
+            this.takeDamage(50); // stretch goal -- received damage configurable by upgrades
+        }
+
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            // get enemy
+            EnemyController enemy = other.gameObject.GetComponent<EnemyController>();
+            
+            // destroy both immediately
+            Destroy(enemy);
             Destroy(gameObject);
         }
     }
-
-    */
-
 }

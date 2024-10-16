@@ -46,4 +46,5 @@ public class PlayerController : MonoBehaviour
             Destroy(gameObject); // kill the player :(
         }
     }
+    
 }
