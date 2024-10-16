@@ -41,8 +41,9 @@ public class PlayerController : MonoBehaviour
 
         Debug.Log("Player taking damage! Health: " + health);
 
-        if (health <= 0) {
-            Application.Quit();
+        if (health <= 0)
+        {
+            Destroy(gameObject); // kill the player :(
         }
     }
 }
