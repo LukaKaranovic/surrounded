@@ -12,42 +12,41 @@ The following person has been designated the main contact person for questions f
 
 ## Table of Contents
 
-[ Problems that are known ](#problems) 
+[Problems that are known](#problems) 
 
-[ Game overview ](#overview) 
+[Game overview](#overview) 
 
-[ Target audience and motivation](#target)
+[Target audience and motivation](#target)
 
-[ Game flow, objectives, and plot-line ](#objs)
+[Game flow, objectives, and plot-line](#gameflow)
 
-[ Key features and behaviour, with detailed requirements ](#keyfeat)
+[Key features and behaviour](#keyfeat)
 
-[ User interface and navigation  ](#ui)
+[User interface and navigation](#ui)
  
-[ Use cases/scenarios  ](#uses)
+[Use cases/scenarios](#uses)
 
-[ Non-functional requirements ](#nonfunc)
+[Non-functional requirements](#nonfunc)
 
-[ Feature prioritization ](#featprio)
+[Feature prioritization](#featprio)
 
-[ Glossary ](#glossary)
-
+[Glossary](#glossary)
 
 ## <a name="figlist"></a>List of figures
 
-[Main Menu]
+Figure 1. [Main Menu](#mainmenu)
 
-[Gameplay Screen]
+Figure 2. [Gameplay Screen](#gameplayscreen)
 
-[Pause Menu]
+Figure 3. [Pause Menu](#pausemenu)
 
-[Item Selection Pop-up]
+Figure 4. [Item Selection Pop-up](#itemselection)
 
-[Game Over]
+Figure 5. [Game Over](#gameover)
 
-[Stats and Upgrades Menu]
+Figure 6. [Stats and Upgrades Menu](statsandupgrades)
 
-[UI Flowchart]
+Figure 7. [UI Flow Chart](#uiflowchart)
 
 ## <a name="problems"></a>Problems that are known 
 
@@ -81,7 +80,7 @@ Everyone in the Discord has some form of background playing video games, with ea
 
 The game’s controls are currently with keyboard and mouse, with no plans to add controller, or touch-screen control support at the moment, meaning this game is meant for PC users only.
 
-## <a name="objs"></a>Game flow, objectives, and plot-line 
+## <a name="gameflow"></a>Game flow, objectives, and plot-line 
 
 ### Objective:
 
@@ -117,7 +116,9 @@ More details about the map size, camera, and asteroids can be found in the Map a
 
 The story is based around a lone survivor traversing an unknown space field referred to as V1U. As the last of their kind from Earth, the player will traverse the V1U field out in the cosmos in hopes to find life. However, the player will only encounter rogue, AI-controlled ships which will try to eliminate the player. Slowly, through in-game text displayed at the end of rounds, they will discover that there is a mastermind unit controlling these AI ships, named W35-S315. Once defeating the W35-S315, the player will discover that W35-S315 was just like the other ships and didn’t have a mind of its own. Instead, it is revealed that W35-S315 is a servant of the great overlord C0B-U5. Overtime, more of the story of the V1U space field will be revealed to the user through completing rounds.
 
-## <a name="keyfeat"></a>Key features and behaviour, with detailed requirements.
+*The cryptic text:* The text will reveal the story to the player through vague statements. It is intended to not be very direct and is something that the user will have to pay attention to and piece together to understand. At the end of each round, the player will disappear and about 1-2 lines of text displaying the cryptic text will appear for about 5 seconds before it disappears and the player is prompted with the [item selection pop-up](#itemselection).
+
+## <a name="keyfeat"></a>Key features and behaviour
 
 The game will consist of moving through 2D space and piloting a base ship through a map, fighting hoards of space enemies in waves. With this, some of the key features/aspects of the game are broken down with these key topics:
 
@@ -179,15 +180,20 @@ The game will consist of moving through 2D space and piloting a base ship throug
 		* If it has enough credits to spawn that enemy, it will spawn it and subtract the credit amount from the credits in the function.  
 		* If it doesn’t have enough credits to spawn the enemy, it will randomly select another enemy ID until it can spawn it.  
 	* The 10 second loop will then repeat.
-* At the end of each round, all enemies are wiped from the screen and the player gets prompted with 3 random items. The player must choose 1 item to boost their ship, these items will be described in the Upgrade System section 
-* At the start of a new round, the player’s health will be replenished to full.
+* At the end of each round, all enemies and the player model are wiped from the screen. Then cryptic text revealing the story will appear for 5 seconds. The text will disappear and the player will get prompted with 3 random items. The player must choose 1 item to boost their ship, these items will be described in the Upgrade System section.
+* The next round will not start until an item has been selected.
+* At the start of a new round, the player’s health will be replenished to full and the player will spawn in at the center of the map.
 
 #### Boss Rounds:
 * Every 10 rounds, a boss will spawn instead of enemies. 
 	* The function for spawning enemies will not be called.
-* A boss health bar and name will appear and the player MUST defeat the boss (by depleting its health to 0) to progress.
-* There is no timer in a boss round.
-* The credits will still update, so the rounds after the boss rounds have the proper amount of credits (credits won’t be used though).
+* A boss health bar and name will appear underneath the player health bar in the top left.
+* There is no timer in a boss round and the player MUST defeat the boss (by depleting its health to 0) to progress.
+* The credit amount will still update, so the rounds after the boss rounds have the proper amount of credits (credits won’t be used on boss rounds though).
+* During a boss round, the camera will NOT keep the player centered and instead will be fixed in place. The player and boss will not be able to traverse outside of this fixed region for the duration of the boss round.
+	* This is so the player cannot run away from the boss attacks that have a specific range and forces them to be dodged the intended way. 
+	* This is also so the bosses can't go out of bounds and cause issues related to that (instantly dying or not being able to be hit).
+* Once a boss round ends, the camera will go back to tracking the player and the player will be able to traverse the entire map again (instead of just the current screen).
 * Details about the bosses are in the enemy design section.
 
 ### Enemy Design
@@ -247,24 +253,65 @@ Every 10 Rounds, a boss will spawn instead of the normal enemies.
 * A red health bar with the boss’s name will appear under the player’s health bar.
 * Bosses will each have distinct movesets (for now, they are quite limited) and will be larger than the player's ship. 
 * For now, the screen will lock when a boss spawns, meaning the camera is not centred around the player and the player cannot move offscreen. 
-	* This is subject to change later if we deem the gameplay isn’t consistent or fair.
+	* *Note: This is subject to change later if we deem the gameplay isn’t consistent or fair.*
 * Each boss has three distinct attacks, as a stretch goal we plan to add more.
+	* Bosses can only do one attack at a time.
 
 For version 1 of our game, we only intend on having 2 specific boss fights that will appear at round 10 and 20:
 
 ##### Version 1 Bosses:
-*W35-S315:*
+
+###### W35-S315:
 * At round 10, W35-S315 will spawn and have three different distinct attacks:
-* Merge Conflict: sends out walls of >>>>> and ===== and <<<<< at the player.
-* The Tree: Shoots out a binary tree which spawns children out random nodes.
-* Vim: opens up a vim terminal and shoots it at the player. 
-* Base stats: 25 speed, 30 damage, 750 health
-*C0B-U5:*
+
+* Merge Conflict: Sends out walls of >>>>> and ===== and <<<<< at the player. 
+	* These walls will be roughly 1/5 of the screen length long and will move at 50% of the player's speed to allow appropriate time to react and weave through the pattern of walls.
+	* The walls will come from the edges of the screen and will traverse in one direction until they go off-screen.
+	* Being hit by a wall will deal 20 damage to the player.
+
+* Git Branch: Shoots out a random binary tree pattern of nodes that will damage the player.
+	* The tree, including all of its edges and nodes, will be displayed for 1 second with a pink outline. The player can move through this outline and it will not damage them during the 1 second. It is purely to telegraph to the player where the tree will be.
+	* After the 2 seconds are up, the outline will turn from pink to white and will stay there for 3 seconds, if the player collides with any of the white edges or nodes, they will be damaged.
+	* Being hit by a node or edge will deal 40 damage to the player.
+
+* Ponytail Whip: W35-S315 will spin quickly, using his ponytail as a whip to damage the player.
+	* To telegraph this attack, W35-S315 will stop moving and flash red for 0.5 seconds.
+	* After the 0.5 seconds are up, he will do a quick 360 degree spin where his ponytail will stick outward, doing a circular slashing motion. 
+	* Being hit by the ponytail will deal 25 damage to the player.
+
+
+* Movement: W35-S315 will constantly move towards the player through the entire fight while doing attacks. 
+	* He will have 75% of the player's speed, allowing the player to easily outrun him, but not be able to stay still during the fight.
+	* If W35-S315 collides with the player, he will deal 25 damage.
+
+* Base stats: 80% of player's speed, 20/40/25/25 damage, 1500 health
+
+###### C0B-U5:
 * At round 20, C0B-U5 will spawn and have three different distinct attacks:
-* The Cartesian Product: Sections the map in patterns based on different cartesian products
-* Sets: C0B-U5 will disperse different set unions at the player
-* The Scalars: C0B-U5 will create a span across the map which can damage the player.
-* Base stats: 75 speed, 60 damage, 5000 health
+
+* Cartesian Product: Sections the map in patterns based on different cartesian products
+	* To telegraph this attack, the screen will be split into quadrants by two lines, forming a cartesian plane. There will be small lines intersecting the graph lines at integer points (think of a number line).
+	* One second after these lines appear, a cartesian product of sets will appear top right of the screen, below the round timer display. An example of a cartesian product is (the set of natural numbers) x (the set of real numbers).
+	* After the product appears, there will be a transparent white collection of shaded regions, dots, or lines that indicate where you will take damage if you stay there. These indicators will appear for 2 seconds.
+	* Once the 2 seconds are up, the indicators will become red and stay there for 1 second, damaging the player if they are in the region.
+	* Being hit by this attack will deal 60 damage to the player.
+
+* Matrix Bomb: C0B-U5 will drop a 4x4 matrix from his body/ship, exploding when it hits the bottom of the screen.
+	* C0B-U5 will flash red for 0.5 seconds before dropping the matrix bomb. The bomb will take 1 second to fall to the bottom of the screen and will explode when it reaches the bottom of the screen. If a player runs into the matrix as it is falling, they will take damage.
+	* The explosion will cause the matrix to disappear and will deal damage in a circular area (indicated visually by an explosion animation) around where the matrix hit the bottom (size to be determined). This explosion will be bigger than the matrix and will damage the player if they are within the radius.
+	* This will be C0B-U5's most frequent attack.
+	* Being hit by this attack will deal 75 damage to the player.
+
+* Factorial: C0B-U5 will shoot a barrage of bullets in decrements (factorial decomposition).
+	* A random number N between 5-8 will be selected. Then a spread of N bullets will be shot at the player. After 0.3 seconds, a spread of N-1 bullets will be shot at the player, then N-2, etc. This pattern will continue until C0B-U5 has shot a spread of one bullet.
+	* Being hit by this attack will deal 45 damage to the player.
+
+* Movement: C0B-U5 will never chase the player or deal damage if he collides with the player. Instead, he will move from left to right on the top third of the screen in an inconsistent and unpredictable pattern, making it hard for the player to deal damage.
+
+* Desperation phase: When C0B-U5 reaches 0 health, he will try and kill the player with one last desperate attack. He will perform the Cartesian Product attack 5 times in a row in succession. If the player survives this, a cutscene will appear. 
+	* During the cutscene, the screen will contain C0B-U5 at the top of the screen and nothing else. Text will appear line by line. This text will be a proof by contradiction written by the player (the text will be predetermined and will not take player input) that eliminates C0B-U5 from V1U. Upon the proof being finished, C0B-U5's model at the top of the screen will explode, and the round will end.
+
+* Base stats: 75 speed (left-right movement only), 60/75/45 damage, 5000 health
 
 ### Upgrade Items and System 
 
@@ -323,8 +370,8 @@ The main starting menu of Surrounded will display the title centred at the top o
 * Load Game: Loads the last saved game (stretch goal)
 * Quit: Closes the game
 
-![Main Menu](mainmenu.png)
-Fig. 1
+![Main Menu](Images/mainmenu.png)
+Figure 1. Main Menu<a name="mainmenu"></a>
 
 *Note: The quit button should be below the load/save button, it was forgotten in image creation.*
 
@@ -351,8 +398,8 @@ The player may choose to *press the escape key* at any time during the gameplay 
 * Player health bar
 * Boss health bar (only on boss rounds)
 
-![Gameplay Screen](gameplayscreen.png)
-Fig. 2
+![Gameplay Screen](Images/gameplayscreen.png)
+Figure 2. Gameplay Screen<a name="gameplayscreen"></a>
 
 *Note: The player will normally be in the centre of the screen.*
 
@@ -368,9 +415,8 @@ The pause menu accessible during gameplay through the escape key consists of a l
 * Stats and upgrades: Brings you to the stats and upgrades menu (described later in this section)
 * Score display: Shows your current score
 
-
-![Pause Menu](pausemenu.png)
-Fig. 3
+![Pause Menu](Images/pausemenu.png)
+Figure 3. Pause Menu<a name="pausemenu"></a>
 
 ### Item Selection Pop-up
 
@@ -378,13 +424,14 @@ At the end of each round the player will be prompted with a pop-up menu containi
 
 The game will be paused until the player clicks on an item to select it. Once the player selects an item, the game will go to the next round and the timer will start.
 
+![Item Selection](Images/itemselection.png)
+Figure 4. Item Selection Pop-up<a name="itemselection"></a>
+
 *The item selection pop-up consists of:* 
 * Display of the player’s stats
 * The three items and their descriptions.
 
-
-
-### <a name="over"></a>Game Over Screen 
+### Game Over Screen 
 
 Once the player reaches 0 health the game will transition to the game over screen with large text titled “Game Over” at the top of the screen along with text to show the players final score. There will be 4 vertically aligned buttons centred on the screen that will provide options for the player to either restart the game and send them back into a new run, quit the game and send them to the main menu, enter the stats and upgrades menu and view their final stats and upgrades, or view the leaderboard. The leaderboard option is a stretch goal and may not be present in the final version.
 
@@ -396,20 +443,19 @@ Once the player reaches 0 health the game will transition to the game over scree
 * Quit: Goes to the main menu
 * Leaderboard: View the leaderboard (stretch goal)
 
+![Game Over](Images/gameoverscreen.png)
+Figure 5. Game Over Screen<a name="gameoverscreen"></a>
 
-![Game Over](gameoverscreen.png)
-Fig. 4
-
-### <a name="stats"></a>Stats and Upgrades Menu:
+### Stats and Upgrades Menu:
 
 The Stats and Upgrades Menu is accessible through either the pause menu or game over screen and will display all of the players current upgrades and stats. The menu consists of the text “Stats and Upgrades” along with a smaller scrollable window situated directly underneath displaying each upgrade and how many multiples of each the player currently has. The upgrades are displayed in a rectangle containing a sprite for the upgrade and an adjacent text description in a similar fashion to the item selection pop-up. At the bottom of the menu will be text to display the player's current stats.
-
 
 *The stats and upgrades menu consists of:*
 * Each item the player currently has, the description of the item, and how many of that item they have
 * The player’s current stats
 
-![Stats and Upgrades Menu](statsandupgrades.png)
+![Stats and Upgrades Menu](Images/statsandupgrades.png)
+Figure 6. Stats and Upgrades<a name="statsandupgrades"></a>
 
 ### Player navigation guide/flow chart:
 * Players will start through the main menu, once they select the start game option they will be brought to the gameplay screen.
@@ -417,8 +463,8 @@ The Stats and Upgrades Menu is accessible through either the pause menu or game 
 * During the game loop, the item selection screen will pop up once after a round, after selecting an item, the player will be brought back to the gameplay screen.
 * If a player dies in the game loop, the game over screen UI will appear over the players gameplay screen, giving them the option to return back to the main menu.
 
-![img](uiflowchart.png)
-Fig. 5
+![UI Flow Chart](Images/uiflowchart.png)
+Figure 7. UI Flow Chart <a name="uiflowchart"></a>
 
 * Leaderboard is omitted for now as it is a stretch goal.
  
@@ -439,7 +485,6 @@ John has finished his homework and needs a way to relax and wind down for the re
 Since this is our first time doing game development, it is difficult to gauge how much time doing certain tasks will take. Additionally, it is a busy semester for a lot of us so it is difficult to know how much time we will have to dedicate to developing our game. These two factors can impact how much we add to our game drastically. 
 
 With that said, we decided to section our prioritisation of development to three sections discussed below:
-
 
 **Core Features:**
 

@@ -13,12 +13,32 @@
  - Brandon Tobin, longtemps101@gmail.com 
  - Casey Adams, CFAdams10@gmail.com 
 
+## Table of Contents
 
-## Project intro
+[Project intro](#intro) 
+
+[Team philosophy](#philosophy) 
+
+[Team roles/responsibilities](#roles)
+
+[Planned team meeting time(s) and communication plans](#meetings)
+
+[Deadlines and deliverables](#deadlines)
+
+[Conflict resolution scheme](#confres)
+
+[Team AI policies](#ai)
+
+[Intellectual property rights](#ip)
+
+[Discussion of team strengths/weaknesses](#strweak)
+
+
+## <a name="intro"></a>Project intro
 
 A top-down shoot-em-up roguelike/lite with a space combat and asteroid mining theme. The player moves around in 2D space to fire on enemies which approach from various surrounding randomly generated spawn points (likely to appear from screen). The main challenge will be making the gameplay feel addicting yet rewarding and somehow let the player feel as if they’ve made real progress from gaining XP from in-game interaction.
 
-## Team philosophy
+## <a name="philosophy"></a>Team philosophy
 
 What are the core goals, priorities, and philosophies of the team this term
 
@@ -33,7 +53,7 @@ Reviewing documentation and code base regularly to ensure quality
 Creating a fun environment which doesn’t exclude members and is also effective
 Having a vocal yet responsive opinion with each other without harsh judgements
 
-## Team roles/responsibilities
+## <a name="roles"></a>Team roles/responsibilities
 
 The team’s roles and responsibilities were decided while making this charter in a call. Everyone got their say in what area they wanted to be most responsible for.
 
@@ -62,7 +82,7 @@ It is also taken into consideration that certain roles do not fall under this sy
 	- Presentation Lead (presentations, demos)
 	- Level Designer
 
-## Planned team meeting time(s) and communication plans
+## <a name="meetings"></a>Planned team meeting time(s) and communication plans
 
 We plan to communicate through a combination of discord calls and meetings in person throughout the course of the semester.
 
@@ -74,8 +94,8 @@ Each Tuesday meeting will feature brief overviews of everyone's work based on th
 
 **Meeting times:**
 
- - Tuesday Evening ~6-9PM (variable call times) - Discord Call (No Connor)
- - Friday 2:30-3:30PM - In-person (All members)
+ - Tuesday Evening ~6-9PM (variable call times) - Discord Call (Connor can't attend)
+ - Friday 1:30-2:30PM - In-person (All members)
 
 **Meeting rules and processes:**
 
@@ -83,7 +103,7 @@ The Tuesday meetings will be used to judge and scale various wants and needs for
 
 In the likely case someone misses a time block for a meeting, said person will be informed of any changes or problems/solutions that need to be checked and reviewed for their respective role. If the problem persists, we will have a general team meeting before contacting the instructor.
 
-## Deadlines and deliverables
+## <a name="deadlines"></a>Deadlines and deliverables
 
 The Tuesday meetings will be for scoping out weekly to-dos Git-Hub Projects, with some of Friday’s meetings and extra weekends being dedicated to project specifics which may need extra time and focus. As a team we agreed to help each other meet deadlines 3 days in advance and have a summary of work (from each respective role) be updated bi-weekly in our discord through a list. 
 
@@ -91,30 +111,30 @@ For documentation, we let our organisational lead be the one doing checks days i
 
 In the instance we have missing deadlines, others may need to sacrifice extra time to help other team members. If there is an instance where workload is given in unfair distributions, we will address this as a team in a meeting.
 
-## Conflict resolution scheme
+## <a name="confres"></a>Conflict resolution scheme
 
 We have reached a verbal agreement that issues would be resolved within a call, if others aren't giving enough work done for the project or have lacked fundamental contribution, we will have an open-minded discussion and resolve this with a unanimous decision from the other members to regard a specific member lacking effort.
 
-## Team AI policies
+## <a name="ai"></a>Team AI policies
 
 Our team has decided not to allow AI because we believe the use of AI would hinder our creativity and learning process throughout the creation of the project. While we do think AI is good for asking ambiguous questions, we would like to restrict its use to a minimum in order to have a clearer path to success that aligns with our group structure, rather than relying on a band-aid.
 
-## Intellectual property rights
+## <a name="ip"></a>Intellectual property rights
 
 All members of the team are equal as holders towards IP rights for this project. 
 
 We have unanimously agreed that this project can be used for resumes and portfolios outside of the class. Without the necessity for consent.
 
-## Discussion of team strengths/weaknesses
+## <a name="strweak"></a>Discussion of team strengths/weaknesses
 
 Strengths of the team: 
-We have good team chemistry as we all know each other from previous classes
-We all have a background in gaming and are interested in game design
-We have clear communication and are able to keep everyone on the same page
-We have a clear goal of what we want to achieve for this project
+* We have good team chemistry as we all know each other from previous classes
+* We all have a background in gaming and are interested in game design
+* We have clear communication and are able to keep everyone on the same page
+* We have a clear goal of what we want to achieve for this project
 Weaknesses of the team: 
-Not many meeting times due to conflicting schedules
-Because we get along well, sometimes we can get distracted and cause each other to lose productivity
-There are some skill differences between the team members
-Lack of background using Unity and C#
+* Not many meeting times due to conflicting schedules
+* Because we get along well, sometimes we can get distracted and cause each other to lose productivity
+* There are some skill differences between the team members
+* Lack of background using Unity and C#
 
