@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Player taking damage! Health: " + health);
         if(health <= 0){
             gameOverScreen.Setup();
+            Destroy(gameObject);
         }
     }
 }
