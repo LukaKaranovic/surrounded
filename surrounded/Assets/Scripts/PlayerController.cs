@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5f;
     public Rigidbody2D rb;
     public Weapon weapon;
+    public GameOverScreen gameOverScreen;     // Reference to the GameOverScreen script
+
 
     public int health;
 
@@ -38,12 +40,9 @@ public class PlayerController : MonoBehaviour
     public void takeDamage(int damage) {
 
         health -= damage;
-
         Debug.Log("Player taking damage! Health: " + health);
-
-        if (health <= 0)
-        {
-            Destroy(gameObject); // kill the player :(
+        if(health <= 0){
+            gameOverScreen.Setup();
         }
     }
 }
