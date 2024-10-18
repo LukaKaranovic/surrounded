@@ -194,6 +194,8 @@ MonoBehaviour:
   firePoint: {fileID: 2713317750801945972}
   fireForce: 20
   shootingRange: 10
+  targetInnerRadius: 7
+  targetOuterRadius: 10
 --- !u!1 &9124661563309619329
 GameObject:
   m_ObjectHideFlags: 0

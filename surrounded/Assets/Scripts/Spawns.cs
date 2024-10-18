@@ -12,7 +12,7 @@ public class ShipSpawner : MonoBehaviour
 
     public float spawnInterval = 5f;      // Time between spawns
     public Transform targetPoint;         // Target for ships to move towards (e.g., player ship)
-    private int currentRound = 17;         // Track the current round
+    public int currentRound = 17;         // Track the current round
 
     private Camera mainCamera;            // Reference to the main camera
 
@@ -40,7 +40,7 @@ public class ShipSpawner : MonoBehaviour
                 GameObject newShip = Instantiate(selectedShip, spawnPosition, Quaternion.identity);
 
                 // Move the ship towards the target point
-                MoveShipToTarget(newShip);
+                //MoveShipToTarget(newShip);
             }
         }
     }
@@ -92,7 +92,6 @@ public class ShipSpawner : MonoBehaviour
     {
         Vector2 targetPosition = targetPoint.position;
         float speed = Random.Range(2f, 5f);  // Randomize ship speed
-
         Rigidbody2D rb = ship.GetComponent<Rigidbody2D>();
         if (rb != null)
         {
