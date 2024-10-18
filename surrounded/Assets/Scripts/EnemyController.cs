@@ -89,7 +89,9 @@ public class EnemyController : MonoBehaviour
             EnemyController enemy = other.gameObject.GetComponent<EnemyController>();
             
             // destroy both immediately
-            Destroy(enemy);
+            // Destroy(enemy); Actually, just destroy yourself.
+            // the other enemy should have the same script, and should
+            // also destroy itself
             Destroy(gameObject);
         }
     }
