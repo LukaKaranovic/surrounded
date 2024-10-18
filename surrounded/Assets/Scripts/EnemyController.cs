@@ -103,6 +103,7 @@ public class EnemyController : MonoBehaviour
             // get enemy
             PlayerController player = other.gameObject.GetComponent<PlayerController>();
             
+            Debug.Log("Enemy hit player! Inflicting damage!");
             // damage both heavily
             player.takeDamage(50);
             this.takeDamage(50); // stretch goal -- received damage configurable by upgrades
@@ -112,7 +113,7 @@ public class EnemyController : MonoBehaviour
         {
             // get enemy
             EnemyController enemy = other.gameObject.GetComponent<EnemyController>();
-            
+            Debug.Log("Enemy hit other enemy! Inflicting heavy damage!");
             enemy.takeDamage(100);
             this.takeDamage(100);
         }
