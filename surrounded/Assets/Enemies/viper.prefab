@@ -160,6 +160,8 @@ MonoBehaviour:
   firePoint: {fileID: 5464646103671442227}
   fireForce: 20
   shootingRange: 10
+  targetInnerRadius: 7
+  targetOuterRadius: 10
 --- !u!50 &8370973401546656414
 Rigidbody2D:
   serializedVersion: 4
