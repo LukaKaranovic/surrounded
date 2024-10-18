@@ -30,7 +30,7 @@ jobs:
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           targetPlatform: StandaloneWindows64
-		  projectPath: surrounded
+          projectPath: surrounded
 
       # Output
       - uses: actions/upload-artifact@v3
