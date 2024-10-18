@@ -223,6 +223,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 301942462713169048, guid: f973e55d43136a74abd52bba662812ae, type: 3}
   firePoint: {fileID: 642253103}
   fireForce: 20
+  fireRate: 2
 --- !u!1 &436016450
 GameObject:
   m_ObjectHideFlags: 0
@@ -259,6 +260,7 @@ MonoBehaviour:
   dreadnought: {fileID: 2932565879803988751, guid: e08050b776009e141ab2aeff61bd0ea1, type: 3}
   spawnInterval: 5
   targetPoint: {fileID: 816382866}
+  currentRound: 17
 --- !u!4 &436016452
 Transform:
   m_ObjectHideFlags: 0
@@ -493,7 +495,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f03cb17b1603c5f4099842cb73bb673a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7117de41c459345a19835989df2e140f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -501,7 +503,7 @@ SpriteRenderer:
   m_Size: {x: 0.32, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &816382866

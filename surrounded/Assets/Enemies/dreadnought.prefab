@@ -167,13 +167,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 607a5e184403246678a050ba7ec45cad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 15
+  moveSpeed: 8
   fireRate: 2
   health: 40
   bulletPrefab: {fileID: 301942462713169048, guid: 1a2c216a236ea404a9fc946332f0b53f, type: 3}
   firePoint: {fileID: 2259143338485275151}
   fireForce: 20
   shootingRange: 10
+  targetInnerRadius: 10
+  targetOuterRadius: 15
 --- !u!50 &9102798631393319690
 Rigidbody2D:
   serializedVersion: 4
