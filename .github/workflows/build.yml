@@ -28,9 +28,10 @@ jobs:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+          projectPath: surrounded/
         with:
           targetPlatform: StandaloneWindows64
-          projectPath: surrounded
+          projectPath: surrounded/
 
       # Output
       - uses: actions/upload-artifact@v3
