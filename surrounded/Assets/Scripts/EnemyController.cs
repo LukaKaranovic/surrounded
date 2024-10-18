@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class EnemyController : MonoBehaviour
 {
@@ -11,22 +14,25 @@ public class EnemyController : MonoBehaviour
     public Transform firePoint;
     public float fireForce = 20f;
     public float shootingRange = 10f;
+    public float targetInnerRadius = 7, targetOuterRadius = 10; //inner and outer radius of target ring to move to around player
 
     private GameObject player;
     private float nextFireTime = 0f;
+    private Vector2 moveTarget;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player"); // Assuming the player has the tag "Player"
+        moveTarget = findTarget();
     }
 
     void Update()
     {
         if (player != null)
         {
-            MoveTowardsPlayer();
-
-            float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
+            float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);  
+            MoveNearPlayer();
+            RotateTowardsPlayer();
             if (distanceToPlayer <= shootingRange && Time.time >= nextFireTime)
             {
                 ShootAtPlayer();
@@ -35,18 +41,37 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    void MoveTowardsPlayer()
+    private void MoveTowardsPlayer() //moves enemy towards player in a straight line
     {
-        Vector2 direction = (player.transform.position - transform.position).normalized;
+        //  Vector2 direction = (player.transform.position - transform.position).normalized; 
         transform.position = Vector2.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
+    }
 
-        // Rotate enemy to face the player
+    private void RotateTowardsPlayer()
+    {
         Vector2 aimDirection = player.transform.position - transform.position;
         float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
         transform.rotation = Quaternion.Euler(0, 0, aimAngle);
     }
 
-    void ShootAtPlayer()
+    private void MoveNearPlayer()
+    {
+        if (Vector2.Distance(transform.position, (Vector2)player.transform.position + moveTarget) < 1)  //Enemy is near target position
+        {
+            moveTarget = findTarget();
+        }
+        float speed = moveSpeed - moveSpeed / (Vector2.Distance(transform.position, player.transform.position));
+        transform.position = Vector2.MoveTowards(transform.position, (Vector2)player.transform.position + moveTarget, speed * Time.deltaTime);
+    }
+
+    private Vector2 findTarget()
+    {
+        Vector2 randomDirection = Random.insideUnitCircle.normalized; //vector pointing towards direction of target around player
+        float randomRadius = Random.Range(targetInnerRadius, targetOuterRadius); //distance target is from player
+        return randomDirection * randomRadius;
+    }
+
+    private void ShootAtPlayer()
     {
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         bullet.GetComponent<Rigidbody2D>().AddForce(firePoint.up * fireForce, ForceMode2D.Impulse);
