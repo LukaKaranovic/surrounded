@@ -9,21 +9,22 @@ public class ShipSpawner : MonoBehaviour
     public GameObject juggernaut;  // Assign Juggernaut ship prefab in the Inspector
     public GameObject striker;     // Assign Striker ship prefab in the Inspector
     public GameObject dreadnought;     // Assign Striker ship prefab in the Inspector
-
     public float spawnInterval = 5f;      // Time between spawns
     public Transform targetPoint;         // Target for ships to move towards (e.g., player ship)
-    public int currentRound = 17;         // Track the current round
-
     private Camera mainCamera;            // Reference to the main camera
+
+    public GameObject Timer;
+    private RoundTimer round;
 
     void Start()
     {
+        round = Timer.GetComponent<RoundTimer>();
         mainCamera = Camera.main;         // Get the main camera
         StartCoroutine(SpawnShips());
     }
     
     int GetCreditAmount(){
-        return (int)(30*(Mathf.Pow(1.1f, (currentRound-1))));
+        return (int)(30*(Mathf.Pow(1.1f, (RoundNumber()-1))));
     }
 
     IEnumerator SpawnShips()
@@ -48,17 +49,17 @@ public class ShipSpawner : MonoBehaviour
     // Choose the appropriate ship prefab based on the current round
     GameObject GetShipBasedOnRound()
     {
-        if (currentRound >= 15)
+        if (RoundNumber() >= 15)
             return ChooseRandomShip(viper, juggernaut, striker, grunt, dreadnought);  
-        else if (currentRound >= 10 && currentRound < 15)
+        else if (RoundNumber() >= 10 && RoundNumber() < 15)
             return ChooseRandomShip(viper, grunt, juggernaut, striker); 
-        else if (currentRound >= 5 && currentRound < 10)
+        else if (RoundNumber() >= 5 && RoundNumber() < 10)
             return ChooseRandomShip(grunt, viper, juggernaut);
         else
             return ChooseRandomShip(grunt, viper); 
     }
 
-    // Helper function to randomly select between given ship prefabs
+    //IMPLEMENTING CREDITS WITHIN THIS FUNCTION    MESSAGE TO ME (ANMOL)
     GameObject ChooseRandomShip(params GameObject[] ships)
     {
         return ships[Random.Range(0, ships.Length)];
@@ -100,9 +101,9 @@ public class ShipSpawner : MonoBehaviour
     }
 
     // Increment the round number
-    public void IncrementRound()
+    public int RoundNumber()
     {
-        currentRound++;
+        return round.round;
     }
 
 }
