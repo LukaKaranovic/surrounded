@@ -38,7 +38,7 @@ List of phase documents:
 [Team Charter](charter.md): the team charter deliverable (phase 1)
 [Requirements](requirements.md): the product requirements deliverable (phase 2)
 [Standards and Procedures](standards.md): the standards and processes deliverable (phase 2)
-[Design](design.md): the logical design deliverable (phase 3)
+[Logical Design](logicaldesign.md): the logical design deliverable (phase 3)
 [Project Update](update.md): the project update deliverable for the most recent phase (currently phase 3)
 More to be added later.
 

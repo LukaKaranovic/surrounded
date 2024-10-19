@@ -62,13 +62,13 @@
 1. [Appendix](#appendix)
 
 ## List of figures
-1. [Context Diagram](#condiag)
-1. [Game Control Module Diagram](#gcmdiag)
-1. [UIX Module Diagram](#uixdiag)
-1. [Menu Navigation Map](#menudiag)
-1. [Player Module Diagram](#playdiag)
-1. [ERD Diagram](#erddiag)
-1. [Appendix Diagram](#appdiag)
+Figure 1. [Context Diagram](#condiag)
+Figure 2. [Game Control Module Diagram](#gcmdiag)
+Figure 3. [UIX Module Diagram](#uixdiag)
+Figure 4. [Menu Navigation Map](#menudiag)
+Figure 5. [Player Module Diagram](#playdiag)
+Figure 6. [Logical ERD](#erddiag)
+Figure 7. [Appendix Diagram](#appdiag)
 
 ## <a name="issues"></a>1. Known Issues/Omissions
 
@@ -151,8 +151,8 @@ Based on a single player game and having round functionality, the diagram below 
 
 Each interaction will feature a new UI for each decision made, and will follow boolean logic and other algorithms for progression of the system.
 
-<a name="condiag"></a>Context Diagram (fig. 4.1):
-![Context Diagram](imgs/condiag.png)
+Figure 1. Context Diagram<a name="condiag"></a>
+![Context Diagram](Images/condiag.png)
 
 ## <a name="arch"></a>5. Architectural Design
 
@@ -185,10 +185,8 @@ The core processes that are involved in the game module are:
 
 The provided model below depicts the interactions of our game control module as it interacts with other modules and handles information given from user and other modules as the game progresses.
 
-<a name="gcmdiag"></a>
-![Game Control Module Diagram](imgs/gcmdiag.png)
-
-
+Figure 2. Game Control Module Diagram<a name="gcmdiag"></a>
+![Game Control Module Diagram](Images/gcmdiag.png)
 
 #### 5.1.2: <a name="archgcminit"></a>Initial Setup/Menu Process
 
@@ -303,16 +301,12 @@ The control module will begin as soon as we run the game, containing the game lo
 
 The update to player display will directly be based on input as all files are local, we will discuss an input output process in 5.2.1 and 5.2.2.
 
-UIX module design diagram:
-<a name="uixdiag"></a>
-![UIX module design diagram](imgs/uixdiag.png)
-
-
+Figure 3. UIX Module Diagram<a name="uixdiag"></a>
+![UIX module design diagram](Images/uixdiag.png)
 
 #### <a name="uixin"></a> 5.2.1 The input process
 
 The input process is for user commands such as keyboard, mouse, esc, etc. It will detect actions made by the user and then this data will be sent through the display data, which in turn creates the output on the screen (All local files, so no need for any delays in terms of input).
-
 
 #### <a name="uixout"></a>5.2.2 The output process
 
@@ -338,9 +332,8 @@ The screens here are listed below, followed by a diagram showing each potential 
 * Stats/Upgrade List UI: shows players stats and upgrades
 * Upgrade selection screen: the player upgrade menu after round completion
 
-<a name="menudiag"></a>
-![Menu Diagram](imgs/menudiag.png)
-
+Figure 4. Menu Navigation Map<a name="menudiag"></a>
+![Menu Diagram](Images/menudiag.png)
 
 ### <a name="roundmod"></a>5.3: Round Module
 The Round Module manages all the data and mechanics related to game rounds, ensuring smooth progression throughout each stage. It is responsible for tracking the current round number, calculating available credits, managing enemy spawns, and updating enemy statistics to maintain gameplay balance and challenge.
@@ -395,8 +388,10 @@ The Player Module is responsible for:
 * Updating Player Status: Modifying player attributes based on in-game events, such as damage taken or upgrades acquired.
 * Communicating with Other Modules: Collaborating with the Game Control Module for game events and the Round Module for tracking current round conditions and enemy interactions.
 This is how the player module interacts with other modules, and why they are interacting:
-<a name="playdiag"></a>
-![Player Module Diagram](imgs/playdiag.png)
+
+Figure 5. Player Module Diagram<a name="playdiag"></a>
+![Player Module Diagram](Images/playdiag.png)
+
 #### <a name="playdata"></a>5.4.2: Player Data Structure
 The Player Module maintains the following key data elements:
 * Health: Current health points, decreasing as damage is sustained from enemy attacks or environmental hazards.
@@ -607,8 +602,8 @@ In this section we relate the data components (class objects) used for the game,
 The entities we will reference in this diagram will be all of the ones referenced prior in 6.4’s list.
 We will use a chart to determine the logical components of each attribute to reduce complexity:
 
-<a name="erddiag"></a>
-![Logical ERD Diagram](imgs/erddiag.png)
+Figure 6. Logical Entity-Relationship Diagram <a name="erddiag"></a>
+![Logical ERD](Images/erddiag.png)
 
 ## <a name="gamstat"></a>7 Game state and flow of play
 In our current iteration of the game we are restricted to one map with a set boundary that will spawn enemies outside of the camera radius, this process is relatively structured with our game logic and has an intuitive sequence of actions with spawns occurring based on a credit count. Ideally we could maybe refine our algorithm to be less exponential overtime for the sake of ease as having a base 30 multiplier at times can be hard to track in terms of enemy spawns. 
@@ -658,6 +653,6 @@ As of what was discussed prior in section 6, we did have many of our various pie
 
 This diagram captures all of the module diagrams together into a “total” design, capturing all of the interactions between key elements of the modules. It is intended to be used to cross reference various module diagrams. Module information is discussed prior in section 6.
 
-<a name="appendixdiag"></a>
-![Appendix](imgs/appdiag.png)
+Figure 7. Appendix Diagram<a name="appdiag"></a>
+![Appendix](Images/appdiag.png)
 

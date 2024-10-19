@@ -19,7 +19,6 @@ For the standards and processes document, a lot of changes were made to address 
 No key revisions were made to the team charter.
 
 ### Changes and updates to the requirements (requirements.md)
-- Collision requirements updates TO BE CHANGED
 
 *Fixing the things stated in known issues:*
 The main update to the requirements document is addressing the known issues/omissions. As we have not begun playtesting yet, we have not changed any values for key features or any of the UI designs, so that was left unchanged.
@@ -35,6 +34,8 @@ Details about the cryptic text that reveals the story and where it will appear h
 - Included anchors to the list of figures that jump to the figure for quick reference.
 - Included the item selection pop=up image that was accidentally not included in phase 2.
 - Included small changes to the "Round System" subsection of the "Key features and behaviour" section to account for the new cryptic text addition and to clarify other small details.
+- Pretty significant changes were made to collision in combat involving asteroids, enemies, and the player dealing damage now. Details of this are in the "Player, Controls, and Combat" and "Map and Terrain" subsections of the the "Key features and behaviour" section.
+- More details about asteroids were added where necessary in the "Key features and behaviour" section.
 
 ### Changes and updates to the standards and processes (standards.md)
 * Added a table of contents for quick reference and to adhere to layout consistency.
