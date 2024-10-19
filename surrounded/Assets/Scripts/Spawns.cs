@@ -9,59 +9,76 @@ public class ShipSpawner : MonoBehaviour
     public GameObject juggernaut;  // Assign Juggernaut ship prefab in the Inspector
     public GameObject striker;     // Assign Striker ship prefab in the Inspector
     public GameObject dreadnought;     // Assign Striker ship prefab in the Inspector
-
     public float spawnInterval = 5f;      // Time between spawns
     public Transform targetPoint;         // Target for ships to move towards (e.g., player ship)
-    public int currentRound = 17;         // Track the current round
-
     private Camera mainCamera;            // Reference to the main camera
+    private int random, creditCost, availableCredits;
+    public GameObject Timer;
+    private RoundTimer round;
 
     void Start()
     {
+        round = Timer.GetComponent<RoundTimer>();
         mainCamera = Camera.main;         // Get the main camera
         StartCoroutine(SpawnShips());
     }
-    
-    int GetCreditAmount(){
-        return (int)(30*(Mathf.Pow(1.1f, (currentRound-1))));
+
+    int availableCreditAmount(){
+        return (int)(30*(Mathf.Pow(1.1f, (RoundNumber()-1))))/10;
     }
 
     IEnumerator SpawnShips()
     {
-        while (true)
-        {
-            yield return new WaitForSeconds(spawnInterval);
-
-            GameObject selectedShip = GetShipBasedOnRound();  // Select the ship type
-
-            if (selectedShip != null)
+        yield return new WaitForSeconds(spawnInterval/2);
+        while(true){
+            availableCredits = availableCreditAmount();
+            while (availableCredits >= 0)
             {
-                Vector2 spawnPosition = GetOffScreenPosition();  // Get off-screen spawn position
-                GameObject newShip = Instantiate(selectedShip, spawnPosition, Quaternion.identity);
+                GameObject selectedShip = GetShipBasedOnRound();  // Select the ship type
+                if(creditCost > availableCredits){
+                    selectedShip = null;
+                }
+                availableCredits -= creditCost;
+                if (selectedShip != null)
+                {
+                    Vector2 spawnPosition = GetOffScreenPosition();  // Get off-screen spawn position
+                    GameObject newShip = Instantiate(selectedShip, spawnPosition, Quaternion.identity);
 
-                // Move the ship towards the target point
-                //MoveShipToTarget(newShip);
+                    // Move the ship towards the target point
+                    //MoveShipToTarget(newShip);
+                }
             }
+            yield return new WaitForSeconds(spawnInterval);
         }
     }
 
     // Choose the appropriate ship prefab based on the current round
     GameObject GetShipBasedOnRound()
     {
-        if (currentRound >= 15)
+        if (RoundNumber() >= 15)
             return ChooseRandomShip(viper, juggernaut, striker, grunt, dreadnought);  
-        else if (currentRound >= 10 && currentRound < 15)
+        else if (RoundNumber() >= 10 && RoundNumber() < 15)
             return ChooseRandomShip(viper, grunt, juggernaut, striker); 
-        else if (currentRound >= 5 && currentRound < 10)
+        else if (RoundNumber() >= 5 && RoundNumber() < 10)
             return ChooseRandomShip(grunt, viper, juggernaut);
         else
             return ChooseRandomShip(grunt, viper); 
     }
 
-    // Helper function to randomly select between given ship prefabs
+    //IMPLEMENTING CREDITS WITHIN THIS FUNCTION    MESSAGE TO ME (ANMOL)
     GameObject ChooseRandomShip(params GameObject[] ships)
     {
-        return ships[Random.Range(0, ships.Length)];
+        random = Random.Range(0, ships.Length);
+        if(ships[random] == grunt || ships[random] == viper){
+            creditCost = 1;
+        } else if(ships[random] == juggernaut){
+            creditCost = 4;
+        } else if(ships[random] == striker){
+            creditCost = 7;
+        } else{
+            creditCost = 11;
+        }
+        return ships[random];
     }
 
     // Get a random position just outside the camera's view
@@ -100,9 +117,9 @@ public class ShipSpawner : MonoBehaviour
     }
 
     // Increment the round number
-    public void IncrementRound()
+    public int RoundNumber()
     {
-        currentRound++;
+        return round.round;
     }
 
 }

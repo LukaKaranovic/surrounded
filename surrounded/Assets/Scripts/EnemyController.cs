@@ -15,7 +15,8 @@ public class EnemyController : MonoBehaviour
     public float fireForce = 20f;
     public float shootingRange = 10f;
     public float targetInnerRadius = 7, targetOuterRadius = 10; //inner and outer radius of target ring to move to around player
-
+    public SpriteRenderer sprite;
+    private Color originalColor;
     private GameObject player;
     private float nextFireTime = 0f;
     private Vector2 moveTarget;
@@ -78,6 +79,7 @@ public class EnemyController : MonoBehaviour
     }
 
     public void takeDamage(int damage) {
+        StartCoroutine(FlashRed());
         health -= damage;
         Debug.Log("Enemy health: " + health); // debug message to track health
 
@@ -118,4 +120,11 @@ public class EnemyController : MonoBehaviour
             this.takeDamage(100);
         }
     }
+    IEnumerator FlashRed(){
+        sprite.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        sprite.color = Color.white;
 }
+}
+
+

@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb;
     public Weapon weapon;
     public GameOverScreen gameOverScreen;     // Reference to the GameOverScreen script
-
+    public PauseMenu pauseMenu;
 
     public int health;
 
@@ -18,6 +18,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Escape)){
+            pauseMenu.Pause();
+        }
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
 
