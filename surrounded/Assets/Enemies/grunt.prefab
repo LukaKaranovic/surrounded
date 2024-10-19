@@ -191,10 +191,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 4
   fireRate: 2
-  health: 25
+  health: 5
   bulletPrefab: {fileID: 301942462713169048, guid: 1a2c216a236ea404a9fc946332f0b53f, type: 3}
   firePoint: {fileID: 2182578315016452914}
-  fireForce: 20
+  fireForce: 25
   shootingRange: 10
   targetInnerRadius: 7
   targetOuterRadius: 10
