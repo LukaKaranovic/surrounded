@@ -11,7 +11,7 @@ public class RoundTimer : MonoBehaviour
 
     void Start()
     {
-        timer = roundDuration; 
+        timer = 105; 
         UpdateRoundText();      
     }
 
