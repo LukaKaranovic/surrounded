@@ -162,6 +162,7 @@ MonoBehaviour:
   shootingRange: 10
   targetInnerRadius: 7
   targetOuterRadius: 10
+  sprite: {fileID: 2292161443297363308}
 --- !u!50 &8370973401546656414
 Rigidbody2D:
   serializedVersion: 4
@@ -214,7 +215,7 @@ Transform:
   m_GameObject: {fileID: 6938312595074656538}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.166, y: 0.329, z: 0.1}
+  m_LocalPosition: {x: -0.166, y: 0.366, z: 0.1}
   m_LocalScale: {x: 0.025395714, y: 0.055888575, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
