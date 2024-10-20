@@ -61,13 +61,13 @@
 1. [Appendix](#appendix)
 
 ## List of figures
-Figure 1. [Context Diagram](#condiag)
-Figure 2. [Game Control Module Diagram](#gcmdiag)
-Figure 3. [UIX Module Diagram](#uixdiag)
-Figure 4. [Menu Navigation Map](#menudiag)
-Figure 5. [Player Module Diagram](#playdiag)
-Figure 6. [Logical ERD](#erddiag)
-Figure 7. [Appendix Diagram](#appdiag)
+Figure 1. [Context Diagram](#condiag)  
+Figure 2. [Game Control Module Diagram](#gcmdiag)  
+Figure 3. [UIX Module Diagram](#uixdiag)  
+Figure 4. [Menu Navigation Map](#menudiag)  
+Figure 5. [Player Module Diagram](#playdiag)  
+Figure 6. [Logical ERD](#erddiag)  
+Figure 7. [Appendix Diagram](#appdiag)  
 
 ## <a name="issues"></a>1. Known Issues/Omissions
 
