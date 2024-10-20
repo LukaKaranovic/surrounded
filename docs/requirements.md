@@ -34,19 +34,19 @@ The following person has been designated the main contact person for questions f
 
 ## <a name="figlist"></a>List of figures
 
-Figure 1. [Main Menu](#mainmenu)
+[Figure 1. Main Menu](#mainmenu)
 
-Figure 2. [Gameplay Screen](#gameplayscreen)
+[Figure 2. Gameplay Screen](#gameplayscreen)
 
-Figure 3. [Pause Menu](#pausemenu)
+[Figure 3. Pause Menu](#pausemenu)
 
-Figure 4. [Item Selection Pop-up](#itemselection)
+[Figure 4. Item Selection Pop-up](#itemselection)
 
-Figure 5. [Game Over](#gameover)
+[Figure 5. Game Over](#gameover)
 
-Figure 6. [Stats and Upgrades Menu](statsandupgrades)
+[Figure 6. Stats and Upgrades Menu](statsandupgrades)
 
-Figure 7. [UI Flow Chart](#uiflowchart)
+[Figure 7. UI Flow Chart](#uiflowchart)
 
 ## <a name="problems"></a>Problems that are known 
 
@@ -93,7 +93,8 @@ The player begins as a ship with the ability to move in 8 directions using the W
 Our gameplay loop is a round-based system. Each round, the game has a finite amount of credits it can use to spawn in enemies:
 * Each enemy requires a certain amount of credits to spawn, the harder the enemy, the more credits it costs to spawn. 
 	* This creates variation in each run, as round 3 may spawn a different assortment of enemies in two different runs.
-* The game can only spend 10% of its total credits for that round every 10 seconds. This means each round lasts exactly 100 seconds. 
+* Each round will have 5 seconds of grace time at the start to let the player get ready.
+* The game can only spend 10% of its total credits for that round every 10 seconds. This means each round lasts exactly 105 seconds.
 	* Having it be 10% of the total amount blocks off harder enemies from being able to be spawned until later rounds.
 * The way the credits are spent is completely random, this process is described in the Round System section.
 * The enemies will spawn just off-screen of the player and will chase and shoot at the player.
@@ -138,7 +139,10 @@ The game will consist of moving through 2D space and piloting a base ship throug
 * When the player’s health hits 0 from being hit too much, the player has lost and the game over UI will lay over the screen (see UI and Navigation section for details).
 * The player’s health will not regenerate throughout a round. Their health will be replenished to full at the start of each new round.
 * Each time an enemy dies (their health hits 0), there will be a short exploding animation to communicate their death to the player. The explosion will not linger to reduce screen clutter.
-* Combat will include collisions to enemies so you cannot pass through them. Running into enemies will not do damage.
+* Combat will include collisions meaning the player or enemy ships can crash into each other or asteroids.
+	* A player crashing into an enemy deals 50 damage to both the enemy and the player.
+	* Two enemies crashing into each other deals 100 damage to both enemies.
+	* A player or an enemy crashing into an asteroid will deal 50 damage to both the player/enemy and the asteroid (asteroids will have health as described in the next subsection).
 * Players will start with base stats of: 5 attack, 10 defence, 10 speed, and 50 health.
 * Each enemy will have their own base stats and health defined in the Enemy Design section.
 * Player and enemy stats will increase by a flat amount throughout the game, details on this are in the XP and Levelling System and Enemy Design sections.
@@ -149,11 +153,15 @@ The game will consist of moving through 2D space and piloting a base ship throug
 * There will be four planets, one near each corner of the map as landmarks to communicate to the player where they are located currently.
 	* Planets will be in the background meaning the player, enemies, and projectiles will pass through them.
 	* The planets will be about one screen length vertically and horizontally from the corners of the map.
-* There will be floating asteroids throughout the map, typically in groups of 3-5.
+* There will be floating asteroids throughout the map, typically in clusters of 3-5.
+	* There will be a maximum of 16 clusters of asteroids on the map at once. Every time enemies spawn (every 10 seconds), asteroids will spawn randomly throughout the map until there are 16 clusters.
 	* The asteroids will move at a slow rate, probably at half of the player’s base speed at level 1 (speed is 5).
-	* The asteroids will have collision boxes meaning the player, enemies, and projectiles cannot pass through them
-	* Running into them will harm the player and enemies, damaging them for 20% of their maximum health. Be careful!
-* The camera that is following the player will be about 1/16 of the size of the entire map, this camera will be centred onto the player at all times.
+	* The asteroids will move in a predetermined, straight direction until they leave the map, which they will killed by the asteroid belt at the world boundary.
+	* The asteroids will have collision boxes meaning the player, enemies, and projectiles cannot pass through them.
+	* Running into them will harm the player and enemies, damaging them for 50 health. Be careful!
+	* If something collides with an asteroid (or it is shot), the individual asteroid will be destroyed. For ease of implementation, asteroids will be treated as an enemy with 1 health.
+* The camera that is following the player will be about 1/64 of the size of the entire map, this camera will be centred onto the player at all times.
+	* In other words, the map will be 8 times the screen width and 8 times the screen height (assuming the user is using a 1920x1080 resolution).
 * The players will be able to traverse all the map freely, as long as they don’t run into any obstacles, with enemies spawning just outside of the player camera randomly.
 
 ### XP and Levelling System
@@ -166,11 +174,14 @@ The game will consist of moving through 2D space and piloting a base ship throug
 	* 30 * (1.1)^(y-1) where y is the current level number.
 
 ### Round System
-* Each round lasts exactly 100 seconds.
+* Each round lasts exactly 105 seconds.
+* Each round will have 5 seconds of grace time at the start to let the player get ready (part of the 105 seconds).
 * Each round, the game will be given an amount of total credits for that round.
 * The round’s total credit amount will start at 30 and be increased by 10% from the past round. The round credit amount formula will be 30 * (1.1)^(x-1) where x is the current round number.
-* Every 10 seconds, the game will get 10% of that round’s total credits to spawn enemies.
+* Every 10 seconds (starting at 100 seconds), the game will get 10% of that round’s total credits to spawn enemies.
 	* The reason for this is to not let higher level enemies spawn in lower rounds.
+	* At the same time, the game will spawn asteroid clusters until there are 16 of them on the map
+		* If there are already 16, will not spawn any.
 * Each enemy requires a certain amount of credits to spawn, the harder the enemy, the more credits it costs to spawn. The credit amounts are found in the Enemy Design section.
 * The way the credits are spent is random, meaning the assortment of enemies is random. We will have a function to select the enemy type based on round and available credits:
 	* Every 10 seconds the function will be given 10% of the round’s total credits to spend.
@@ -208,8 +219,10 @@ Overall details on enemies are provided first, followed by specific details and 
 * Enemy stats will increase each round, the amount is based on the specific enemy (described in version 1 enemies).
 * An enemy’s base stats will be their stats on the first round that they appear.
 	* E.g. If an enemy only appears on round 11 or later, it will have its base stats at round 11.
+* Each time an enemy is shot, the enemy will flash red for 0.2 seconds to give the player visual feedback that they successfully hit the enemy.
 * Each time an enemy dies, there will be a short exploding animation to communicate their death to the player. The explosion will not linger to reduce screen clutter.
-* Enemies will have collision boxes meaning you cannot pass through them. Running into enemies will not do damage.
+* Enemies will have collision boxes meaning you cannot pass through them. Running into enemies will deal 50 damage. Enemies running into each other will deal 100 damage to each enemy.
+* Enemies will try their best to avoid asteroid clusters.
 
 ##### Version 1 Enemies:
 *Viper:* high speed, low damage, average health
@@ -257,9 +270,9 @@ Every 10 Rounds, a boss will spawn instead of the normal enemies.
 * Each boss has three distinct attacks, as a stretch goal we plan to add more.
 	* Bosses can only do one attack at a time.
 
-For version 1 of our game, we only intend on having 2 specific boss fights that will appear at round 10 and 20:
-
 ##### Version 1 Bosses:
+
+For version 1 of our game, we only intend on having 2 specific boss fights that will appear at round 10 and 20:
 
 ###### W35-S315:
 * At round 10, W35-S315 will spawn and have three different distinct attacks:
