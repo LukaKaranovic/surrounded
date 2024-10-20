@@ -93,7 +93,8 @@ The player begins as a ship with the ability to move in 8 directions using the W
 Our gameplay loop is a round-based system. Each round, the game has a finite amount of credits it can use to spawn in enemies:
 * Each enemy requires a certain amount of credits to spawn, the harder the enemy, the more credits it costs to spawn. 
 	* This creates variation in each run, as round 3 may spawn a different assortment of enemies in two different runs.
-* The game can only spend 10% of its total credits for that round every 10 seconds. This means each round lasts exactly 100 seconds. 
+* Each round will have 5 seconds of grace time at the start to let the player get ready.
+* The game can only spend 10% of its total credits for that round every 10 seconds. This means each round lasts exactly 105 seconds.
 	* Having it be 10% of the total amount blocks off harder enemies from being able to be spawned until later rounds.
 * The way the credits are spent is completely random, this process is described in the Round System section.
 * The enemies will spawn just off-screen of the player and will chase and shoot at the player.
@@ -173,10 +174,11 @@ The game will consist of moving through 2D space and piloting a base ship throug
 	* 30 * (1.1)^(y-1) where y is the current level number.
 
 ### Round System
-* Each round lasts exactly 100 seconds.
+* Each round lasts exactly 105 seconds.
+* Each round will have 5 seconds of grace time at the start to let the player get ready (part of the 105 seconds).
 * Each round, the game will be given an amount of total credits for that round.
 * The round’s total credit amount will start at 30 and be increased by 10% from the past round. The round credit amount formula will be 30 * (1.1)^(x-1) where x is the current round number.
-* Every 10 seconds, the game will get 10% of that round’s total credits to spawn enemies.
+* Every 10 seconds (starting at 100 seconds), the game will get 10% of that round’s total credits to spawn enemies.
 	* The reason for this is to not let higher level enemies spawn in lower rounds.
 	* At the same time, the game will spawn asteroid clusters until there are 16 of them on the map
 		* If there are already 16, will not spawn any.

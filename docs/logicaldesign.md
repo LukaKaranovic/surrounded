@@ -126,7 +126,7 @@ Due to this issue of a lack of background, we plan on having a resource page bui
 
 As mentioned above, one of our other challenges with the core design of the game will be our round system.
 
-Our current philosophy of the round system is to have each round be 100 seconds, with the ending of each round destroying all current enemies which then features the prompt for the upgrade system (More details including the math and back-end philosophy are included in our [requirements document](requirements.md)).
+Our current philosophy of the round system is to have each round be 105 seconds, with the ending of each round destroying all current enemies which then features the prompt for the upgrade system (More details including the math and back-end philosophy are included in our [requirements document](requirements.md)).
 
 To give a brief overview of the round system, it will feature a credit system wwhere the credit amount is dictated by the round number. While we have yet to have any background with implementing such features, the philosophy of our game plan for implementation of this feature will be dictated using a mathematical function and an array containing an ID and will run through a while loop. All of this will not be visible to the player, but this sort of implementation will be present in each round. The credit rate will be increased by each round to dictate greater enemy spawns. We plan on tweaking this to account for balance changes and any potential misalignment with how our code runs.
 
@@ -250,24 +250,24 @@ In this section, we try to discuss all possible events/actions the game can reco
 	* Sounds are generated upon menu interaction as well
 
 * Upgrade Decision
-	* Player is presented with upgrade menu at beginning of new round, which is determined by round module
-	* Player selects upgrade decision from randomly generated 3 items from items pool
+	* Player is presented with item selection pop-up at the end of each round, which is determined by round module
+	* Player selects upgrade decision from 3 randomly generated items from items pool
 	* Selected upgrade is then saved to player, adjusting stats accordingly and being stored for viewing in upgrades list menu, other options are deleted
 	* Next round begins
 
 * Player Death
-	* Upon player's health stat reaching 0 through means mentioned above, game will be sent into end of game process
+	* Upon player's current health reaching 0 through means mentioned above, game will be sent into end of game process
 
 * Round Update
 	* Upon beginning of game, round count is set to 1, in which the round 1 data is called and requested from the round module
-	* After 100 seconds, the round counter is increased by 1, the player is sent to the upgrade decision, and the next round is updated from the round module, increasing enemy credit count, and possible enemy spawns
+	* After 105 seconds, the round counter is increased by 1, the player is sent to the upgrade decision, and the next round is updated from the round module, increasing enemy credit count, and possible enemy spawns
 	* After player finishes Upgrade Decision, next round begins
 
 ##### 5.1.3.2 Enemy Actions and Updates
 
 In Surrounded, the space is filled with enemy ships, these enemy ships will be spawned by the round module and will attempt to get the player to the end of game process by eliminating all of the players health.
 
-Each enemy's specific AI will be highlighted and further explained on their own in the enemy module, but simply, the enemy will approach the player x,y coordinate, and upon reaching a certain threshold distance, begin fire, attempting to damage, and further kill the user player.
+Each enemy's specific AI will be highlighted and further explained in the enemy module, but to put it simply, enemies will approach the player's x, y coordinates, and upon reaching a certain threshold distance, begin to fire, attempting to damage and further kill the player.
 
 ##### 5.1.3.3 Game-Over Detection
 
@@ -282,17 +282,17 @@ Under any other circumstance, the game is not over.
 This process is what proceeds the game logic process, as we have met the criteria to enter the end game process, meaning the player has either died, or has decided to quit the game. 
 The steps to be taken are outlined here:
 
-1. Determine if the player had died or quit game
-2. If player has died, present game over screen, showing them their score, upgrades acquired and what round they achieved, as well as present them with the options on how to proceed next (Quit Game, return to main menu, restart game)
-3. If player has instead chosen to quit, return them to the main menu, the setup process is then reengaged
+1. Check and determine if the player has died or quit the game.
+2a. If player has died, present game over screen, showing them their score, upgrades acquired and what round they achieved, as well as present them with the options on how to proceed next (Quit Game, return to main menu, restart game)
+2b. If player has instead chosen to quit, return them to the main menu, the setup process is then reengaged.
 
 ### <a name="uix"></a>5.2 UIX Module: 
 
-The UIX module is to handle all of the local updates which happen to the player, all of the player inputs (such as camera movement, WASD, shooting, etc). All information containing player and enemy data will be processed on start up.
+The UIX module handles all of the local visual updates which happen to the player, all of the player inputs (such as camera movement, WASD, shooting, etc), and all visual information displaying player and enemy data that will be processed on start up.
 
 The control module will begin as soon as we run the game, containing the game logic and assets from the engine, this will pull UI elements with a display update, prompting the display data containing menus, and HUDs, and will be displayed based on the input.
 
-The update to player display will directly be based on input as all files are local, we will discuss an input output process in 5.2.1 and 5.2.2.
+The update to player display will directly be based on input as all files are local, we will discuss an input/output process in 5.2.1 and 5.2.2.
 
 Figure 3. UIX Module Diagram<a name="uixdiag"></a>
 ![UIX module design diagram](Images/uixdiag.png)
@@ -306,11 +306,13 @@ The input process is for user commands such as keyboard, mouse, esc, etc. It wil
 The output process will be the main UI which feature main HUD elements and menus, different processes or actions for output in the local display include:
 
 * Going from menu to menu (through main menu and pause menu).
-* Adjustments to projectile upgrades UI on player and enemy ship displays.
+* Adjustments to projectiles based on upgrades on player.
+* Adjustments to enemy and player sprites (briefly) when taking damage.
 * Adjustments to position of ship on the map.
 * Adjustments to player health bar.
 * Adjustments to boss health bar
 * Adjustments to XP bar.
+* Round number, timer, and player score.
 
 The type definition for all of this data will be discussed in section 6 of this document.
 
@@ -318,82 +320,106 @@ The type definition for all of this data will be discussed in section 6 of this 
 
 The screens here are listed below, followed by a diagram showing each potential flow of menus
 
-* Main Menu: start screen with options to start and quit the game
+* Main menu: start screen with options to start and quit the game
 * Gameplay screen: general game overlay
 * Game over screen: the UI overlay when players lose
-* Pause Menu: for when players press esc
-* Stats/Upgrade List UI: shows players stats and upgrades
+* Pause menu: for when players press ESC
+* Stats and upgrades list: shows players stats and upgrades
 * Upgrade selection screen: the player upgrade menu after round completion
 
 Figure 4. Menu Navigation Map<a name="menudiag"></a>
 ![Menu Diagram](Images/menudiag.png)
 
 ### <a name="roundmod"></a>5.3: Round Module
-The Round Module manages all the data and mechanics related to game rounds, ensuring smooth progression throughout each stage. It is responsible for tracking the current round number, calculating available credits, managing enemy spawns, and updating enemy statistics to maintain gameplay balance and challenge.
+
+The Round Module manages all the data and mechanics related to game rounds, ensuring smooth progression throughout each stage. It is responsible for tracking the current round number, calculating available credits, managing enemy and asteroid spawns, and updating enemy statistics to maintain gameplay balance and challenge.
 Responsibilities of the Round Module:
 * Round Tracking: Maintains the current round number and monitors round progression.
-* Credit Calculation: Implements a scaling system for available credits, calculated using the formula: Credits=30×(1.1)(x−1) where x is the round number
+* Credit Calculation: Implements a scaling system for available credits, calculated using the formula: Credits=30×(1.1)^(x−1) where x is the round number
 * Boss Round Logic: Special logic for boss rounds triggers the spawning of unique enemies (e.g., W35-S315 and C0B-U5) at predetermined intervals (e.g., rounds 10 and 20).
-* Round Timer: Controls the pacing of the game by regulating the duration of each round and the timing of enemy spawns.
-* Enemy Spawning: Utilizes a dictionary mapping enemy types to their respective credit costs and IDs to facilitate efficient and balanced spawning logic.
+* Enemy Spawning: Utilizes a dictionary mapping enemy types to their respective credit costs and IDs to facilitate efficient and balanced spawning logic. Tracks round timer from game control module to know when to spawn enemies.
+* Asteroid Spawning: Whenever enemy spawns are called (every 10 seconds starting at 100), will spawn asteroids until there are 16 clusters on the map as well.
 * Dynamic Difficulty Adjustment: As rounds progress, the module dynamically updates enemy stats (damage, health, and speed) to increase the difficulty, keeping players challenged.
+
 #### <a name="roundesc"></a>5.3.1: Round Module Description
+
 The round module operates as the central system for managing all aspects of gameplay related to rounds. It tracks player progress, manages enemy dynamics, and ensures that each round presents new challenges and rewards.
+
 #### <a name="roundinit"></a>5.3.2: Round Initialization Process
+
 At the start of the game or after completing a round, the round module initializes the parameters for the upcoming round:
 1. The game control module signals the round module to begin round initialization.
 2. The round module sets the current round to 1 and calculates available credits based on the round number.
 3. It populates the enemy spawn dictionary and prepares special boss logic for applicable rounds.
 4. The module notifies the game control module that the round has begun.
+
 #### <a name="roundprog"></a>5.3.3: Round Progression Processes
+
 During the round progression process, the module manages real-time gameplay, enemy spawning, and player interactions:
 1. The round module is activated by the game control module.
 2. Monitor the round timer, which determines the duration of the current round.
 3. Spawn enemies based on the predefined credit costs and the dictionary mapping.
 	* Enemy spawns are limited to 10% of the total available credits every 10 seconds, ensuring balanced encounters.
 4. Notify the enemy module to manage enemy behaviors and interactions with the player.
-5. Regularly check for player actions (combat, movement) and respond accordingly.
-6. Adjust enemy stats dynamically based on the current round to increase challenge:
+5. Adjust enemy stats dynamically based on the current round to increase challenge:
 	* Update enemy damage, health, and speed based on scaling factors as rounds progress.
+	
 #### <a name="roundboss"></a>5.3.4: Boss Round Logic
+
 In rounds that qualify for boss encounters (e.g., rounds 10 and 20), the round module will trigger the following:
 1. Notify the game control module to prepare for a boss encounter.
-2. Spawn designated boss enemies (e.g., W35-S315, C0B-U5) at the start of the designated round.
-3. Adjust the difficulty scaling for the round based on the presence of a boss, ensuring that the player is appropriately challenged.
+2. Set player to center of the map and lock the camera. Move world boundaries to the size of the screen only.
+3. Spawn designated boss enemies (e.g., W35-S315, C0B-U5) at the start of the designated round.
+4. Adjust the round data despite no enemies spawning, to ensure credit amounts challenge the player appropriately in further rounds.
+
 #### <a name="roundtrans"></a>5.3.5: Round Transition Process
+
 At the end of each round, the module manages transitions effectively:
 1. Upon completion of the round, the round module communicates with the game control module to signal the end of the current round.
-2. Present players with upgrade options based on credits earned in the completed round.
-3. Update the round count and prepare for the next round's parameters.
-4. Transition back to the round progression process for the next initialized round.
+2. Present players with cryptic text about story for 5 seconds.
+3. Present players with random upgrade options.
+4. Update the round count and prepare the next round's data.
+5. Transition back to the round progression process for the next initialized round.
+
 #### <a name="roundend"></a>5.3.6: Game State and End Round Detection
+
 The round module checks for the completion of rounds based on two conditions:
-* All enemies in the current round have been defeated, resulting in successful round completion.
-* The round timer has reached zero, which also triggers a transition to the next round.
+* The round timer has reached zero.
+* All enemies in the current round have been defeated, resulting in successful round completion (for boss rounds).
+
 #### <a name="roundint"></a>5.3.7: Round Module Interaction Overview
+
 The interaction model outlines how the round module communicates with the game control, player, and enemy modules throughout the game, ensuring a seamless and engaging gameplay experience.
+
 ### <a name="play"></a>5.4: Player Module
-The Player Module is designed to manage all aspects of player data within the game, ensuring a seamless experience as the player progresses through various rounds. This module interfaces closely with the Game Control Module and the Round Module to ensure correct data is given to control module for gameplay
+
+The player module is designed to manage all aspects of player data within the game, ensuring a seamless experience as the player progresses through various rounds. This module communicates frequently with the game control module and the round module to ensure correct data is given to update the player data.
+
 #### <a name="playmod">5.4.1: Player Module Responsibilities
-The Player Module is responsible for:
-* Tracking Player Statistics: Keeping a detailed record of player health, experience points (XP), levels, and acquired upgrades.
+
+The player module is responsible for:
+* Tracking Player Statistics: Keeping a detailed record of player stats, experience points (XP), levels, score, and acquired upgrades.
 * Facilitating Player Input: Interpreting user commands for movement, combat, and menu navigation to ensure responsive gameplay.
-* Updating Player Status: Modifying player attributes based on in-game events, such as damage taken or upgrades acquired.
-* Communicating with Other Modules: Collaborating with the Game Control Module for game events and the Round Module for tracking current round conditions and enemy interactions.
+* Updating Player Status: Modifying player attributes based on in-game events, such as leveling up, taking damage, or acquiring upgrades.
+* Communicating With Other Modules: Collaborating with the game control module for game events and the round module for tracking current round conditions and enemy interactions.
 This is how the player module interacts with other modules, and why they are interacting:
 
 Figure 5. Player Module Diagram<a name="playdiag"></a>
 ![Player Module Diagram](Images/playdiag.png)
 
 #### <a name="playdata"></a>5.4.2: Player Data Structure
-The Player Module maintains the following key data elements:
+
+The player module maintains the following key data elements:
 * Health: Current health points, decreasing as damage is sustained from enemy attacks or environmental hazards.
 * Experience Points (XP): Accumulated points gained through gameplay, contributing to leveling up and unlocking upgrades.
 * Level: Represents the player's current level, which affects overall stats and available upgrades.
+* Stats: The player's attack, speed, and defense statistics which are updated on level up or by obtaining upgrade items.
 * Upgrades: A list of enhancements selected by the player that improve abilities or stats, stored for reference during gameplay.
 * Movement State: The player’s current position and orientation within the game environment, updated in real-time based on user input.
+
 #### <a name="playact"></a>5.4.3: Player Actions and Updates
-The Player Module gets data from the Control Module which manages various actions and updates as follows:
+
+The Player Module gets data from the game control module which manages various actions and updates as follows:
 1. Movement Control:
 	* Players navigate using the WASD keys for omnidirectional movement.
 	* The module continuously updates the player's location and facing direction, maintaining camera focus on the player.
@@ -401,102 +427,117 @@ The Player Module gets data from the Control Module which manages various action
 2. Combat Mechanics:
 	* Players utilize mouse movement and left-click to aim and fire projectiles.
 	* Each projectile is generated with specific stats (e.g., damage, speed) and tracked until it either collides with a target or expires.
+	* If the player gets hit by an enemy's body or projectiles, their current health will decrease based on the enemy's damage stat.
 
 3. Upgrade Mechanism:
-	* At the beginning of each new round, players are presented with an upgrade menu displaying randomly selected options.
-	* The chosen upgrade is sent from Round Module and enhances the player's stats and is stored for future use
+	* At the end of each round, players are presented with an upgrade menu displaying randomly selected options.
+	* The chosen upgrade is sent from the round module and enhances the player's stats.
 
 4. Player Death:
-* If the player’s health reaches zero, the module triggers a game-over sequence, coordinating with the Game Control Module to initiate the end game process.
+	* If the player’s health reaches zero, the module triggers a game-over sequence, coordinating with the game control module to initiate the end game process.
 
-5. Dynamic Stat Updates:
-* As rounds progress, the Player Module dynamically adjusts to the data sent from Round Module based on difficulty scaling, ensuring that encounters remain challenging. This includes adapting health and damage values in response to the game's round mechanics.
 #### <a name="playint"></a>5.4.4: Player Interaction with Other Modules
+
 The Player Module communicates effectively with various other modules:
 * Game Control Module:
-	* Provides real-time updates on player stats (e.g., health, level) and reacts to gameplay events initiated by user actions.
+	* Provides real-time updates on player stats (e.g. health and XP) and reacts to gameplay events initiated by user actions.
 
 * Round Module:
-	* Interacts closely to track the current round number, which in turn is related to upgrade system, the round module gives upgrades which in turn need to be applied to player stats and module
+	* Interacts closely to track the current round number, which in turn is related to upgrade system, the round module gives upgrades which in turn need to be applied to player stats and module.
 
 * UIX Module:
-	* Updates the user interface to reflect player stats, such as health and XP, enhancing the player’s understanding of their current status.
+	* Updates the user interface to reflect player stats, (e.g. health and XP), enhancing the player’s understanding of their current status.
+
 #### <a name="playset"></a>5.4.5: Player Initialization and Setup
+
 Upon the initiation of a new game or round, the Player Module executes the following steps:
 1. Setup Player Stats:
-	* Initialize player attributes, including health, XP, level, and available upgrades, according to game parameters and outcomes from previous rounds.
+	* Initialize player attributes, including stats, XP, level, and available upgrades, according to game parameters and outcomes from previous rounds.
 
 2. Display Player UI:
-	* Collaborate with the UIX Module to render the player’s HUD, ensuring that real-time feedback on health, upgrades, and scores is readily available.
+	* Collaborate with the UIX Module to render the player’s HUD, ensuring that real-time feedback on stats, upgrades, and scores is readily available.
 
 3. Prepare for Input:
 	* Establish input listeners for keyboard and mouse actions, allowing for immediate response to player commands for movement and combat.
 
 4. Reset Positioning:
 	* Position the player at a defined starting point in the game world, ensuring proper camera alignment and interaction with the environment.
-The Player Module is integral to the gaming experience, managing player interactions and evolving capabilities in conjunction with the game’s round dynamics. By maintaining a responsive and adaptable framework, the module enhances player engagement and ensures a consistent challenge throughout the game.
+
+The player module is integral to the user experience, managing player interactions and evolving capabilities in conjunction with the game’s round and upgrade dynamics. By maintaining a responsive and adaptable framework, the module enhances player engagement by ensuring they feel consistently rewarded and challenged throughout the game.
+
 #### <a name="enemy"></a>5.5 Enemy Module
-The enemy module, similar to the player module, holds data and information for the game control module and UIX module to use. The enemy module also contains the information for their AI and as well as the bosses AI and data.
+
+The enemy module, similar to the player module, holds data and information for the game control module, UIX module, and round module to use. The enemy module also contains the information for their AI and as well as the bosses AI and data.
+
 #### <a name="enemyresp"></a>5.5.1: Enemy Module Responsibilities
+
 The Enemy Module is responsible for:
 * Tracking Enemy Statistics: Keeping a detailed record of enemy health and experience points (XP) that will be given to players upon defeat.	
 * AI: Updated movement of enemies, enemy decision making, how enemies collide with objects.
-* Communicating with Other Modules: Collaborating with the Game Control Module for game events and the Round Module for spawn rates current and enemy types.
+* Communicating With Other Modules: Collaborating with the game control module for game events and the round module for current enemy stats and available enemy types.
+
 #### <a name="enemydata"></a>5.5.2: Enemy Data Structure
+
 The Enemy Module maintains the following key data elements:
-* Health: Current health points, decreasing as damage is dealt by attacks from the player.
-* Abilities: Current enemy types abilities and stats which are made in the classes booted by the game control module.
+* Stats: Health, damage, and speed for each enemy, updated every round which are kept in the classes booted by the game control module.
+* Behaviour: Enemy types' movement and decision making patterns.
 * Movement State: The enemy’s current position and orientation within the game environment, updated in real-time based on collision detection.
+
 #### <a name="enemyact"></a>5.4.3: Player Actions and Updates
-The Enemy Module gets data from the Control Module which manages various actions and updates as follows:
+
+The Enemy Module gets data from the game control module which manages various actions and updates as follows:
 * Movement Control:
 	* The module continuously updates the enemy's location and facing direction, spawning outside players POV.
 * Combat Mechanics:
 	* Enemies aim and fire projectiles.
 	* Each projectile is generated with specific stats (e.g., damage, speed) and tracked until it either collides with a target or expires.
 * Enemy Death:
-	* If the enemy health reaches zero, the UI will display animation and XP will be given to the player on completion of kill
+	* If the enemy health reaches zero, the UI will display animation and XP will be given to the player on kill.
 
 ## <a name="data"></a>6. Data Design
+
 In this section we describe how the information elements are manipulated by the game system.
 Currently we have information divided into these broad categories:
-* Player data (information about the players stats and attributes paired with the overlay)
-* Enemy data (enemy stats and how enemies attributes are updated)
+* Player data (information about the player's stats and attributes paired with the overlay)
+* Enemy data (enemy stats and how enemy attributes are updated)
 * Boss data (How boss functionality works and how it pairs with round system)
 * In-game data
-The four information groups will be covered respectively 6.1 - 6.4 respectively, and the information’s entirety will be represented by a diagram in 6.5.
+The four information groups will be covered respectively 6.1 - 6.4 respectively, and the entirety of the information will be represented by a diagram in 6.5.
 
 ### <a name="dataplay"></a>6.1 Player data:
-Players data refers to information which concerns how gameplay data will function outside the game loop which means:
+
+Player data refers to information which concerns how gameplay data will function outside the game loop which means:
 * The player will spawn with the base ship (base case will be introduced as a class)
-* The players data and statistics will be stored in a class containing in game data (see 6.4.1)
+* The player's data, upgrades, and statistics will be stored in a class containing in game data (see 6.4.1)
 This player data will stay static through the boot up process, with the ship's features being updated with the in-game upgrade system and will update UI during the game loop.
 The player data will update along with each upgrade as well. The upgrade system will use pre-built classes containing upgrades as objects. Each object will be added to our current base stats and character functions. 
 
 ### <a name="dataenemy"></a>6.2 Enemy data:
+
 Enemy data will refer to how the actual gameplay data of enemy IDs will flow. This concerns the likes of enemy spawns and enemy types. Examples of enemy data which will be updated outside of the gameplay loop include:
 * The enemy spawns which will be determined by each round (base case of enemies dictated by credit and thrown into our function referred to in our round module).
 * Enemy types will feature different UI (Each enemy object uses a sprite).
 * Enemy types will also be contained in a class and will be spawned using a function.
 All of these spawns and types will be updated as each round increases, most likely syncing to when each round starts after our item-upgrade menu is completed. 
+
 ### <a name="databoss"></a>6.3 Boss data:
 
 Boss data will refer to how the actual gameplay data of boss IDs will appear in game. This concerns the likes of UI overlay with bosses and how each boss class will look. Examples of boss data which will be updated outside of the gameplay loop include:
-* UI updates with a Boss health bar over the game loop UI
+* UI updates with a boss health bar over the game loop UI
 * Boss attack algorithm, (will be included in a class which has each unique move, will have a telegraphed attack pattern).
-* Round system acknowledging its a boss round (Will look at round count to start boss round).
+* Round system acknowledging it's a boss round (Will look at round count to start boss round).
 
 All of these boss data types will be updated at round 10 to round 20, with assets of bosses most likely being reused at rounds higher than 20. The round system will check for round 10 or 20 respectively (most likely will use an if condition).
 
 ### <a name="datalog"></a>6.4 Game logic data:
 
-The game logic data needs to represent all the information about every player ship variant, enemy variant, boss data, and item upgrade, and any map related data which will appear in the current game state. This will be the biggest section to organize but this collection of data will be generalized for the sake of ease of understanding. 
+The game logic data needs to represent all the information about every player ship variant, enemy variant, boss data, and item upgrade, and any map related data which will appear in the current game state. This will be the biggest section to organize but this collection of data will be generalized for ease of understanding. 
 
 Our data will be dissected into these categories:
 
-* Player ship data
-* Enemy ship data
-* Item Upgrade data
+* Player data
+* Enemy data
+* Item upgrade data
 * Round data
 * Boss data
 * Map data
@@ -508,13 +549,13 @@ We will go into more depth of each category individually (in sections 6.3.1 to 6
 
 The information to be maintained for each player ship is as follows:
 
-* Unique Class ID
-* Sprite, Colour.
+* Unique class ID
+* Sprite, colour
 * Health stat
 * Attack stat
 * Defense stat
 * Speed stat
-* Current x,y coordinates and map zone
+* Current (x, y) coordinates and map zone
 * Current direction facing
 * Current upgrade
 * Level and XP total
@@ -524,12 +565,12 @@ The information to be maintained for each player ship is as follows:
 The information to be maintained for each enemy data is very similar to player data, it appears as follows:
 
 * Unique Class ID
-* Sprite, Colour.
+* Sprite, colour
 * Health stat
 * Attack stat
 * Defense stat
 * Speed stat
-* Current x,y coordinates and map zone
+* Current (x, y) coordinates and map zone
 * Current direction facing
 * Current ship total
 * Current credit cost of each enemy
@@ -546,9 +587,10 @@ The information needed for items will include these following:
 
 * Unique ID
 * Display over sprite (New UI update per each upgrade)
-* Current x,y of items bullet trajectory and map zone coverage
 * Current stat changes (will also change with XP system)
+	* Stat changes for when multiple of the same item are picked up
 * Current upgrade system adding count for each upgrade
+* Visuals for items if required (diverge and forcefield)
 
 #### <a name="dataround"></a>6.4.4 Round data:
 
@@ -556,12 +598,12 @@ The current round system involves inputting round count into a function as the g
 
 The current round system will have these properties updated:
 
-* Enemy spawn rate (based on function)
 * Credit count
 * Round count
 * Credits spent
-* Enemy IDs (using while loop)
-* In game timer
+* Enemy IDs and credit costs
+* Enemy spawning (using while loop)
+* In-game timer
 * Player health (At end of each round, player will have health restored)
 
 #### <a name="databship"></a>6.4.5 Boss Ship Data:
@@ -569,28 +611,29 @@ The current round system will have these properties updated:
 The boss data will be dictated by specific round count, the current boss properties which need to be identified include:
 
 * Unique ID
-* Current x,y location and area on map
-* Current Boss health 
+* Current (x, y) location and area on map
+* Current boss health 
 * Health UI for boss
 * Display and animations of hit registration
+* Possible attack moveset and damage values for each attack.
 * Current ability usage
-* Current attack stats
-* Current defense stats
 * Current speed stats
 
 #### <a name="datamap"></a>6.4.6 Map data:
 
-The design of the map data is most likely going to feature a simple restricted area with an out of bounds prompt for each time players ship access a restricted x,y.
-These zones will damage the player as well, and will have a UI display.
-For the majority of the terrain, it will have an overlay in the background indicating where on the map you are located based on specific zones which are static in the background. The images of these will be loaded as soon as the game loop starts.
+The design of the map data is most likely going to feature a simple restricted area with the bounds visually indicated by an asteroid belt that kills the player on impact.
+The asteroids will be handled in the round module when enemy spawns are called, ensuring there are enough asteroid clusters on the map.
+Will have objects (e.g. planets) in the background indicating where on the map you are located based on specific zones which are static in the background. The images of these will be loaded as soon as the game loop starts.
 
 #### <a name="datadis"></a>6.4.7 Display data:
+
 The display data covers which portion of the map the current player's gameplay will view. It will be in a locked camera which will show a portion of the map.
 The specific properties that will be stored are:
 * Current width and height of the display (on a locked screen)
 * Current x,y coordinates updated in our system
 
 ### <a name="logerd"></a>6.5 Logical ERD
+
 In this section we relate the data components (class objects) used for the game, as well as attributes such as stats related to each object.
 The entities we will reference in this diagram will be all of the ones referenced prior in 6.4’s list.
 We will use a chart to determine the logical components of each attribute to reduce complexity:
@@ -599,20 +642,22 @@ Figure 6. Logical Entity-Relationship Diagram <a name="erddiag"></a>
 ![Logical ERD](Images/erddiag.png)
 
 ## <a name="gamstat"></a>7 Game state and flow of play
-In our current iteration of the game we are restricted to one map with a set boundary that will spawn enemies outside of the camera radius, this process is relatively structured with our game logic and has an intuitive sequence of actions with spawns occurring based on a credit count. Ideally we could maybe refine our algorithm to be less exponential overtime for the sake of ease as having a base 30 multiplier at times can be hard to track in terms of enemy spawns. 
-Generally our game flow will follow a series of events listed below, however the bulk of our steps are mostly covered in the system context design diagram listed in 4. The game will be primarily based around menu prompts, round conditions, and the game over condition, all simultaneously updating each sequence of the UI.
+
+In our current iteration of the game we are restricted to one map with a set boundary that will spawn enemies outside of the camera radius, this process is relatively structured with our game logic and has an intuitive sequence of actions with spawns occurring based on a credit count. Ideally, we could refine our algorithm to be more dynamic rather than an exponential function to prevent a wall of difficulty occuring in the late game, as having an exponentially increasing function can cause balancing to get out of hand extremely quickly.
+Generally, our game flow will follow a series of events listed below, however the bulk of our steps are mostly covered in the system context design diagram listed in 4. The game will be primarily based around menu prompts, round conditions, and the game over condition, all simultaneously updating each sequence of the UI.
 This list will be a very bare bones summary of the system context but in a rather user faced perspective to give a general idea of what the user might encounter on first start.
+
 The sequence follows:
 1. In Main Menu
 	* Select Start Game or Quit
-2. In the Game Loop
+2. In the Gameplay Loop
 	* Begin piloting ship and encountering enemies
 	* XP increases per enemy ship destroyed
 	* Enemies begin to spawn based on round number
 3. Round Ends:
 	* Upgrade prompt appears and the user selects an upgrade
 4. New Round Begins
-	* Player health returns to 100, upgrades gets applied
+	* Player health returns to full, upgrades gets applied
 5. Boss Round:
 	* Prompt appears indicating a boss round
 	* Distinct moves selected from boss’s tool kit
@@ -624,7 +669,7 @@ At the game over prompt the user will be able to decide whether they want to pla
 
 The game could go on for many rounds, with much of the gorey details of higher round counts and discussion of scope creep still on the table for discussion.
 
-The enemies will all spawn outside of the player camera, and will positionally shoot based on radius of enemy and radius of player. The game logic will mostly deal with enemy spawn rates and updated credits to dictate spawns. The enemies will spawn infinitely and the credit count will determine which enemies spawn. This goes on infinitely until the round timer is done.
+The enemies will all spawn outside of the player camera, and will positionally shoot based on distance from the player. The game logic will mostly deal with enemy spawn rates and updated credits to dictate spawns. The enemies will spawn infinitely and the credit amount and costs will determine which enemies spawn. This goes on infinitely until the round timer is done.
 
 ## <a name="phys"></a>8 Transition to physical design
 
@@ -634,9 +679,9 @@ In the current iterations we have made in our github testing branch we already h
 
 ### <a name="physim"></a>8.1 Implementation decisions
 
-The question we asked ourselves in the beginning was which game engine we would like to work with. Our options at the time were Godot, Unreal, and Unity. The decision was unity, however there was some speculation early on to have Godot be our engine as it featured c++.
+The question we asked ourselves in the beginning was which game engine we would like to work with. Our main options at the time were Godot, Unreal, and Unity. The decision was Unity, however there was some speculation early on to have Godot be our engine as it is very beginner friendly.
 
-Because we wanted to use Unity as our engine, the mandatory step was to use C# as our main language of choice, and use any pre-built assets given to us by unity to create physics, sprites, and projectiles without the necessity of having to form many class/object designs from scratch.
+Because we wanted to use Unity as our engine, the mandatory step was to use C# as our main language of choice, and use any pre-built assets given to us by Unity to create physics, sprites, and projectiles without the necessity of having to form many class/object designs from scratch.
 
 ### <a name="physobj"></a>8.2 Object model
 
