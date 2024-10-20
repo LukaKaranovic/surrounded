@@ -159,7 +159,8 @@ The game will consist of moving through 2D space and piloting a base ship throug
 	* The asteroids will have collision boxes meaning the player, enemies, and projectiles cannot pass through them.
 	* Running into them will harm the player and enemies, damaging them for 50 health. Be careful!
 	* If something collides with an asteroid (or it is shot), the individual asteroid will be destroyed. For ease of implementation, asteroids will be treated as an enemy with 1 health.
-* The camera that is following the player will be about 1/16 of the size of the entire map, this camera will be centred onto the player at all times.
+* The camera that is following the player will be about 1/64 of the size of the entire map, this camera will be centred onto the player at all times.
+	* In other words, the map will be 8 times the screen width and 8 times the screen height (assuming the user is using a 1920x1080 resolution).
 * The players will be able to traverse all the map freely, as long as they don’t run into any obstacles, with enemies spawning just outside of the player camera randomly.
 
 ### XP and Levelling System

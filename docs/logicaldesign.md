@@ -8,7 +8,6 @@
 
 - Connor McDermid, mcdermidconnor@outlook.com
 
-
 ## Table of Contents
 1. [Known Issues](#issues)
 1. [Overview](#overview)
@@ -56,7 +55,7 @@
 		1. [Display Data](#datadis)
 	1. [Logical Entity Relation Diagram](#logerd)
 1. [Game State and Flow](#gamstat)
-1. [Transition to Physical Desin](#phys)
+1. [Transition to Physical Design](#phys)
 	1. [Implementation Decisions](#physim)
 	1. [Object Model](#physobj)
 1. [Appendix](#appendix)
@@ -74,34 +73,27 @@ Figure 7. [Appendix Diagram](#appdiag)
 
 In this section we list any currently-known errors, omissions, or other problems with the rest of this design document.
 
-1. Collision detection with the games ships
+1. Confusion on how we should start approaching our code base
 
-2. Implementation of required interfaces not fleshed with enough detail
-
-3. Confusion on how we should start approaching our code base
-
-4. How we will know how certain aspects of Unity engine will function
-
-5. Updating certain aspects of our requirements document
-
+2. How we will know how certain aspects of Unity engine will function
 
 ## <a name="overview"></a>2. Product Overview
 
-[Requirements Document](requirements.md) 
-In this document, we discuss the design of our game Surrounded. Our Requirements document discusses these core features and our overall design perspective. These core features are essential to our game and its overall design. These will be elaborated further in our core design section of this document
+In this document, we discuss the design of our game Surrounded. Our [requirements document](requirements.md) discusses these core features and our overall design perspective of the game. These core features are essential to our game and its overall design. These will be elaborated on in our core design section of this document.
 
-The full vision for this game is essentially a single player experience, whereas it is launched and hosted by a singular player that interacts with AI opponents. The player is started in an open world filled with obstacles, where they are given basic movement abilities and a basic weapon to begin with. Here the player will engage in combat with the opposing enemies, who come in many different sizes and strengths and get increasingly more difficult as the game progresses. The design and function of the game is very simple: eliminate enemies, acquire upgrades and repeat.
+The full vision for this game is essentially a single player experience, whereas it is launched and hosted locally by a singular player that interacts with AI opponents. The player is started in an open world filled with obstacles, where they are given basic movement abilities and a basic weapon to begin with. Here the player will engage in combat with the opposing enemies, who come in many different sizes and strengths and get increasingly more difficult as the game progresses. The design and function of the game is very simple: eliminate enemies, acquire upgrades, and repeat without dying.
 
-There are several game features and mechanics whose design are essential and straight forward, our key points are:
+There are several game features and mechanics whose design are essential and straight forward, our key ones are:
 
-* Detection of player actions (movement, combat)
-* Handling of all menu systems, options and menu navigation (main menu, game over, main game hud, player stats, player upgrades)
+* Detection of player actions (movement, combat, opening menus)
+* Handling of all menu systems, options and menu navigation (main menu, game over, main game hud, player stats and upgrades)
 * Collision detection (obstacles, enemy collision)
 * Sound representation (on-map and enemy interaction)
 * Controlling and updating enemy AI (their movement and combat)
 * Handling of XP and level system
-* Handling of Round System
-* Handling of Enemy spawn system (credits system)
+* Handling of the round system
+* Handling of the enemy spawning system (credits system)
+* Handling of bosses and boss rounds
 * Handling and storage of item and upgrade system
 * Handling of random item generation system
 * Handling of player statistics relative to upgrades (upgrades alter player)
@@ -116,34 +108,34 @@ There are four core facets of the system we discuss here:
 * The general overview of the upgrade system,
 * The design implications of the various objects and statistical design.
 
-In terms of an overall design methodology, we wanted a 2D landscape with a restricted area with hordes of enemies. Generally for a majority of game designers this type of gameplay design is very common and for the most part easy to understand. We found that there were various game engines that could support implementation of the system (Godot, Unreal, for example), but we ended up choosing Unity because of their built in assets (such as built in colliders and 2D physics engine). Overall, the other options had their ups too.
+In terms of an overall design methodology, we wanted a 2D landscape with a restricted area with hordes of enemies. For a majority of game designers, this type of gameplay design is relatively common, and for the most part, easy to understand. We found that there were various game engines that could support implementation of the system (Godot and Unreal for example), but we ended up choosing Unity because of their built-in assets (such as built-in colliders and 2D physics engine). Overall, the other options had their pros too.
 
-Some of our biggest overall design problems we’ve faced so far in uncertainty of the extent of how to implement systems and ideas because of the lack of background with the engine, some of these uncertainties include:
+Some of our biggest overall design problems we’ve faced so far relate to uncertainty of the extent of how to implement systems and ideas. This is due to our lack of background with the engine and game development in general. Some of these uncertainties include:
 
 - Unfamiliarity with C# as compared to C++
-- Lack of foundation for implementing structures in game assets and features (such as enemy UI, floating objects in space, creating abilities, etc). As well as the general ability to navigate the Unity Engine fluently.
+- Lack of foundation for implementing structures in game assets and features (such as enemy UI, floating objects in space, creating abilities, etc). 
+- General ability to navigate the Unity engine fluently.
 
-With respect to our first problem, we intend on using as many built in assets with the unity engine. This will be our main crux for the issue of us not being as efficient programmers with C#, as we don’t see it as a necessity to be completely fluent with C#. With this unfamiliarity affecting every member of the team. We all agreed to help each other with the programming aspect of the project if needed. This was due to us abandoning the team philosophy of having someone shadow the other. Rather, each and every member of the team has the ability to give input on design and programming choices.
+With respect to our first problem, we intend on using as many built in assets with the Unity engine. This will be our main crux for the issue of us not being as efficient programmers with C#, as we don’t see it as a necessity to be completely fluent with C#. With this unfamiliarity affecting every member of the team. We all agreed to help each other with the programming aspect of the project if needed. Each and every member of the team has the ability to give input on design and programming choices.
 
-For our methodology, it’s foreseeable that there might be some confusion on programming the back-end side of the project, as we are a school that focuses entirely to C++ using an engine that is built using C#. This does not mean however that we should abandon our current learnt design principles we’ve acquired from other classes so far here.
+For our methodology, it’s foreseeable that there might be some confusion on programming the back-end side of the project. In our schooling, we have only focused on C++ so far, using an engine that is built using C# will definitely cause some confusion. This does not mean however that we should abandon our current learnt design principles we’ve acquired from other classes so far here.
 
-With respect to our second problem, after a bit of research on abstractable content and discussion of our GitHub branch system, the team has decided our main methodology was doing smaller implementations from whatever resources we could find (YouTube tutorials, other documentation for similar past projects, etc) and discussing what is likely best for our system and what isn't using our current background in programming. This discussion will occur via our discord and pull requests. We will also review each segment of code to assure proper conventions before adding each to main.
+With respect to our second and third problems, after a bit of research on abstractable content and discussion of our GitHub branch system, the team has decided our main methodology was doing smaller implementations from whatever resources we could find (YouTube tutorials, other documentation for similar past projects, etc) and discussing what is likely best for our system and what isn't using our current background in programming. This discussion will occur via our Discord and pull requests. We will also review each segment of code to assure proper conventions before adding each to main.
 
-Due to this issue of a lack of background, for our project we plan on having a resource page built into our discord which we will use to gather as much knowledge from the landscape of game development using Unity. 
-
-This fixes any sort of questions that might arise from working with our other teammates (eg. “What methodological procedure is best?” As well as “Where did you find this?”).
+Due to this issue of a lack of background, we plan on having a resource page built into our Discord for our project, which we will use to gather as much knowledge from the landscape of game development using Unity. This fixes any sort of questions that might arise from working with our other teammates (eg. “What methodological procedure is best?” As well as “Where did you find this?”).
 
 As mentioned above, one of our other challenges with the core design of the game will be our round system.
 
-Our current philosophy of the round system is to have each round be 100 seconds, with the ending of each round destroying all current enemies which then features the prompt for the upgrade system (More details including the math and back-end philosophy are included in our requirements document).
+Our current philosophy of the round system is to have each round be 100 seconds, with the ending of each round destroying all current enemies which then features the prompt for the upgrade system (More details including the math and back-end philosophy are included in our [requirements document](requirements.md)).
 
-To give a brief overview of the round system, it will feature a credit system whose function’s input is dictated by the round number. While we have yet to have any background with implementing such features, the philosophy of our game plan for implementation of this feature will be dictated using a mathematical function and an array containing an ID and run through a  while loop. All of this will not be visible to the player, but this sort of implementation will be present in each round. The credit rate will be increased by each round to dictate greater enemy spawns. We plan on tweaking this to account for balance changes and any potential misalignment with how our code runs.
+To give a brief overview of the round system, it will feature a credit system wwhere the credit amount is dictated by the round number. While we have yet to have any background with implementing such features, the philosophy of our game plan for implementation of this feature will be dictated using a mathematical function and an array containing an ID and will run through a while loop. All of this will not be visible to the player, but this sort of implementation will be present in each round. The credit rate will be increased by each round to dictate greater enemy spawns. We plan on tweaking this to account for balance changes and any potential misalignment with how our code runs.
 
-To address the current upgrade system, we plan on having an entirely separate UI overlay which will appear over our current gameplay loop. Our methodology for this is to reference objects from prior classes which hold each upgrade and use a switch case to determine which upgrade to select that will be added to the player. The implementation of this overlay has yet to be fully fleshed out and is still in very early talks in terms of design philosophy. We will be using this switch-case like approach for the meantime as our current solution to how the back-end of the upgrade system could work as of right now. 
+To address the current upgrade system, we plan on having an entirely separate UI overlay which will appear over our current gameplay loop. Our methodology for this is to reference objects from prior classes which hold each upgrade and use a switch case to determine which upgrade to select that will be added to the player. The implementation of this overlay has yet to be fully fleshed out and is still in early talks in terms of design philosophy. We will be using this switch-case like approach for the meantime as our current solution to how the back-end of the upgrade system could work as of right now. 
 
-Finally, for our final facet implementation of our design of objects and statistical approaches we will be using a basic OOP class structure which will feature enemies, player’s ship, and upgraded ships as classes. All of the statistical elements such as enemy defense and player attacks will be already fleshed out in the class objects and will be updated based on upgrade. How each damage number is updated will be by conditions. An example of a condition could be if a ship's attack hits an enemy ship (collision) then subtract enemy health by the player attack function multiplied by an arbitrary number (however this is not finalized and is just a snippet of how functionality could theoretically work). As the game progresses, we expect the scope creep of enemy difficulty won't be dictated by enemy stats, but rather how many enemies spawn with each round to determine our games philosophy on the player's challenge.
+Finally, for our final facet implementation of our design of objects and statistical approaches we will be using a basic OOP class structure which will feature enemies, the player’s ship, and bosses as classes. All of the statistical elements such as enemy defense and player attacks will be already fleshed out in the class objects and will be updated based on upgrade. How each damage number is updated will be by conditions. An example of a condition could be if a ship's attack hits an enemy ship (collision) then subtract enemy health by the player attack function multiplied by an arbitrary number (however this is not finalized and is just a snippet of how functionality could theoretically work). As the game 
+progresses, we expect the adjustment of enemy difficulty won't be dictated by enemy stats, but rather the amount of enemies that spawn in each round. This makes our difficulty align more with our game's philosophy on the player's challenge.
 
-A majority of these design choices are not final and subject to change however. This is all due to the uncertainty of how to fully grasp Unity and the vagueness of each challenge. With that said, we still remain confident in our project design and what any challenges could appear for us this term as game designers.
+A majority of these design choices are not final and are subject to change. This is all due to the uncertainty of how to fully grasp Unity and our inexperience with game development. With that said, we will still remain confident in our project design and what any challenges could appear for us this term as game designers.
 
 ## <a name="syscon"></a>4. System Context
 
@@ -156,23 +148,22 @@ Figure 1. Context Diagram<a name="condiag"></a>
 
 ## <a name="arch"></a>5. Architectural Design
 
-
 ### 5.1:<a name="archgcm"></a> Game Control Module
 The game control module works all from a local system, as everything is local and requires no network connection to work. The game control module is responsible for handling all in-play game logic. It is responsible for: 
 
 * Responding to player input (mouse and keyboard input)
 * Game status determination (Menu options, player death, application termination)
-* Updating round data (communicates with round module) with due respect to game conditions (timer)
+* Updating round data such as credit amount and number (communicates with round module) with due respect to game conditions (timer)
 * Updating UI (communicates with UIX module) with due respect to game conditions (game pause, player death, round end)
-* Updating player and enemy information based on player interaction (combat, collision), this communicates with the enemy module and player module
-* Updating player data based on game conditions (Level up, upgrades), this communicates with out player module
+* Updating player and enemy information based on player interaction (combat, collision)
+* Updating player data based on game conditions (level up, upgrades), this communicates with our player module (and enemy module to get XP amount from enemies)
 
 The game control module is our central system module that communicates with other modules such as: 
 
 * UIX Module: controller module tells UIX when to switch scenes, display menus and overlays, update UI elements (XP bar, health, score and stats/upgrades menu), requests the map design, and all necessary sound and music.
-* Round Module: controller module communicates with the round data and credit system for enemies, when to portray boss rounds, and the in game round timer.
-* Player Module: controller module communicates with the player module to acquire player data and statistics, upgrades system information, player score and players movement/attacks.
-* The Enemy Module: controller module communicates with the enemy module to acquire enemy data and statistics, enemies movements and attacks system, boss data and statistics, as well as boss movement and attack systems
+* Round Module: controller module communicates with the round module by updating the credit amount and round number, alerting when to start boss rounds, and the in-game round timer to tell it when to spawn enemies.
+* Player Module: controller module communicates with the player module to update the player's current health, XP, and score. Will also notify this module on the case of a level up to update player stats (speed, attack, defense, total health)
+* The Enemy Module: controller module communicates with the enemy module to update current enemy health, current boss health, and to retrieve the XP amount from killing those entities. 
 
 #### 5.1.1<a name="archgcmdesc">: Game Control Module Description
 
@@ -202,11 +193,11 @@ The anticipated sequence of events is:
 
 #### 5.1.3: <a name="archgcmproc"></a>Game Logic Processes
 
-The game logic processes are responsible for moment to moment game control itself. All core gameplay actions and events are resolved here.
+The game logic processes are responsible for moment-to-moment game control itself. All core gameplay actions and events are resolved here.
 
-1. This is a rough outline of the expected sequence of events, these are explained further in their respective subsections:
+*This is a rough outline of the expected sequence of events, these are explained further in their respective subsections:*
 
-2. User triggers start of gameplay from setup process, entering into the game logic process. All checks are repeated until End Game process is initiated.  
+User triggers start of gameplay from setup process, entering into the game logic process. All checks are repeated until End Game process is initiated.  
 
 	1.  Start game boot-strap with 60 FPS lock  
 
@@ -226,18 +217,18 @@ The game logic processes are responsible for moment to moment game control itsel
 
 	7. Check for game-over (either go back through loop or proceed to step 3)
 
-Invoke End game process
+Invoke End Game process
 
 ##### 5.1.3.1 Game Data Updates
 
-In our game data updates we try to discuss all possible events/actions the game can recognize and respond to through user input. This information is as well shared with enemy AI which determines how they approach and interact with the player.
+In this section, we try to discuss all possible events/actions the game can recognize and respond to through user input. This information is as well shared with enemy AI which determines how they approach and interact with the player.
 
 * Player Movement (WASD)
-	* Omnidirectional movement through usage of WASD keys, player moves forward with W, backwards with S, and can turn left and right with respective A and D.
+	* Omnidirectional movement through usage of WASD keys, player moves forward with W, backwards with S, and can move left and right with respective A and D.
 	* New location and direction is updated with camera as it is fixed on player
 
-* Player Menu (ESC)
-	* Opens player menu, allowing access to Resume Game, Upgrades List, Quit game
+* Pause Menu (ESC)
+	* Opens pause menu, allowing access to Resume Game, Stats and Upgrades List, Quit game
 
 * Player projectile fire and aim (Mouse Movement and Left Click)
 	* Player fires projectile with left click which is aimed at position of cursor
@@ -245,16 +236,18 @@ In our game data updates we try to discuss all possible events/actions the game 
 	* Projectile information is stored until expiry (collision, expired distance)
 
 * Collisions
-	* Between Player/Enemy
-	* Player and enemy both receive damage according to stats of each
-	* Between Player/Wall
-	* Player receives damage according static wall damage amount and is blocked from moving forward
-	* Between Player/Projectile
-	* Player receives damage according to projectile stat, projectile is then expired according to its stats and relative conditions
+	* Between Player/Enemy:
+		* Player and enemy both take 50 damage
+	* Between Player/Asteroid:
+		* Player takes 50 damage and asteroid gets destroyed
+	* Between Player/Asteroid Belt:
+		* Player takes damage equal to their total health
+	* Between Player/Projectile:
+		* Player takes damage according to projectile stat, projectile is then expired according to its stats and relative conditions
 
 * Sound Generation
 	* Sound is generated upon nearly any action created by player or enemy (Projectile fire, death, damage taken)
-	* Sounds are generated upon menu interaction and game over presented
+	* Sounds are generated upon menu interaction as well
 
 * Upgrade Decision
 	* Player is presented with upgrade menu at beginning of new round, which is determined by round module
@@ -263,7 +256,7 @@ In our game data updates we try to discuss all possible events/actions the game 
 	* Next round begins
 
 * Player Death
-	* Upon players health stat reaching 0 through means mentioned above, game will be sent into end of game process
+	* Upon player's health stat reaching 0 through means mentioned above, game will be sent into end of game process
 
 * Round Update
 	* Upon beginning of game, round count is set to 1, in which the round 1 data is called and requested from the round module

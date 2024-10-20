@@ -30,12 +30,13 @@ Changes to the boss rounds can be found in the "Round System" subsection of the 
 Details about the cryptic text that reveals the story and where it will appear have been added under the story subsection of the "Game flow, objects, and plot-line" section.
 
 *Additional changees that were made:*
-- Labelled the figures properly in both the list of figures and where they actually appear so they match.
-- Included anchors to the list of figures that jump to the figure for quick reference.
-- Included the item selection pop=up image that was accidentally not included in phase 2.
-- Included small changes to the "Round System" subsection of the "Key features and behaviour" section to account for the new cryptic text addition and to clarify other small details.
-- Pretty significant changes were made to collision in combat involving asteroids, enemies, and the player dealing damage now. Details of this are in the "Player, Controls, and Combat" and "Map and Terrain" subsections of the the "Key features and behaviour" section.
-- More details about asteroids were added where necessary in the "Key features and behaviour" section.
+* Labelled the figures properly in both the list of figures and where they actually appear so they match.
+* Included anchors to the list of figures that jump to the figure for quick reference.
+* Included the item selection pop=up image that was accidentally not included in phase 2.
+* Included small changes to the "Round System" subsection of the "Key features and behaviour" section to account for the new cryptic text addition and to clarify other small details.
+* Pretty significant changes were made to collision in combat involving asteroids, enemies, and the player dealing damage now. Details of this are in the "Player, Controls, and Combat" and "Map and Terrain" subsections of the the "Key features and behaviour" section.
+* More details about asteroids were added where necessary in the "Key features and behaviour" section.
+* Changed map size to be 4 times as big for now as we realized map was too small.
 
 ### Changes and updates to the standards and processes (standards.md)
 * Added a table of contents for quick reference and to adhere to layout consistency.
