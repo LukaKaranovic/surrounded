@@ -34,19 +34,19 @@ The following person has been designated the main contact person for questions f
 
 ## <a name="figlist"></a>List of figures
 
-Figure 1. [Main Menu](#mainmenu)
+[Figure 1. Main Menu](#mainmenu)
 
-Figure 2. [Gameplay Screen](#gameplayscreen)
+[Figure 2. Gameplay Screen](#gameplayscreen)
 
-Figure 3. [Pause Menu](#pausemenu)
+[Figure 3. Pause Menu](#pausemenu)
 
-Figure 4. [Item Selection Pop-up](#itemselection)
+[Figure 4. Item Selection Pop-up](#itemselection)
 
-Figure 5. [Game Over](#gameover)
+[Figure 5. Game Over](#gameover)
 
-Figure 6. [Stats and Upgrades Menu](statsandupgrades)
+[Figure 6. Stats and Upgrades Menu](statsandupgrades)
 
-Figure 7. [UI Flow Chart](#uiflowchart)
+[Figure 7. UI Flow Chart](#uiflowchart)
 
 ## <a name="problems"></a>Problems that are known 
 
