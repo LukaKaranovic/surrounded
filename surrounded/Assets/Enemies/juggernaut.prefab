@@ -161,7 +161,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 100
-  m_LinearDrag: 0
+  m_LinearDrag: 0.5
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -198,7 +198,7 @@ MonoBehaviour:
   targetOuterRadius: 10
   sprite: {fileID: 2084447321122650451}
   XPdropped: 4
-  avoidanceRadius: 2
+  avoidanceRadius: 6
 --- !u!1 &9124661563309619329
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,7 +224,7 @@ Transform:
   m_GameObject: {fileID: 9124661563309619329}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.025905069, w: 0.9996644}
-  m_LocalPosition: {x: 0.008, y: 0.323, z: 0}
+  m_LocalPosition: {x: 0, y: 0.323, z: 0}
   m_LocalScale: {x: 0.025395716, y: 0.055888586, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

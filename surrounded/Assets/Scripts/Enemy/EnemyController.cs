@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Security.Cryptography;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -16,19 +17,22 @@ public class EnemyController : MonoBehaviour
     public float shootingRange = 10f;
     public float targetInnerRadius = 7, targetOuterRadius = 10; //inner and outer radius of target ring to move to around player
     public SpriteRenderer sprite;
+
     private Color originalColor;
     protected GameObject player; // changed from private to protected
     private float nextFireTime = 0f;
     public float XPdropped;
+    private Rigidbody2D rb;
     
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player"); // Assuming the player has the tag "Player"
         moveTarget = FindPointNearPlayer();
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    void FixedUpdate()
     {   
         if (player != null)
         {
@@ -56,7 +60,7 @@ public class EnemyController : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, aimAngle);
     }
 
-    public float avoidanceRadius = 3; //Radius of avoidance area around enemy
+    public float avoidanceRadius = 5; //Radius of avoidance area around enemy
     private Vector3 moveTarget;
     private Vector3 heading;
     protected void MoveNearPlayer()
@@ -65,11 +69,22 @@ public class EnemyController : MonoBehaviour
         {
             moveTarget = FindPointNearPlayer();
         } 
-        heading = ((moveTarget + player.transform.position) - transform.position).normalized;   
+        Vector3 heading = ((moveTarget + player.transform.position) - transform.position).normalized;   
+        heading = avoidanceAdjustment(heading); 
+       // transform.position += maxSpeed * Time.deltaTime * heading;
+        if(rb.velocity.magnitude > maxSpeed)
+        {
+            rb.AddForce(maxSpeed * -rb.velocity.normalized, ForceMode2D.Impulse);
+        }
+        Debug.DrawLine(transform.position, player.transform.position + moveTarget);
+        Debug.DrawLine(transform.position, transform.position + heading, Color.red);
+        rb.AddForce(maxSpeed * heading,ForceMode2D.Impulse);
+    }
+
+    private Vector3 avoidanceAdjustment(Vector3 heading){
         Collider2D[] NearbyColliders = Physics2D.OverlapCircleAll(transform.position, avoidanceRadius);
         foreach (Collider2D collider in NearbyColliders)
-        {
-            
+        {    
             if (collider.gameObject != this.gameObject && !collider.gameObject.CompareTag("Bullet"))
             {
                 float distance = Vector2.Distance(transform.position, collider.transform.position);
@@ -77,11 +92,9 @@ public class EnemyController : MonoBehaviour
             }
         }
         heading = heading.normalized;
-        transform.position += maxSpeed * Time.deltaTime * heading;
+        return heading;
     }
-
-
-    protected Vector2 FindPointNearPlayer() // changed from private to protected
+    protected Vector3 FindPointNearPlayer() // changed from private to protected
     {
         Vector2 randomDirection = Random.insideUnitCircle.normalized; //vector pointing towards direction of target around player
         float randomRadius = Random.Range(targetInnerRadius, targetOuterRadius); //distance target is from player
