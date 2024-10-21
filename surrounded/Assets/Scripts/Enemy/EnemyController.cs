@@ -19,7 +19,7 @@ public class EnemyController : MonoBehaviour
     public SpriteRenderer sprite;
 
     private Color originalColor;
-    private GameObject player;
+    protected GameObject player; // changed from private to protected
     private float nextFireTime = 0f;
     public float XPdropped;
     private Rigidbody2D rb;
@@ -62,7 +62,8 @@ public class EnemyController : MonoBehaviour
 
     public float avoidanceRadius = 5; //Radius of avoidance area around enemy
     private Vector3 moveTarget;
-    private void MoveNearPlayer()
+    private Vector3 heading;
+    protected void MoveNearPlayer()
     {
         if (Vector2.Distance(transform.position, player.transform.position + moveTarget) < 1)  //Enemy is near target position
         {
@@ -93,7 +94,13 @@ public class EnemyController : MonoBehaviour
         heading = heading.normalized;
         return heading;
     }
+<<<<<<< HEAD:surrounded/Assets/Scripts/Enemy/EnemyController.cs
     private Vector3 FindPointNearPlayer()
+=======
+
+
+    protected Vector2 FindPointNearPlayer() // changed from private to protected
+>>>>>>> testing:surrounded/Assets/Scripts/EnemyController.cs
     {
         Vector2 randomDirection = Random.insideUnitCircle.normalized; //vector pointing towards direction of target around player
         float randomRadius = Random.Range(targetInnerRadius, targetOuterRadius); //distance target is from player
