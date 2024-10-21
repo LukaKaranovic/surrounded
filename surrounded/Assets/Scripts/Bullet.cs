@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float timeToLiveBullets = 2f;
-    public float damage = 1;
+    public int damage = 1;
 
     void Start()
     {
@@ -36,16 +36,12 @@ public class Bullet : MonoBehaviour
 
             PlayerController player = other.GetComponent<PlayerController>();
             if (player != null) {
-                player.TakeDamage(damage);
+                player.takeDamage(damage);
                 Debug.Log("Player took damage!");
             }
 
             //Destroy bullet after impact
             Destroy(gameObject);
         }
-    }
-
-    public void SetDamage(float dmg) {
-        damage = dmg;
     }
 }

@@ -9,7 +9,7 @@ public class EnemyController : MonoBehaviour
 {
     public float maxSpeed = 3f;
     public float fireRate = 2f; // Time between shots
-    public float health = 3f;
+    public int health = 3;
     public GameObject bulletPrefab;
     public Transform firePoint;
     public float fireForce = 20f;
@@ -92,7 +92,7 @@ public class EnemyController : MonoBehaviour
         bullet.GetComponent<Rigidbody2D>().AddForce(firePoint.up * fireForce, ForceMode2D.Impulse);
     }
 
-    public void takeDamage(float damage) {
+    public void takeDamage(int damage) {
         StartCoroutine(FlashRed());
         health -= damage;
         Debug.Log("Enemy health: " + health); // debug message to track health
@@ -121,7 +121,7 @@ public class EnemyController : MonoBehaviour
             
             Debug.Log("Enemy hit player! Inflicting damage!");
             // damage both heavily
-            player.TakeDamage(50);
+            player.takeDamage(50);
             this.takeDamage(50); // stretch goal -- received damage configurable by upgrades
         }
 
