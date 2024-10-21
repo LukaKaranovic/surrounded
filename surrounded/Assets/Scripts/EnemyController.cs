@@ -81,7 +81,7 @@ public class EnemyController : MonoBehaviour
     }
 
 
-    private Vector2 FindPointNearPlayer()
+    protected Vector2 FindPointNearPlayer() // changed from private to protected
     {
         Vector2 randomDirection = Random.insideUnitCircle.normalized; //vector pointing towards direction of target around player
         float randomRadius = Random.Range(targetInnerRadius, targetOuterRadius); //distance target is from player
