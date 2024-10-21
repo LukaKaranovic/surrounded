@@ -18,6 +18,35 @@ public class AsteroidController : EnemyController
         GetComponent<Rigidbody2D>().AddForce(heading, ForceMode2D.Impulse);
         // asteroid towards player
     }
+    
+    public void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Bullet"))
+        {
+            // do nothing, redundant. handled by Bullet
+            return;
+        }
+
+        if (other.gameObject.CompareTag("Player"))
+        {
+            // get enemy
+            PlayerController player = other.gameObject.GetComponent<PlayerController>();
+            
+            Debug.Log("Asteroid hit player! Inflicting damage!");
+            // damage both heavily
+            player.takeDamage(50);
+            this.takeDamage(50); // stretch goal -- received damage configurable by upgrades
+        }
+
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            // get enemy
+            EnemyController enemy = other.gameObject.GetComponent<EnemyController>();
+            Debug.Log("Asteroid hit other enemy! Inflicting heavy damage!");
+            enemy.takeDamage(100);
+            this.takeDamage(100);
+        }
+    }
 
     void Update()
     {
