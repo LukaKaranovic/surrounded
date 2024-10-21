@@ -17,7 +17,7 @@ public class EnemyController : MonoBehaviour
     public float targetInnerRadius = 7, targetOuterRadius = 10; //inner and outer radius of target ring to move to around player
     public SpriteRenderer sprite;
     private Color originalColor;
-    private GameObject player;
+    protected GameObject player; // changed from private to protected
     private float nextFireTime = 0f;
     public float XPdropped;
     
