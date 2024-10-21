@@ -59,7 +59,7 @@ public class EnemyController : MonoBehaviour
     public float avoidanceRadius = 3; //Radius of avoidance area around enemy
     private Vector3 moveTarget;
     private Vector3 heading;
-    private void MoveNearPlayer()
+    protected void MoveNearPlayer()
     {
         if (Vector2.Distance(transform.position, player.transform.position + moveTarget) < 1)  //Enemy is near target position
         {

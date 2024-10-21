@@ -15,7 +15,7 @@ public class AsteroidController : EnemyController
         player = GameObject.FindGameObjectWithTag("Player");
         moveTarget = FindPointNearPlayer();
         Vector3 heading = ((moveTarget + player.transform.position) - transform.position).normalized;
-        transform.position += maxSpeed * Time.deltaTime * heading; // should hopefully accelerate
+        GetComponent<Rigidbody2D>().AddForce(heading, ForceMode2D.Impulse);
         // asteroid towards player
     }
 
