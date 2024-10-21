@@ -22,7 +22,7 @@ public class EnemyController : MonoBehaviour
     protected GameObject player; // changed from private to protected
     private float nextFireTime = 0f;
     public float XPdropped;
-    private Rigidbody2D rb;
+    protected Rigidbody2D rb;
     
 
     void Start()
