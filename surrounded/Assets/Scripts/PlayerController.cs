@@ -10,11 +10,14 @@ public class PlayerController : MonoBehaviour
     public PauseMenu pauseMenu;
     public int damage = 5;
     public int defense = 3;
-    public float moveSpeed = 10f;
+    public int moveSpeed = 10;
     public int health = 50;
+    public int maxHealth = 50;
     public float XP = 0;
     public int currentLevel = 1;
     public float levelReq = 30 * Mathf.Pow(1.1f, 0);
+    public SpriteRenderer sprite;
+
 
 
     Vector2 moveDirection;
@@ -54,6 +57,7 @@ public class PlayerController : MonoBehaviour
             damageTaken = 1;
         }
         health -= damageTaken;
+        StartCoroutine(FlashRed());
 
         Debug.Log("Player taking damage! Health: " + health);
         if(health <= 0){
@@ -67,9 +71,15 @@ public class PlayerController : MonoBehaviour
         defense += 3;
         moveSpeed += 3;
         health += 10;
+        maxHealth += 10;
         XP -= levelReq;
         currentLevel++;
         levelReq = 30 * Mathf.Pow(1.1f, (currentLevel-1));
     }
-    
+
+    IEnumerator FlashRed(){
+        sprite.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        sprite.color = Color.white;
+    }
 }

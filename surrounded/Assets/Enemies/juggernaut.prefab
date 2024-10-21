@@ -190,16 +190,14 @@ MonoBehaviour:
   maxSpeed: 6
   fireRate: 2
   health: 60
-  healthIncrease: 6
   bulletPrefab: {fileID: 301942462713169048, guid: 05e1fc6fa8ef2244cab45285b85e49a9, type: 3}
   firePoint: {fileID: 2713317750801945972}
-  fireForce: 20
+  fireForce: 10
   shootingRange: 10
   targetInnerRadius: 7
   targetOuterRadius: 10
   sprite: {fileID: 2084447321122650451}
   XPdropped: 4
-  Timer: {fileID: 0}
   avoidanceRadius: 2
 --- !u!1 &9124661563309619329
 GameObject:

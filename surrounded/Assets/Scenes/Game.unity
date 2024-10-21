@@ -1977,9 +1977,11 @@ MonoBehaviour:
   defense: 3
   moveSpeed: 10
   health: 50
+  maxHealth: 50
   XP: 0
   currentLevel: 1
   levelReq: 30
+  sprite: {fileID: 816382865}
 --- !u!50 &816382868
 Rigidbody2D:
   serializedVersion: 4
@@ -3820,7 +3822,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2137968400}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
