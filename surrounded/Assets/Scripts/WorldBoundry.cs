@@ -12,7 +12,7 @@ public class WorldBoundary : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             PlayerController target = other.gameObject.GetComponent<PlayerController>();
-            int dmg = (target.health)/3;
+            float dmg = (target.health)/3;
             dot = StartCoroutine(DOT(target,dmg));
          }
         if (other.gameObject.CompareTag("Enemy"))
@@ -24,9 +24,9 @@ public class WorldBoundary : MonoBehaviour
     public void OnCollisionExit2D(Collision2D other){
         StopCoroutine(dot);
     }
-    private IEnumerator DOT(PlayerController target, int damage){
+    private IEnumerator DOT(PlayerController target, float damage){
         while(true){
-            target.takeDamage(damage);
+            target.TakeDamage(damage);
             yield return new WaitForSeconds(1);
         }
     }

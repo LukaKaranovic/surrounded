@@ -10,12 +10,15 @@ public class Weapon : MonoBehaviour
     public float fireRate = 1.0f;
 
     private float nextFireTime = 0f;
-    public void Fire(){
+    public void Fire(float damage){
         if (Time.time >= nextFireTime)
         {
             GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            Bullet b = bullet.GetComponent<Bullet>();
+            b.SetDamage(damage);
             bullet.GetComponent<Rigidbody2D>().AddForce(firePoint.up * fireForce, ForceMode2D.Impulse);
             nextFireTime = Time.time+ 1f/fireRate;
+            
         }
     }
 }
