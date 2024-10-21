@@ -1268,6 +1268,7 @@ MonoBehaviour:
   striker: {fileID: 594141007423946783, guid: a3e4fd81a08196b469f1964c313063e4, type: 3}
   dreadnought: {fileID: 2932565879803988751, guid: e08050b776009e141ab2aeff61bd0ea1, type: 3}
   C0BU5: {fileID: 8480422743410830737, guid: f43c384fd911d7645897b1468cc9794d, type: 3}
+  asteroid: {fileID: 2122399234681751659, guid: 35659968c90f372e8bcb1d14a5d7f520, type: 3}
   spawnInterval: 10
   targetPoint: {fileID: 816382866}
   Timer: {fileID: 1289865444}
