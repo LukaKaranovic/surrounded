@@ -152,7 +152,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 8
   fireRate: 2
-  health: 3
+  health: 15
+  healthIncrease: 2
   bulletPrefab: {fileID: 301942462713169048, guid: 1a2c216a236ea404a9fc946332f0b53f, type: 3}
   firePoint: {fileID: 5464646103671442227}
   fireForce: 20
@@ -160,6 +161,8 @@ MonoBehaviour:
   targetInnerRadius: 7
   targetOuterRadius: 10
   sprite: {fileID: 2292161443297363308}
+  XPdropped: 1
+  Timer: {fileID: 0}
   avoidanceRadius: 3
 --- !u!50 &8370973401546656414
 Rigidbody2D:

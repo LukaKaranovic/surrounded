@@ -7,6 +7,7 @@ public class WorldBoundary : MonoBehaviour
 {
    public GameOverScreen gameOverScreen;
    private Coroutine dot;
+
    public void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player"))

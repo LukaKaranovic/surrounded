@@ -19,6 +19,8 @@ public class EnemyController : MonoBehaviour
     private Color originalColor;
     private GameObject player;
     private float nextFireTime = 0f;
+    public float XPdropped;
+    
 
     void Start()
     {
@@ -27,7 +29,7 @@ public class EnemyController : MonoBehaviour
     }
 
     void Update()
-    {
+    {   
         if (player != null)
         {
             float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);  
@@ -93,12 +95,14 @@ public class EnemyController : MonoBehaviour
     }
 
     public void takeDamage(int damage) {
+        PlayerController p = player.GetComponent<PlayerController>(); 
         StartCoroutine(FlashRed());
         health -= damage;
         Debug.Log("Enemy health: " + health); // debug message to track health
 
-        if (health <= 0) {
+        if (health <= 0 && p != null) {
             Debug.Log("Enemy destroyed!");
+            p.XP += XPdropped;
             Destroy(gameObject);
         }
     }

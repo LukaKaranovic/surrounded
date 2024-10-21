@@ -8,13 +8,13 @@ public class PlayerController : MonoBehaviour
     public Weapon weapon;
     public GameOverScreen gameOverScreen;     // Reference to the GameOverScreen script
     public PauseMenu pauseMenu;
-    public float damage = 5f;
-    public float defense = 3f;
+    public int damage = 5;
+    public int defense = 3;
     public float moveSpeed = 10f;
-    public float health = 50f;
+    public int health = 50;
     public float XP = 0;
-    private int currentLevel = 1;
-    private float levelReq = 30 * Mathf.Pow(1.1f, 0);
+    public int currentLevel = 1;
+    public float levelReq = 30 * Mathf.Pow(1.1f, 0);
 
 
     Vector2 moveDirection;
@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
         float moveY = Input.GetAxisRaw("Vertical");
 
         if(Input.GetMouseButton(0)){
-            weapon.Fire(damage);
+            weapon.Fire();
         }
 
         moveDirection = new Vector2(moveX, moveY).normalized;
@@ -48,8 +48,8 @@ public class PlayerController : MonoBehaviour
         rb.rotation = aimAngle;
     }
 
-    public void TakeDamage(float damage) {
-        float damageTaken = (damage - defense);
+    public void takeDamage(int damage) {
+        int damageTaken = (damage - defense);
         if (damageTaken <= 1) {
             damageTaken = 1;
         }

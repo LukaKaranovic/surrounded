@@ -21,14 +21,12 @@ public class HealthBar : MonoBehaviour
     void Update()
     {
         currentHealth = player.health;
+        if(currentHealth <=0){
+            currentHealth = 0;
+        }
         healthText.text = "HP: " + currentHealth + "/" + maxHealth;
         float targetFillAmount = currentHealth/maxHealth;
         healthBar.fillAmount = targetFillAmount;
-
-        /*currentXP = player.exp;
-        float targetFillAmount = currentXP/maxHealth;
-        healthBar.fillAmount = targetFillAmount;*/
-
 
     }
 }

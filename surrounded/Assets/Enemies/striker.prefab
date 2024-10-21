@@ -179,16 +179,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 607a5e184403246678a050ba7ec45cad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 10
+  maxSpeed: 25
   fireRate: 2
-  health: 30
-  bulletPrefab: {fileID: 301942462713169048, guid: 1a2c216a236ea404a9fc946332f0b53f, type: 3}
+  health: 60
+  healthIncrease: 4
+  bulletPrefab: {fileID: 301942462713169048, guid: fe917482b493d614480bd59c67b7010c, type: 3}
   firePoint: {fileID: 3183919931402661476}
   fireForce: 20
   shootingRange: 10
   targetInnerRadius: 7
   targetOuterRadius: 10
   sprite: {fileID: 6922347402053109228}
+  XPdropped: 7
+  Timer: {fileID: 0}
   avoidanceRadius: 3
 --- !u!1 &1872739135838276893
 GameObject:
