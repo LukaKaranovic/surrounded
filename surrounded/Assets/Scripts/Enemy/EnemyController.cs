@@ -94,13 +94,7 @@ public class EnemyController : MonoBehaviour
         heading = heading.normalized;
         return heading;
     }
-<<<<<<< HEAD:surrounded/Assets/Scripts/Enemy/EnemyController.cs
-    private Vector3 FindPointNearPlayer()
-=======
-
-
-    protected Vector2 FindPointNearPlayer() // changed from private to protected
->>>>>>> testing:surrounded/Assets/Scripts/EnemyController.cs
+    protected Vector3 FindPointNearPlayer() // changed from private to protected
     {
         Vector2 randomDirection = Random.insideUnitCircle.normalized; //vector pointing towards direction of target around player
         float randomRadius = Random.Range(targetInnerRadius, targetOuterRadius); //distance target is from player
