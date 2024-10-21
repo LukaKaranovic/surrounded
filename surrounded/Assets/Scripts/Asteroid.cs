@@ -1,10 +1,18 @@
 using UnityEngine;
 
+/**
+ * AsteroidController inherits from EnemyController for code reuse and ease of implementation
+ */
 public class AsteroidController : EnemyController
 {
 
     private Vector3 moveTarget;
     
+    /**
+     * The start for Asteroid does two things:
+     * 1. Finds the target player
+     * 2. Uses an impulse force to propel itself towards the player
+     */
     void Start()
     {
         /*  It was a good thought. Doesn;t work though.
@@ -12,6 +20,7 @@ public class AsteroidController : EnemyController
         transform.Rotate(direction);
         GetComponent<Rigidbody2D>().AddForce(transform.forward, ForceMode2D.Impulse);
         */
+        // these four lines sourced and modified from EnemyController and from Bullet
         player = GameObject.FindGameObjectWithTag("Player");
         moveTarget = FindPointNearPlayer();
         Vector3 heading = ((moveTarget + player.transform.position) - transform.position).normalized;
@@ -19,6 +28,9 @@ public class AsteroidController : EnemyController
         // asteroid towards player
     }
     
+    /**
+     * Copied with minor behavioural changes from EnemyController's function of the same name.
+     */
     public void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Bullet"))
@@ -48,6 +60,11 @@ public class AsteroidController : EnemyController
         }
     }
 
+    /**
+     * The Update method is intentionally left blank in Asteroid because
+     * the Asteroid should be entirely static -- it shouldn't have any interactions per-frame.
+     * But we need to override EnemyController's Update() for that to happen.
+     */
     void Update()
     {
         // this section intentionally left blank
