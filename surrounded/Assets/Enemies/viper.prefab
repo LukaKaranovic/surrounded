@@ -161,7 +161,7 @@ MonoBehaviour:
   targetOuterRadius: 10
   sprite: {fileID: 2292161443297363308}
   XPdropped: 1
-  avoidanceRadius: 3
+  avoidanceRadius: 5
 --- !u!50 &8370973401546656414
 Rigidbody2D:
   serializedVersion: 4

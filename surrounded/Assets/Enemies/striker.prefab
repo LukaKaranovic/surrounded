@@ -190,7 +190,7 @@ MonoBehaviour:
   targetOuterRadius: 10
   sprite: {fileID: 6922347402053109228}
   XPdropped: 7
-  avoidanceRadius: 3
+  avoidanceRadius: 7
 --- !u!1 &1872739135838276893
 GameObject:
   m_ObjectHideFlags: 0

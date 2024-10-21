@@ -60,20 +60,30 @@ public class EnemyController : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, aimAngle);
     }
 
-    public float avoidanceRadius = 3; //Radius of avoidance area around enemy
+    public float avoidanceRadius = 5; //Radius of avoidance area around enemy
     private Vector3 moveTarget;
-    private Vector3 heading;
     private void MoveNearPlayer()
     {
         if (Vector2.Distance(transform.position, player.transform.position + moveTarget) < 1)  //Enemy is near target position
         {
             moveTarget = FindPointNearPlayer();
         } 
-        heading = ((moveTarget + player.transform.position) - transform.position).normalized;   
+        Vector3 heading = ((moveTarget + player.transform.position) - transform.position).normalized;   
+        heading = avoidanceAdjustment(heading); 
+       // transform.position += maxSpeed * Time.deltaTime * heading;
+        if(rb.velocity.magnitude > maxSpeed)
+        {
+            rb.AddForce(maxSpeed * -rb.velocity.normalized, ForceMode2D.Impulse);
+        }
+        Debug.DrawLine(transform.position, player.transform.position + moveTarget);
+        Debug.DrawLine(transform.position, transform.position + heading, Color.red);
+        rb.AddForce(maxSpeed * heading,ForceMode2D.Impulse);
+    }
+
+    private Vector3 avoidanceAdjustment(Vector3 heading){
         Collider2D[] NearbyColliders = Physics2D.OverlapCircleAll(transform.position, avoidanceRadius);
         foreach (Collider2D collider in NearbyColliders)
-        {
-            
+        {    
             if (collider.gameObject != this.gameObject && !collider.gameObject.CompareTag("Bullet"))
             {
                 float distance = Vector2.Distance(transform.position, collider.transform.position);
@@ -81,16 +91,9 @@ public class EnemyController : MonoBehaviour
             }
         }
         heading = heading.normalized;
-       // transform.position += maxSpeed * Time.deltaTime * heading;
-        if(rb.velocity.magnitude > maxSpeed)
-        {
-            rb.AddForce(maxSpeed * -rb.velocity.normalized, ForceMode2D.Impulse);
-        }
-        rb.AddForce(maxSpeed * heading,ForceMode2D.Impulse);
+        return heading;
     }
-
-
-    private Vector2 FindPointNearPlayer()
+    private Vector3 FindPointNearPlayer()
     {
         Vector2 randomDirection = Random.insideUnitCircle.normalized; //vector pointing towards direction of target around player
         float randomRadius = Random.Range(targetInnerRadius, targetOuterRadius); //distance target is from player
