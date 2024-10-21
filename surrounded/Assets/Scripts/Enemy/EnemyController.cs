@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Security.Cryptography;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -16,19 +17,22 @@ public class EnemyController : MonoBehaviour
     public float shootingRange = 10f;
     public float targetInnerRadius = 7, targetOuterRadius = 10; //inner and outer radius of target ring to move to around player
     public SpriteRenderer sprite;
+
     private Color originalColor;
     private GameObject player;
     private float nextFireTime = 0f;
     public float XPdropped;
+    private Rigidbody2D rb;
     
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player"); // Assuming the player has the tag "Player"
         moveTarget = FindPointNearPlayer();
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    void FixedUpdate()
     {   
         if (player != null)
         {
@@ -77,7 +81,12 @@ public class EnemyController : MonoBehaviour
             }
         }
         heading = heading.normalized;
-        transform.position += maxSpeed * Time.deltaTime * heading;
+       // transform.position += maxSpeed * Time.deltaTime * heading;
+        if(rb.velocity.magnitude > maxSpeed)
+        {
+            rb.AddForce(maxSpeed * -rb.velocity.normalized, ForceMode2D.Impulse);
+        }
+        rb.AddForce(maxSpeed * heading,ForceMode2D.Impulse);
     }
 
 
