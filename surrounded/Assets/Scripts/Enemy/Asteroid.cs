@@ -24,6 +24,7 @@ public class AsteroidController : EnemyController
         Vector3 heading = ((moveTarget + player.transform.position) - transform.position).normalized;
         rb = GetComponent<Rigidbody2D>();
         rb.AddForce(heading, ForceMode2D.Impulse);
+        rb.AddTorque(Random.Range(30,50));
         // asteroid towards player
     }
     

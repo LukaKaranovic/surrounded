@@ -1979,7 +1979,7 @@ MonoBehaviour:
   damage: 5
   defense: 3
   moveSpeed: 10
-  health: 1000
+  health: 50
   maxHealth: 50
   XP: 0
   currentLevel: 1
