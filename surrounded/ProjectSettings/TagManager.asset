@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Bullet
+  - Asteroid
   layers:
   - Default
   - TransparentFX
@@ -40,6 +41,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: New Layer Bottom
+    uniqueID: 3199128401
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

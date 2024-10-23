@@ -10,13 +10,16 @@ public class ShipSpawner : MonoBehaviour
     public GameObject striker;     // Assign Striker ship prefab in the Inspector
     public GameObject dreadnought;     // Assign Striker ship prefab in the Inspector
     public GameObject C0BU5;
-    public GameObject asteroid;
+    public GameObject asteroid1;
+    public GameObject asteroid2;
+    public GameObject asteroid3;
     public float spawnInterval = 5f;      // Time between spawns
     public Transform targetPoint;         // Target for ships to move towards (e.g., player ship)
     private Camera mainCamera;            // Reference to the main camera
     private int random, creditCost, availableCredits;
     public GameObject Timer;
     private RoundTimer round;
+
 
     void Start()
     {
@@ -31,12 +34,13 @@ public class ShipSpawner : MonoBehaviour
 
     IEnumerator SpawnShips()
     {
+    while(true){
         yield return new WaitForSeconds(spawnInterval/2);
         /*if(RoundNumber() == 10){
             Vector2 spawnPosition = GetOffScreenPosition();  // Get off-screen spawn position
             GameObject newShip = Instantiate(C0BU5, spawnPosition, Quaternion.identity);
         }*/
-        while(true){
+        for(int i = 0; i<10; i++){
             availableCredits = availableCreditAmount();
             while (availableCredits >= 0)
             {
@@ -54,10 +58,11 @@ public class ShipSpawner : MonoBehaviour
             }
             // also, spawn one asteroid
             Vector2 asteroidSpawnPosition = GetOffScreenPosition(); // get off-screen spawn position
-            GameObject newAst = Instantiate(asteroid, asteroidSpawnPosition, Quaternion.identity);
+            GameObject newAst = Instantiate(ChooseRandomAsteroid(asteroid1, asteroid2, asteroid3), asteroidSpawnPosition, Quaternion.identity);
             yield return new WaitForSeconds(spawnInterval);
         }
     }
+}
 
     // Choose the appropriate ship prefab based on the current round
     GameObject GetShipBasedOnRound()
@@ -86,6 +91,12 @@ public class ShipSpawner : MonoBehaviour
             creditCost = 11;
         }
         return ships[random];
+    }
+
+    GameObject ChooseRandomAsteroid(params GameObject[] Asteroids)
+    {
+        random = Random.Range(0, Asteroids.Length);
+        return Asteroids[random];
     }
 
     // Get a random position just outside the camera's view

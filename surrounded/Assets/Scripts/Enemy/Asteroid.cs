@@ -5,8 +5,6 @@ using UnityEngine;
  */
 public class AsteroidController : EnemyController
 {
-
-    private Vector3 moveTarget;
     
     /**
      * The start for Asteroid does two things:
@@ -32,7 +30,7 @@ public class AsteroidController : EnemyController
     /**
      * Copied with minor behavioural changes from EnemyController's function of the same name.
      */
-    public void OnCollisionEnter2D(Collision2D other)
+    public new void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Bullet"))
         {
@@ -60,13 +58,20 @@ public class AsteroidController : EnemyController
             this.takeDamage(100);
         }
     }
-
+    public new void takeDamage(int damage) {
+        if(player != null){
+        health -= damage;
+        if (health <= 0) {
+            Destroy(gameObject);
+        }
+        }
+    }
     /**
      * The Update method is intentionally left blank in Asteroid because
      * the Asteroid should be entirely static -- it shouldn't have any interactions per-frame.
      * But we need to override EnemyController's Update() for that to happen.
      */
-    void Update()
+    void FixedUpdate()
     {
         // this section intentionally left blank
     }
