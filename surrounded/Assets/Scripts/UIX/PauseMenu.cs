@@ -26,4 +26,9 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene("Main Menu");       
         Time.timeScale = 1;
     }
+    void Update(){
+        if(Input.GetKeyDown(KeyCode.Escape)){
+            Resume();
+        }
+    }
 }
