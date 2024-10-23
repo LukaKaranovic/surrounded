@@ -3,12 +3,13 @@ using TMPro;  // Import TextMeshPro namespace
 
 public class RoundTimer : MonoBehaviour
 {
-    public float roundDuration = 100f;  
+    private float roundDuration = 105f;  
     private float timer;                
     public int round = 1;
     public TMP_Text timerText;          
     public TMP_Text roundText;         
     public GameOverScreen gameOverScreen;
+    public PlayerController player;
 
     void Start()
     {
@@ -35,6 +36,7 @@ public class RoundTimer : MonoBehaviour
 
     void IncrementRound()
     {
+        player.health = player.maxHealth;
         round++;
         UpdateRoundText();
     }

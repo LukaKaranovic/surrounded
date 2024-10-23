@@ -61,7 +61,7 @@ public class EnemyController : MonoBehaviour
     }
 
     public float avoidanceRadius = 5; //Radius of avoidance area around enemy
-    private Vector3 moveTarget;
+    protected Vector3 moveTarget;
     private Vector3 heading;
     protected void MoveNearPlayer()
     {
@@ -108,6 +108,7 @@ public class EnemyController : MonoBehaviour
     }
 
     public void takeDamage(int damage) {
+        if(player != null){
         PlayerController p = player.GetComponent<PlayerController>(); 
         StartCoroutine(FlashRed());
         health -= damage;
@@ -117,6 +118,7 @@ public class EnemyController : MonoBehaviour
             Debug.Log("Enemy destroyed!");
             p.XP += XPdropped;
             Destroy(gameObject);
+        }
         }
     }
     /**
