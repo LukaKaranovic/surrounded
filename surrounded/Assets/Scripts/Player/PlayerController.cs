@@ -17,8 +17,7 @@ public class PlayerController : MonoBehaviour
     public int currentLevel = 1;
     public float levelReq = 30 * Mathf.Pow(1.1f, 0);
     public SpriteRenderer sprite;
-
-
+    
 
     Vector2 moveDirection;
     Vector2 mousePosition;
@@ -40,6 +39,7 @@ public class PlayerController : MonoBehaviour
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         if (XP >= levelReq) {
             LevelUp();
+
         }
     }
 
@@ -75,6 +75,7 @@ public class PlayerController : MonoBehaviour
         XP -= levelReq;
         currentLevel++;
         levelReq = 30 * Mathf.Pow(1.1f, (currentLevel-1));
+
     }
 
     IEnumerator FlashRed(){

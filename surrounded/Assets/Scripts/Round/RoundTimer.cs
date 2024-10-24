@@ -10,6 +10,7 @@ public class RoundTimer : MonoBehaviour
     public TMP_Text roundText;         
     public GameOverScreen gameOverScreen;
     public PlayerController player;
+    public UpgradeScreen upgrade;
 
     void Start()
     {
@@ -39,6 +40,7 @@ public class RoundTimer : MonoBehaviour
         player.health = player.maxHealth;
         round++;
         UpdateRoundText();
+        upgrade.DisplayRandomUpgrades();
     }
 
     void UpdateTimerText()

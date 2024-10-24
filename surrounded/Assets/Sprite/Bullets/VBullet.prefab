@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5189954848836009739}
   - component: {fileID: 6984882920091175717}
   m_Layer: 0
-  m_Name: Grunt
+  m_Name: VBullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToLiveBullets: 2
-  damage: 5
+  damage: 3
 --- !u!61 &6984882920091175717
 BoxCollider2D:
   m_ObjectHideFlags: 0

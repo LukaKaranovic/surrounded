@@ -19,6 +19,7 @@ public class ShipSpawner : MonoBehaviour
     private int random, creditCost, availableCredits;
     public GameObject Timer;
     private RoundTimer round;
+    public PlayerController player;
 
 
     void Start()
@@ -34,7 +35,7 @@ public class ShipSpawner : MonoBehaviour
 
     IEnumerator SpawnShips()
     {
-    while(true){
+    while(player.health > 0){
         yield return new WaitForSeconds(spawnInterval/2);
         /*if(RoundNumber() == 10){
             Vector2 spawnPosition = GetOffScreenPosition();  // Get off-screen spawn position
