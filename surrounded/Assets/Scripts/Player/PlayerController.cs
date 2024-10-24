@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour
     private void LevelUp() {
         damage += 3;
         defense += 3;
-        moveSpeed += 3;
+        moveSpeed += 1;
         health += 10;
         maxHealth += 10;
         XP -= levelReq;

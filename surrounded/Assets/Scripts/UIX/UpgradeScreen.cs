@@ -73,7 +73,6 @@ public class UpgradeScreen : MonoBehaviour
             case 0:
                 //Diverge
                 Debug.Log("0");
-
                 break;
             case 1:
                 //Forcefield
