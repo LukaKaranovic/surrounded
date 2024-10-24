@@ -1649,7 +1649,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &468480963
 Transform:
   m_ObjectHideFlags: 0
@@ -2328,6 +2328,7 @@ MonoBehaviour:
   - {fileID: 824832183}
   - {fileID: 1845039912}
   - {fileID: 1590641895}
+  player: {fileID: 816382867}
 --- !u!1 &816382864
 GameObject:
   m_ObjectHideFlags: 0
@@ -3563,6 +3564,7 @@ MonoBehaviour:
   gameOverScreen: {fileID: 1085984028738968807}
   player: {fileID: 816382867}
   upgrade: {fileID: 685533862}
+  stats: {fileID: 219752457}
 --- !u!1 &1527549168
 GameObject:
   m_ObjectHideFlags: 3

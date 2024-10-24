@@ -26,7 +26,7 @@ public class WorldBoundary : MonoBehaviour
         StopCoroutine(dot);
     }
     private IEnumerator DOT(PlayerController target, int damage){
-        while(true){
+        while(target != null){
             target.takeDamage(damage);
             yield return new WaitForSeconds(1);
         }

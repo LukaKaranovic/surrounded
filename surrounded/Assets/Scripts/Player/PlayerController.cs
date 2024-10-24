@@ -10,13 +10,14 @@ public class PlayerController : MonoBehaviour
     public PauseMenu pauseMenu;
     public int damage = 5;
     public int defense = 3;
-    public int moveSpeed = 10;
+    public float moveSpeed = 10f;
     public int health = 50;
     public int maxHealth = 50;
     public float XP = 0;
     public int currentLevel = 1;
     public float levelReq = 30 * Mathf.Pow(1.1f, 0);
     public SpriteRenderer sprite;
+    private int MachineGunCount = 0, RocketBoosterCount = 0;
     
 
     Vector2 moveDirection;
@@ -83,4 +84,25 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         sprite.color = Color.white;
     }
+    public void MachineGuns(){ //if machine guns upgrade collected
+        if(MachineGunCount == 0){
+            weapon.fireRate *= 1.1f;
+        } else{
+            weapon.fireRate *= 1.05f;
+        }
+        MachineGunCount++;
+        }
+    public void RocketBooster(){
+        if(RocketBoosterCount == 0){
+            moveSpeed *= 1.1f;
+        } else{
+            moveSpeed *= 1.05f;
+        }
+        RocketBoosterCount++;
+    }
+    public void PilotingEnhancement(){
+        XP += levelReq;
+        XP += levelReq;
+    }
+
 }

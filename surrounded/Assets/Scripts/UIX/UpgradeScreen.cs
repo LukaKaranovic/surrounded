@@ -15,18 +15,28 @@ public class UpgradeScreen : MonoBehaviour
         "Machine Guns: Increases fire rate by 10% (+5% per stack).",
         "Piercing Rounds: Shots hit 2 enemies (+1 per stack)",
         "Piloting Enhancements: Grants 2 free level-ups (one-time use)",
-        "Rocket Boosters: Boosts movement speed by 10% (+10% per stack)",
+        "Rocket Boosters: Boosts movement speed by 10% (+5% per stack)",
         "Roulette: Spawns damaging orbs (max 3), +1 orb per stack. Orbs deal 2x player’s damage"
     };
     public Image[] uiImage;//where to display images
     public TMP_Text[] uiDescriptions;//where to display descriptions
     public Button[] uiButtons; 
     private int[] displayedUpgrades = new int[3];
+    public PlayerController player; //for upgrades
 
     public void DisplayRandomUpgrades() //function chooses random images to put on screen
     {
+
         gameObject.SetActive(true);
         Time.timeScale = 0;
+        GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
+        foreach (GameObject bullet in bullets){
+            Destroy(bullet);
+        }
+        GameObject[] ships = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject ship in ships){
+            Destroy(ship);
+        }
         // Create a list of available indices (0 to 7)
         int[] list = { 0, 1, 2, 3, 4, 5, 6, 7};
 
@@ -84,6 +94,7 @@ public class UpgradeScreen : MonoBehaviour
                 break;
             case 3:
                 //Machine Guns
+                player.MachineGuns();
                 Debug.Log("3");
                 break;
             case 4: 
@@ -92,10 +103,12 @@ public class UpgradeScreen : MonoBehaviour
                 break;
             case 5:
                 //Piloting Enhancements
+                player.PilotingEnhancement();
                 Debug.Log("5");
                 break;
             case 6:
                 //Rocket Boosters
+                player.RocketBooster();
                 Debug.Log("6");
                 break;
             case 7:

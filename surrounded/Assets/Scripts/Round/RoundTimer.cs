@@ -11,7 +11,7 @@ public class RoundTimer : MonoBehaviour
     public GameOverScreen gameOverScreen;
     public PlayerController player;
     public UpgradeScreen upgrade;
-
+    public TMP_Text stats;
     void Start()
     {
         timer = 105; 
@@ -41,6 +41,7 @@ public class RoundTimer : MonoBehaviour
         round++;
         UpdateRoundText();
         upgrade.DisplayRandomUpgrades();
+        stats.text = "ATK: " + player.damage + " DEF: " + player.defense + " SPD: " + player.moveSpeed;
     }
 
     void UpdateTimerText()

@@ -8,7 +8,6 @@ public class Weapon : MonoBehaviour
     public Transform firePoint;
     public float fireForce = 50f;
     public float fireRate = 1.0f;
-
     private float nextFireTime = 0f;
     public void Fire(){
         if (Time.time >= nextFireTime)
@@ -18,4 +17,5 @@ public class Weapon : MonoBehaviour
             nextFireTime = Time.time+ 1f/fireRate;
         }
     }
+
 }
