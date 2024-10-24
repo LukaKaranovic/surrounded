@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public float levelReq = 30 * Mathf.Pow(1.1f, 0);
     public SpriteRenderer sprite;
     private int MachineGunCount = 0, RocketBoosterCount = 0;
+    public TMP_Text sstats, stats; //stats for upgrade page and stats page
     
 
     Vector2 moveDirection;
@@ -26,6 +28,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Stats();
         if(Input.GetKeyDown(KeyCode.Escape)){
             pauseMenu.Pause();
         }
@@ -104,5 +107,8 @@ public class PlayerController : MonoBehaviour
         XP += levelReq;
         XP += levelReq;
     }
-
+    public void Stats(){
+        stats.text = "ATK: " + damage + " DEF: " + defense + " SPD: " + moveSpeed;
+        sstats.text = "ATK: " + damage + " DEF: " + defense + " SPD: " + moveSpeed;
+    }
 }

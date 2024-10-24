@@ -53,7 +53,7 @@ public class UpgradeScreen : MonoBehaviour
             uiDescriptions[i].text = upgradeDesc[randomIndex];
             int index = i; 
             uiButtons[i].onClick.RemoveAllListeners();
-            uiButtons[i].onClick.AddListener(() => ApplyUpgrade(displayedUpgrades[index]));
+            uiButtons[i].onClick.AddListener(() => ApplyUpgrade(displayedUpgrades[index])); 
         }
     }
 
