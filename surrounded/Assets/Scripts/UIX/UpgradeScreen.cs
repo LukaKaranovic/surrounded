@@ -23,6 +23,7 @@ public class UpgradeScreen : MonoBehaviour
     public Button[] uiButtons; 
     private int[] displayedUpgrades = new int[3];
     public PlayerController player; //for upgrades
+    public StatsPage numOf;
 
     public void DisplayRandomUpgrades() //function chooses random images to put on screen
     {
@@ -51,6 +52,7 @@ public class UpgradeScreen : MonoBehaviour
             uiImage[i].sprite = upgrades[randomIndex];
             uiDescriptions[i].text = upgradeDesc[randomIndex];
             int index = i; 
+            uiButtons[i].onClick.RemoveAllListeners();
             uiButtons[i].onClick.AddListener(() => ApplyUpgrade(displayedUpgrades[index]));
         }
     }
@@ -83,37 +85,45 @@ public class UpgradeScreen : MonoBehaviour
             case 0:
                 //Diverge
                 Debug.Log("0");
+                numOf.AddItem(0);
                 break;
             case 1:
                 //Forcefield
                 Debug.Log("1");
+                numOf.AddItem(1);
                 break;
             case 2:
                 //Fortified Plating
                 Debug.Log("2");
+                numOf.AddItem(2);
                 break;
             case 3:
                 //Machine Guns
                 player.MachineGuns();
                 Debug.Log("3");
+                numOf.AddItem(3);
                 break;
             case 4: 
                 //Piercing Round
                 Debug.Log("4");
+                numOf.AddItem(4);
                 break;
             case 5:
                 //Piloting Enhancements
                 player.PilotingEnhancement();
                 Debug.Log("5");
+                numOf.AddItem(5);
                 break;
             case 6:
                 //Rocket Boosters
                 player.RocketBooster();
                 Debug.Log("6");
+                numOf.AddItem(6);
                 break;
             case 7:
                 //Roulette
                 Debug.Log("7");
+                numOf.AddItem(7);
                 break;
         }
         gameObject.SetActive(false);

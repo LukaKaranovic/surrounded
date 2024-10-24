@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
+    public StatsPage statsPage;
+    public bool isStatsOpen = false;
     public void Pause(){
         gameObject.SetActive(true);
         Time.timeScale = 0;
@@ -16,7 +18,9 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1;
     }
     public void Stats(){
-        //Nothing YET
+        statsPage.Setup();
+        isStatsOpen = true;
+        Time.timeScale = 0;
         }
     public void Restart(){
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -27,8 +31,11 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1;
     }
     void Update(){
-        if(Input.GetKeyDown(KeyCode.Escape)){
+        if(Input.GetKeyDown(KeyCode.Escape) && isStatsOpen == false){
             Resume();
+        } else if(Input.GetKeyDown(KeyCode.Escape)){
+            statsPage.Resume();
+            isStatsOpen = false;
         }
     }
 }
