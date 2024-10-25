@@ -37,10 +37,10 @@ public class ShipSpawner : MonoBehaviour
     {
     while(player.health > 0){
         yield return new WaitForSeconds(spawnInterval/2);
-        /*if(RoundNumber() == 10){
+        if(RoundNumber() == 10){
             Vector2 spawnPosition = GetOffScreenPosition();  // Get off-screen spawn position
-            GameObject newShip = Instantiate(C0BU5, spawnPosition, Quaternion.identity);
-        }*/
+            GameObject COBUS = Instantiate(C0BU5, spawnPosition, Quaternion.identity);
+        }
         for(int i = 0; i<10; i++){
             availableCredits = availableCreditAmount();
             while (availableCredits >= 0)

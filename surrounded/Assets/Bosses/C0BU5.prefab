@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 6462930197331859335}
   - component: {fileID: 3793162019320444986}
   - component: {fileID: 3454779904905642514}
-  - component: {fileID: 7074812241963588970}
+  - component: {fileID: 1747275106402126168}
   m_Layer: 0
   m_Name: C0BU5
   m_TagString: Untagged
@@ -249,7 +249,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &7074812241963588970
+--- !u!114 &1747275106402126168
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -258,16 +258,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8480422743410830737}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 607a5e184403246678a050ba7ec45cad, type: 3}
+  m_Script: {fileID: 11500000, guid: f4f533a266a3e44de9f07a54d9120774, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  fireRate: 15
-  health: 1000
-  bulletPrefab: {fileID: 301942462713169048, guid: 1a2c216a236ea404a9fc946332f0b53f, type: 3}
-  firePoint: {fileID: 4115909054693136949}
-  fireForce: 50
-  shootingRange: 50
-  targetInnerRadius: 7
-  targetOuterRadius: 10
-  sprite: {fileID: 6462930197331859335}

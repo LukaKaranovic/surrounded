@@ -108,7 +108,7 @@ public class PlayerController : MonoBehaviour
         XP += levelReq;
     }
     public void Stats(){
-        stats.text = "ATK: " + damage + " DEF: " + defense + " SPD: " + moveSpeed;
-        sstats.text = "ATK: " + damage + " DEF: " + defense + " SPD: " + moveSpeed;
+        stats.text = "ATK: " + damage + " DEF: " + defense + " SPD: " + (int)moveSpeed;
+        sstats.text = "ATK: " + damage + " DEF: " + defense + " SPD: " + (int)moveSpeed;
     }
 }
