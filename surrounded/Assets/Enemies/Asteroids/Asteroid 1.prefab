@@ -172,4 +172,5 @@ MonoBehaviour:
   targetOuterRadius: 10
   sprite: {fileID: 8943027280858152984}
   XPdropped: 0
+  destroyedByAsteroid: 0
   avoidanceRadius: 3

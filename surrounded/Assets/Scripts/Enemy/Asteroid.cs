@@ -47,9 +47,8 @@ public class AsteroidController : EnemyController
             PlayerController player = other.gameObject.GetComponent<PlayerController>();
             
             Debug.Log("Asteroid hit player! Inflicting damage!");
-            // damage both heavily
             player.takeDamage(50);
-            this.takeDamage(50); // stretch goal -- received damage configurable by upgrades
+            this.takeDamage(5);
         }
 
         if (other.gameObject.CompareTag("Enemy"))
@@ -57,8 +56,9 @@ public class AsteroidController : EnemyController
             // get enemy
             EnemyController enemy = other.gameObject.GetComponent<EnemyController>();
             Debug.Log("Asteroid hit other enemy! Inflicting heavy damage!");
-            enemy.takeDamage(100);
-            this.takeDamage(100);
+            enemy.destroyedByAsteroid = true;
+            enemy.takeDamage(50);
+            this.takeDamage(5);
         }
     }
     public new void takeDamage(int damage) {

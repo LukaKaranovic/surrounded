@@ -27,22 +27,22 @@ public class StatsPage : MonoBehaviour
     // Check if the item UI already exists in the Scroll View
     if (itemUIElements[itemIndex] == null)
     {
-        // Instantiate the prefab for this item and place it in the Scroll View content
+        // Instantiate prefab for this item and place it in Scroll View content
         GameObject newItemUI = Instantiate(itemPrefabs[itemIndex], content);
 
-        // Store the instantiated prefab in the itemUIElements array
+        // Store prefab in array
         itemUIElements[itemIndex] = newItemUI;
 
-        // Initialize quantity to 1 for the first instance
+        // Initialize num to 1 for the first instance
         itemQuantities[itemIndex] = 1;
     }
     else
     {
-        // Increment the quantity of the given item
+        // Increment the quantity of item
         itemQuantities[itemIndex]++;
     }
 
-    // Update the quantity display of the item in the UI
+    // Update num of item in the UI
     TextMeshProUGUI x = itemUIElements[itemIndex].transform.Find("numOf").GetComponent<TextMeshProUGUI>();
     x.text = "x" + itemQuantities[itemIndex].ToString();
 }

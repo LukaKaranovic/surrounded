@@ -23,6 +23,7 @@ public class EnemyController : MonoBehaviour
     private float nextFireTime = 0f;
     public float XPdropped;
     protected Rigidbody2D rb;
+    public bool destroyedByAsteroid = false;
     
 
     void Start()
@@ -116,7 +117,11 @@ public class EnemyController : MonoBehaviour
 
         if (health <= 0 && p != null) {
             Debug.Log("Enemy destroyed!");
-            p.XP += XPdropped;
+            if(!destroyedByAsteroid){
+                p.XP += XPdropped;
+            }  else {
+                destroyedByAsteroid = false;
+            }
             Destroy(gameObject);
         }
         }
@@ -140,8 +145,8 @@ public class EnemyController : MonoBehaviour
             
             Debug.Log("Enemy hit player! Inflicting damage!");
             // damage both heavily
-            player.takeDamage(50);
-            this.takeDamage(50); // stretch goal -- received damage configurable by upgrades
+            player.takeDamage(health);
+            this.takeDamage((int)player.health); // stretch goal -- received damage configurable by upgrades
         }
 
         if (other.gameObject.CompareTag("Enemy"))
@@ -149,8 +154,8 @@ public class EnemyController : MonoBehaviour
             // get enemy
             EnemyController enemy = other.gameObject.GetComponent<EnemyController>();
             Debug.Log("Enemy hit other enemy! Inflicting heavy damage!");
-            enemy.takeDamage(100);
-            this.takeDamage(100);
+            enemy.takeDamage(enemy.health);
+            this.takeDamage(health);
         }
     }
     IEnumerator FlashRed(){

@@ -84,6 +84,8 @@ public class UpgradeScreen : MonoBehaviour
         switch (index){
             case 0:
                 //Diverge
+                player.divergeActivated = true;
+                player.damage *= 1.1f; // or damage, depending on team
                 Debug.Log("0");
                 numOf.AddItem(0);
                 break;
@@ -94,6 +96,7 @@ public class UpgradeScreen : MonoBehaviour
                 break;
             case 2:
                 //Fortified Plating
+                player.Shield();
                 Debug.Log("2");
                 numOf.AddItem(2);
                 break;
