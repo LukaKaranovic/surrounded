@@ -37,6 +37,7 @@ public class RoundTimer : MonoBehaviour
     void IncrementRound()
     {
         player.health = player.maxHealth;
+        player.shield = player.maxShield;
         round++;
         UpdateRoundText();
         upgrade.DisplayRandomUpgrades();

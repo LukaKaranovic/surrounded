@@ -23,9 +23,9 @@ public class Weapon : MonoBehaviour
             GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
             GameObject bullet2 = Instantiate(bulletPrefab, firePoint2.position, firePoint2.rotation);
             GameObject bullet3 = Instantiate(bulletPrefab, firePoint3.position, firePoint3.rotation);
-            bullet.GetComponent<Rigidbody2D>().AddForce(firePoint.up * fireForce, ForceMode2D.Impulse);
-            bullet2.GetComponent<Rigidbody2D>().AddForce(firePoint2.up * fireForce, ForceMode2D.Impulse);
-            bullet3.GetComponent<Rigidbody2D>().AddForce(firePoint3.up * fireForce, ForceMode2D.Impulse);
+            bullet.GetComponent<Rigidbody2D>().AddForce(firePoint.up * (fireForce), ForceMode2D.Impulse);
+            bullet2.GetComponent<Rigidbody2D>().AddForce(firePoint2.up * (fireForce), ForceMode2D.Impulse);
+            bullet3.GetComponent<Rigidbody2D>().AddForce(firePoint3.up * (fireForce), ForceMode2D.Impulse);
             nextFireTime = Time.time+ 1f/fireRate;
         }
     }

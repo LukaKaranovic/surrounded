@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public Weapon weapon;
     public GameOverScreen gameOverScreen;     // Reference to the GameOverScreen script
     public PauseMenu pauseMenu;
-    public float damage = 5f, defense = 3, moveSpeed = 10f, health = 50, maxHealth = 50, XP = 0, shield = 0;
+    public float damage = 5f, defense = 3, moveSpeed = 10f, health = 50, maxHealth = 50, XP = 0, shield = 0, maxShield;
     public int currentLevel = 1;
     public float levelReq = 30 * Mathf.Pow(1.1f, 0);
     public SpriteRenderer sprite;
@@ -115,12 +115,17 @@ public class PlayerController : MonoBehaviour
         XP += levelReq;
     }
 
+    public void DivergeActivated(){
+        divergeActivated = true;
+        damage *= 1.1f;
+    }
+
     public void Stats(){
         stats.text = "ATK: " + (int)damage + " DEF: " + (int)defense + " SPD: " + (int)moveSpeed;
         sstats.text = "ATK: " + (int)damage + " DEF: " + (int)defense + " SPD: " + (int)moveSpeed;
     }
 
-    public void Shield(){
-        shield = 0.1f*health;
+    public void Shield(){   
+        maxShield = shield = 0.1f*health;
     }
 }
