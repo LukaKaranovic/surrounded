@@ -117,7 +117,6 @@ public class PlayerController : MonoBehaviour
 
     public void DivergeActivated(){
         divergeActivated = true;
-        damage *= 1.1f;
     }
 
     public void Stats(){

@@ -30,13 +30,13 @@ public class ShipSpawner : MonoBehaviour
     }
 
     int availableCreditAmount(){
-        return (int)(30*(Mathf.Pow(1.1f, (RoundNumber()-1))))/10;
+        return (int)(24*(Mathf.Pow(1.1f, (RoundNumber()-1))))/10;
     }
 
     IEnumerator SpawnShips()
     {
     while(player.health > 0){
-        yield return new WaitForSeconds(spawnInterval/2);
+        yield return new WaitForSeconds(5);
         if(RoundNumber() == 10){
             Vector2 spawnPosition = GetOffScreenPosition();  // Get off-screen spawn position
             GameObject COBUS = Instantiate(C0BU5, spawnPosition, Quaternion.identity);
@@ -58,8 +58,11 @@ public class ShipSpawner : MonoBehaviour
                 }
             }
             // also, spawn one asteroid
-            Vector2 asteroidSpawnPosition = GetOffScreenPosition(); // get off-screen spawn position
-            GameObject newAst = Instantiate(ChooseRandomAsteroid(asteroid1, asteroid2, asteroid3), asteroidSpawnPosition, Quaternion.identity);
+            int doesSpawn = Random.Range(1,3);
+            if(doesSpawn == 1){
+                Vector2 asteroidSpawnPosition = GetOffScreenPosition(); // get off-screen spawn position
+                GameObject newAst = Instantiate(ChooseRandomAsteroid(asteroid1, asteroid2, asteroid3), asteroidSpawnPosition, Quaternion.identity);
+            }
             yield return new WaitForSeconds(spawnInterval);
         }
     }

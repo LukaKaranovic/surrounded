@@ -3,7 +3,7 @@ using TMPro;  // Import TextMeshPro namespace
 
 public class RoundTimer : MonoBehaviour
 {
-    private float roundDuration = 105f;  
+    private float roundDuration = 55f;  
     private float timer;                
     public int round = 1;
     public TMP_Text timerText;          
@@ -13,7 +13,7 @@ public class RoundTimer : MonoBehaviour
     public UpgradeScreen upgrade;
     void Start()
     {
-        timer = 105; 
+        timer = 55; 
         UpdateRoundText();      
     }
 
