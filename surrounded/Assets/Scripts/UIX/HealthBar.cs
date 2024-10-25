@@ -7,8 +7,8 @@ using TMPro;
 public class HealthBar : MonoBehaviour
 {
     public PlayerController player;
-    [SerializeField] private Image healthBar;
-    private float currentHealth, maxHealth;
+    [SerializeField] protected Image healthBar;
+    protected float currentHealth, maxHealth;
     public TMP_Text healthText; 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +24,7 @@ public class HealthBar : MonoBehaviour
         if(currentHealth <=0){
             currentHealth = 0;
         }
-        healthText.text = "HP: " + currentHealth + "/" + maxHealth;
+        healthText.text = "HP: " + (currentHealth + player.shield) + "/" + maxHealth;
         float targetFillAmount = currentHealth/maxHealth;
         healthBar.fillAmount = targetFillAmount;
         maxHealth = player.maxHealth;

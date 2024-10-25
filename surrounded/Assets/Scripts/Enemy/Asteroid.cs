@@ -20,12 +20,14 @@ public class AsteroidController : EnemyController
         */
         // these four lines sourced and modified from EnemyController and from Bullet
         player = GameObject.FindGameObjectWithTag("Player");
-        moveTarget = FindPointNearPlayer();
-        Vector3 heading = ((moveTarget + player.transform.position) - transform.position).normalized;
-        rb = GetComponent<Rigidbody2D>();
-        rb.AddForce(heading, ForceMode2D.Impulse);
-        rb.AddTorque(Random.Range(30,50));
-        // asteroid towards player
+        if(player != null){
+            moveTarget = FindPointNearPlayer();
+            Vector3 heading = ((moveTarget + player.transform.position) - transform.position).normalized;
+            rb = GetComponent<Rigidbody2D>();
+            rb.AddForce(heading, ForceMode2D.Impulse);
+            rb.AddTorque(Random.Range(30,50));
+            // asteroid towards player
+        }
     }
     
     /**
@@ -45,9 +47,8 @@ public class AsteroidController : EnemyController
             PlayerController player = other.gameObject.GetComponent<PlayerController>();
             
             Debug.Log("Asteroid hit player! Inflicting damage!");
-            // damage both heavily
             player.takeDamage(50);
-            this.takeDamage(50); // stretch goal -- received damage configurable by upgrades
+            this.takeDamage(5);
         }
 
         if (other.gameObject.CompareTag("Enemy"))
@@ -55,8 +56,9 @@ public class AsteroidController : EnemyController
             // get enemy
             EnemyController enemy = other.gameObject.GetComponent<EnemyController>();
             Debug.Log("Asteroid hit other enemy! Inflicting heavy damage!");
-            enemy.takeDamage(100);
-            this.takeDamage(100);
+            enemy.destroyedByAsteroid = true;
+            enemy.takeDamage(50);
+            this.takeDamage(5);
         }
     }
     public new void takeDamage(int damage) {

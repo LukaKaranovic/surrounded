@@ -39,7 +39,7 @@ public class Bullet : MonoBehaviour
         }
         if (other.CompareTag("Player")) {
             Debug.Log("Bullet hit player!");
-
+            
             PlayerController player = other.GetComponent<PlayerController>();
             if (player != null) {
                 player.takeDamage(damage);

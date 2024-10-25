@@ -41,7 +41,13 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: New Layer Bottom
+  - name: bg3
+    uniqueID: 272381019
+    locked: 0
+  - name: bg2
+    uniqueID: 2762366751
+    locked: 0
+  - name: bg1
     uniqueID: 3199128401
     locked: 0
   - name: Default
