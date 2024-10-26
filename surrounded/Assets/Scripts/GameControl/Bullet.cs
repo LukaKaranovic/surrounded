@@ -30,13 +30,7 @@ public class Bullet : MonoBehaviour
             // Destroy the bullet after impact
             Destroy(gameObject);
         }
-        if (other.CompareTag("Asteroid")){
-            AsteroidController asteroid = other.GetComponent<AsteroidController>();
-            if(asteroid != null){
-                asteroid.takeDamage(1);
-            }
-            Destroy(gameObject);
-        }
+       
         if (other.CompareTag("Player")) {
             Debug.Log("Bullet hit player!");
             
