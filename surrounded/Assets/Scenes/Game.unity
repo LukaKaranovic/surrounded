@@ -227,7 +227,9 @@ MonoBehaviour:
   firePoint2: {fileID: 1072307010}
   firePoint3: {fileID: 1253434842}
   fireForce: 50
+  baseForce: 50
   fireRate: 5
+  baseRate: 5
 --- !u!1 &62137326
 GameObject:
   m_ObjectHideFlags: 0
@@ -3839,6 +3841,7 @@ MonoBehaviour:
   damage: 5
   defense: 3
   moveSpeed: 10
+  baseSpeed: 10
   health: 50
   maxHealth: 50
   XP: 0
