@@ -20,6 +20,5 @@ public class BackGroundParallax : MonoBehaviour
     {
         Vector2 distance = cam.transform.position * parallaxEffect;
         transform.position = startpos + distance;
-    
     }
 }
