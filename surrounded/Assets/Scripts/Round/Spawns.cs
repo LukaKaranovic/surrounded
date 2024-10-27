@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ShipSpawner : MonoBehaviour
 {
@@ -20,7 +21,8 @@ public class ShipSpawner : MonoBehaviour
     public GameObject Timer;
     private RoundTimer round;
     public PlayerController player;
-
+    public bool isEnemyScene = false;
+    
 
     void Start()
     {
@@ -36,38 +38,54 @@ public class ShipSpawner : MonoBehaviour
 
     IEnumerator SpawnShips()
     {
-    while(player.health > 0){
-        yield return new WaitForSeconds(5);
-        if(RoundNumber() == 10){
-            Vector2 spawnPosition = GetOffScreenPosition();  // Get off-screen spawn position
-            GameObject COBUS = Instantiate(C0BU5, spawnPosition, Quaternion.identity);
-        }
-        for(int i = 0; i<10; i++){
-            availableCredits = availableCreditAmount();
-            while (availableCredits >= 0)
-            {
-                GameObject selectedShip = GetShipBasedOnRound();  // Select the ship type
-                if(creditCost > availableCredits){
-                    selectedShip = null;
-                }
-                availableCredits -= creditCost;
-                if (selectedShip != null)
-                {
+        while(player.health > 0){
+            if(!isEnemyScene){
+                yield return new WaitForSeconds(5);
+                /*if(RoundNumber() == 10){
                     Vector2 spawnPosition = GetOffScreenPosition();  // Get off-screen spawn position
-                    GameObject newShip = Instantiate(selectedShip, spawnPosition, Quaternion.identity);
+                    GameObject COBUS = Instantiate(C0BU5, spawnPosition, Quaternion.identity);
+                }*/
+                for(int i = 0; i<10; i++){
+                    availableCredits = availableCreditAmount();
+                    while (availableCredits >= 0)
+                    {
+                        GameObject selectedShip = GetShipBasedOnRound();  // Select the ship type
+                        if(creditCost > availableCredits){
+                            selectedShip = null;
+                        }
+                        availableCredits -= creditCost;
+                        if (selectedShip != null)
+                        {
+                            Vector2 spawnPosition = GetOffScreenPosition();  // Get off-screen spawn position
+                            GameObject newShip = Instantiate(selectedShip, spawnPosition, Quaternion.identity);
 
+                        }
+                    }
+                    // also, spawn one asteroid
+                    int doesSpawn = Random.Range(1,3);
+                    if(doesSpawn == 1){
+                        Vector2 asteroidSpawnPosition = GetOffScreenPosition(); // get off-screen spawn position
+                        GameObject newAst = Instantiate(ChooseRandomAsteroid(asteroid1, asteroid2, asteroid3), asteroidSpawnPosition, Quaternion.identity);
+                    }
+                    yield return new WaitForSeconds(spawnInterval);
                 }
             }
-            // also, spawn one asteroid
-            int doesSpawn = Random.Range(1,3);
-            if(doesSpawn == 1){
-                Vector2 asteroidSpawnPosition = GetOffScreenPosition(); // get off-screen spawn position
-                GameObject newAst = Instantiate(ChooseRandomAsteroid(asteroid1, asteroid2, asteroid3), asteroidSpawnPosition, Quaternion.identity);
+            if(isEnemyScene){
+                yield return new WaitForSeconds(5);
+                Vector2 spawnPosition = GetOffScreenPosition();
+                GameObject Spawn1 = Instantiate(grunt, spawnPosition, Quaternion.identity);
+                yield return new WaitForSeconds(5);
+                GameObject Spawn2 = Instantiate(viper, spawnPosition, Quaternion.identity);
+                yield return new WaitForSeconds(5);
+                GameObject Spawn3 = Instantiate(juggernaut, spawnPosition, Quaternion.identity);
+                yield return new WaitForSeconds(5);
+                GameObject Spawn4 = Instantiate(striker, spawnPosition, Quaternion.identity);
+                yield return new WaitForSeconds(5);
+                GameObject Spawn5 = Instantiate(dreadnought, spawnPosition, Quaternion.identity);
+                StopCoroutine(SpawnShips());
             }
-            yield return new WaitForSeconds(spawnInterval);
         }
     }
-}
 
     // Choose the appropriate ship prefab based on the current round
     GameObject GetShipBasedOnRound()

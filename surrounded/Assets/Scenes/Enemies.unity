@@ -227,7 +227,6 @@ MonoBehaviour:
   firePoint2: {fileID: 1072307010}
   firePoint3: {fileID: 1253434842}
   fireForce: 50
-  baseForce: 50
   fireRate: 5
   baseRate: 5
 --- !u!1 &62137326
@@ -2543,6 +2542,7 @@ MonoBehaviour:
   targetPoint: {fileID: 816382866}
   Timer: {fileID: 1289865444}
   player: {fileID: 816382867}
+  isEnemyScene: 1
 --- !u!4 &436016452
 Transform:
   m_ObjectHideFlags: 0
