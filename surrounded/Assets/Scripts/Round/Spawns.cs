@@ -30,7 +30,8 @@ public class ShipSpawner : MonoBehaviour
     }
 
     int availableCreditAmount(){
-        return (int)(24*(Mathf.Pow(1.1f, (RoundNumber()-1))))/10;
+        return (int)(30*(Mathf.Pow(1.1f, (RoundNumber()-1))))/10;
+        
     }
 
     IEnumerator SpawnShips()

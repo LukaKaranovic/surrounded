@@ -15,7 +15,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume(){ //resumes game
         gameObject.SetActive(false);
-        Time.timeScale = 100;
+        Time.timeScale = 1;
     }
     public void Stats(){ //opens stats and upgrades page
         statsPage.Setup();
@@ -31,7 +31,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1;
     }
     void Update(){
-        if(Input.GetKeyDown(KeyCode.Escape) && isStatsOpen == false){ //if press esc and stats page isnt open, then resume game, otherwise removes stat page off screen
+        if(Input.GetKeyDown(KeyCode.Escape) && !isStatsOpen){ //if press esc and stats page isnt open, then resume game, otherwise removes stat page off screen
             Resume();
         } else if(Input.GetKeyDown(KeyCode.Escape)){
             statsPage.Resume();
