@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Unity.VisualScripting;
+using Object = UnityEngine.Object;
 
 public class PlayerController : MonoBehaviour
 {
@@ -16,10 +18,15 @@ public class PlayerController : MonoBehaviour
     private int MachineGunCount = 0, RocketBoosterCount = 0;
     public TMP_Text sstats, stats; //stats for upgrade page and stats page
     public bool divergeActivated = false;
+    public bool forceFieldActivated = false;
+    protected float nextFieldTime = 0f;
+    protected int _timer;
+    protected IEnumerator TimerCoroutine;
+    private Action onTimeOut;
+    
 
     Vector2 moveDirection;
     Vector2 mousePosition;
-
     // Update is called once per frame
     void Update()
     {
@@ -55,6 +62,13 @@ public class PlayerController : MonoBehaviour
     }
 
     public void takeDamage(float damage) {
+        if (forceFieldActivated)
+        {
+            // don't take damage
+            // drop sprite
+            timer.Elapsed += ForceFieldTimer(this);
+            
+        }
         float damageTaken = (damage - defense);
         if (damageTaken <= 1) {
             damageTaken = 1;
@@ -127,4 +141,25 @@ public class PlayerController : MonoBehaviour
     public void Shield(){   
         maxShield = shield = 0.1f*health;
     }
+
+    public void ForceField()
+    {
+        forceFieldActivated = true;
+        // raise forcefield sprite
+    }
+
+    public IEnumerator forceFieldTimer(int totaltime)
+    {
+        
+    }
+
+    public void ForceFieldTimerStart(int totalTime, Action timeOut)
+    {
+        onTimeOut = timeOut; // save callback Action
+        // reset timer
+        _timer = 0;
+        TimerCoroutine = forceFieldTimer(15);
+        StartCoroutine(TimerCoroutine);
+    }
+    
 }
