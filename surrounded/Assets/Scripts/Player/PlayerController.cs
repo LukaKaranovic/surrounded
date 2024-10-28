@@ -66,8 +66,14 @@ public class PlayerController : MonoBehaviour
         {
             // don't take damage
             // drop sprite
-            timer.Elapsed += ForceFieldTimer(this);
-            
+            forceFieldActivated = false;
+            ForceFieldTimerStart(15, () =>
+            {
+                // put the sprite back up
+                forceFieldActivated = true;
+                onTimeOut = null;
+                Debug.Log("Callback lambda! Forcefield re-engaged.");
+            });
         }
         float damageTaken = (damage - defense);
         if (damageTaken <= 1) {
@@ -145,12 +151,20 @@ public class PlayerController : MonoBehaviour
     public void ForceField()
     {
         forceFieldActivated = true;
-        // raise forcefield sprite
+        // TODO: raise forcefield sprite
     }
 
     public IEnumerator forceFieldTimer(int totaltime)
     {
+        while (_timer < totaltime)
+        {
+            yield return new WaitForSecondsRealtime(1);
+            _timer++;
+            Debug.Log("forcefield timer at " + _timer);
+        }
         
+        // trigger callback
+        onTimeOut?.Invoke();
     }
 
     public void ForceFieldTimerStart(int totalTime, Action timeOut)
