@@ -10,7 +10,7 @@ public class EnemyController : MonoBehaviour
 {
     public float maxSpeed = 3f;
     public float fireRate = 2f; // Time between shots
-    public int health = 3;
+    public float health = 3;
     public GameObject bulletPrefab;
     public Transform firePoint;
     public float fireForce = 20f;
@@ -108,7 +108,7 @@ public class EnemyController : MonoBehaviour
         bullet.GetComponent<Rigidbody2D>().AddForce(firePoint.up * fireForce, ForceMode2D.Impulse);
     }
 
-    public void takeDamage(int damage) {
+    public void takeDamage(float damage) {
         if(player != null){
         PlayerController p = player.GetComponent<PlayerController>(); 
         StartCoroutine(FlashRed());

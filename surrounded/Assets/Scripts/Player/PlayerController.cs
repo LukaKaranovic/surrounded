@@ -32,9 +32,9 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetMouseButton(0)){
             if(divergeActivated){
-                weapon.Diverge();
+                weapon.Diverge(damage);
             } else{
-                weapon.Fire();
+                weapon.Fire(damage);
             }
         }
 
@@ -53,8 +53,8 @@ public class PlayerController : MonoBehaviour
         rb.rotation = aimAngle;
     }
 
-    public void takeDamage(float damage) {
-        float damageTaken = (damage - defense);
+    public void takeDamage(float dam) {
+        float damageTaken = (dam - defense);
         if (damageTaken <= 1) {
             damageTaken = 1;
         }

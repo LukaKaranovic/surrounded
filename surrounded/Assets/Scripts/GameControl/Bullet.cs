@@ -5,13 +5,16 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float timeToLiveBullets = 2f;
-    public int damage;
+    public float damage;
 
     void Start()
     {
         Destroy(gameObject, timeToLiveBullets);
     }
 
+    public void setDamage(float dam){
+        damage = dam;
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         // Check if the object hit has the "Enemy" tag
