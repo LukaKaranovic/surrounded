@@ -3493,6 +3493,7 @@ MonoBehaviour:
   - {fileID: 1590641895}
   player: {fileID: 816382867}
   numOf: {fileID: 227461972}
+  isItems: 0
 --- !u!1 &698185829
 GameObject:
   m_ObjectHideFlags: 0
@@ -3841,18 +3842,20 @@ MonoBehaviour:
   damage: 5
   defense: 3
   moveSpeed: 10
-  baseSpeed: 10
   health: 50
   maxHealth: 50
   XP: 0
   shield: 0
   maxShield: 0
+  baseSpeed: 10
   currentLevel: 1
   levelReq: 30
   sprite: {fileID: 816382865}
   sstats: {fileID: 219752457}
   stats: {fileID: 212559886}
   divergeActivated: 0
+  forceFieldActivated: 0
+  itemsPoC: {fileID: 685533862}
 --- !u!50 &816382868
 Rigidbody2D:
   serializedVersion: 4

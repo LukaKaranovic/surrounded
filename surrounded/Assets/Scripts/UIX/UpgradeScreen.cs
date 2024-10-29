@@ -24,6 +24,14 @@ public class UpgradeScreen : MonoBehaviour
     private int[] displayedUpgrades = new int[3];
     public PlayerController player; //for upgrades
     public StatsPage numOf;
+    public bool isItems = false;
+
+    public void Items(){
+        if(isItems){
+            ApplyUpgrade(1);
+            ApplyUpgrade(7);
+        }
+    }
 
     public void DisplayRandomUpgrades() //function chooses random images to put on screen
     {
@@ -40,20 +48,27 @@ public class UpgradeScreen : MonoBehaviour
         }
         // Create a list of available indices (0 to 7)
         int[] list = { 0, 1, 2, 3, 4, 5, 6, 7};
-
-        // Shuffle the list randomly
-        Shuffle(list);
-
-        // Assign the first 3 images and descriptions to the UI elements
-        for (int i = 0; i < 3; i++)
-        {
-            int randomIndex = list[i];
-            displayedUpgrades[i] = randomIndex;
-            uiImage[i].sprite = upgrades[randomIndex];
-            uiDescriptions[i].text = upgradeDesc[randomIndex];
-            int index = i; 
-            uiButtons[i].onClick.RemoveAllListeners();
-            uiButtons[i].onClick.AddListener(() => ApplyUpgrade(displayedUpgrades[index])); 
+        if(!isItems){
+            // Shuffle the list randomly
+            Shuffle(list);
+            // Assign the first 3 images and descriptions to the UI elements
+            for (int i = 0; i < 3; i++)
+            {
+                int randomIndex = list[i];
+                displayedUpgrades[i] = randomIndex;
+                uiImage[i].sprite = upgrades[randomIndex];
+                uiDescriptions[i].text = upgradeDesc[randomIndex];
+                int index = i; 
+                uiButtons[i].onClick.RemoveAllListeners();
+                uiButtons[i].onClick.AddListener(() => ApplyUpgrade(displayedUpgrades[index])); 
+            }
+        } else if(isItems){
+                uiImage[0].sprite = upgrades[1];
+                uiDescriptions[0].text = upgradeDesc[1];
+                uiImage[1].sprite = upgrades[7];
+                uiDescriptions[1].text = upgradeDesc[7];
+                uiImage[2].sprite = upgrades[0];
+                uiDescriptions[2].text = upgradeDesc[0];
         }
     }
 
@@ -90,6 +105,7 @@ public class UpgradeScreen : MonoBehaviour
                 break;
             case 1:
                 //Forcefield
+                player.ForceField();
                 Debug.Log("1");
                 numOf.AddItem(1);
                 break;
