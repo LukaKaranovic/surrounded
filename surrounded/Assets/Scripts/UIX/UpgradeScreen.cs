@@ -65,10 +65,16 @@ public class UpgradeScreen : MonoBehaviour
         } else if(isItems){
                 uiImage[0].sprite = upgrades[1];
                 uiDescriptions[0].text = upgradeDesc[1];
+                uiButtons[0].onClick.RemoveAllListeners();
+                uiButtons[0].onClick.AddListener(() => ApplyUpgrade(1)); 
                 uiImage[1].sprite = upgrades[7];
                 uiDescriptions[1].text = upgradeDesc[7];
+                uiButtons[1].onClick.RemoveAllListeners();
+                uiButtons[1].onClick.AddListener(() => ApplyUpgrade(7)); 
                 uiImage[2].sprite = upgrades[0];
                 uiDescriptions[2].text = upgradeDesc[0];
+                uiButtons[2].onClick.RemoveAllListeners();
+                uiButtons[2].onClick.AddListener(() => ApplyUpgrade(0)); 
         }
     }
 
