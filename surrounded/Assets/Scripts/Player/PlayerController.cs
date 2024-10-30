@@ -200,7 +200,7 @@ public class PlayerController : MonoBehaviour
             return; // exit early
         }
         var piercingbull = Resources.Load("PiercingBullet") as GameObject; // load piercingbullet prefab
-        gameObject.GetComponent<Weapon>().bulletPrefab = piercingbull; // assign prefab
+        weapon.bulletPrefab = piercingbull; // assign prefab
         hasPiercing = true;
     }
     
