@@ -61,7 +61,7 @@ public class AsteroidController : EnemyController
             this.takeDamage(5);
         }
     }
-    public new void takeDamage(int damage) {
+    public void takeDamage(int damage) {
         if(player != null){
         health -= damage;
         if (health <= 0) {

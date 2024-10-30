@@ -33,15 +33,9 @@ public class Weapon : MonoBehaviour
             bullet.GetComponent<Rigidbody2D>().AddForce(firePoint.up * (fireForce), ForceMode2D.Impulse);
             bullet2.GetComponent<Rigidbody2D>().AddForce(firePoint2.up * (fireForce), ForceMode2D.Impulse);
             bullet3.GetComponent<Rigidbody2D>().AddForce(firePoint3.up * (fireForce), ForceMode2D.Impulse);
-
             bullet.GetComponent<Bullet>().setDamage(damage);
             bullet2.GetComponent<Bullet>().setDamage(damage);
             bullet3.GetComponent<Bullet>().setDamage(damage);
-
-            nextFireTime = Time.time+ 1f/fireRate;
-            bullet.GetComponent<Rigidbody2D>().AddForce(firePoint.up * fireForce, ForceMode2D.Impulse);
-            bullet2.GetComponent<Rigidbody2D>().AddForce(firePoint2.up * fireForce, ForceMode2D.Impulse);
-            bullet3.GetComponent<Rigidbody2D>().AddForce(firePoint3.up * fireForce, ForceMode2D.Impulse);
             nextFireTime = Time.time+ 1f/(debuff*fireRate);        }
     }
 
