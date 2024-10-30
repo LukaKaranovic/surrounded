@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour
     public float timeToLiveBullets = 2f;
     public float damage;
 
-    void Start()
+    protected virtual void Start()
     {
         Destroy(gameObject, timeToLiveBullets);
     }
@@ -15,7 +15,7 @@ public class Bullet : MonoBehaviour
     public void setDamage(float dam){
         damage = dam;
     }
-    private void OnTriggerEnter2D(Collider2D other)
+    public virtual void OnTriggerEnter2D(Collider2D other)
     {
         // Check if the object hit has the "Enemy" tag
         if (other.CompareTag("Enemy"))
