@@ -55,7 +55,7 @@ public class ShipSpawner : MonoBehaviour
                 {
                     Vector2 spawnPosition = GetOffScreenPosition();  // Get off-screen spawn position
                     GameObject newShip = Instantiate(selectedShip, spawnPosition, Quaternion.identity);
-
+                    newShip.GetComponent<EnemyController>().ScaleStats(RoundNumber());
                 }
             }
             // also, spawn one asteroid

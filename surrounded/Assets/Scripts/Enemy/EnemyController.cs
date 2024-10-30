@@ -8,13 +8,15 @@ using UnityEngine.UIElements;
 
 public class EnemyController : MonoBehaviour
 {
+    public float dmgInc, spdInc, hpInc;
     public float maxSpeed = 3f;
     public float fireRate = 2f; // Time between shots
-    public int health = 3;
+    public float health = 3;
     public GameObject bulletPrefab;
     public Transform firePoint;
     public float fireForce = 20f;
     public float shootingRange = 10f;
+    public float damage;
     public float targetInnerRadius = 7, targetOuterRadius = 10; //inner and outer radius of target ring to move to around player
     public SpriteRenderer sprite;
 
@@ -33,6 +35,12 @@ public class EnemyController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
+    public void ScaleStats(int RoundNumber){
+        maxSpeed += RoundNumber*spdInc;
+        damage += RoundNumber*dmgInc;
+        health += RoundNumber*hpInc;
+    }
+
     void FixedUpdate()
     {   
         if (player != null)
@@ -42,7 +50,7 @@ public class EnemyController : MonoBehaviour
             RotateTowardsPlayer();
             if (distanceToPlayer <= shootingRange && Time.time >= nextFireTime)
             {
-                ShootAtPlayer();
+                ShootAtPlayer(damage);
                 nextFireTime = Time.time + 1f / fireRate;
             }
         }
@@ -102,13 +110,14 @@ public class EnemyController : MonoBehaviour
         return randomDirection * randomRadius;
     }
 
-    private void ShootAtPlayer()
+    private void ShootAtPlayer(float dam)
     {
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         bullet.GetComponent<Rigidbody2D>().AddForce(firePoint.up * fireForce, ForceMode2D.Impulse);
+        bullet.GetComponent<Bullet>().setDamage(dam);
     }
 
-    public void takeDamage(int damage) {
+    public void takeDamage(float damage) {
         if(player != null){
         PlayerController p = player.GetComponent<PlayerController>(); 
         StartCoroutine(FlashRed());

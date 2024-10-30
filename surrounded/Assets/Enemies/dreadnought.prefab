@@ -167,6 +167,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 607a5e184403246678a050ba7ec45cad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dmgInc: 10
+  spdInc: 6
+  hpInc: 10
   maxSpeed: 40
   fireRate: 2
   health: 300
@@ -174,6 +177,7 @@ MonoBehaviour:
   firePoint: {fileID: 2259143338485275151}
   fireForce: 10
   shootingRange: 10
+  damage: 0
   targetInnerRadius: 10
   targetOuterRadius: 15
   sprite: {fileID: 3887442524976656483}

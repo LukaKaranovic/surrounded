@@ -150,6 +150,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 607a5e184403246678a050ba7ec45cad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dmgInc: 1
+  spdInc: 3
+  hpInc: 2
   maxSpeed: 8
   fireRate: 2
   health: 15
@@ -157,10 +160,12 @@ MonoBehaviour:
   firePoint: {fileID: 5464646103671442227}
   fireForce: 10
   shootingRange: 10
+  damage: 0
   targetInnerRadius: 7
   targetOuterRadius: 10
   sprite: {fileID: 2292161443297363308}
   XPdropped: 1
+  destroyedByAsteroid: 0
   avoidanceRadius: 5
 --- !u!50 &8370973401546656414
 Rigidbody2D:
