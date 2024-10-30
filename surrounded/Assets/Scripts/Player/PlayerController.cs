@@ -189,5 +189,11 @@ public class PlayerController : MonoBehaviour
         TimerCoroutine = forceFieldTimer(totalTime);
         StartCoroutine(TimerCoroutine);
     }
+
+    public void Piercing()
+    {
+        var piercingbull = Resources.Load("PiercingBullet") as GameObject; // load piercingbullet prefab
+        gameObject.GetComponent<Weapon>().bulletPrefab = piercingbull; // assign prefab
+    }
     
 }
