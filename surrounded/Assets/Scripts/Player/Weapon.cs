@@ -36,7 +36,8 @@ public class Weapon : MonoBehaviour
             bullet.GetComponent<Bullet>().setDamage(damage);
             bullet2.GetComponent<Bullet>().setDamage(damage);
             bullet3.GetComponent<Bullet>().setDamage(damage);
-            nextFireTime = Time.time+ 1f/(debuff*fireRate);        }
+            nextFireTime = Time.time+ 1f/(debuff*fireRate);        
+        }
     }
 
 }

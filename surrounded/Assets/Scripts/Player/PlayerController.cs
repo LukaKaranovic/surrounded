@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     public int currentLevel = 1;
     public float levelReq = 30 * Mathf.Pow(1.1f, 0);
     public SpriteRenderer sprite, spritefield;
-    private int MachineGunCount = 0, RocketBoosterCount = 0, divergeCount = 0, shieldCount = 0;
+    private int MachineGunCount = 0, RocketBoosterCount = 0, divergeCount = 0, shieldCount = 0, forcefieldCount = 0;
     public TMP_Text sstats, stats; //stats for upgrade page and stats page
     public bool divergeActivated = false;
     public bool forceFieldActivated = false;
@@ -74,7 +74,11 @@ public class PlayerController : MonoBehaviour
         {
             damageTaken = 0;
             forceFieldActivated = false;
-            ForceFieldTimerStart(15, () =>
+            float time = 15-(forcefieldCount*1.5f);
+            if(time <= 2){
+                time = 2;
+            }
+            ForceFieldTimerStart((int)time, () =>
             {
                 forceFieldActivated = true;
                 onTimeOut = null;
@@ -161,6 +165,7 @@ public class PlayerController : MonoBehaviour
     public void ForceField()
     {
         forceFieldActivated = true;
+        forcefieldCount++;
     }
 
     public IEnumerator forceFieldTimer(int totaltime)
@@ -181,7 +186,7 @@ public class PlayerController : MonoBehaviour
         onTimeOut = timeOut; // save callback Action
         // reset timer
         _timer = 0;
-        TimerCoroutine = forceFieldTimer(15);
+        TimerCoroutine = forceFieldTimer(totalTime);
         StartCoroutine(TimerCoroutine);
     }
     
