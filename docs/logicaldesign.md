@@ -126,7 +126,7 @@ Due to this issue of a lack of background, we plan on having a resource page bui
 
 As mentioned above, one of our other challenges with the core design of the game will be our round system.
 
-Our current philosophy of the round system is to have each round be 105 seconds, with the ending of each round destroying all current enemies which then features the prompt for the upgrade system (More details including the math and back-end philosophy are included in our [requirements document](requirements.md)).
+Our current philosophy of the round system is to have each round be 55 seconds, with the ending of each round destroying all current enemies which then features the prompt for the upgrade system (More details including the math and back-end philosophy are included in our [requirements document](requirements.md)).
 
 To give a brief overview of the round system, it will feature a credit system wwhere the credit amount is dictated by the round number. While we have yet to have any background with implementing such features, the philosophy of our game plan for implementation of this feature will be dictated using a mathematical function and an array containing an ID and will run through a while loop. All of this will not be visible to the player, but this sort of implementation will be present in each round. The credit rate will be increased by each round to dictate greater enemy spawns. We plan on tweaking this to account for balance changes and any potential misalignment with how our code runs.
 
@@ -260,7 +260,7 @@ In this section, we try to discuss all possible events/actions the game can reco
 
 * Round Update
 	* Upon beginning of game, round count is set to 1, in which the round 1 data is called and requested from the round module
-	* After 105 seconds, the round counter is increased by 1, the player is sent to the upgrade decision, and the next round is updated from the round module, increasing enemy credit count, and possible enemy spawns
+	* After the round timer hits 0, the round counter is increased by 1, the player is sent to the upgrade decision, and the next round is updated from the round module, increasing enemy credit count, and possible enemy spawns
 	* After player finishes Upgrade Decision, next round begins
 
 ##### 5.1.3.2 Enemy Actions and Updates
@@ -338,7 +338,7 @@ Responsibilities of the Round Module:
 * Credit Calculation: Implements a scaling system for available credits, calculated using the formula: Credits=30×(1.1)^(x−1) where x is the round number
 * Boss Round Logic: Special logic for boss rounds triggers the spawning of unique enemies (e.g., W35-S315 and C0B-U5) at predetermined intervals (e.g., rounds 10 and 20).
 * Enemy Spawning: Utilizes a dictionary mapping enemy types to their respective credit costs and IDs to facilitate efficient and balanced spawning logic. Tracks round timer from game control module to know when to spawn enemies.
-* Asteroid Spawning: Whenever enemy spawns are called (every 10 seconds starting at 100), will spawn asteroids until there are 16 clusters on the map as well.
+* Asteroid Spawning: Whenever enemy spawns are called (every 5 seconds starting at 50), will spawn asteroids until there are 16 clusters on the map as well.
 * Dynamic Difficulty Adjustment: As rounds progress, the module dynamically updates enemy stats (damage, health, and speed) to increase the difficulty, keeping players challenged.
 
 #### <a name="roundesc"></a>5.3.1: Round Module Description
@@ -359,7 +359,7 @@ During the round progression process, the module manages real-time gameplay, ene
 1. The round module is activated by the game control module.
 2. Monitor the round timer, which determines the duration of the current round.
 3. Spawn enemies based on the predefined credit costs and the dictionary mapping.
-	* Enemy spawns are limited to 10% of the total available credits every 10 seconds, ensuring balanced encounters.
+	* Enemy spawns are limited to 10% of the total available credits every 5 seconds, ensuring balanced encounters.
 4. Notify the enemy module to manage enemy behaviors and interactions with the player.
 5. Adjust enemy stats dynamically based on the current round to increase challenge:
 	* Update enemy damage, health, and speed based on scaling factors as rounds progress.

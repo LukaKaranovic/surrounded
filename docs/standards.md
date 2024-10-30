@@ -6,7 +6,7 @@
 
 ## Key contact person and email
 
- - Connor McDermid, mcdermidc@stumail.viu.ca 
+ - Connor McDermid, mcdermidconnor@outlook.com
 
 ## Table of Contents
 
@@ -29,20 +29,25 @@ Each section includes discussion of how those standards/processes will be enforc
 
 Documentation will be kept in a `docs/` directory off the project root, and will contain the proposal, team charter, requirements, standards and processes, design, project update, and other future documents.
 
-Images included in the documentation will be kept in a `Images/` subdirectory located inside the `docs/` directory mentioned above. 
+Images included in the documentation will be kept in an `images/` subdirectory located inside the `docs/` directory mentioned above. 
 Any/all image files must have relevant and useful names related to the content it holds and have the .png extension. 
 
+All old documentation that is not currently in use (such as past project update deliverables) will be kept in an `archived/` subdirectory inside the `docs/` directory.
+
 The phase documents will be maintained and updated each phase by Luka Karanovic as the term progresses. Changes will be submitted on the `docs` [feature branch](#vc). Changes will be approved by at least two other members by virtue of our pull request approval process.
+
 List of phase documents:
 [Proposal.md](proposal.md): the preliminary proposal deliverable (phase 1)
 [Team Charter](charter.md): the team charter deliverable (phase 1)
 [Requirements](requirements.md): the product requirements deliverable (phase 2)
 [Standards and Procedures](standards.md): the standards and processes deliverable (phase 2)
 [Logical Design](logicaldesign.md): the logical design deliverable (phase 3)
-[Project Update](update.md): the project update deliverable for the most recent phase (currently phase 3)
+[Project Update](update.md): the project update deliverable for the most recent phase (currently phase 4)
+[Proof of Concept](proofconcept.md): the proof of concept deliverable (phase 4)
+
 More to be added later.
 
-Documents are to (as closely as possible) follow the organization/layout structure provided by the course project/phase specifications and skeletal versions of the documents provided. If additional sections are needed within the documents, the heading and layout choices will be the same as the rest of the document to look and feel consistent.
+Documents are to, as closely as possible, follow the organization/layout structure provided by the course project/phase specifications and skeletal versions of the documents provided. If additional sections are needed within the documents, the heading and layout choices will be the same as the rest of the document to look and feel consistent.
 
 To the extent possible, all documents should follow the format and conventions set out in the project template’s documents. Documents are expected to have proper grammar and spelling (Canadian English).
 
