@@ -27,6 +27,14 @@ namespace GameControl
         }
 
         /**
+         * Programmatically increase the pierce capacity
+         */
+        public void increaseCapacity()
+        {
+            pierce_capacity++;
+        }
+
+        /**
          * Overriden from Bullet::OnTriggerEnter2D
          * Has same functionality, but prevents bullet from being destroyed if it has pierces left.
          * @param other the other Collider interacted with

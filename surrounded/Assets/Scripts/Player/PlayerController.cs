@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using GameControl;
 using UnityEngine;
 using TMPro;
 using Unity.VisualScripting;
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public TMP_Text sstats, stats; //stats for upgrade page and stats page
     public bool divergeActivated = false;
     public bool forceFieldActivated = false;
+    public bool hasPiercing = false;
     protected float nextFieldTime = 0f;
     protected int _timer;
     protected IEnumerator TimerCoroutine;
@@ -192,8 +194,14 @@ public class PlayerController : MonoBehaviour
 
     public void Piercing()
     {
+        if (hasPiercing)
+        {
+            gameObject.GetComponent<Weapon>().bulletPrefab.GetComponent<PiercingBullet>().increaseCapacity();
+            return; // exit early
+        }
         var piercingbull = Resources.Load("PiercingBullet") as GameObject; // load piercingbullet prefab
         gameObject.GetComponent<Weapon>().bulletPrefab = piercingbull; // assign prefab
+        hasPiercing = true;
     }
     
 }
