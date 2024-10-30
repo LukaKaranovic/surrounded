@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     public float damage = 5f, defense = 3, moveSpeed = 10f, health = 50, maxHealth = 50, XP = 0, shield = 0, maxShield;
     public int currentLevel = 1;
     public float levelReq = 30 * Mathf.Pow(1.1f, 0);
-    public SpriteRenderer sprite;
+    public SpriteRenderer sprite, spritefield;
     private int MachineGunCount = 0, RocketBoosterCount = 0;
     public TMP_Text sstats, stats; //stats for upgrade page and stats page
     public bool divergeActivated = false;
@@ -30,6 +30,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Color color = spritefield.color;
+        color.a = forceFieldActivated ? 1f : 0f;  // 1 = fully visible, 0 = fully transparent
+        spritefield.color = color;
         Stats();
         if(Input.GetKeyDown(KeyCode.Escape)){
             pauseMenu.Pause();
@@ -62,22 +65,20 @@ public class PlayerController : MonoBehaviour
     }
 
     public void takeDamage(float damage) {
+        float damageTaken = (damage - defense);
+        if (damageTaken <= 1) {
+            damageTaken = 1;
+        }
         if (forceFieldActivated)
         {
-            // don't take damage
-            // drop sprite
+            damageTaken = 0;
             forceFieldActivated = false;
             ForceFieldTimerStart(15, () =>
             {
-                // put the sprite back up
                 forceFieldActivated = true;
                 onTimeOut = null;
                 Debug.Log("Callback lambda! Forcefield re-engaged.");
             });
-        }
-        float damageTaken = (damage - defense);
-        if (damageTaken <= 1) {
-            damageTaken = 1;
         }
         if(shield-damageTaken < 0){
             health -= damageTaken - shield;
@@ -151,7 +152,6 @@ public class PlayerController : MonoBehaviour
     public void ForceField()
     {
         forceFieldActivated = true;
-        // TODO: raise forcefield sprite
     }
 
     public IEnumerator forceFieldTimer(int totaltime)
