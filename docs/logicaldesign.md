@@ -242,10 +242,14 @@ In this section, we try to discuss all possible events/actions the game can reco
 		* Player and enemy both take 50 damage
 	* Between Player/Asteroid:
 		* Player takes 50 damage and asteroid gets destroyed
+	* Between Enemy/Enemy:
+		* Enemy takes 100 damage, damaging both enemies
 	* Between Player/Asteroid Belt:
 		* Player takes damage equal to their total health
 	* Between Player/Projectile:
 		* Player takes damage according to projectile stat, projectile is then expired according to its stats and relative conditions
+	* Between Player/Enemy Projectile:
+		* Player takes damage relevant to enemies projectile stat minus the players defense stat, projectile is then expired according to its stats and relative conditions
 
 * Sound Generation
 	* Sound is generated upon nearly any action created by player or enemy (Projectile fire, death, damage taken)
@@ -625,7 +629,12 @@ The boss data will be dictated by specific round count, the current boss propert
 
 The design of the map data is most likely going to feature a simple restricted area with the bounds visually indicated by an asteroid belt that kills the player on impact.
 The asteroids will be handled in the round module when enemy spawns are called, ensuring there are enough asteroid clusters on the map.
-Will have objects (e.g. planets) in the background indicating where on the map you are located based on specific zones which are static in the background. The images of these will be loaded as soon as the game loop starts.
+
+* Unique ID for asteroids
+* Current (x, y) location for asteroids on map
+* Current health for asteroids
+* Collision data for asteroids/asteroid belt
+* Current Asteroid Count
 
 #### <a name="datadis"></a>6.4.7 Display data:
 
@@ -637,6 +646,19 @@ The specific properties that will be stored are:
 ### <a name="logerd"></a>6.5 Logical ERD
 
 In this section we relate the data components (class objects) used for the game, as well as attributes such as stats related to each object.
+
+The current list of entities goes as follows:
+
+* Game
+* Ship Display
+* Round Data
+* Player Ship
+* Map
+* Upgrade
+* Enemy
+* Boss
+* Sounds
+
 The entities we will reference in this diagram will be all of the ones referenced prior in 6.4’s list.
 We will use a chart to determine the logical components of each attribute to reduce complexity:
 
