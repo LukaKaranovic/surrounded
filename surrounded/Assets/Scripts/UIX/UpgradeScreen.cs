@@ -14,7 +14,7 @@ public class UpgradeScreen : MonoBehaviour
         "Fortified Plating: Adds shield health and +10% max health per stack. Shield regenerates only between rounds.",
         "Machine Guns: Increases fire rate by 10% (+5% per stack).",
         "Piercing Rounds: Shots hit 2 enemies (+1 per stack)",
-        "Piloting Enhancements: Grants 2 free level-ups (one-time use)",
+        "Piloting Enhancements: Grants 2 level-ups",
         "Rocket Boosters: Boosts movement speed by 10% (+5% per stack)",
         "Roulette: Spawns damaging orbs (max 3), +1 orb per stack. Orbs deal 2x player’s damage"
     };
