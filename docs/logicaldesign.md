@@ -201,21 +201,23 @@ User triggers start of gameplay from setup process, entering into the game logic
 
 	1.  Start game boot-strap with 60 FPS lock  
 
-	2. Contact UIX Module for display of initial game UI and continue to update accordingly
+	2. Generate the map, from map data which is stored in the game logic module
 
-	3. Contact Player Module for player stat and control information
+	3. Contact UIX Module for display of initial game UI and continue to update accordingly
+
+	4. Contact Player Module for player stat and control information
 		* Determine if player actions occur and update accordingly
 
-	4. Contact round module for round and enemy spawn information
+	5. Contact round module for round and enemy spawn information
 		* Determine round module for any changes in rounds according to game clock
 
-	5. Contact enemy module for enemy stat and control information
+	6. Contact enemy module for enemy stat and control information
 		* Determine if enemy actions occur and update accordingly
 
-	6. Resolve all Player/Enemy/Round/UIX updates
+	7. Resolve all Player/Enemy/Round/UIX updates
 		* Apply any updates sent by any of the modules and reiterate loop constantly
 
-	7. Check for game-over (either go back through loop or proceed to step 3)
+	8. Check for game-over (either go back through loop or proceed to step 3)
 
 Invoke End Game process
 
