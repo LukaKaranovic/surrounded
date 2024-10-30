@@ -24,7 +24,7 @@ public class HealthBar : MonoBehaviour
         if(currentHealth <=0){
             currentHealth = 0;
         }
-        healthText.text = "HP: " + (currentHealth + player.shield) + "/" + maxHealth;
+        healthText.text = "HP: " + (int)(currentHealth + player.shield) + "/" + maxHealth;
         float targetFillAmount = currentHealth/maxHealth;
         healthBar.fillAmount = targetFillAmount;
         maxHealth = player.maxHealth;
