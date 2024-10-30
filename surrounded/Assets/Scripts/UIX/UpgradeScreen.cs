@@ -90,6 +90,7 @@ public class UpgradeScreen : MonoBehaviour
                 break;
             case 1:
                 //Forcefield
+                player.ForceField();
                 Debug.Log("1");
                 numOf.AddItem(1);
                 break;
