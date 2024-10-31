@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 25
-  fireRate: 2
+  fireRate: 3
   health: 60
   bulletPrefab: {fileID: 301942462713169048, guid: fe917482b493d614480bd59c67b7010c, type: 3}
   firePoint: {fileID: 3183919931402661476}
