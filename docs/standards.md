@@ -29,7 +29,7 @@ Each section includes discussion of how those standards/processes will be enforc
 
 Documentation will be kept in a `docs/` directory off the project root, and will contain the proposal, team charter, requirements, standards and processes, design, project update, and other future documents.
 
-Images included in the documentation will be kept in an `images/` subdirectory located inside the `docs/` directory mentioned above. 
+Images included in the documentation will be kept in an `Images/` subdirectory located inside the `docs/` directory mentioned above. 
 Any/all image files must have relevant and useful names related to the content it holds and have the .png extension. 
 
 All old documentation that is not currently in use (such as past project update deliverables) will be kept in an `archived/` subdirectory inside the `docs/` directory.

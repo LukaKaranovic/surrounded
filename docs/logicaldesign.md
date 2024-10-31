@@ -200,9 +200,9 @@ The game logic processes are responsible for moment-to-moment game control itsel
 
 User triggers start of gameplay from setup process, entering into the game logic process. All checks are repeated until End Game process is initiated.  
 
-	1.  Start game boot-strap with 60 FPS lock  
+	1. Start game boot-strap with 60 FPS lock  
 
-	2. Generate the map, from map data which is stored in the game logic module
+	2. Generate the map, from map data which is stored in the game control module
 
 	3. Contact UIX Module for display of initial game UI and continue to update accordingly
 
@@ -472,7 +472,7 @@ The player module is integral to the user experience, managing player interactio
 
 #### <a name="enemy"></a>5.5 Enemy Module
 
-The enemy module, similar to the player module, holds data and information for the game control module, UIX module, and round module to use. The enemy module also contains the information for their AI and as well as the bosses AI and data.
+The enemy module, similar to the player module, holds data and information for the game control module, UIX module, and round module to use. The enemy module also contains the information for their AI and as well as the AI and data for bosses.
 
 #### <a name="enemyresp"></a>5.5.1: Enemy Module Responsibilities
 
@@ -672,13 +672,11 @@ This is just a short list of different example attributes and variables used for
 
 Coordinates (x, y values)
 Stats (Int values)
-Sprites and Upgrade imaging (j.pegs)
+Sprites and Upgrade imaging (.jpegs)
 
 
 Figure 6. Logical Entity-Relationship Diagram <a name="erddiag"></a>
 ![Logical ERD](Images/erddiag.png)
-
-## <a name="gamstat"></a>7 Game state and flow of play
 
 In our current iteration of the game we are restricted to one map with a set boundary that will spawn enemies outside of the camera radius, this process is relatively structured with our game logic and has an intuitive sequence of actions with spawns occurring based on a credit count. Ideally, we could refine our algorithm to be more dynamic rather than an exponential function to prevent a wall of difficulty occuring in the late game, as having an exponentially increasing function can cause balancing to get out of hand extremely quickly.
 Generally, our game flow will follow a series of events listed below, however the bulk of our steps are mostly covered in the system context design diagram listed in 4. The game will be primarily based around menu prompts, round conditions, and the game over condition, all simultaneously updating each sequence of the UI.
