@@ -217,9 +217,9 @@ User triggers start of gameplay from setup process, entering into the game logic
 	7. Resolve all Player/Enemy/Round/UIX updates
 		* Apply any updates sent by any of the modules and reiterate loop constantly
 
-	8. Check for game-over (either go back through loop or proceed to step 3)
+	8. Check for game-over (either go back through loop or proceed to step 9)
 
-Invoke End Game process
+    9. Invoke End Game process
 
 ##### 5.1.3.1 Game Data Updates
 
