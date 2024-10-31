@@ -174,8 +174,8 @@ MonoBehaviour:
   firePoint: {fileID: 2259143338485275151}
   fireForce: 20
   shootingRange: 15
-  targetInnerRadius: 15
-  targetOuterRadius: 15
+  targetInnerRadius: 9
+  targetOuterRadius: 12
   sprite: {fileID: 3887442524976656483}
   XPdropped: 11
   destroyedByAsteroid: 0
