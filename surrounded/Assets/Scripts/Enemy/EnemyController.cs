@@ -149,7 +149,6 @@ public class EnemyController : MonoBehaviour
             player.takeDamage(health);
             this.takeDamage((int)player.health); // stretch goal -- received damage configurable by upgrades
         }
-
         if (other.gameObject.CompareTag("Enemy"))
         {
             // get enemy
