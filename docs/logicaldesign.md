@@ -248,8 +248,6 @@ In this section, we try to discuss all possible events/actions the game can reco
 	* Between Player/Asteroid Belt:
 		* Player takes damage equal to their total health
 	* Between Player/Projectile:
-		* Player takes damage according to projectile stat, projectile is then expired according to its stats and relative conditions
-	* Between Player/Enemy Projectile:
 		* Player takes damage relevant to enemies projectile stat minus the players defense stat, projectile is then expired according to its stats and relative conditions
 
 * Sound Generation
