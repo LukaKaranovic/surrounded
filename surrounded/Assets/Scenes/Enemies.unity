@@ -3843,8 +3843,8 @@ MonoBehaviour:
   damage: 5
   defense: 3
   moveSpeed: 10
-  health: 50
-  maxHealth: 50
+  health: 1000
+  maxHealth: 1000
   XP: 0
   shield: 0
   maxShield: 0
