@@ -198,7 +198,9 @@ MonoBehaviour:
   targetOuterRadius: 10
   sprite: {fileID: 2084447321122650451}
   XPdropped: 4
-  avoidanceRadius: 6
+  destroyedByAsteroid: 0
+  isKamikaze: 0
+  avoidanceRadius: 3
 --- !u!1 &9124661563309619329
 GameObject:
   m_ObjectHideFlags: 0

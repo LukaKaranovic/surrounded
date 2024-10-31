@@ -24,6 +24,7 @@ public class EnemyController : MonoBehaviour
     public float XPdropped;
     protected Rigidbody2D rb;
     public bool destroyedByAsteroid = false;
+    public bool isKamikaze = false;
     
 
     void Start()
@@ -48,13 +49,13 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    private void MoveTowardsPlayer() //moves enemy towards player in a straight line
+    protected void MoveTowardsPlayer() //moves enemy towards player in a straight line
     {
         //  Vector2 direction = (player.transform.position - transform.position).normalized; 
         transform.position = Vector2.MoveTowards(transform.position, player.transform.position, maxSpeed * Time.deltaTime);
     }
 
-    private void RotateTowardsPlayer()
+    protected void RotateTowardsPlayer()
     {
         Vector2 aimDirection = player.transform.position - transform.position;
         float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
@@ -86,7 +87,7 @@ public class EnemyController : MonoBehaviour
         Collider2D[] NearbyColliders = Physics2D.OverlapCircleAll(transform.position, avoidanceRadius);
         foreach (Collider2D collider in NearbyColliders)
         {    
-            if (collider.gameObject != this.gameObject && !collider.gameObject.CompareTag("Bullet"))
+            if (collider.gameObject != this.gameObject && !collider.gameObject.CompareTag("Bullet") && !(isKamikaze && collider.gameObject.CompareTag("Player")))
             {
                 float distance = Vector2.Distance(transform.position, collider.transform.position);
                 heading += avoidanceRadius / distance * Vector3.Normalize(transform.position - collider.transform.position);

@@ -193,11 +193,13 @@ MonoBehaviour:
   firePoint: {fileID: 2182578315016452914}
   fireForce: 12.5
   shootingRange: 10
-  targetInnerRadius: 7
-  targetOuterRadius: 10
+  targetInnerRadius: 0
+  targetOuterRadius: 0
   sprite: {fileID: 6605013512819476269}
   XPdropped: 1
-  avoidanceRadius: 5
+  destroyedByAsteroid: 0
+  isKamikaze: 1
+  avoidanceRadius: 6
 --- !u!50 &9024527655432294418
 Rigidbody2D:
   serializedVersion: 4

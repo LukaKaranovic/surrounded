@@ -82,7 +82,7 @@ public class ShipSpawner : MonoBehaviour
                 GameObject Spawn4 = Instantiate(striker, spawnPosition, Quaternion.identity);
                 yield return new WaitForSeconds(5);
                 GameObject Spawn5 = Instantiate(dreadnought, spawnPosition, Quaternion.identity);
-                StopCoroutine(SpawnShips());
+                yield break;
             }
         }
     }
