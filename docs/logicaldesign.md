@@ -53,6 +53,7 @@
 		1. [Boss Ship Data](#databship)
 		1. [Map Data](#datamap)
 		1. [Display Data](#datadis)
+		1. [Sound Data](#datasound)
 	1. [Logical Entity Relation Diagram](#logerd)
 1. [Game State and Flow](#gamstat)
 1. [Transition to Physical Design](#phys)
@@ -643,21 +644,30 @@ The specific properties that will be stored are:
 * Current width and height of the display (on a locked screen)
 * Current x,y coordinates updated in our system
 
+### <a name="datasound"></a>6.4.8 Sound data:
+
+6.4.8 Sound data
+
+The sound data covers how sounds will be implemented into the game as the game module runs, the properties that are required to create sounds are:
+
+* Audio source
+* Volume 
+
 ### <a name="logerd"></a>6.5 Logical ERD
 
 In this section we relate the data components (class objects) used for the game, as well as attributes such as stats related to each object.
 
 The current list of entities goes as follows:
 
-* Game
-* Ship Display
-* Round Data
-* Player Ship
-* Map
-* Upgrade
-* Enemy
-* Boss
-* Sounds
+* Game Data (see 6.4)
+* Ship Display Data (see 6.4.7)
+* Round Data (see 6.4.4)
+* Player Ship Data (see 6.4.1)
+* Map Data (see 6.4.6)
+* Upgrade Data (see 6.4.3)
+* Enemy Data (see 6.4.2)
+* Boss Data (see 6.4.5)
+* Sounds Data (see 6.4.8)
 
 The entities we will reference in this diagram will be all of the ones referenced prior in 6.4’s list.
 We will use a chart to determine the logical components of each attribute to reduce complexity:
