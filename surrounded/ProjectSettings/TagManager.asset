@@ -51,6 +51,12 @@ TagManager:
   - name: bg1
     uniqueID: 3199128401
     locked: 0
+  - name: CobusArm
+    uniqueID: 1397512343
+    locked: 0
+  - name: CobusForearm
+    uniqueID: 3213001199
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
