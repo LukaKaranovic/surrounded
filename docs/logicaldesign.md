@@ -726,6 +726,16 @@ As of what was discussed prior in section 6, we did have many of our various pie
 
 This diagram captures all of the module diagrams together into a “total” design, capturing all of the interactions between key elements of the modules. It is intended to be used to cross reference various module diagrams. Module information is discussed prior in section 6.
 
+The modules described in this document are:
+* Game Control Module (see 5.1)
+* UIX Module (see 5.2)
+* Round Module (see 5.3)
+* Player Module (see 5.4)
+* Enemy Module (see 5.5)
+
+Each Module relates data and processes discussed in each module (See section 5). We plan on keeping the cohesion of each process high and coupling low, with most coupling being related from the game module and round module.
+
+
 Figure 7. Appendix Diagram<a name="appdiag"></a>
 ![Appendix](Images/appdiag.png)
 
