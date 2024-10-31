@@ -153,7 +153,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 100
-  m_LinearDrag: 0.5
+  m_LinearDrag: 1
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -186,11 +186,13 @@ MonoBehaviour:
   firePoint: {fileID: 3183919931402661476}
   fireForce: 10
   shootingRange: 10
-  targetInnerRadius: 7
-  targetOuterRadius: 10
+  targetInnerRadius: 0
+  targetOuterRadius: 0
   sprite: {fileID: 6922347402053109228}
   XPdropped: 7
-  avoidanceRadius: 7
+  destroyedByAsteroid: 0
+  isKamikaze: 1
+  avoidanceRadius: 6
 --- !u!1 &1872739135838276893
 GameObject:
   m_ObjectHideFlags: 0
