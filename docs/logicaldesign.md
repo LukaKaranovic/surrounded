@@ -646,8 +646,6 @@ The specific properties that will be stored are:
 
 ### <a name="datasound"></a>6.4.8 Sound data:
 
-6.4.8 Sound data
-
 The sound data covers how sounds will be implemented into the game as the game module runs, the properties that are required to create sounds are:
 
 * Audio source
@@ -671,6 +669,13 @@ The current list of entities goes as follows:
 
 The entities we will reference in this diagram will be all of the ones referenced prior in 6.4’s list.
 We will use a chart to determine the logical components of each attribute to reduce complexity:
+
+This is just a short list of different example attributes and variables used for the display in the ERD, all these variables are present in multiple modules. These variables will be shown as:
+
+Coordinates (x, y values)
+Stats (Int values)
+Sprites and Upgrade imaging (j.pegs)
+
 
 Figure 6. Logical Entity-Relationship Diagram <a name="erddiag"></a>
 ![Logical ERD](Images/erddiag.png)
