@@ -173,13 +173,13 @@ MonoBehaviour:
   bulletPrefab: {fileID: 301942462713169048, guid: 14d43376011fbaa4f97d40a15c1881ae, type: 3}
   firePoint: {fileID: 2259143338485275151}
   fireForce: 10
-  shootingRange: 10
+  shootingRange: 15
   targetInnerRadius: 15
   targetOuterRadius: 15
   sprite: {fileID: 3887442524976656483}
   XPdropped: 11
   destroyedByAsteroid: 0
-  isStriker: 0
+  isKamikaze: 0
   avoidanceRadius: 7
 --- !u!50 &9102798631393319690
 Rigidbody2D:
