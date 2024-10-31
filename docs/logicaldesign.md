@@ -635,6 +635,8 @@ The asteroids will be handled in the round module when enemy spawns are called, 
 * Collision data for asteroids/asteroid belt
 * Current Asteroid Count
 
+Asteroids which will spawn as soon as the game loop starts, the function starts and uses vectors to move asteroids and deal collision damage to enemies and update using compare functions onto players and enemies.
+
 #### <a name="datadis"></a>6.4.7 Display data:
 
 The display data covers which portion of the map the current player's gameplay will view. It will be in a locked camera which will show a portion of the map.
