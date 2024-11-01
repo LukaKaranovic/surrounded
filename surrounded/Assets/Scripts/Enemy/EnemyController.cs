@@ -22,7 +22,7 @@ public class EnemyController : MonoBehaviour
 
     private Color originalColor;
     protected GameObject player; // changed from private to protected
-    private float nextFireTime = 0f;
+    protected float nextFireTime = 0f;
     public float XPdropped;
     protected Rigidbody2D rb;
     public bool destroyedByAsteroid = false;
@@ -56,13 +56,13 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    private void MoveTowardsPlayer() //moves enemy towards player in a straight line
+    protected void MoveTowardsPlayer() //moves enemy towards player in a straight line
     {
         //  Vector2 direction = (player.transform.position - transform.position).normalized; 
         transform.position = Vector2.MoveTowards(transform.position, player.transform.position, maxSpeed * Time.deltaTime);
     }
 
-    private void RotateTowardsPlayer()
+    protected void RotateTowardsPlayer()
     {
         Vector2 aimDirection = player.transform.position - transform.position;
         float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
@@ -90,7 +90,7 @@ public class EnemyController : MonoBehaviour
         rb.AddForce(maxSpeed * heading,ForceMode2D.Impulse);
     }
 
-    private Vector3 avoidanceAdjustment(Vector3 heading){
+    protected Vector3 avoidanceAdjustment(Vector3 heading){
         Collider2D[] NearbyColliders = Physics2D.OverlapCircleAll(transform.position, avoidanceRadius);
         foreach (Collider2D collider in NearbyColliders)
         {    
@@ -110,7 +110,7 @@ public class EnemyController : MonoBehaviour
         return randomDirection * randomRadius;
     }
 
-    private void ShootAtPlayer(float dam)
+    protected void ShootAtPlayer(float dam)
     {
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         bullet.GetComponent<Rigidbody2D>().AddForce(firePoint.up * fireForce, ForceMode2D.Impulse);
@@ -163,8 +163,8 @@ public class EnemyController : MonoBehaviour
             // get enemy
             EnemyController enemy = other.gameObject.GetComponent<EnemyController>();
             Debug.Log("Enemy hit other enemy! Inflicting heavy damage!");
-            enemy.takeDamage(enemy.health);
-            this.takeDamage(health);
+            enemy.takeDamage(health);
+            this.takeDamage(enemy.health);
         }
     }
     IEnumerator FlashRed(){

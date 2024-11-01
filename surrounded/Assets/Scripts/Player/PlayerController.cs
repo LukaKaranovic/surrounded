@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     public int currentLevel = 1;
     public float levelReq = 30 * Mathf.Pow(1.1f, 0);
     public SpriteRenderer sprite, spritefield;
-    private int MachineGunCount = 0, RocketBoosterCount = 0, divergeCount = 0, shieldCount = 0, forcefieldCount = 0;
+    private int MachineGunCount = 0, RocketBoosterCount = 0, divergeCount = 0, shieldCount = 0, forcefieldCount = 0, rouletteCount = 0;
     public TMP_Text sstats, stats; //stats for upgrade page and stats page
     public bool divergeActivated = false;
     public bool forceFieldActivated = false;
@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     protected int _timer;
     protected IEnumerator TimerCoroutine;
     private Action onTimeOut;
-    
+    public GameObject rouletteBall;
 
     Vector2 moveDirection;
     Vector2 mousePosition;
@@ -99,7 +99,13 @@ public class PlayerController : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
+    public void KillPlayer()
+    {
+        health = 0;
+        shield = 0;
+        gameOverScreen.Setup();
+        Destroy(gameObject);
+    }
     private void LevelUp() {
         damage += 1;
         defense += 1;
@@ -189,5 +195,23 @@ public class PlayerController : MonoBehaviour
         TimerCoroutine = forceFieldTimer(totalTime);
         StartCoroutine(TimerCoroutine);
     }
-    
+    public void Roulette(){
+        rouletteCount++;
+        if(rouletteCount > 3){
+            rouletteCount = 3;
+        }
+        GameObject roulette = Instantiate(rouletteBall);
+        Roulette r = roulette.GetComponent<Roulette>();
+        switch(rouletteCount){
+            case 1: 
+                r.isBall1 = true;
+                break;
+            case 2:
+                r.isBall2 = true;
+                break;
+            case 3:
+                r.isBall3 = true;
+                break;
+        }
+    }
 }
