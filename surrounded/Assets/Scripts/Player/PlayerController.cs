@@ -102,6 +102,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void KillPlayer()
+    {
+        health = 0;
+        shield = 0;
+        gameOverScreen.Setup();
+        Destroy(gameObject);
+    }
+
     private void LevelUp() {
         damage += 1;
         defense += 1;

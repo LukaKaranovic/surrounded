@@ -53,7 +53,7 @@ public class WorldBoundary : MonoBehaviour
 
     IEnumerator Warning(){
         for(int i = 5; i>=0; i--){
-            warningText.text = "WARNING: PLAYER REACHING OUT OF BOUNDS.\n\n" + i.ToString() + " SECONDS BEFORE COMET DEPLOYMENT";
+            warningText.text = "WARNING: OUT OF BOUNDS.\n\n" + i.ToString() + " SECONDS BEFORE COMET DEPLOYMENT";
             yield return new WaitForSeconds(1);
         }
         if(!isOutOfBounds){
