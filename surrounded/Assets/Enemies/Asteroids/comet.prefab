@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d76c588184f6407d9bec7db56cc33b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 15
+  maxSpeed: 25
   fireRate: 2
   health: 100000
   bulletPrefab: {fileID: 0}

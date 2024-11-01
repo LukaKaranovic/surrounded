@@ -4,16 +4,22 @@ using TMPro;  // Import TextMeshPro namespace
 public class RoundTimer : MonoBehaviour
 {
     private float roundDuration = 55f;  
-    private float timer;                
+    public float timer;                
     public int round = 1;
     public TMP_Text timerText;          
     public TMP_Text roundText;         
     public GameOverScreen gameOverScreen;
     public PlayerController player;
     public UpgradeScreen upgrade;
+    public bool isItems = false;
     void Start()
     {
-        timer = 55; 
+        if(isItems){
+            timer = 25;
+        }
+        else{
+            timer = 55;
+        }
         UpdateRoundText();      
     }
 

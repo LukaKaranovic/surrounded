@@ -2543,6 +2543,7 @@ MonoBehaviour:
   Timer: {fileID: 1289865444}
   player: {fileID: 816382867}
   isEnemyScene: 0
+  Scene: 10
 --- !u!4 &436016452
 Transform:
   m_ObjectHideFlags: 0
@@ -3793,7 +3794,7 @@ MonoBehaviour:
   pauseMenu: {fileID: 1009200859}
   damage: 5
   defense: 3
-  moveSpeed: 10
+  moveSpeed: 25
   health: 50
   maxHealth: 50
   XP: 0
@@ -5529,12 +5530,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f8c193061344574ea6056667198472c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timer: 0
   round: 1
   timerText: {fileID: 1289865446}
   roundText: {fileID: 1672225154}
   gameOverScreen: {fileID: 1085984028738968807}
   player: {fileID: 816382867}
   upgrade: {fileID: 685533862}
+  isItems: 0
 --- !u!1 &1319657340
 GameObject:
   m_ObjectHideFlags: 0

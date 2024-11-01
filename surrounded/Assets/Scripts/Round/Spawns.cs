@@ -22,6 +22,7 @@ public class ShipSpawner : MonoBehaviour
     private RoundTimer round;
     public PlayerController player;
     public bool isEnemyScene = false;
+    public int Scene = 10;
     
 
     void Start()
@@ -45,7 +46,7 @@ public class ShipSpawner : MonoBehaviour
                     Vector2 spawnPosition = GetOffScreenPosition();  // Get off-screen spawn position
                     GameObject COBUS = Instantiate(C0BU5, spawnPosition, Quaternion.identity);
                 }*/
-                for(int i = 0; i<10; i++){
+                for(int i = 0; i<Scene; i++){
                     availableCredits = availableCreditAmount();
                     while (availableCredits >= 0)
                     {
