@@ -10,12 +10,12 @@
 
 ## Table of Contents
 
-1. [Core technical challenges]
-2. [Approach to meet each challenge]
-3. [Assets produced to meet challenges]
-4. [Results of proof of concept and implications]
+1. [Core technical challenges](#challenges)
+2. [Approach to meet each challenge](#approach)
+3. [Assets produced to meet challenges](#production)
+4. [Results of proof of concept and implications](#results)
 
-## 1. Core technical challenges.
+## <a name="challenges"></a> 1. Core technical challenges.
 
 In this section we outline our for major technical hurdles the team expects to encounter when trying to complete the game:
 
@@ -34,7 +34,7 @@ Each of the issues listed are issues because we haven’t thought deeply about h
 We will be tackling each of the four problems above individually. Section 2 will discuss the approaches to address each challenge individually. Section 3 will provide the necessary sprites, pseudocode, or algorithms needed to perform live demos of the proof of concept. Our results and implications of the proof of concept will be discussed in section 4.
 
 
-## 2. Approach to meet each challenge
+## <a name="approach"></a> 2. Approach to meet each challenge
 
 Here we will discuss each individual approach used to solve our current issues addressed in Section 1. The issue of wrapping every issue together will be discussed in section 4.
 
@@ -61,7 +61,7 @@ Approach:
 * Creating new unique code and sprites for more advanced items (such as forcefield, roulette) to give them unique properties unlike basic items (such as rocket boosters, machine guns, etc.)
 * Working out a consistent system for the stacking of all items.
 
-## 3 Assets produced to meet challenges
+## <a name="production"></a> 3. Assets produced to meet challenges
 
 We will be creating a proof of concept branch named `PoC`. Since we have already developed a good portion of our game, each of the demos will start off of the base game with all of the basic features implemented. The base game will be changed to implement the technical challenge and to illustrate the changes.
 
@@ -124,7 +124,7 @@ The demo will be playable through the ‘Items’ option of the main menu. The r
 
 The files for roulette will be found in roulette.cs which is under the player file path in assets, and the forcefield code is found in the player module also under assets in our POC branch. 
 
-## 4. Results of proof of concept and implications
+## <a name="results"></a> 4. Results of proof of concept and implications
 
 We have two sections concerning both our results and implications:
 Results of our POC challenges on a rate of success.
