@@ -53,13 +53,14 @@ public class WorldBoundary : MonoBehaviour
 
     IEnumerator Warning(){
         for(int i = 5; i>=0; i--){
+            warningText.enabled = true;
             warningText.text = "WARNING: OUT OF BOUNDS.\n\n" + i.ToString() + " SECONDS BEFORE COMET DEPLOYMENT";
             yield return new WaitForSeconds(1);
         }
         if(!isOutOfBounds){
             Debug.Log("Comet INCOMING");
             comet = Instantiate(comet, GetOffScreenPosition(), Quaternion.identity);
-            warningText.text = "";
+            warningText.enabled = false;
         }
         yield break;
     }
