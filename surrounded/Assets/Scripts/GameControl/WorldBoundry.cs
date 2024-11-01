@@ -22,9 +22,10 @@ public class WorldBoundary : MonoBehaviour
             if(distance >= 550 && isOutOfBounds){
                 StartCoroutine(Warning());
                 isOutOfBounds = false;
+                warningText.enabled = true;
             } else if( distance < 550){
                 StopCoroutine(Warning());
-                warningText.text = "";
+                warningText.enabled = false;
                 isOutOfBounds = true;
             }
         }
@@ -52,8 +53,8 @@ public class WorldBoundary : MonoBehaviour
     }
 
     IEnumerator Warning(){
+        warningText.enabled = true;
         for(int i = 5; i>=0; i--){
-            warningText.enabled = true;
             warningText.text = "WARNING: OUT OF BOUNDS.\n\n" + i.ToString() + " SECONDS BEFORE COMET DEPLOYMENT";
             yield return new WaitForSeconds(1);
         }
