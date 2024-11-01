@@ -759,7 +759,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2123054426}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: EnemyButton
+        m_MethodName: BoundaryButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
