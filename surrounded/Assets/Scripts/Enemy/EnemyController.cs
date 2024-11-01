@@ -149,14 +149,13 @@ public class EnemyController : MonoBehaviour
             player.takeDamage(health);
             this.takeDamage((int)player.health); // stretch goal -- received damage configurable by upgrades
         }
-
         if (other.gameObject.CompareTag("Enemy"))
         {
             // get enemy
             EnemyController enemy = other.gameObject.GetComponent<EnemyController>();
             Debug.Log("Enemy hit other enemy! Inflicting heavy damage!");
-            enemy.takeDamage(enemy.health);
-            this.takeDamage(health);
+            enemy.takeDamage(health);
+            this.takeDamage(enemy.health);
         }
     }
     IEnumerator FlashRed(){

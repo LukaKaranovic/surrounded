@@ -2607,6 +2607,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOverScreen: {fileID: 1085984028738968807}
+  player: {fileID: 0}
+  comet: {fileID: 0}
+  warningText: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -4133,6 +4136,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOverScreen: {fileID: 1085984028738968807}
+  player: {fileID: 0}
+  comet: {fileID: 0}
+  warningText: {fileID: 0}
 --- !u!1 &866412177
 GameObject:
   m_ObjectHideFlags: 0
@@ -4224,6 +4230,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOverScreen: {fileID: 1085984028738968807}
+  player: {fileID: 0}
+  comet: {fileID: 0}
+  warningText: {fileID: 0}
 --- !u!1 &909881014
 GameObject:
   m_ObjectHideFlags: 0
@@ -4519,6 +4528,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOverScreen: {fileID: 1085984028738968807}
+  player: {fileID: 0}
+  comet: {fileID: 0}
+  warningText: {fileID: 0}
 --- !u!1 &1034177987
 GameObject:
   m_ObjectHideFlags: 0
@@ -7145,6 +7157,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOverScreen: {fileID: 1085984028738968807}
+  player: {fileID: 0}
+  comet: {fileID: 0}
+  warningText: {fileID: 0}
 --- !u!1 &1693198891
 GameObject:
   m_ObjectHideFlags: 0
