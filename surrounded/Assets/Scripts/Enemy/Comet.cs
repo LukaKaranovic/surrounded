@@ -25,11 +25,11 @@ public class Comet : EnemyController
     {   
         if (player != null)
         {
-            MoveNearPlayer();
+            MoveTowardsPlayer();
         }
     }
 
-    public new void OnCollisionEnter2D(Collision2D other)
+    public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
@@ -45,4 +45,5 @@ public class Comet : EnemyController
             enemy.takeDamage(enemy.health);
         }
     }
+
 }

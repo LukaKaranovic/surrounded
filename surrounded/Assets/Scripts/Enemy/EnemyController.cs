@@ -58,8 +58,12 @@ public class EnemyController : MonoBehaviour
 
     protected void MoveTowardsPlayer() //moves enemy towards player in a straight line
     {
-        //  Vector2 direction = (player.transform.position - transform.position).normalized; 
-        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, maxSpeed * Time.deltaTime);
+        Vector3 heading = ((player.transform.position) - transform.position).normalized; 
+        if(rb.velocity.magnitude > maxSpeed)
+        {
+            rb.AddForce(maxSpeed * -rb.velocity.normalized, ForceMode2D.Impulse);
+        }
+        rb.AddForce(maxSpeed * heading,ForceMode2D.Impulse);
     }
 
     protected void RotateTowardsPlayer()
@@ -91,13 +95,14 @@ public class EnemyController : MonoBehaviour
     }
 
     protected Vector3 avoidanceAdjustment(Vector3 heading){
-        Collider2D[] NearbyColliders = Physics2D.OverlapCircleAll(transform.position, avoidanceRadius);
+        float avoidanceRadiusAdjusted = avoidanceRadius + rb.velocity.magnitude/2; 
+        Collider2D[] NearbyColliders = Physics2D.OverlapCircleAll(transform.position, avoidanceRadiusAdjusted);
         foreach (Collider2D collider in NearbyColliders)
         {    
             if (collider.gameObject != this.gameObject && !collider.gameObject.CompareTag("Bullet"))
             {
                 float distance = Vector2.Distance(transform.position, collider.transform.position);
-                heading += avoidanceRadius / distance * Vector3.Normalize(transform.position - collider.transform.position);
+                heading += avoidanceRadiusAdjusted / distance * Vector3.Normalize(transform.position - collider.transform.position);
             }
         }
         heading = heading.normalized;
