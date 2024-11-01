@@ -20,7 +20,7 @@ public class EnemyController : MonoBehaviour
 
     private Color originalColor;
     protected GameObject player; // changed from private to protected
-    private float nextFireTime = 0f;
+    protected float nextFireTime = 0f;
     public float XPdropped;
     protected Rigidbody2D rb;
     public bool destroyedByAsteroid = false;
@@ -83,7 +83,7 @@ public class EnemyController : MonoBehaviour
         rb.AddForce(maxSpeed * heading,ForceMode2D.Impulse);
     }
 
-    private Vector3 avoidanceAdjustment(Vector3 heading){
+    protected Vector3 avoidanceAdjustment(Vector3 heading){
         Collider2D[] NearbyColliders = Physics2D.OverlapCircleAll(transform.position, avoidanceRadius);
         foreach (Collider2D collider in NearbyColliders)
         {    
@@ -103,7 +103,7 @@ public class EnemyController : MonoBehaviour
         return randomDirection * randomRadius;
     }
 
-    private void ShootAtPlayer()
+    protected void ShootAtPlayer()
     {
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         bullet.GetComponent<Rigidbody2D>().AddForce(firePoint.up * fireForce, ForceMode2D.Impulse);
