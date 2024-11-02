@@ -615,23 +615,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5945ca35746a11409e0b71692b4f0e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dmgInc: 0
-  spdInc: 0
-  hpInc: 0
-  maxSpeed: 5
-  fireRate: 2
-  health: 3
-  bulletPrefab: {fileID: 0}
   firePoint: {fileID: 1074772625700979324}
-  fireForce: 20
-  shootingRange: 10
-  damage: 0
-  targetInnerRadius: 0
-  targetOuterRadius: 0
-  sprite: {fileID: 0}
-  XPdropped: 0
-  destroyedByAsteroid: 0
-  avoidanceRadius: 5
+  ContactDamage: 0
+  maxSpeed: 5
 --- !u!1 &4975570688089129614
 GameObject:
   m_ObjectHideFlags: 0
@@ -1054,23 +1040,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5945ca35746a11409e0b71692b4f0e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dmgInc: 0
-  spdInc: 0
-  hpInc: 0
-  maxSpeed: 5
-  fireRate: 2
-  health: 3
-  bulletPrefab: {fileID: 0}
   firePoint: {fileID: 4537889620903667778}
-  fireForce: 20
-  shootingRange: 10
-  damage: 0
-  targetInnerRadius: 0
-  targetOuterRadius: 0
-  sprite: {fileID: 0}
-  XPdropped: 0
-  destroyedByAsteroid: 0
-  avoidanceRadius: 5
+  ContactDamage: 0
+  maxSpeed: 5
 --- !u!1 &8435196426616648819
 GameObject:
   m_ObjectHideFlags: 0
