@@ -1086,6 +1086,7 @@ GameObject:
   - component: {fileID: 6462930197331859335}
   - component: {fileID: 3454779904905642514}
   - component: {fileID: 6540420111196840545}
+  - component: {fileID: 8764484693174512221}
   m_Layer: 0
   m_Name: C0BU5
   m_TagString: Enemy
@@ -1170,7 +1171,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8480422743410830737}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -1234,3 +1235,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.4, y: 0.55}
   m_EdgeRadius: 0
+--- !u!114 &8764484693174512221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8480422743410830737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f533a266a3e44de9f07a54d9120774, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 1

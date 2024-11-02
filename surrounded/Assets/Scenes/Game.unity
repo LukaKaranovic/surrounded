@@ -4015,7 +4015,7 @@ MonoBehaviour:
   defense: 3
   moveSpeed: 10
   baseSpeed: 10
-  health: 50
+  health: 20000000
   maxHealth: 50
   XP: 0
   shield: 0
