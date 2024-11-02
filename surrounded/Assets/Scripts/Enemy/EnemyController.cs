@@ -95,14 +95,13 @@ public class EnemyController : MonoBehaviour
     }
 
     protected Vector3 avoidanceAdjustment(Vector3 heading){
-        float avoidanceRadiusAdjusted = avoidanceRadius + rb.velocity.magnitude/2; 
-        Collider2D[] NearbyColliders = Physics2D.OverlapCircleAll(transform.position, avoidanceRadiusAdjusted);
+        Collider2D[] NearbyColliders = Physics2D.OverlapCircleAll(transform.position, avoidanceRadius);
         foreach (Collider2D collider in NearbyColliders)
         {    
             if (collider.gameObject != this.gameObject && !collider.gameObject.CompareTag("Bullet"))
             {
                 float distance = Vector2.Distance(transform.position, collider.transform.position);
-                heading += avoidanceRadiusAdjusted / distance * Vector3.Normalize(transform.position - collider.transform.position);
+                heading += avoidanceRadius / distance * Vector3.Normalize(transform.position - collider.transform.position);
             }
         }
         heading = heading.normalized;
