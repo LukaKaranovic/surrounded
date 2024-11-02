@@ -12,7 +12,7 @@ The following person has been designated the main contact person for questions f
 
 ## Key revisions since phase 3
 
-Nothing massive was changed since phase 3. Most of the changes were small and were included to either fill in gaps, be consistent with information across documents, or to be consistent with changes made in our actual game.
+Nothing massive was changed since phase 3. Most of the changes were small and were included to either fill in gaps, to be consistent with information across documents, or to be consistent with changes made in our actual game.
 
 ### Changes and updates to the standards and processes (standards.md)
 
@@ -41,4 +41,4 @@ Nothing massive was changed since phase 3. Most of the changes were small and we
 * Added more information about bosses to design (mainly wording to include them) now that we know more about them.
 * Added a description for ERD (was feedback for phase 3).
 * Added further explanation to data design section.
-* Added sound data to data design.
+* Added parts about sound data and asteroid data (in map data) to data design.

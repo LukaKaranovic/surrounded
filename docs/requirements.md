@@ -22,21 +22,21 @@ The following person has been designated the main contact person for questions f
 
 1. [Key features and behaviour](#keyfeat)
 
-	1. [Player, Controls, and Combat](#player)
+	5.1. [Player, Controls, and Combat](#player)
 
-	1. [Map and Terrain](#map)
+	5.2. [Map and Terrain](#map)
 
-	1. [XP and Levelling System](#xp)
+	5.3. [XP and Levelling System](#xp)
 
-	1. [Round System](#round)
+	5.4. [Round System](#round)
 
-	1. [Enemy Design](#enemy)
+	5.5. [Enemy Design](#enemy)
 
-	1. [Bosses](#boss)
+	5.6. [Bosses](#boss)
 
-	1. [Upgrade Items and System](#items)
+	5.7. [Upgrade Items and System](#items)
 
-	1. [Sounds and Music](#sounds)
+	5.8. [Sounds and Music](#sounds)
 
 1. [User interface and navigation](#ui)
  
