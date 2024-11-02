@@ -16,7 +16,7 @@ public class CobusHand : EnemyController
         if (player != null)
         {
             float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);  
-            MoveNearPlayer();
+            MoveTowardsPlayer();
             RotateTowardsPlayer();
             if (distanceToPlayer <= shootingRange && Time.time >= nextFireTime)
             {
@@ -25,23 +25,7 @@ public class CobusHand : EnemyController
             }
         }
     }
-    protected new void MoveNearPlayer()
-    {
-        if (Vector2.Distance(transform.position, player.transform.position + moveTarget) < 1)  //Enemy is near target position
-        {
-            moveTarget = FindPointNearPlayer();
-        } 
-        Vector3 heading = ((moveTarget + player.transform.position) - transform.position).normalized;   
-        heading = avoidanceAdjustment(heading); 
-       // transform.position += maxSpeed * Time.deltaTime * heading;
-        if(rb.velocity.magnitude > maxSpeed)
-        {
-            rb.AddForce(maxSpeed * -rb.velocity.normalized, ForceMode2D.Force);
-        }
-        Debug.DrawLine(transform.position, player.transform.position + moveTarget);
-        Debug.DrawLine(transform.position, transform.position + heading, Color.red);
-        rb.AddForce(maxSpeed * heading,ForceMode2D.Force);
-    }
+
     public new void OnCollisionEnter2D(Collision2D other)
     {
     }
