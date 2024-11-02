@@ -8,7 +8,7 @@
 
 The following person has been designated the main contact person for questions from the reader:
 
- - Connor McDermid, mcdermidconnor@outlook.com
+ - Connor McDermid, mcdermidc@stumail.viu.ca
 
 ## Table of Contents
 

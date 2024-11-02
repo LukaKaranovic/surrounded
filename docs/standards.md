@@ -6,7 +6,7 @@
 
 ## Key contact person and email
 
- - Connor McDermid, mcdermidconnor@outlook.com
+ - Connor McDermid, mcdermidc@stumail.viu.ca
 
 ## Table of Contents
 
