@@ -8,11 +8,12 @@ public class COBUSShooting : MonoBehaviour
     private GameObject player;
     private Rigidbody2D rb;
     // Start is called before the first frame update
-    public GameObject bullet;
+    public GameObject bulletFab;
     public Transform bulletPos;
     public float force = 5;
-
+    private float nextFireTime = 0f;
     private float timer;
+    public float fireRate = 5.0f;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -23,16 +24,16 @@ public class COBUSShooting : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        timer += Time.deltaTime;
-        {
-            timer = 0;
-            shoot();
-        }
+    void Update(){
+        Fire();
     }
 
-    void shoot() {
-        Instantiate(bullet, bulletPos.position, Quaternion.identity);
+    public void Fire(){
+        if (Time.time >= nextFireTime)
+        {
+            GameObject bullet = Instantiate(bulletFab, bulletPos.position, bulletPos.rotation);
+            bullet.GetComponent<Rigidbody2D>().AddForce(bulletPos.up * force, ForceMode2D.Impulse);
+            nextFireTime = Time.time+ 1f/fireRate;
+        }
     }
 }

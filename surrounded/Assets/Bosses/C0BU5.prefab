@@ -431,6 +431,7 @@ GameObject:
   - component: {fileID: 7186561653653444006}
   - component: {fileID: 1878669556581092896}
   - component: {fileID: 1492757572547234172}
+  - component: {fileID: 1552948077642348402}
   m_Layer: 0
   m_Name: hand2
   m_TagString: Untagged
@@ -618,6 +619,22 @@ MonoBehaviour:
   firePoint: {fileID: 1074772625700979324}
   ContactDamage: 0
   maxSpeed: 5
+--- !u!114 &1552948077642348402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4939842755970033963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37ca6737dc5579b4482233ac306950d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletFab: {fileID: 301942462713169048, guid: 14d43376011fbaa4f97d40a15c1881ae, type: 3}
+  bulletPos: {fileID: 1074772625700979324}
+  force: 5
+  fireRate: 2
 --- !u!1 &4975570688089129614
 GameObject:
   m_ObjectHideFlags: 0
@@ -1087,7 +1104,6 @@ GameObject:
   - component: {fileID: 3454779904905642514}
   - component: {fileID: 6540420111196840545}
   - component: {fileID: 8764484693174512221}
-  - component: {fileID: 3728949264793481477}
   m_Layer: 0
   m_Name: C0BU5
   m_TagString: Enemy
@@ -1246,17 +1262,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4f533a266a3e44de9f07a54d9120774, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3728949264793481477
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8480422743410830737}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00a7afeb482f33a4da485add060d595b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
