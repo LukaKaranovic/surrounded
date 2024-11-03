@@ -11,6 +11,7 @@ public class CobusHand : MonoBehaviour
 
     private Rigidbody2D rb;
     private GameObject player;
+    private Transform target;
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player"); // Assuming the player has the tag "Player"
@@ -20,7 +21,7 @@ public class CobusHand : MonoBehaviour
     {   
         if (player != null)
         {
-            MoveTowardsPlayer();
+            MoveToTarget();
             RotateToPlayer();
         }
     }
@@ -30,24 +31,23 @@ public class CobusHand : MonoBehaviour
         float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg + 90;
         rb.rotation = aimAngle;
     }
-    protected void MoveTowardsPlayer() //moves enemy towards player in a straight line
+    public void SetMoveTarget(Transform moveTarget)
     {
-        Vector3 heading = ((player.transform.position) - transform.position).normalized;
-        if (rb.velocity.magnitude > maxSpeed)
-        {
-            rb.AddForce(maxSpeed * -rb.velocity.normalized, ForceMode2D.Impulse);
-        }
-        rb.AddForce(maxSpeed * heading, ForceMode2D.Impulse);
+        target = moveTarget;
     }
 
-    private void moveToPosition(Vector3 position)
+    private void MoveToTarget()
     {
-        Vector3 heading = ((position) - transform.position).normalized;
+        if(Vector3.Distance(transform.position, target.position) < 0.2)
+        {
+            return;
+        }
+        Vector3 heading = ((target.position) - transform.position).normalized;
         if (rb.velocity.magnitude > maxSpeed)
         {
             rb.AddForce(maxSpeed * -rb.velocity.normalized, ForceMode2D.Impulse);
         }
-        rb.AddForce(maxSpeed * heading, ForceMode2D.Impulse);
+        rb.AddForce(maxSpeed/2 * heading, ForceMode2D.Impulse);
     }
 
 
