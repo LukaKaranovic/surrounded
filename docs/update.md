@@ -1,4 +1,4 @@
-# CSCI 265 Project Update (Phase 3)
+# CSCI 265 Project Update (Phase 4)
 
 ## Team name: We Haven't Decided
 
@@ -8,58 +8,37 @@
 
 The following person has been designated the main contact person for questions from the reader:
 
- - Connor McDermid, mcdermidconnor@outlook.com
+ - Connor McDermid, mcdermidc@stumail.viu.ca
 
-## Key revisions since phase 2
+## Key revisions since phase 3
 
-For the requirements document, the main change is to describe the boss rounds, boss attacks/behaviour, and boss stats. Other small tweaks were added to make the document more consistent and easier to navigate. Clarification on a few missing details were added and so were changes to the requirements as our vision for the game has evovled (E.g. collisions).
-
-For the standards and processes document, a lot of changes were made to address the feedback we had received for phase 2. The document has been reorganized to increase readability and to have a consistent layout with other documents. A clearly defined sequence of steps for our branch protection policy for merging has been implemented as the main change.
-
-No key revisions were made to the team charter.
-
-### Changes and updates to the requirements (requirements.md)
-
-*Fixing the things stated in known issues:*
-The main update to the requirements document is addressing the known issues/omissions. As we have not begun playtesting yet, we have not changed any values for key features or any of the UI designs, so that was left unchanged.
-
-The biggest known issue and change to the requirements is the bosses and boss round sections. A lot more specific information about the boss rounds and the specific bosses, including changes to their attacks (and explanations on how they work) and stats, were added. These descriptions will help us with the design document when dealing with the logic for boss rounds and behaviour. They will also help us have a more clear idea of exactly how the boss rounds and the specific boss attacks will work. 
-
-Changes to the boss rounds can be found in the "Round System" subsection of the "Key features and behaviour" section of the document. Changes to the boss's stats and attacks can be found in the later half of the "Enemy Design" subsection of the "Key features and behaviour" section of the document. 
-
-Details about the cryptic text that reveals the story and where it will appear have been added under the story subsection of the "Game flow, objects, and plot-line" section.
-
-*Additional changees that were made:*
-* Labelled the figures properly in both the list of figures and where they actually appear so they match.
-* Included anchors to the list of figures that jump to the figure for quick reference.
-* Included the item selection pop=up image that was accidentally not included in phase 2.
-* Included small changes to the "Round System" subsection of the "Key features and behaviour" section to account for the new cryptic text addition and to clarify other small details.
-* Pretty significant changes were made to collision in combat involving asteroids, enemies, and the player dealing damage now. Details of this are in the "Player, Controls, and Combat" and "Map and Terrain" subsections of the the "Key features and behaviour" section.
-    * Also made rounds 105 seconds to allow the player to have time to settle in before enemies spawn.
-* More details about asteroids were added where necessary in the "Key features and behaviour" section.
-* Changed map size to be 4 times as big for now as we realized map was too small.
+Nothing massive was changed since phase 3. Most of the changes were small and were included to either fill in gaps, to be consistent with information across documents, or to be consistent with changes made in our actual game.
 
 ### Changes and updates to the standards and processes (standards.md)
-* Added a table of contents for quick reference and to adhere to layout consistency.
 
-The main revisions to this document were made to address the feedback given at the end of phase 2:
+* Added a line that discusses our new `archived/` subdirectory in `docs/`, which is where we keep old documents that aren't useful anymore.
+* Updated list of documents to be maintained to include phase 4 documents.
 
-*Changes to documentation standards and processes:*
-* Moved the parts of the 'Documentation standards and proecesses' discussing in-code documentation to the coding standards/processes section.
-* Added a point that talks about where images located in the documents are stored and the requirements for the images.
-* Added a paragraph talking about document layout requirements that must be upheld.
-* As Luka is doing the project update for this phase on his own and wants to handle future project updates, it has been changed in the documentation standards/processes so that he is responsible for maintaining all documents moving forward. These documents will still be cross-checked and proofread by other members moving forward, but Luka will handle the project update for each phase from now on.
+### Changes and updates to the product requirements (requirements.md)
 
-*Changes to coding standards and processes:*
-* Added parts dicussing in-code documentation to this section.
-* Added a point about in-code documentation being stored in its own new directory.
-* Added a paragraph described the code reviewing process that must be done before a merge to the testing branch.
-* Added a disclaimer at the bottom of the section.
+* Added subsections of "Key features and behaviour" section to the table of contentes, and numbered the table of contents for ease of reference.
+    * Note: Didn't add subsections of "User interface and navigation" section to the table as the list of figures already links to every section already.
+    * Other sections we felt weren't long enough to warrant adding their subsections to the table of contents.
+* Changed how collisions between enemies and players work so it scales with the game better.
+* Changed asteroid's health so it scales with the player.
+* Made numerous changes to the "Map and Terrain" subsection of the "Key features and behaviour" section to match our evolving plan with the map.
+* We felt high values of speed became uncontrollable, so we set a cap to player speed (also updated base defense stat).
+* We reduced the length of each round to 55 seconds because we felt 105 seconds was way too long, and didn't allow for interesting (and chaotic) enough gameplay.
+* Made changes to items and their stat values a bit.
+* We realized we were super vague about how score was counted in our requirements, so we fixed this by adding concrete values to score (and a calculation).
 
-*Changes to version control standards and processes:*
-* Added a sequence of clearly defined steps for merging procedures to the testing and main branches. 
-* Split the merging and testing procedures into two segments, one for merging features into testing, and another for merging testing into main. This is to clearly see the distinctions between the two processes.
+### Changes and updates to the logical design (logicaldesign.md)
 
-### Changes and updates to the team charter (charter.md)
-* Changed meeting time on Fridays to the newly agreed upon time.
-* Added a table of contents for quick reference and to adhred to layout consistency.
+* Added information about asteroids that wasn't included before
+    * Asteroid data is in enemy module, asteroid spawning is in round module.
+* Added information about background and world boundary that wasn't included before
+    * Background and world boundary is held in game control module.
+* Added more information about bosses to design (mainly wording to include them) now that we know more about them.
+* Added a description for ERD (was feedback for phase 3).
+* Added further explanation to data design section.
+* Added parts about sound data and asteroid data (in map data) to data design.

@@ -6,7 +6,7 @@
 
 ## Members and contact email
 
- - Connor McDermid, mcdermidconnor@outlook.com *main contact*
+ - Connor McDermid, mcdermidc@stumail.viu.ca *main contact*
  - Luka Karanovic, lkaranovic88@gmail.com
  - Quetzal Torres, quetzalt05@gmail.com 
  - Anmol Baidwan, anmolbaidwan@gmail.com “do not contact”

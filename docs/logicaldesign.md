@@ -6,59 +6,60 @@
 
 ## Contact person and email address
 
-- Connor McDermid, mcdermidconnor@outlook.com
+- Connor McDermid, mcdermidc@stumail.viu.ca
 
 ## Table of Contents
 1. [Known Issues](#issues)
-1. [Overview](#overview)
-1. [Core Design Influences](#core)
-1. [System Context](#syscon)
-1. [Architectural Design](#arch)
-	1. [Game Control Module](#archgcm)
-		1. [Description](#archgcmdesc)
-		1. [Initial Setup](#archgcminit)
-		1. [Game Logic Processes](#archgcmproc)
-		1. [The End Game Process](#archgcmend)
-	1. [UIX Module](#uix)
-		1. [The Input Process](#uixin)
-		1. [The Output Process](#uixout)
-		1. [Menu Navigation Map](#uixmenu)
-	1. [Round Module](#roundmod)
-		1. [Description](#roundesc)
-		1. [Round Initialization Process](#roundinit)
-		1. [Round Progression processes](#roundprog)
-		1. [Boss Round Logic](#roundboss)
-		1. [Round Transition Process](#roundtrans)
-		1. [Game State and End Round Detection](#roundend)
-		1. [Round Module Interaction Overview](#roundint)
-	1. [Player Module](#play)
-		1. [Responsibilities](#playmod)
-		1. [Player Data Structure](#playdata)
-		1. [Player Actions and Updates](#playact)
-		1. [Player Interaction](#playint)
-		1. [Player Initialization and Setup](#playset)
-	1. [Enemy Module](#enemy)
-		1. [Responsibilities](#enemyresp)
-		1. [Enemy Data Structure](#enemydata)
-		1. [Player Actions and Updates](#enemyact)
-1. [Data Design](#data)
-	1. [Player Data](#dataplay)
-	1. [Enemy Data](#dataenemy)
-	1. [Boss Data](#databoss)
-	1. [Game Logic Data](#datalog)
-		1. [Player Ship Data](#dataship)
-		1. [Enemy Ship Data](#dataenship)
-		1. [Item Upgrade Data](#dataup)
-		1. [Round Data](#dataround)
-		1. [Boss Ship Data](#databship)
-		1. [Map Data](#datamap)
-		1. [Display Data](#datadis)
-	1. [Logical Entity Relation Diagram](#logerd)
-1. [Game State and Flow](#gamstat)
-1. [Transition to Physical Design](#phys)
-	1. [Implementation Decisions](#physim)
-	1. [Object Model](#physobj)
-1. [Appendix](#appendix)
+2. [Overview](#overview)
+3. [Core Design Influences](#core)
+4. [System Context](#syscon)
+5. [Architectural Design](#arch)
+	5.1. [Game Control Module](#archgcm)
+		5.1.1. [Description](#archgcmdesc)
+		5.1.2. [Initial Setup](#archgcminit)
+		5.1.3. [Game Logic Processes](#archgcmproc)
+		5.1.4. [The End Game Process](#archgcmend)
+	5.2. [UIX Module](#uix)
+		5.2.1. [The Input Process](#uixin)
+		5.2.2. [The Output Process](#uixout)
+		5.2.3. [Menu Navigation Map](#uixmenu)
+	5.3. [Round Module](#roundmod)
+		5.3.1. [Description](#roundesc)
+		5.3.2. [Round Initialization Process](#roundinit)
+		5.3.3. [Round Progression processes](#roundprog)
+		5.3.4. [Boss Round Logic](#roundboss)
+		5.3.5. [Round Transition Process](#roundtrans)
+		5.3.6. [Game State and End Round Detection](#roundend)
+		5.3.7. [Round Module Interaction Overview](#roundint)
+	5.4. [Player Module](#play)
+		5.4.1. [Responsibilities](#playmod)
+		5.4.2. [Player Data Structure](#playdata)
+		5.4.3. [Player Actions and Updates](#playact)
+		5.4.4. [Player Interaction](#playint)
+		5.4.5. [Player Initialization and Setup](#playset)
+	5.5. [Enemy Module](#enemy)
+		5.5.1. [Responsibilities](#enemyresp)
+		5.5.2. [Enemy Data Structure](#enemydata)
+		5.5.3. [Player Actions and Updates](#enemyact)
+6. [Data Design](#data)
+	6.1. [Player Data](#dataplay)
+	6.2. [Enemy Data](#dataenemy)
+	6.3. [Boss Data](#databoss)
+	6.4. [Game Logic Data](#datalog)
+		6.4.1. [Player Ship Data](#dataship)
+		6.4.2. [Enemy Ship Data](#dataenship)
+		6.4.3. [Item Upgrade Data](#dataup)
+		6.4.4. [Round Data](#dataround)
+		6.4.5. [Boss Ship Data](#databship)
+		6.4.6. [Map Data](#datamap)
+		6.4.7. [Display Data](#datadis)
+		6.4.8. [Sound Data](#datasound)
+	6.5. [Logical Entity Relation Diagram](#logerd)
+7. [Game State and Flow](#gamstat)
+8. [Transition to Physical Design](#phys)
+	8.1. [Implementation Decisions](#physim)
+	8.2. [Object Model](#physobj)
+9. [Appendix](#appendix)
 
 ## List of figures
 [Figure 1. Context Diagram](#condiag)  
@@ -126,7 +127,7 @@ Due to this issue of a lack of background, we plan on having a resource page bui
 
 As mentioned above, one of our other challenges with the core design of the game will be our round system.
 
-Our current philosophy of the round system is to have each round be 105 seconds, with the ending of each round destroying all current enemies which then features the prompt for the upgrade system (More details including the math and back-end philosophy are included in our [requirements document](requirements.md)).
+Our current philosophy of the round system is to have each round be 55 seconds, with the ending of each round destroying all current enemies which then features the prompt for the upgrade system (More details including the math and back-end philosophy are included in our [requirements document](requirements.md)).
 
 To give a brief overview of the round system, it will feature a credit system wwhere the credit amount is dictated by the round number. While we have yet to have any background with implementing such features, the philosophy of our game plan for implementation of this feature will be dictated using a mathematical function and an array containing an ID and will run through a while loop. All of this will not be visible to the player, but this sort of implementation will be present in each round. The credit rate will be increased by each round to dictate greater enemy spawns. We plan on tweaking this to account for balance changes and any potential misalignment with how our code runs.
 
@@ -199,25 +200,27 @@ The game logic processes are responsible for moment-to-moment game control itsel
 
 User triggers start of gameplay from setup process, entering into the game logic process. All checks are repeated until End Game process is initiated.  
 
-	1.  Start game boot-strap with 60 FPS lock  
+	1. Start game boot-strap with 60 FPS lock  
 
-	2. Contact UIX Module for display of initial game UI and continue to update accordingly
+	2. Generate the map, from map data which is stored in the game control module
 
-	3. Contact Player Module for player stat and control information
+	3. Contact UIX Module for display of initial game UI and continue to update accordingly
+
+	4. Contact Player Module for player stat and control information
 		* Determine if player actions occur and update accordingly
 
-	4. Contact round module for round and enemy spawn information
+	5. Contact round module for round and enemy spawn information
 		* Determine round module for any changes in rounds according to game clock
 
-	5. Contact enemy module for enemy stat and control information
+	6. Contact enemy module for enemy stat and control information
 		* Determine if enemy actions occur and update accordingly
 
-	6. Resolve all Player/Enemy/Round/UIX updates
+	7. Resolve all Player/Enemy/Round/UIX updates
 		* Apply any updates sent by any of the modules and reiterate loop constantly
 
-	7. Check for game-over (either go back through loop or proceed to step 3)
+	8. Check for game-over (either go back through loop or proceed to step 9)
 
-Invoke End Game process
+    9. Invoke End Game process
 
 ##### 5.1.3.1 Game Data Updates
 
@@ -240,10 +243,12 @@ In this section, we try to discuss all possible events/actions the game can reco
 		* Player and enemy both take 50 damage
 	* Between Player/Asteroid:
 		* Player takes 50 damage and asteroid gets destroyed
+	* Between Enemy/Enemy:
+		* Enemy takes 100 damage, damaging both enemies
 	* Between Player/Asteroid Belt:
 		* Player takes damage equal to their total health
 	* Between Player/Projectile:
-		* Player takes damage according to projectile stat, projectile is then expired according to its stats and relative conditions
+		* Player takes damage relevant to enemies projectile stat minus the players defense stat, projectile is then expired according to its stats and relative conditions
 
 * Sound Generation
 	* Sound is generated upon nearly any action created by player or enemy (Projectile fire, death, damage taken)
@@ -260,7 +265,7 @@ In this section, we try to discuss all possible events/actions the game can reco
 
 * Round Update
 	* Upon beginning of game, round count is set to 1, in which the round 1 data is called and requested from the round module
-	* After 105 seconds, the round counter is increased by 1, the player is sent to the upgrade decision, and the next round is updated from the round module, increasing enemy credit count, and possible enemy spawns
+	* After the round timer hits 0, the round counter is increased by 1, the player is sent to the upgrade decision, and the next round is updated from the round module, increasing enemy credit count, and possible enemy spawns
 	* After player finishes Upgrade Decision, next round begins
 
 ##### 5.1.3.2 Enemy Actions and Updates
@@ -338,7 +343,7 @@ Responsibilities of the Round Module:
 * Credit Calculation: Implements a scaling system for available credits, calculated using the formula: Credits=30×(1.1)^(x−1) where x is the round number
 * Boss Round Logic: Special logic for boss rounds triggers the spawning of unique enemies (e.g., W35-S315 and C0B-U5) at predetermined intervals (e.g., rounds 10 and 20).
 * Enemy Spawning: Utilizes a dictionary mapping enemy types to their respective credit costs and IDs to facilitate efficient and balanced spawning logic. Tracks round timer from game control module to know when to spawn enemies.
-* Asteroid Spawning: Whenever enemy spawns are called (every 10 seconds starting at 100), will spawn asteroids until there are 16 clusters on the map as well.
+* Asteroid Spawning: Whenever enemy spawns are called (every 5 seconds starting at 50), will spawn asteroids until there are 16 clusters on the map as well.
 * Dynamic Difficulty Adjustment: As rounds progress, the module dynamically updates enemy stats (damage, health, and speed) to increase the difficulty, keeping players challenged.
 
 #### <a name="roundesc"></a>5.3.1: Round Module Description
@@ -359,7 +364,7 @@ During the round progression process, the module manages real-time gameplay, ene
 1. The round module is activated by the game control module.
 2. Monitor the round timer, which determines the duration of the current round.
 3. Spawn enemies based on the predefined credit costs and the dictionary mapping.
-	* Enemy spawns are limited to 10% of the total available credits every 10 seconds, ensuring balanced encounters.
+	* Enemy spawns are limited to 10% of the total available credits every 5 seconds, ensuring balanced encounters.
 4. Notify the enemy module to manage enemy behaviors and interactions with the player.
 5. Adjust enemy stats dynamically based on the current round to increase challenge:
 	* Update enemy damage, health, and speed based on scaling factors as rounds progress.
@@ -467,7 +472,7 @@ The player module is integral to the user experience, managing player interactio
 
 #### <a name="enemy"></a>5.5 Enemy Module
 
-The enemy module, similar to the player module, holds data and information for the game control module, UIX module, and round module to use. The enemy module also contains the information for their AI and as well as the bosses AI and data.
+The enemy module, similar to the player module, holds data and information for the game control module, UIX module, and round module to use. The enemy module also contains the information for their AI and as well as the AI and data for bosses.
 
 #### <a name="enemyresp"></a>5.5.1: Enemy Module Responsibilities
 
@@ -623,7 +628,14 @@ The boss data will be dictated by specific round count, the current boss propert
 
 The design of the map data is most likely going to feature a simple restricted area with the bounds visually indicated by an asteroid belt that kills the player on impact.
 The asteroids will be handled in the round module when enemy spawns are called, ensuring there are enough asteroid clusters on the map.
-Will have objects (e.g. planets) in the background indicating where on the map you are located based on specific zones which are static in the background. The images of these will be loaded as soon as the game loop starts.
+
+* Unique ID for asteroids
+* Current (x, y) location for asteroids on map
+* Current health for asteroids
+* Collision data for asteroids/asteroid belt
+* Current asteroid count
+
+Asteroids which will spawn as soon as the game loop starts, the function starts and uses vectors to move asteroids and deal collision damage to enemies and update using compare functions onto players and enemies.
 
 #### <a name="datadis"></a>6.4.7 Display data:
 
@@ -632,16 +644,41 @@ The specific properties that will be stored are:
 * Current width and height of the display (on a locked screen)
 * Current x,y coordinates updated in our system
 
+### <a name="datasound"></a>6.4.8 Sound data:
+
+The sound data covers how sounds will be implemented into the game as the game module runs, the properties that are required to create sounds are:
+
+* Audio source
+* Volume 
+
 ### <a name="logerd"></a>6.5 Logical ERD
 
 In this section we relate the data components (class objects) used for the game, as well as attributes such as stats related to each object.
+
+The current list of entities goes as follows:
+
+* Game Data (see 6.4)
+* Player Ship Data (see 6.4.1)
+* Enemy Data (see 6.4.2)
+* Upgrade Data (see 6.4.3)
+* Round Data (see 6.4.4)
+* Boss Data (see 6.4.5)
+* Map Data (see 6.4.6)
+* Ship Display Data (see 6.4.7)
+* Sounds Data (see 6.4.8)
+
 The entities we will reference in this diagram will be all of the ones referenced prior in 6.4’s list.
 We will use a chart to determine the logical components of each attribute to reduce complexity:
 
+This is just a short list of different example attributes and variables used for the display in the ERD, all these variables are present in multiple modules. These variables will be shown as:
+
+Coordinates (x, y values)
+Stats (Int values)
+Sprites and Upgrade imaging (.jpegs)
+
+
 Figure 6. Logical Entity-Relationship Diagram <a name="erddiag"></a>
 ![Logical ERD](Images/erddiag.png)
-
-## <a name="gamstat"></a>7 Game state and flow of play
 
 In our current iteration of the game we are restricted to one map with a set boundary that will spawn enemies outside of the camera radius, this process is relatively structured with our game logic and has an intuitive sequence of actions with spawns occurring based on a credit count. Ideally, we could refine our algorithm to be more dynamic rather than an exponential function to prevent a wall of difficulty occuring in the late game, as having an exponentially increasing function can cause balancing to get out of hand extremely quickly.
 Generally, our game flow will follow a series of events listed below, however the bulk of our steps are mostly covered in the system context design diagram listed in 4. The game will be primarily based around menu prompts, round conditions, and the game over condition, all simultaneously updating each sequence of the UI.
@@ -690,6 +727,15 @@ As of what was discussed prior in section 6, we did have many of our various pie
 ## <a name="appendix"></a>9 Appendix: the total design
 
 This diagram captures all of the module diagrams together into a “total” design, capturing all of the interactions between key elements of the modules. It is intended to be used to cross reference various module diagrams. Module information is discussed prior in section 6.
+
+The modules described in this document are:
+* Game Control Module (see 5.1)
+* UIX Module (see 5.2)
+* Round Module (see 5.3)
+* Player Module (see 5.4)
+* Enemy Module (see 5.5)
+
+Each Module relates data and processes discussed in each module (See section 5). We plan on keeping the cohesion of each process high and coupling low, with most coupling being related from the game module and round module.
 
 Figure 7. Appendix Diagram<a name="appdiag"></a>
 ![Appendix](Images/appdiag.png)
