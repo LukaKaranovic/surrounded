@@ -27,7 +27,30 @@ public class PlayerController : MonoBehaviour
 
     Vector2 moveDirection;
     Vector2 mousePosition;
+
+    //Boundary Implementation Variables (Added 2024/11/03 By Casey, used for boundaries on boss scene
+    // to interact with collisions)
+
+    //public GameObject topRightLimitGameobject;
+    //public GameObject bottomLeftLimitGameobject;
+
+    //private Vector3 topRightLimit;
+    //private Vector3 bottomLeftLimit;
+
+    //private Vector2 input;
+
+    //void Start()
+    //{
+    //   topRightLimit = topRightLimitGameobject.transform.position;
+    //   bottomLeftLimit = bottomLeftLimitGameobject.transform.position;
+
+    //}
+
+    //scrapped implementation for now
+
+
     // Update is called once per frame
+  
     void Update()
     {
         Color color = spritefield.color;
@@ -54,7 +77,6 @@ public class PlayerController : MonoBehaviour
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         if (XP >= levelReq) {
             LevelUp();
-
         }
     }
 

@@ -62,4 +62,6 @@ public class CobusHand : MonoBehaviour
             player.takeDamage(ContactDamage);
         }
     }
+
+   
 }
