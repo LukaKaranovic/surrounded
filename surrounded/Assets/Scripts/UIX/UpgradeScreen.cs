@@ -126,6 +126,7 @@ public class UpgradeScreen : MonoBehaviour
                 break;
             case 7:
                 //Roulette
+                player.Roulette();
                 Debug.Log("7");
                 numOf.AddItem(7);
                 break;
