@@ -4011,21 +4011,13 @@ MonoBehaviour:
   weapon: {fileID: 2338488}
   gameOverScreen: {fileID: 1085984028738968807}
   pauseMenu: {fileID: 1009200859}
-  damage: 5
-  defense: 3
-  moveSpeed: 10
-  baseSpeed: 10
-  health: 20000000
-  maxHealth: 50
-  XP: 0
-  shield: 0
-  maxShield: 0
-  currentLevel: 1
+  stats: {fileID: 11400000, guid: 7c75433bcc845c144b96dfbdbb91ab24, type: 2}
+  health: 20000
   levelReq: 30
   sprite: {fileID: 816382865}
   spritefield: {fileID: 927477663}
   sstats: {fileID: 219752457}
-  stats: {fileID: 212559886}
+  statsText: {fileID: 219752457}
   divergeActivated: 0
   forceFieldActivated: 0
   rouletteBall: {fileID: 6739810025927660360, guid: 4d102170a383b284598aa3784dba149a, type: 3}

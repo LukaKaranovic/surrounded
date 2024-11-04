@@ -13,8 +13,8 @@ public class XPBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        XPText.text = p.currentLevel.ToString();
-        float targetFillAmount = p.XP/p.levelReq;
+        XPText.text = p.stats.currentLevel.ToString();
+        float targetFillAmount = p.stats.XP /p.levelReq;
         XP.fillAmount = targetFillAmount;
 
 

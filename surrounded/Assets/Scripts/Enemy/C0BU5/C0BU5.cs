@@ -23,7 +23,7 @@ public class C0BU5 : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        maxSpeed = player.GetComponent<PlayerController>().moveSpeed/2;
+        maxSpeed = player.GetComponent<PlayerController>().stats.moveSpeed /2;
         rightHand = right.GetComponent<CobusHand>();
         leftHand = left.GetComponent<CobusHand>();
         SetHandsNeutral();

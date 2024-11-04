@@ -132,7 +132,7 @@ public class EnemyController : MonoBehaviour
         if (health <= 0 && p != null) {
             Debug.Log("Enemy destroyed!");
             if(!destroyedByAsteroid){
-                p.XP += XPdropped;
+                p.stats.XP += XPdropped;
             }  else {
                 destroyedByAsteroid = false;
             }

@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using Unity.VisualScripting;
 using Object = UnityEngine.Object;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,14 +12,14 @@ public class PlayerController : MonoBehaviour
     public Weapon weapon;
     public GameOverScreen gameOverScreen;     // Reference to the GameOverScreen script
     public PauseMenu pauseMenu;
-    public float damage = 5f, defense = 3, moveSpeed = 10f, baseSpeed = 10f, health = 50, maxHealth = 50, XP = 0, shield = 0, maxShield;
-    public int currentLevel = 1;
+    public PlayerStats stats;
+    public float health = 50f;
     public float levelReq = 30 * Mathf.Pow(1.1f, 0);
     public SpriteRenderer sprite, spritefield;
-    private int MachineGunCount = 0, RocketBoosterCount = 0, divergeCount = 0, shieldCount = 0, forcefieldCount = 0, rouletteCount = 0;
-    public TMP_Text sstats, stats; //stats for upgrade page and stats page
+    public TMP_Text sstats, statsText; //stats for upgrade page and stats page
     public bool divergeActivated = false;
     public bool forceFieldActivated = false;
+
     protected float nextFieldTime = 0f;
     protected int _timer;
     protected IEnumerator TimerCoroutine;
@@ -66,29 +67,35 @@ public class PlayerController : MonoBehaviour
         if(Input.GetMouseButton(0)){
             if(divergeActivated){
 
-                weapon.Diverge(divergeCount, damage);
+                weapon.Diverge(stats.divergeCount, stats.damage);
 
             } else{
-                weapon.Fire(damage);
+                weapon.Fire(stats.damage);
             }
         }
 
         moveDirection = new Vector2(moveX, moveY).normalized;
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if (XP >= levelReq) {
+        if (stats.XP >= levelReq) {
             LevelUp();
         }
     }
 
     private void FixedUpdate(){
-        rb.AddForce(moveSpeed * new Vector2(moveDirection.x, moveDirection.y),ForceMode2D.Impulse);
+        rb.AddForce(stats.moveSpeed * new Vector2(moveDirection.x, moveDirection.y),ForceMode2D.Impulse);
         Vector2 aimDirection = mousePosition - rb.position;
         float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
         rb.rotation = aimAngle;
+        if (health <= 0)
+        {
+            stats.ResetStats();
+            gameOverScreen.Setup();
+            Destroy(gameObject);
+        }
     }
 
     public void takeDamage(float dam) {
-        float damageTaken = (dam - defense);
+        float damageTaken = (dam - stats.defense);
         if (damageTaken <= 1) {
             damageTaken = 1;
         }
@@ -96,7 +103,7 @@ public class PlayerController : MonoBehaviour
         {
             damageTaken = 0;
             forceFieldActivated = false;
-            float time = 15-(forcefieldCount*1.5f);
+            float time = 15-(stats.forcefieldCount * 1.5f);
             if(time <= 2){
                 time = 2;
             }
@@ -107,40 +114,36 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("Callback lambda! Forcefield re-engaged.");
             });
         }
-        if(shield-damageTaken < 0){
-            health -= damageTaken - shield;
-            shield = 0;
+        if(stats.shield - damageTaken < 0){
+            health -= damageTaken - stats.shield;
+            stats.shield = 0;
         } else{
-            shield -= damageTaken;
+            stats.shield -= damageTaken;
         }
         StartCoroutine(FlashRed());
 
         Debug.Log("Player taking damage! Health: " + health);
-        if(health <= 0){
-            gameOverScreen.Setup();
-            Destroy(gameObject);
-        }
     }
+
     public void KillPlayer()
     {
         health = 0;
-        shield = 0;
-        gameOverScreen.Setup();
-        Destroy(gameObject);
+        stats.shield = 0;
     }
+
     private void LevelUp() {
-        damage += 1;
-        defense += 1;
-        baseSpeed += 1;
-        moveSpeed += 1;
+        stats.damage += 1;
+        stats.defense += 1;
+        stats.baseSpeed += 1;
+        stats.moveSpeed += 1;
         health += 10;
-        maxHealth += 10;
-        if(shieldCount != 0){
-            maxShield = (0.1f+(0.05f*shieldCount))*maxHealth;
+        stats.maxHealth += 10;
+        if(stats.shieldCount != 0){
+            stats.maxShield = (0.1f+(0.05f* stats.shieldCount))* stats.maxHealth;
         }
-        XP -= levelReq;
-        currentLevel++;
-        levelReq = 30 * Mathf.Pow(1.1f, (currentLevel-1));
+        stats.XP -= levelReq;
+        stats.currentLevel++;
+        levelReq = 30 * Mathf.Pow(1.1f, (stats.currentLevel - 1));
 
     }
 
@@ -151,49 +154,49 @@ public class PlayerController : MonoBehaviour
     }
     
     public void MachineGuns(){ //if machine guns upgrade collected
-        if(MachineGunCount == 0){
+        if(stats.MachineGunCount == 0){
             weapon.fireRate *= 1.1f;
         } else{
-            weapon.fireRate = (1.1f+(0.05f*MachineGunCount)) * weapon.baseRate;
+            weapon.fireRate = (1.1f+(0.05f* stats.MachineGunCount)) * weapon.baseRate;
         }
-        MachineGunCount++;
+        stats.MachineGunCount++;
         }
 
     public void RocketBooster(){
-        if(RocketBoosterCount == 0){
-            moveSpeed *= 1.1f;
+        if(stats.RocketBoosterCount == 0){
+            stats.moveSpeed *= 1.1f;
         } else{
-            moveSpeed = (1.1f+(0.05f*RocketBoosterCount)) * baseSpeed;
+            stats.moveSpeed = (1.1f+(0.05f* stats.RocketBoosterCount)) * stats.baseSpeed;
         }
-        RocketBoosterCount++;
+        stats.RocketBoosterCount++;
     }
 
     public void PilotingEnhancement(){
-        XP += levelReq;
-        XP += levelReq;
+        stats.XP += levelReq;
+        stats.XP += levelReq;
     }
     
     public void DivergeActivated(){
         divergeActivated = true;
-        divergeCount++;
+        stats.divergeCount++;
     }
 
     public void Stats(){
-        stats.text = "ATK: " + (int)damage + " DEF: " + (int)defense + " SPD: " + (int)moveSpeed;
-        sstats.text = "ATK: " + (int)damage + " DEF: " + (int)defense + " SPD: " + (int)moveSpeed;
+        statsText.text = "ATK: " + (int)stats.damage + " DEF: " + (int)stats.defense + " SPD: " + (int)stats.moveSpeed;
+        sstats.text = "ATK: " + (int)stats.damage + " DEF: " + (int)stats.defense + " SPD: " + (int)stats.moveSpeed;
     }
 
-    public void Shield(){   
-        maxShield = (0.1f+(0.05f*shieldCount))*maxHealth;
-        shieldCount++;
-        shield = maxShield;
-        moveSpeed = (1-(0.05f*shieldCount))*moveSpeed;
+    public void Shield(){
+        stats.maxShield = (0.1f+(0.05f* stats.shieldCount))* stats.maxHealth;
+        stats.shieldCount++;
+        stats.shield = stats.maxShield;
+        stats.moveSpeed = (1-(0.05f* stats.shieldCount))* stats.moveSpeed;
     }
 
     public void ForceField()
     {
         forceFieldActivated = true;
-        forcefieldCount++;
+        stats.forcefieldCount++;
     }
 
     public IEnumerator forceFieldTimer(int totaltime)
@@ -218,13 +221,13 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(TimerCoroutine);
     }
     public void Roulette(){
-        rouletteCount++;
-        if(rouletteCount > 3){
-            rouletteCount = 3;
+        stats.rouletteCount++;
+        if(stats.rouletteCount > 3){
+            stats.rouletteCount = 3;
         }
         GameObject roulette = Instantiate(rouletteBall);
         Roulette r = roulette.GetComponent<Roulette>();
-        switch(rouletteCount){
+        switch(stats.rouletteCount){
             case 1: 
                 r.isBall1 = true;
                 break;
