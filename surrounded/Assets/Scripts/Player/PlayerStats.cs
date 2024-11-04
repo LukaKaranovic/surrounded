@@ -25,7 +25,8 @@ public class PlayerStats : ScriptableObject
         maxShield = 0,
         fireForce = 50f,
         fireRate = 5.0f, 
-        baseRate = 5.0f;
+        baseRate = 5.0f,
+        score = 0;
     public void ResetStats()
     {
         MachineGunCount = 0;

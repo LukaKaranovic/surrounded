@@ -76,8 +76,11 @@ public class PlayerController : MonoBehaviour
 
         moveDirection = new Vector2(moveX, moveY).normalized;
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        stats.score = stats.XP;
         if (stats.XP >= levelReq) {
+            stats.score += stats.XP;
             LevelUp();
+
         }
     }
 
