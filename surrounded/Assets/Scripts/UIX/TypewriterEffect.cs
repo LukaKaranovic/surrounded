@@ -25,5 +25,6 @@ public class TypewriterEffect : MonoBehaviour
             textMeshPro.text = currentText; 
             yield return new WaitForSeconds(typingSpeed);
         }
+        yield break;
     }
 }
