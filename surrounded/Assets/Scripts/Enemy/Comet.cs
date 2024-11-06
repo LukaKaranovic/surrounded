@@ -34,6 +34,8 @@ public class Comet : EnemyController
         if (other.gameObject.CompareTag("Player"))
         {
             PlayerController player = other.gameObject.GetComponent<PlayerController>();
+            FindObjectOfType<AudioManager>().Play("Explosion", 0.1f);
+            FindObjectOfType<AudioManager>().Play("Metal", 0.1f);
             player.KillPlayer();
         }
 

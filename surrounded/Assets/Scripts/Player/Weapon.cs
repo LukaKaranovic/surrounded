@@ -17,7 +17,7 @@ public class Weapon : MonoBehaviour
             bullet.GetComponent<Rigidbody2D>().AddForce(firePoint.up * fireForce, ForceMode2D.Impulse);
             bullet.GetComponent<Bullet>().setDamage(damage);
             nextFireTime = Time.time+ 1f/fireRate;
-            FindObjectOfType<AudioManager>().Play("Goofy Ahh Fire");
+            FindObjectOfType<AudioManager>().Play("Goofy Ahh Fire", 0.5f);
         }
     }
 

@@ -18,13 +18,14 @@ public class AudioManager : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(gameObject); // Keep AudioManager across scenes
     }
-    public void Play(string NameOfSound)
+    public void Play(string NameOfSound, float Volume)
     {
         GameObject audioObject = new GameObject("FireAudio");
         AudioSource audioSource = audioObject.AddComponent<AudioSource>();
 
         // Set audio properties
         audioSource.clip = Resources.Load<AudioClip>($"Sounds/{NameOfSound}");
+        audioSource.volume = Volume;
         audioSource.Play();
 
         // Destroy the audio object after the clip finishes

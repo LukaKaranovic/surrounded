@@ -97,7 +97,7 @@ public partial class PlayerController : MonoBehaviour
         Debug.Log("Player taking damage! Health: " + health);
         if(health <= 0){
             gameOverScreen.Setup();
-            FindObjectOfType<AudioManager>().Play("Goofy Player Death");
+            FindObjectOfType<AudioManager>().Play("Goofy Player Death", 1.0f);
             Destroy(gameObject);
         }
     }
