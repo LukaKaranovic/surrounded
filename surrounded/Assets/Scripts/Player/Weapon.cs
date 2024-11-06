@@ -9,6 +9,7 @@ public class Weapon : MonoBehaviour
     public float fireForce = 50f;
     public float fireRate = 5.0f, baseRate = 5.0f;
     private float nextFireTime = 0f;
+
     public void Fire(float damage){
         if (Time.time >= nextFireTime)
         {
@@ -16,6 +17,7 @@ public class Weapon : MonoBehaviour
             bullet.GetComponent<Rigidbody2D>().AddForce(firePoint.up * fireForce, ForceMode2D.Impulse);
             bullet.GetComponent<Bullet>().setDamage(damage);
             nextFireTime = Time.time+ 1f/fireRate;
+            FindObjectOfType<AudioManager>().Play("Goofy Ahh Fire");
         }
     }
 
@@ -38,6 +40,7 @@ public class Weapon : MonoBehaviour
             bullet3.GetComponent<Bullet>().setDamage(damage);
             nextFireTime = Time.time+ 1f/(debuff*fireRate);        
         }
+        //shootingAudio.PlayOneShot(shootingClip);
     }
 
 }

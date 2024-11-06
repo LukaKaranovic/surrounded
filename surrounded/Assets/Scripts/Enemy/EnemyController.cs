@@ -30,6 +30,7 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
+        //shootingClip = "Assets/Sounds/Goofy Ahh Death.mp3";
         player = GameObject.FindGameObjectWithTag("Player"); // Assuming the player has the tag "Player"
         moveTarget = FindPointNearPlayer();
         rb = GetComponent<Rigidbody2D>();
@@ -135,6 +136,7 @@ public class EnemyController : MonoBehaviour
             }  else {
                 destroyedByAsteroid = false;
             }
+            FindObjectOfType<AudioManager>().Play("Goofy Ahh Death");
             Destroy(gameObject);
         }
         }

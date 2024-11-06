@@ -7,6 +7,7 @@ using Object = UnityEngine.Object;
 
 public partial class PlayerController : MonoBehaviour
 {
+    
     public Rigidbody2D rb;
     public Weapon weapon;
     public GameOverScreen gameOverScreen;     // Reference to the GameOverScreen script
@@ -96,6 +97,7 @@ public partial class PlayerController : MonoBehaviour
         Debug.Log("Player taking damage! Health: " + health);
         if(health <= 0){
             gameOverScreen.Setup();
+            FindObjectOfType<AudioManager>().Play("Goofy Player Death");
             Destroy(gameObject);
         }
     }
