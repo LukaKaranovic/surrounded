@@ -283,6 +283,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75b75e2df5a0b0b41acb3931ac338fa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typingSpeed: 0.1
+  Text: 'There was blah '
 --- !u!114 &334478383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -708,8 +710,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75b75e2df5a0b0b41acb3931ac338fa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typingSpeed: 0.5
-  Text: 
+  typingSpeed: 0.1
+  Text: Somewhere in blah
 --- !u!1 &674316412
 GameObject:
   m_ObjectHideFlags: 0
@@ -741,6 +743,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75b75e2df5a0b0b41acb3931ac338fa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typingSpeed: 0.1
+  Text: Then the last blah
 --- !u!114 &674316414
 MonoBehaviour:
   m_ObjectHideFlags: 0
