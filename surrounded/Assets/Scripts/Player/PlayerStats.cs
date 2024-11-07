@@ -12,6 +12,8 @@ public class PlayerStats : ScriptableObject
         shieldCount = 0,
         forcefieldCount = 0,
         rouletteCount = 0,
+        piercingRoundCount = 0,//upgrade not implemented yet
+        pilotingEnhancementsCount = 0,
         currentLevel = 1;
 
     public float
@@ -35,6 +37,10 @@ public class PlayerStats : ScriptableObject
         shieldCount = 0;
         forcefieldCount = 0;
         rouletteCount = 0;
+        piercingRoundCount = 0;
+        pilotingEnhancementsCount = 0;
+        currentLevel = 1;
+
         currentLevel = 1;
         damage = 5f;
         defense = 3;

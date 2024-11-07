@@ -7,7 +7,8 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public StatsPage statsPage; //Retrieve Stats and Upgrades Page in order to activate and deactivate
-    public bool isStatsOpen = false; 
+    public bool isStatsOpen = false;
+    public PlayerStats playerStats;
     public void Pause(){ //pauses game
         gameObject.SetActive(true);
         Time.timeScale = 0; //means time is paused
@@ -23,10 +24,12 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0;
         }
     public void Restart(){
+        playerStats.ResetStats();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); //reloads game - restarts
         Time.timeScale = 1;
     }
     public void Quit(){ //quits game
+        playerStats.ResetStats();
         SceneManager.LoadScene("Main Menu");       
         Time.timeScale = 1;
     }

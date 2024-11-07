@@ -1588,6 +1588,7 @@ MonoBehaviour:
   - {fileID: 4372520386622337310, guid: 0b23ec79971e64f09a2841f652cf233a, type: 3}
   - {fileID: 2000569852667698950, guid: 0e85a623ba6024942b08a2a60b282846, type: 3}
   - {fileID: 3742534021022649326, guid: c1b54840f5d7549818cac0c2fcbcb379, type: 3}
+  stats: {fileID: 11400000, guid: 7c75433bcc845c144b96dfbdbb91ab24, type: 2}
   content: {fileID: 2128207290}
 --- !u!1 &245077347
 GameObject:
@@ -4161,9 +4162,7 @@ MonoBehaviour:
   sprite: {fileID: 816382865}
   spritefield: {fileID: 927477663}
   sstats: {fileID: 219752457}
-  statsText: {fileID: 219752457}
-  divergeActivated: 0
-  forceFieldActivated: 0
+  statsText: {fileID: 212559886}
   rouletteBall: {fileID: 6739810025927660360, guid: 4d102170a383b284598aa3784dba149a, type: 3}
 --- !u!50 &816382868
 Rigidbody2D:
@@ -4642,6 +4641,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statsPage: {fileID: 227461972}
   isStatsOpen: 0
+  playerStats: {fileID: 11400000, guid: 7c75433bcc845c144b96dfbdbb91ab24, type: 2}
 --- !u!1 &1034177987
 GameObject:
   m_ObjectHideFlags: 0

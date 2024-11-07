@@ -17,41 +17,24 @@ public class PlayerController : MonoBehaviour
     public float levelReq = 30 * Mathf.Pow(1.1f, 0);
     public SpriteRenderer sprite, spritefield;
     public TMP_Text sstats, statsText; //stats for upgrade page and stats page
-    public bool divergeActivated = false;
-    public bool forceFieldActivated = false;
 
     protected float nextFieldTime = 0f;
     protected int _timer;
     protected IEnumerator TimerCoroutine;
     private Action onTimeOut;
     public GameObject rouletteBall;
+    private bool forceFieldActivated;
 
     Vector2 moveDirection;
     Vector2 mousePosition;
 
-    //Boundary Implementation Variables (Added 2024/11/03 By Casey, used for boundaries on boss scene
-    // to interact with collisions)
-
-    //public GameObject topRightLimitGameobject;
-    //public GameObject bottomLeftLimitGameobject;
-
-    //private Vector3 topRightLimit;
-    //private Vector3 bottomLeftLimit;
-
-    //private Vector2 input;
-
-    //void Start()
-    //{
-    //   topRightLimit = topRightLimitGameobject.transform.position;
-    //   bottomLeftLimit = bottomLeftLimitGameobject.transform.position;
-
-    //}
-
-    //scrapped implementation for now
-
-
+    void Start()
+    {
+        forceFieldActivated = stats.forcefieldCount > 0;
+        LoadRoulette();
+    }
     // Update is called once per frame
-  
+
     void Update()
     {
         Color color = spritefield.color;
@@ -65,7 +48,7 @@ public class PlayerController : MonoBehaviour
         float moveY = Input.GetAxisRaw("Vertical");
 
         if(Input.GetMouseButton(0)){
-            if(divergeActivated){
+            if(stats.divergeCount > 0){
 
                 weapon.Diverge(stats.divergeCount, stats.damage);
 
@@ -177,10 +160,10 @@ public class PlayerController : MonoBehaviour
     public void PilotingEnhancement(){
         stats.XP += levelReq;
         stats.XP += levelReq;
+        stats.pilotingEnhancementsCount++;
     }
     
-    public void DivergeActivated(){
-        divergeActivated = true;
+    public void Diverge(){
         stats.divergeCount++;
     }
 
@@ -240,6 +223,28 @@ public class PlayerController : MonoBehaviour
             case 3:
                 r.isBall3 = true;
                 break;
+        }
+    }
+
+    //Used in start method to instantiate roulette objects using roulette count stat
+    private void LoadRoulette()
+    {
+        for(int i = 0; i < stats.rouletteCount; i++)
+        {
+            GameObject roulette = Instantiate(rouletteBall);
+            Roulette r = roulette.GetComponent<Roulette>();
+            switch (i)
+            {
+                case 0:
+                    r.isBall1 = true;
+                    break;
+                case 1:
+                    r.isBall2 = true;
+                    break;
+                case 2:
+                    r.isBall3 = true;
+                    break;
+            }
         }
     }
 }
