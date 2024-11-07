@@ -6,9 +6,11 @@ using UnityEngine.SceneManagement;
 public class BossPortal : MonoBehaviour
 {
     public float rotationSpeed;
+    private Animator crossfade;
+    private float transitionTime = 3f;
     void Start()
     {
-
+        crossfade = GameObject.FindGameObjectWithTag("Crossfade").GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -21,7 +23,15 @@ public class BossPortal : MonoBehaviour
     {
         if (collider.CompareTag("Player"))
         {
-            SceneManager.LoadScene("Boss");
+            collider.GetComponent<PlayerController>().enabled = false; //Disable Player Controller on enter
+            StartCoroutine(LoadBossScene());
         }
+    }
+
+    IEnumerator LoadBossScene()
+    {
+        crossfade.SetTrigger("PortalEnter");
+        yield return new WaitForSeconds(transitionTime);
+        SceneManager.LoadScene("Boss");
     }
 }
