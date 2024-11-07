@@ -1,10 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class AudioManager : MonoBehaviour
 {   
     private static AudioManager instance;
+    public bool isGoofy = false;
+    public Toggle myToggle;
+
+    void Update(){
+        isGoofy = myToggle.isOn ? true : false;
+    }
 
     // Ensure there's only one instance of AudioManager
     private void Awake()
@@ -24,7 +30,11 @@ public class AudioManager : MonoBehaviour
         AudioSource audioSource = audioObject.AddComponent<AudioSource>();
 
         // Set audio properties
-        audioSource.clip = Resources.Load<AudioClip>($"Sounds/{NameOfSound}");
+        if(isGoofy){
+        audioSource.clip = Resources.Load<AudioClip>($"Sounds/Goofy Ahh {NameOfSound}");
+        } else{
+            audioSource.clip = Resources.Load<AudioClip>($"Sounds/{NameOfSound}");
+        }
         audioSource.volume = Volume;
         audioSource.Play();
 

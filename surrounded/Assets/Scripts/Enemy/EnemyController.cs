@@ -136,7 +136,7 @@ public class EnemyController : MonoBehaviour
             }  else {
                 destroyedByAsteroid = false;
             }
-            FindObjectOfType<AudioManager>().Play("Goofy Ahh Death", 1.0f);
+            FindObjectOfType<AudioManager>().Play("Enemy Death", 1.0f);
             Destroy(gameObject);
         }
         }

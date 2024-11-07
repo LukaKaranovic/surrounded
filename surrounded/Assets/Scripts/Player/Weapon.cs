@@ -17,7 +17,7 @@ public class Weapon : MonoBehaviour
             bullet.GetComponent<Rigidbody2D>().AddForce(firePoint.up * fireForce, ForceMode2D.Impulse);
             bullet.GetComponent<Bullet>().setDamage(damage);
             nextFireTime = Time.time+ 1f/fireRate;
-            FindObjectOfType<AudioManager>().Play("Goofy Ahh Fire", 0.5f);
+            FindObjectOfType<AudioManager>().Play("Weapon Fire", 0.5f);
         }
     }
 
@@ -39,6 +39,7 @@ public class Weapon : MonoBehaviour
             bullet2.GetComponent<Bullet>().setDamage(damage);
             bullet3.GetComponent<Bullet>().setDamage(damage);
             nextFireTime = Time.time+ 1f/(debuff*fireRate);        
+            FindObjectOfType<AudioManager>().Play("Weapon Fire", 0.2f);
         }
         //shootingAudio.PlayOneShot(shootingClip);
     }
