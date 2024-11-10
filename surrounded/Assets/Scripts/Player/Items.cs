@@ -93,4 +93,10 @@ public partial class PlayerController
                 break;
         }
     }
+    
+    public void Piercing()
+    {
+        var piercingbull = Resources.Load("PiercingBullet") as GameObject; // load piercingbullet prefab
+        weapon.bulletPrefab = piercingbull; // assign prefab
+    }
 }
