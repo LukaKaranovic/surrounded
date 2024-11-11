@@ -3,22 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class BackGroundParallax : MonoBehaviour
+namespace GameControl
 {
-    private Vector2 size, startpos;
-    public GameObject cam;
-    public float parallaxEffect;
-    // Start is called before the first frame update
-    void Start()
+    public class BackGroundParallax : MonoBehaviour
     {
-        startpos = transform.position;
-        size = GetComponent<SpriteRenderer>().bounds.max;
-    }
+        private Vector2 size, startpos;
+        public GameObject cam;
 
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        Vector2 distance = cam.transform.position * parallaxEffect;
-        transform.position = startpos + distance;
+        public float parallaxEffect;
+
+        // Start is called before the first frame update
+        void Start()
+        {
+            startpos = transform.position;
+            size = GetComponent<SpriteRenderer>().bounds.max;
+        }
+
+        // Update is called once per frame
+        void FixedUpdate()
+        {
+            Vector2 distance = cam.transform.position * parallaxEffect;
+            transform.position = startpos + distance;
+        }
     }
 }

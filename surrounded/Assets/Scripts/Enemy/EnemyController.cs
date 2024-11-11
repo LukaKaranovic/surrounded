@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+using GameControl;
 
 public class EnemyController : MonoBehaviour
 {
