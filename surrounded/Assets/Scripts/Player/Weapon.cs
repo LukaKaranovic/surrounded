@@ -7,7 +7,8 @@ public class Weapon : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform firePoint, firePoint2, firePoint3;
     public float fireForce = 50f;
-    public float fireRate = 5.0f, baseRate = 5.0f;
+    public float fireRate = 5.0f;
+    public float baseRate = 5.0f;
     private float nextFireTime = 0f;
     public void Fire(float damage){
         if (Time.time >= nextFireTime)

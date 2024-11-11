@@ -10,19 +10,19 @@ public class ShieldBar : HealthBar
     // Start is called before the first frame update
     void Start()
     {
-        maxShield = player.shield;
-        maxHealth = player.maxHealth;
+        maxShield = player.stats.shield;
+        maxHealth = player.stats.maxHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
-        currentShield = player.shield;
+        currentShield = player.stats.shield;
         if(currentShield <=0){
             currentShield = 0;
         }
         float targetFillAmount = currentShield/maxHealth;
         healthBar.fillAmount = targetFillAmount;
-        maxShield = player.shield;
+        maxShield = player.stats.shield;
     }
 }

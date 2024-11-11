@@ -84,7 +84,7 @@ public class UpgradeScreen : MonoBehaviour
         switch (index){
             case 0:
                 //Diverge
-                player.DivergeActivated();
+                player.Diverge();
                 Debug.Log("0");
                 numOf.AddItem(0);
                 break;

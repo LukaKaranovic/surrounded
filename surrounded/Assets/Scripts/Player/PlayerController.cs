@@ -5,6 +5,7 @@ using UnityEngine;
 using TMPro;
 using Unity.VisualScripting;
 using Object = UnityEngine.Object;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 
 public partial class PlayerController : MonoBehaviour
 {
@@ -12,15 +13,13 @@ public partial class PlayerController : MonoBehaviour
     public Weapon weapon;
     public GameOverScreen gameOverScreen;     // Reference to the GameOverScreen script
     public PauseMenu pauseMenu;
-    public float damage = 5f, defense = 3, moveSpeed = 10f, baseSpeed = 10f, health = 50, maxHealth = 50, XP = 0, shield = 0, maxShield;
-    public int currentLevel = 1;
+    public PlayerStats stats;
+    public float health = 50f;
     public float levelReq = 30 * Mathf.Pow(1.1f, 0);
     public SpriteRenderer sprite, spritefield;
+    public TMP_Text sstats, statsText; //stats for upgrade page and stats page
+
     private int MachineGunCount = 0, RocketBoosterCount = 0, divergeCount = 0, shieldCount = 0, forcefieldCount = 0, rouletteCount = 0;
-    public TMP_Text sstats, stats; //stats for upgrade page and stats page
-    public bool divergeActivated = false;
-    public bool forceFieldActivated = false;
-    public bool hasPiercing = false;
     protected float nextFieldTime = 0f;
     protected int _timer;
     protected IEnumerator TimerCoroutine;
@@ -29,11 +28,18 @@ public partial class PlayerController : MonoBehaviour
 
     Vector2 moveDirection;
     Vector2 mousePosition;
+
+    void Start()
+    {
+        stats.forceFieldActivated = stats.forcefieldCount > 0;
+        LoadRoulette();
+    }
     // Update is called once per frame
+
     void Update()
     {
         Color color = spritefield.color;
-        color.a = forceFieldActivated ? 1f : 0f;  // 1 = fully visible, 0 = fully transparent
+        color.a = stats.forceFieldActivated ? 1f : 0f;  // 1 = fully visible, 0 = fully transparent
         spritefield.color = color;
         Stats();
         if(Input.GetKeyDown(KeyCode.Escape)){
@@ -43,84 +49,88 @@ public partial class PlayerController : MonoBehaviour
         float moveY = Input.GetAxisRaw("Vertical");
 
         if(Input.GetMouseButton(0)){
-            if(divergeActivated){
+            if(stats.divergeCount > 0){
 
-                weapon.Diverge(divergeCount, damage);
+                weapon.Diverge(stats.divergeCount, stats.damage);
 
             } else{
-                weapon.Fire(damage);
+                weapon.Fire(stats.damage);
             }
         }
 
         moveDirection = new Vector2(moveX, moveY).normalized;
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if (XP >= levelReq) {
+        stats.score = stats.XP;
+        if (stats.XP >= levelReq) {
+            stats.score += stats.XP;
             LevelUp();
 
         }
     }
 
     private void FixedUpdate(){
-        rb.AddForce(moveSpeed * new Vector2(moveDirection.x, moveDirection.y),ForceMode2D.Impulse);
+        rb.AddForce(stats.moveSpeed * new Vector2(moveDirection.x, moveDirection.y),ForceMode2D.Impulse);
         Vector2 aimDirection = mousePosition - rb.position;
         float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
         rb.rotation = aimAngle;
+        if (health <= 0)
+        {
+            stats.ResetStats();
+            gameOverScreen.Setup();
+            Destroy(gameObject);
+        }
     }
 
     public void takeDamage(float dam) {
-        float damageTaken = (dam - defense);
+        float damageTaken = (dam - stats.defense);
         if (damageTaken <= 1) {
             damageTaken = 1;
         }
-        if (forceFieldActivated)
+        if (stats.forceFieldActivated)
         {
             damageTaken = 0;
-            forceFieldActivated = false;
-            float time = 15-(forcefieldCount*1.5f);
+            stats.forceFieldActivated = false;
+            float time = 15-(stats.forcefieldCount * 1.5f);
             if(time <= 2){
                 time = 2;
             }
             ForceFieldTimerStart((int)time, () =>
             {
-                forceFieldActivated = true;
+                stats.forceFieldActivated = true;
                 onTimeOut = null;
                 Debug.Log("Callback lambda! Forcefield re-engaged.");
             });
         }
-        if(shield-damageTaken < 0){
-            health -= damageTaken - shield;
-            shield = 0;
+        if(stats.shield - damageTaken < 0){
+            health -= damageTaken - stats.shield;
+            stats.shield = 0;
         } else{
-            shield -= damageTaken;
+            stats.shield -= damageTaken;
         }
         StartCoroutine(FlashRed());
 
         Debug.Log("Player taking damage! Health: " + health);
-        if(health <= 0){
-            gameOverScreen.Setup();
-            Destroy(gameObject);
-        }
     }
+
     public void KillPlayer()
     {
         health = 0;
-        shield = 0;
-        gameOverScreen.Setup();
-        Destroy(gameObject);
+        stats.shield = 0;
     }
+
     private void LevelUp() {
-        damage += 1;
-        defense += 1;
-        baseSpeed += 1;
-        moveSpeed += 1;
+        stats.damage += 1;
+        stats.defense += 1;
+        stats.baseSpeed += 1;
+        stats.moveSpeed += 1;
         health += 10;
-        maxHealth += 10;
-        if(shieldCount != 0){
-            maxShield = (0.1f+(0.05f*shieldCount))*maxHealth;
+        stats.maxHealth += 10;
+        if(stats.shieldCount != 0){
+            stats.maxShield = (0.1f+(0.05f* stats.shieldCount))* stats.maxHealth;
         }
-        XP -= levelReq;
-        currentLevel++;
-        levelReq = 30 * Mathf.Pow(1.1f, (currentLevel-1));
+        stats.XP -= levelReq;
+        stats.currentLevel++;
+        levelReq = 30 * Mathf.Pow(1.1f, (stats.currentLevel - 1));
 
     }
 
@@ -129,4 +139,6 @@ public partial class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         sprite.color = Color.white;
     }
+    
+    
 }

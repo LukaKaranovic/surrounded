@@ -45,7 +45,7 @@ public class Roulette : MonoBehaviour
             EnemyController enemy = other.GetComponent<EnemyController>();
             if (enemy != null)
             {
-                enemy.takeDamage((int)(p.damage*2)); // Apply damage to the enemy
+                enemy.takeDamage((int)(p.stats.damage *2)); // Apply damage to the enemy
                 Debug.Log("Enemy took damage! Remaining health: " + enemy.health);
             }
 

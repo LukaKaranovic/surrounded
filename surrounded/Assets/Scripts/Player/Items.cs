@@ -18,38 +18,38 @@ public partial class PlayerController
 
     public void RocketBooster(){
         if(RocketBoosterCount == 0){
-            moveSpeed *= 1.1f;
+            stats.moveSpeed *= 1.1f;
         } else{
-            moveSpeed = (1.1f+(0.05f*RocketBoosterCount)) * baseSpeed;
+            stats.moveSpeed = (1.1f+(0.05f*RocketBoosterCount)) * stats.baseSpeed;
         }
         RocketBoosterCount++;
     }
 
     public void PilotingEnhancement(){
-        XP += levelReq;
-        XP += levelReq;
+        stats.XP += levelReq;
+        stats.XP += levelReq;
     }
     
-    public void DivergeActivated(){
-        divergeActivated = true;
+    public void Diverge(){
+        stats.divergeActivated = true;
         divergeCount++;
     }
 
     public void Stats(){
-        stats.text = "ATK: " + (int)damage + " DEF: " + (int)defense + " SPD: " + (int)moveSpeed;
-        sstats.text = "ATK: " + (int)damage + " DEF: " + (int)defense + " SPD: " + (int)moveSpeed;
+        statsText.text = "ATK: " + (int)stats.damage + " DEF: " + (int)stats.defense + " SPD: " + (int)stats.moveSpeed;
+        sstats.text = "ATK: " + (int)stats.damage + " DEF: " + (int)stats.defense + " SPD: " + (int)stats.moveSpeed;
     }
 
     public void Shield(){   
-        maxShield = (0.1f+(0.05f*shieldCount))*maxHealth;
+        stats.maxShield = (0.1f+(0.05f*shieldCount))*stats.maxHealth;
         shieldCount++;
-        shield = maxShield;
-        moveSpeed = (1-(0.05f*shieldCount))*moveSpeed;
+        stats.shield = stats.maxShield;
+        stats.moveSpeed = (1-(0.05f*shieldCount))*stats.moveSpeed;
     }
 
     public void ForceField()
     {
-        forceFieldActivated = true;
+        stats.forceFieldActivated = true;
         forcefieldCount++;
     }
 
@@ -98,5 +98,27 @@ public partial class PlayerController
     {
         var piercingbull = Resources.Load("PiercingBullet") as GameObject; // load piercingbullet prefab
         weapon.bulletPrefab = piercingbull; // assign prefab
+    }
+    
+    //Used in start method to instantiate roulette objects using roulette count stat
+    private void LoadRoulette()
+    {
+        for(int i = 0; i < stats.rouletteCount; i++)
+        {
+            GameObject roulette = Instantiate(rouletteBall);
+            Roulette r = roulette.GetComponent<Roulette>();
+            switch (i)
+            {
+                case 0:
+                    r.isBall1 = true;
+                    break;
+                case 1:
+                    r.isBall2 = true;
+                    break;
+                case 2:
+                    r.isBall3 = true;
+                    break;
+            }
+        }
     }
 }

@@ -13,7 +13,7 @@ public class HealthBar : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        maxHealth = player.maxHealth;
+        maxHealth = player.stats.maxHealth;
 
     }
 
@@ -24,9 +24,9 @@ public class HealthBar : MonoBehaviour
         if(currentHealth <=0){
             currentHealth = 0;
         }
-        healthText.text = "HP: " + (int)(currentHealth + player.shield) + "/" + maxHealth;
+        healthText.text = "HP: " + (int)(currentHealth + player.stats.shield) + "/" + maxHealth;
         float targetFillAmount = currentHealth/maxHealth;
         healthBar.fillAmount = targetFillAmount;
-        maxHealth = player.maxHealth;
+        maxHealth = player.stats.maxHealth;
     }
 }
