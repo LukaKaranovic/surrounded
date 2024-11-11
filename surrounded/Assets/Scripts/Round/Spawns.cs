@@ -1,147 +1,171 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Player;
+using Enemy;
 
-public class ShipSpawner : MonoBehaviour
+namespace Round
 {
-    public GameObject grunt;       // Assign Grunt ship prefab in the Inspector
-    public GameObject viper;       // Assign Viper ship prefab in the Inspector
-    public GameObject juggernaut;  // Assign Juggernaut ship prefab in the Inspector
-    public GameObject striker;     // Assign Striker ship prefab in the Inspector
-    public GameObject dreadnought;     // Assign Striker ship prefab in the Inspector
-    public GameObject C0BU5;
-    public GameObject asteroid1;
-    public GameObject asteroid2;
-    public GameObject asteroid3;
-    public float spawnInterval = 5f;      // Time between spawns
-    public Transform targetPoint;         // Target for ships to move towards (e.g., player ship)
-    private Camera mainCamera;            // Reference to the main camera
-    private int random, creditCost, availableCredits;
-    public GameObject Timer;
-    private RoundTimer round;
-    public PlayerController player;
-
-
-    void Start()
+    public class ShipSpawner : MonoBehaviour
     {
-        round = Timer.GetComponent<RoundTimer>();
-        mainCamera = Camera.main;         // Get the main camera
-        StartCoroutine(SpawnShips());
-    }
+        public GameObject grunt; // Assign Grunt ship prefab in the Inspector
+        public GameObject viper; // Assign Viper ship prefab in the Inspector
+        public GameObject juggernaut; // Assign Juggernaut ship prefab in the Inspector
+        public GameObject striker; // Assign Striker ship prefab in the Inspector
+        public GameObject dreadnought; // Assign Striker ship prefab in the Inspector
+        public GameObject C0BU5;
+        public GameObject asteroid1;
+        public GameObject asteroid2;
+        public GameObject asteroid3;
+        public float spawnInterval = 5f; // Time between spawns
+        public Transform targetPoint; // Target for ships to move towards (e.g., player ship)
+        private Camera mainCamera; // Reference to the main camera
+        private int random, creditCost, availableCredits;
+        public GameObject Timer;
+        private RoundTimer round;
+        public PlayerController player;
 
-    int availableCreditAmount(){
-        return (int)(30*(Mathf.Pow(1.1f, (RoundNumber()-1))))/10;
-        
-    }
 
-    IEnumerator SpawnShips()
-    {
-    while(player.health > 0){
-        yield return new WaitForSeconds(5);
-        if(RoundNumber() == 10){
-            Vector2 spawnPosition = GetOffScreenPosition();  // Get off-screen spawn position
-            GameObject COBUS = Instantiate(C0BU5, spawnPosition, Quaternion.identity);
+        void Start()
+        {
+            round = Timer.GetComponent<RoundTimer>();
+            mainCamera = Camera.main; // Get the main camera
+            StartCoroutine(SpawnShips());
         }
-        for(int i = 0; i<10; i++){
-            availableCredits = availableCreditAmount();
-            while (availableCredits >= 0)
+
+        int availableCreditAmount()
+        {
+            return (int)(30 * (Mathf.Pow(1.1f, (RoundNumber() - 1)))) / 10;
+
+        }
+
+        IEnumerator SpawnShips()
+        {
+            while (player.health > 0)
             {
-                GameObject selectedShip = GetShipBasedOnRound();  // Select the ship type
-                if(creditCost > availableCredits){
-                    selectedShip = null;
-                }
-                availableCredits -= creditCost;
-                if (selectedShip != null)
+                yield return new WaitForSeconds(5);
+                if (RoundNumber() == 10)
                 {
-                    Vector2 spawnPosition = GetOffScreenPosition();  // Get off-screen spawn position
-                    GameObject newShip = Instantiate(selectedShip, spawnPosition, Quaternion.identity);
-                    newShip.GetComponent<EnemyController>().ScaleStats(RoundNumber());
+                    Vector2 spawnPosition = GetOffScreenPosition(); // Get off-screen spawn position
+                    GameObject COBUS = Instantiate(C0BU5, spawnPosition, Quaternion.identity);
+                }
+
+                for (int i = 0; i < 10; i++)
+                {
+                    availableCredits = availableCreditAmount();
+                    while (availableCredits >= 0)
+                    {
+                        GameObject selectedShip = GetShipBasedOnRound(); // Select the ship type
+                        if (creditCost > availableCredits)
+                        {
+                            selectedShip = null;
+                        }
+
+                        availableCredits -= creditCost;
+                        if (selectedShip != null)
+                        {
+                            Vector2 spawnPosition = GetOffScreenPosition(); // Get off-screen spawn position
+                            GameObject newShip = Instantiate(selectedShip, spawnPosition, Quaternion.identity);
+                            newShip.GetComponent<EnemyController>().ScaleStats(RoundNumber());
+                        }
+                    }
+
+                    // also, spawn one asteroid
+                    int doesSpawn = Random.Range(1, 3);
+                    if (doesSpawn == 1)
+                    {
+                        Vector2 asteroidSpawnPosition = GetOffScreenPosition(); // get off-screen spawn position
+                        GameObject newAst = Instantiate(ChooseRandomAsteroid(asteroid1, asteroid2, asteroid3),
+                            asteroidSpawnPosition, Quaternion.identity);
+                    }
+
+                    yield return new WaitForSeconds(spawnInterval);
                 }
             }
-            // also, spawn one asteroid
-            int doesSpawn = Random.Range(1,3);
-            if(doesSpawn == 1){
-                Vector2 asteroidSpawnPosition = GetOffScreenPosition(); // get off-screen spawn position
-                GameObject newAst = Instantiate(ChooseRandomAsteroid(asteroid1, asteroid2, asteroid3), asteroidSpawnPosition, Quaternion.identity);
+        }
+
+        // Choose the appropriate ship prefab based on the current round
+        GameObject GetShipBasedOnRound()
+        {
+            if (RoundNumber() >= 15)
+                return ChooseRandomShip(viper, juggernaut, striker, grunt, dreadnought);
+            else if (RoundNumber() >= 10 && RoundNumber() < 15)
+                return ChooseRandomShip(viper, grunt, juggernaut, striker);
+            else if (RoundNumber() >= 5 && RoundNumber() < 10)
+                return ChooseRandomShip(grunt, viper, juggernaut);
+            else
+                return ChooseRandomShip(grunt, viper);
+        }
+
+        //IMPLEMENTING CREDITS WITHIN THIS FUNCTION    MESSAGE TO ME (ANMOL)
+        GameObject ChooseRandomShip(params GameObject[] ships)
+        {
+            random = Random.Range(0, ships.Length);
+            if (ships[random] == grunt || ships[random] == viper)
+            {
+                creditCost = 1;
             }
-            yield return new WaitForSeconds(spawnInterval);
+            else if (ships[random] == juggernaut)
+            {
+                creditCost = 4;
+            }
+            else if (ships[random] == striker)
+            {
+                creditCost = 7;
+            }
+            else
+            {
+                creditCost = 11;
+            }
+
+            return ships[random];
         }
-    }
-}
 
-    // Choose the appropriate ship prefab based on the current round
-    GameObject GetShipBasedOnRound()
-    {
-        if (RoundNumber() >= 15)
-            return ChooseRandomShip(viper, juggernaut, striker, grunt, dreadnought);  
-        else if (RoundNumber() >= 10 && RoundNumber() < 15)
-            return ChooseRandomShip(viper, grunt, juggernaut, striker); 
-        else if (RoundNumber() >= 5 && RoundNumber() < 10)
-            return ChooseRandomShip(grunt, viper, juggernaut);
-        else
-            return ChooseRandomShip(grunt, viper); 
-    }
-
-    //IMPLEMENTING CREDITS WITHIN THIS FUNCTION    MESSAGE TO ME (ANMOL)
-    GameObject ChooseRandomShip(params GameObject[] ships)
-    {
-        random = Random.Range(0, ships.Length);
-        if(ships[random] == grunt || ships[random] == viper){
-            creditCost = 1;
-        } else if(ships[random] == juggernaut){
-            creditCost = 4;
-        } else if(ships[random] == striker){
-            creditCost = 7;
-        } else{
-            creditCost = 11;
-        }
-        return ships[random];
-    }
-
-    GameObject ChooseRandomAsteroid(params GameObject[] Asteroids)
-    {
-        random = Random.Range(0, Asteroids.Length);
-        return Asteroids[random];
-    }
-
-    // Get a random position just outside the camera's view
-    Vector2 GetOffScreenPosition()
-    {
-        Vector2 screenMin = mainCamera.ViewportToWorldPoint(new Vector2(0, 0));
-        Vector2 screenMax = mainCamera.ViewportToWorldPoint(new Vector2(1, 1));
-
-        float x, y;
-        bool spawnOnX = Random.value > 0.5f;
-
-        if (spawnOnX)
+        GameObject ChooseRandomAsteroid(params GameObject[] Asteroids)
         {
-            x = Random.value < 0.5f ? screenMin.x - 2 : screenMax.x + 2;
-            y = Random.Range(screenMin.y, screenMax.y);
+            random = Random.Range(0, Asteroids.Length);
+            return Asteroids[random];
         }
-        else
+
+        // Get a random position just outside the camera's view
+        Vector2 GetOffScreenPosition()
         {
-            x = Random.Range(screenMin.x, screenMax.x);
-            y = Random.value < 0.5f ? screenMin.y - 2 : screenMax.y + 2;
+            Vector2 screenMin = mainCamera.ViewportToWorldPoint(new Vector2(0, 0));
+            Vector2 screenMax = mainCamera.ViewportToWorldPoint(new Vector2(1, 1));
+
+            float x, y;
+            bool spawnOnX = Random.value > 0.5f;
+
+            if (spawnOnX)
+            {
+                x = Random.value < 0.5f ? screenMin.x - 2 : screenMax.x + 2;
+                y = Random.Range(screenMin.y, screenMax.y);
+            }
+            else
+            {
+                x = Random.Range(screenMin.x, screenMax.x);
+                y = Random.value < 0.5f ? screenMin.y - 2 : screenMax.y + 2;
+            }
+
+            return new Vector2(x, y);
         }
 
-        return new Vector2(x, y);
-    }
-
-    // Move the ship towards the target point (e.g., player ship)
-    void MoveShipToTarget(GameObject ship)
-    {
-        Vector2 targetPosition = targetPoint.position;
-        float speed = Random.Range(2f, 5f);  // Randomize ship speed
-        Rigidbody2D rb = ship.GetComponent<Rigidbody2D>();
-        if (rb != null)
+        // Move the ship towards the target point (e.g., player ship)
+        void MoveShipToTarget(GameObject ship)
         {
-            rb.velocity = (targetPosition - (Vector2)ship.transform.position).normalized * speed;
+            Vector2 targetPosition = targetPoint.position;
+            float speed = Random.Range(2f, 5f); // Randomize ship speed
+            Rigidbody2D rb = ship.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                rb.velocity = (targetPosition - (Vector2)ship.transform.position).normalized * speed;
+            }
         }
-    }
 
-    // Increment the round number
-    public int RoundNumber()
-    {
-        return round.round;
+        // Increment the round number
+        public int RoundNumber()
+        {
+            return round.round;
+        }
     }
 }

@@ -7,7 +7,6 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using Quaternion = UnityEngine.Quaternion;
 using Vector2 = UnityEngine.Vector2;
-
 public class NewTestScript
 {
     // A Test behaves as an ordinary method

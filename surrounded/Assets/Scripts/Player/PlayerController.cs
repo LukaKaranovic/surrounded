@@ -3,6 +3,7 @@ using System.Collections;
 using GameControl;
 using UnityEngine;
 using TMPro;
+using UIX;
 using Unity.VisualScripting;
 using Object = UnityEngine.Object;
 

@@ -1,32 +1,34 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
+using Player;
 
-public class HealthBar : MonoBehaviour
+namespace UIX
 {
-    public PlayerController player;
-    [SerializeField] protected Image healthBar;
-    protected float currentHealth, maxHealth;
-    public TMP_Text healthText; 
-    // Start is called before the first frame update
-    void Start()
+    public class HealthBar : MonoBehaviour
     {
-        maxHealth = player.maxHealth;
+        public PlayerController player;
+        [SerializeField] protected Image healthBar;
+        protected float currentHealth, maxHealth;
+        public TMP_Text healthText; 
+        // Start is called before the first frame update
+        void Start()
+        {
+            maxHealth = player.maxHealth;
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        currentHealth = player.health;
-        if(currentHealth <=0){
-            currentHealth = 0;
         }
-        healthText.text = "HP: " + (int)(currentHealth + player.shield) + "/" + maxHealth;
-        float targetFillAmount = currentHealth/maxHealth;
-        healthBar.fillAmount = targetFillAmount;
-        maxHealth = player.maxHealth;
+
+        // Update is called once per frame
+        void Update()
+        {
+            currentHealth = player.health;
+            if(currentHealth <=0){
+                currentHealth = 0;
+            }
+            healthText.text = "HP: " + (int)(currentHealth + player.shield) + "/" + maxHealth;
+            float targetFillAmount = currentHealth/maxHealth;
+            healthBar.fillAmount = targetFillAmount;
+            maxHealth = player.maxHealth;
+        }
     }
 }
