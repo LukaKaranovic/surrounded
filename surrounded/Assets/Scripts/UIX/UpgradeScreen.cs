@@ -108,6 +108,7 @@ public class UpgradeScreen : MonoBehaviour
                 break;
             case 4: 
                 //Piercing Round
+                player.Piercing();
                 Debug.Log("4");
                 numOf.AddItem(4);
                 break;

@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
+using GameControl;
 using UnityEngine;
 using TMPro;
 using Unity.VisualScripting;
 using Object = UnityEngine.Object;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 
-public class PlayerController : MonoBehaviour
+public partial class PlayerController : MonoBehaviour
 {
     public Rigidbody2D rb;
     public Weapon weapon;
@@ -18,19 +19,19 @@ public class PlayerController : MonoBehaviour
     public SpriteRenderer sprite, spritefield;
     public TMP_Text sstats, statsText; //stats for upgrade page and stats page
 
+    private int MachineGunCount = 0, RocketBoosterCount = 0, divergeCount = 0, shieldCount = 0, forcefieldCount = 0, rouletteCount = 0;
     protected float nextFieldTime = 0f;
     protected int _timer;
     protected IEnumerator TimerCoroutine;
     private Action onTimeOut;
     public GameObject rouletteBall;
-    private bool forceFieldActivated;
 
     Vector2 moveDirection;
     Vector2 mousePosition;
 
     void Start()
     {
-        forceFieldActivated = stats.forcefieldCount > 0;
+        stats.forceFieldActivated = stats.forcefieldCount > 0;
         LoadRoulette();
     }
     // Update is called once per frame
@@ -38,7 +39,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Color color = spritefield.color;
-        color.a = forceFieldActivated ? 1f : 0f;  // 1 = fully visible, 0 = fully transparent
+        color.a = stats.forceFieldActivated ? 1f : 0f;  // 1 = fully visible, 0 = fully transparent
         spritefield.color = color;
         Stats();
         if(Input.GetKeyDown(KeyCode.Escape)){
@@ -85,17 +86,17 @@ public class PlayerController : MonoBehaviour
         if (damageTaken <= 1) {
             damageTaken = 1;
         }
-        if (forceFieldActivated)
+        if (stats.forceFieldActivated)
         {
             damageTaken = 0;
-            forceFieldActivated = false;
+            stats.forceFieldActivated = false;
             float time = 15-(stats.forcefieldCount * 1.5f);
             if(time <= 2){
                 time = 2;
             }
             ForceFieldTimerStart((int)time, () =>
             {
-                forceFieldActivated = true;
+                stats.forceFieldActivated = true;
                 onTimeOut = null;
                 Debug.Log("Callback lambda! Forcefield re-engaged.");
             });
@@ -139,112 +140,5 @@ public class PlayerController : MonoBehaviour
         sprite.color = Color.white;
     }
     
-    public void MachineGuns(){ //if machine guns upgrade collected
-        if(stats.MachineGunCount == 0){
-            weapon.fireRate *= 1.1f;
-        } else{
-            weapon.fireRate = (1.1f+(0.05f* stats.MachineGunCount)) * weapon.baseRate;
-        }
-        stats.MachineGunCount++;
-        }
-
-    public void RocketBooster(){
-        if(stats.RocketBoosterCount == 0){
-            stats.moveSpeed *= 1.1f;
-        } else{
-            stats.moveSpeed = (1.1f+(0.05f* stats.RocketBoosterCount)) * stats.baseSpeed;
-        }
-        stats.RocketBoosterCount++;
-    }
-
-    public void PilotingEnhancement(){
-        stats.XP += levelReq;
-        stats.XP += levelReq;
-        stats.pilotingEnhancementsCount++;
-    }
     
-    public void Diverge(){
-        stats.divergeCount++;
-    }
-
-    public void Stats(){
-        statsText.text = "ATK: " + (int)stats.damage + " DEF: " + (int)stats.defense + " SPD: " + (int)stats.moveSpeed;
-        sstats.text = "ATK: " + (int)stats.damage + " DEF: " + (int)stats.defense + " SPD: " + (int)stats.moveSpeed;
-    }
-
-    public void Shield(){
-        stats.maxShield = (0.1f+(0.05f* stats.shieldCount))* stats.maxHealth;
-        stats.shieldCount++;
-        stats.shield = stats.maxShield;
-        stats.moveSpeed = (1-(0.05f* stats.shieldCount))* stats.moveSpeed;
-    }
-
-    public void ForceField()
-    {
-        forceFieldActivated = true;
-        stats.forcefieldCount++;
-    }
-
-    public IEnumerator forceFieldTimer(int totaltime)
-    {
-        while (_timer < totaltime)
-        {
-            yield return new WaitForSecondsRealtime(1);
-            _timer++;
-            Debug.Log("forcefield timer at " + _timer);
-        }
-        
-        // trigger callback
-        onTimeOut?.Invoke();
-    }
-
-    public void ForceFieldTimerStart(int totalTime, Action timeOut)
-    {
-        onTimeOut = timeOut; // save callback Action
-        // reset timer
-        _timer = 0;
-        TimerCoroutine = forceFieldTimer(totalTime);
-        StartCoroutine(TimerCoroutine);
-    }
-    public void Roulette(){
-        stats.rouletteCount++;
-        if(stats.rouletteCount > 3){
-            stats.rouletteCount = 3;
-        }
-        GameObject roulette = Instantiate(rouletteBall);
-        Roulette r = roulette.GetComponent<Roulette>();
-        switch(stats.rouletteCount){
-            case 1: 
-                r.isBall1 = true;
-                break;
-            case 2:
-                r.isBall2 = true;
-                break;
-            case 3:
-                r.isBall3 = true;
-                break;
-        }
-    }
-
-    //Used in start method to instantiate roulette objects using roulette count stat
-    private void LoadRoulette()
-    {
-        for(int i = 0; i < stats.rouletteCount; i++)
-        {
-            GameObject roulette = Instantiate(rouletteBall);
-            Roulette r = roulette.GetComponent<Roulette>();
-            switch (i)
-            {
-                case 0:
-                    r.isBall1 = true;
-                    break;
-                case 1:
-                    r.isBall2 = true;
-                    break;
-                case 2:
-                    r.isBall3 = true;
-                    break;
-            }
-        }
-    }
 }

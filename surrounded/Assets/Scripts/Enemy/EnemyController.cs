@@ -94,7 +94,7 @@ public class EnemyController : MonoBehaviour
         rb.AddForce(maxSpeed * heading,ForceMode2D.Impulse);
     }
 
-    protected Vector3 avoidanceAdjustment(Vector3 heading){ 
+    protected Vector3 avoidanceAdjustment(Vector3 heading){
         Collider2D[] NearbyColliders = Physics2D.OverlapCircleAll(transform.position, avoidanceRadius);
         foreach (Collider2D collider in NearbyColliders)
         {    

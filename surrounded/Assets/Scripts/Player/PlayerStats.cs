@@ -29,6 +29,11 @@ public class PlayerStats : ScriptableObject
         fireRate = 5.0f, 
         baseRate = 5.0f,
         score = 0;
+
+    public bool
+        forceFieldActivated,
+        hasPiercing,
+        divergeActivated;
     public void ResetStats()
     {
         MachineGunCount = 0;
