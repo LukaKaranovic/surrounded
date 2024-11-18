@@ -8,7 +8,10 @@ namespace UIX
     public class UpgradeScreen : MonoBehaviour
     {
         public Sprite[] upgrades; //array for 8 upgrade sprites
-        private string[] upgradeDesc = { //descriptions for the 8 upgrades from reqs
+
+        private string[] upgradeDesc =
+        {
+            //descriptions for the 8 upgrades from reqs
             "Diverge: Fires 3 bullets in a cone, +10% damage per stack",
             "Forcefield: Automatically dodges 1 hit, 15s cooldown (-10% per stack)",
             "Fortified Plating: Adds shield health and +10% max health per stack. Shield regenerates only between rounds.",
@@ -18,9 +21,10 @@ namespace UIX
             "Rocket Boosters: Boosts movement speed by 10% (+5% per stack)",
             "Roulette: Spawns damaging orbs (max 3), +1 orb per stack. Orbs deal 2x player’s damage"
         };
-        public Image[] uiImage;//where to display images
-        public TMP_Text[] uiDescriptions;//where to display descriptions
-        public Button[] uiButtons; 
+
+        public Image[] uiImage; //where to display images
+        public TMP_Text[] uiDescriptions; //where to display descriptions
+        public Button[] uiButtons;
         private int[] displayedUpgrades = new int[3];
         public PlayerController player; //for upgrades
         public StatsPage numOf;
@@ -31,15 +35,19 @@ namespace UIX
             gameObject.SetActive(true);
             Time.timeScale = 0;
             GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
-            foreach (GameObject bullet in bullets){
+            foreach (GameObject bullet in bullets)
+            {
                 Destroy(bullet);
             }
+
             GameObject[] ships = GameObject.FindGameObjectsWithTag("Enemy");
-            foreach (GameObject ship in ships){
+            foreach (GameObject ship in ships)
+            {
                 Destroy(ship);
             }
+
             // Create a list of available indices (0 to 7)
-            int[] list = { 0, 1, 2, 3, 4, 5, 6, 7};
+            int[] list = { 0, 1, 2, 3, 4, 5, 6, 7 };
 
             // Shuffle the list randomly
             Shuffle(list);
@@ -51,9 +59,9 @@ namespace UIX
                 displayedUpgrades[i] = randomIndex;
                 uiImage[i].sprite = upgrades[randomIndex];
                 uiDescriptions[i].text = upgradeDesc[randomIndex];
-                int index = i; 
+                int index = i;
                 uiButtons[i].onClick.RemoveAllListeners();
-                uiButtons[i].onClick.AddListener(() => ApplyUpgrade(displayedUpgrades[index])); 
+                uiButtons[i].onClick.AddListener(() => ApplyUpgrade(displayedUpgrades[index]));
             }
         }
 
@@ -69,7 +77,8 @@ namespace UIX
             }
         }
 
-        private void ApplyUpgrade(int index){
+        private void ApplyUpgrade(int index)
+        {
             //Import all upgrade functions here based on index
             /*index to upgrade list:
             0: Diverge
@@ -81,10 +90,11 @@ namespace UIX
             6: Rocket Boosters
             7: Roulette
             */
-            switch (index){
+            switch (index)
+            {
                 case 0:
                     //Diverge
-                    player.DivergeActivated();
+                    player.Diverge();
                     Debug.Log("0");
                     numOf.AddItem(0);
                     break;
@@ -106,7 +116,7 @@ namespace UIX
                     Debug.Log("3");
                     numOf.AddItem(3);
                     break;
-                case 4: 
+                case 4:
                     //Piercing Round
                     player.Piercing();
                     Debug.Log("4");
@@ -131,6 +141,7 @@ namespace UIX
                     numOf.AddItem(7);
                     break;
             }
+
             gameObject.SetActive(false);
             Time.timeScale = 1;
         }

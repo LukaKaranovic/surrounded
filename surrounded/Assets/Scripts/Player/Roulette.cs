@@ -51,13 +51,13 @@ namespace Player
             {
                 Debug.Log("Roulette hit enemy!"); // Debug message to confirm collision
 
-                // Try to get the Enemy component and apply damage
-                EnemyController enemy = other.GetComponent<EnemyController>();
-                if (enemy != null)
-                {
-                    enemy.takeDamage((int)(p.damage * 2)); // Apply damage to the enemy
-                    Debug.Log("Enemy took damage! Remaining health: " + enemy.health);
-                }
+            // Try to get the Enemy component and apply damage
+            EnemyController enemy = other.GetComponent<EnemyController>();
+            if (enemy != null)
+            {
+                enemy.takeDamage((int)(p.stats.damage *2)); // Apply damage to the enemy
+                Debug.Log("Enemy took damage! Remaining health: " + enemy.health);
+            }
 
             }
         }

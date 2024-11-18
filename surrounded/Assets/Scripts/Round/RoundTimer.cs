@@ -41,14 +41,16 @@ namespace Round {
             }
         }
 
-        void IncrementRound()
-        {
-            player.health = player.maxHealth;
-            player.shield = player.maxShield;
-            round++;
-            UpdateRoundText();
-            upgrade.DisplayRandomUpgrades();
-        }
+    void IncrementRound()
+    {
+        player.health = player.stats.maxHealth;
+        player.stats.shield = player.stats.maxShield;
+        player.stats.score += 100;
+        player.stats.score += round == 10 || round == 20 ? 400 : 0;
+        round++;
+        UpdateRoundText();
+        upgrade.DisplayRandomUpgrades();
+    }
 
         void UpdateTimerText()
         {

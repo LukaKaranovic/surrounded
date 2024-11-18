@@ -1,12 +1,17 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Player;
 
 namespace UIX
 {
     public class PauseMenu : MonoBehaviour
     {
         public StatsPage statsPage; //Retrieve Stats and Upgrades Page in order to activate and deactivate
-        public bool isStatsOpen = false; 
+        public bool isStatsOpen = false;
+        public PlayerStats playerStats;
         public void Pause(){ //pauses game
             gameObject.SetActive(true);
             Time.timeScale = 0; //means time is paused
@@ -22,10 +27,11 @@ namespace UIX
             Time.timeScale = 0;
         }
         public void Restart(){
+            playerStats.ResetStats();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); //reloads game - restarts
             Time.timeScale = 1;
         }
-        public void Quit(){ //quits game
+        public void Quit(){ //quits gameplayerStats.ResetStats();
             SceneManager.LoadScene("Main Menu");       
             Time.timeScale = 1;
         }

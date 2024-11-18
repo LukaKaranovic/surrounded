@@ -13,7 +13,7 @@ namespace Round
         public GameObject juggernaut; // Assign Juggernaut ship prefab in the Inspector
         public GameObject striker; // Assign Striker ship prefab in the Inspector
         public GameObject dreadnought; // Assign Striker ship prefab in the Inspector
-        public GameObject C0BU5;
+        public GameObject bossPortal;
         public GameObject asteroid1;
         public GameObject asteroid2;
         public GameObject asteroid3;
@@ -46,8 +46,8 @@ namespace Round
                 yield return new WaitForSeconds(5);
                 if (RoundNumber() == 10)
                 {
-                    Vector2 spawnPosition = GetOffScreenPosition(); // Get off-screen spawn position
-                    GameObject COBUS = Instantiate(C0BU5, spawnPosition, Quaternion.identity);
+                    Vector2 spawnPosition = new(0, 0); // Get off-screen spawn position
+                    Instantiate(bossPortal, spawnPosition, Quaternion.identity);
                 }
 
                 for (int i = 0; i < 10; i++)
@@ -83,6 +83,7 @@ namespace Round
                 }
             }
         }
+
 
         // Choose the appropriate ship prefab based on the current round
         GameObject GetShipBasedOnRound()

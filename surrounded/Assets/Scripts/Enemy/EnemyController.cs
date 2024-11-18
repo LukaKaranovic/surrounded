@@ -72,8 +72,6 @@ namespace Enemy
             {
                 rb.AddForce(maxSpeed * -rb.velocity.normalized, ForceMode2D.Impulse);
             }
-
-            rb.AddForce(maxSpeed * heading, ForceMode2D.Impulse);
         }
 
         protected void RotateTowardsPlayer()
@@ -155,7 +153,7 @@ namespace Enemy
                     Debug.Log("Enemy destroyed!");
                     if (!destroyedByAsteroid)
                     {
-                        p.XP += XPdropped;
+                        p.stats.XP += XPdropped;
                     }
                     else
                     {
