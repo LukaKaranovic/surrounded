@@ -50,7 +50,7 @@ namespace Player
             Color color = spritefield.color;
             color.a = stats.forceFieldActivated ? 1f : 0f; // 1 = fully visible, 0 = fully transparent
             spritefield.color = color;
-            Stats();
+            // Stats(); Dumped at the request of Quetzal to avoid a nullreference
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 pauseMenu.Pause();
