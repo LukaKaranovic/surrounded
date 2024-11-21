@@ -24,6 +24,7 @@ namespace Round
         public GameObject Timer;
         private RoundTimer round;
         public PlayerController player;
+        public Vector2 spawnPosition;
 
 
         void Start()
@@ -46,7 +47,7 @@ namespace Round
                 yield return new WaitForSeconds(5);
                 if (RoundNumber() == 10)
                 {
-                    Vector2 spawnPosition = new(0, 0); // Get off-screen spawn position
+                    spawnPosition = new(0, 0); // Get off-screen spawn position
                     Instantiate(bossPortal, spawnPosition, Quaternion.identity);
                 }
 
