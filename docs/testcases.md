@@ -21,8 +21,7 @@ Scripts/Arguments: The script for the player movement can be found in the player
 
 Expected Results/Output: Player ship will move across the map and have its x and y updated accordingly.
 
-Cleanup Process: All file management is done via a script which will manually sort files, and this will only work on Linux.
-
+Cleanup Process: All cleanup is done via the 'clean.sh' bash script which will clean the tests directory. This script will ony work on Linux
 
 Reporting Process: Checks will be updated as passed or failed in an XML via a test log.
 
@@ -48,7 +47,7 @@ Scripts/Arguments: The bullet prefab and bullet script are part of the game cont
 
 Expected Results/Output: Players will move, shoot on the map, and bullets will spawn at any point the mouse is aimed at.
 
-Cleanup Process: All file management is done via a script which will manually sort files, and this will only work on Linux.
+Cleanup Process: All cleanup is done via the 'clean.sh' bash script which will clean the tests directory. This script will ony work on Linux
 
 Reporting Process: Checks will be updated as passed or failed in an XML via a test log.
 
@@ -73,7 +72,7 @@ Amount of Testers: Currently, we will have group members review the test case im
 Scripts/Arguments: Currently we have our damage test script which takes assets from our Game Control scripts, unity scripts, and our player script.
 Expected Results/Output: Bullet spawns and shoots on the map, and bullets will pass through the player updating health and damaging the player ship.
 
-Cleanup Process: All file management is done via a script which will manually sort files, and this will only work on Linux.
+Cleanup Process: All cleanup is done via the 'clean.sh' bash script which will clean the tests directory. This script will ony work on Linux
 
 Reporting Process: Checks will be updated as passed or failed in an XML via a test log.
 
@@ -98,7 +97,7 @@ Scripts/Arguments: Currently we have our MAT05 script which takes assets from ou
 
 Expected Results/Output: Players going out of bounds will prompt the comet to spawn and destroy the player ship.
 
-Cleanup Process: All file management is done via a script which will manually sort files, and this will only work on Linux.
+Cleanup Process: All cleanup is done via the 'clean.sh' bash script which will clean the tests directory. This script will ony work on Linux
 
 Reporting Process: Checks will be updated as passed or failed in an XML via a test log.
 
@@ -124,7 +123,7 @@ Scripts/Arguments: Currently we have our MAT01 script which takes assets from ou
 
 Expected Results/Output: Player camera is followed at the same time as camera movement is updated.
 
-Cleanup Process: All file management is done via a script which will manually sort files, and this will only work on Linux.
+Cleanup Process: All cleanup is done via the 'clean.sh' bash script which will clean the tests directory. This script will ony work on Linux
 
 Reporting Process: Checks will be updated as passed or failed in an XML via a test log.
 
@@ -150,7 +149,7 @@ Scripts/Arguments: XPL00 test script is inheriting assets from the enemy and pla
 
 Expected Results/Output: Player presses ESC, menu opens and game is paused
 
-Cleanup Process: All file management is done via a script which will manually sort files, and this will only work on Linux.
+Cleanup Process: All cleanup is done via the 'clean.sh' bash script which will clean the tests directory. This script will ony work on Linux
 
 Reporting Process: Checks will be updated as passed or failed in an XML via a test log.
 
@@ -174,7 +173,7 @@ Scripts/Arguments: RND01 test script is using the player module, enemy module, r
 
 Expected Results/Output: Enemies spawn past 49 seconds and will spawn according to round timer function.
 
-Cleanup Process: All file management is done via a script which will manually sort files, and this will only work on Linux.
+Cleanup Process: All cleanup is done via the 'clean.sh' bash script which will clean the tests directory. This script will ony work on Linux
 
 Reporting Process: Checks will be updated as passed or failed in an XML via a test log.
 
@@ -199,7 +198,7 @@ Scripts/Arguments: ENY00 test script is inheriting assets from the enemy and pla
 
 Expected Results/Output: Enemies shoot at the player and track them at any coordinate.
 
-Cleanup Process: All file management is done via a script which will manually sort files, and this will only work on Linux.
+Cleanup Process: All cleanup is done via the 'clean.sh' bash script which will clean the tests directory. This script will ony work on Linux
 
 Reporting Process: Checks will be updated as passed or failed in an XML via a test log.
 
@@ -222,7 +221,7 @@ Scripts/Arguments: ENY01 test script is inheriting assets from the enemy and pla
 
 Expected Results/Output: Player spawn and enemies spawn outside of camera range.
 
-Cleanup Process: All file management is done via a script which will manually sort files, and this will only work on Linux.
+Cleanup Process: All cleanup is done via the 'clean.sh' bash script which will clean the tests directory. This script will ony work on Linux
 
 Reporting Process: Checks will be updated as passed or failed in an XML via a test log.
 
@@ -246,7 +245,7 @@ Scripts/Arguments: BOS12 test script is using the player module, enemy module, r
 
 Expected Results/Output: C0B-U5 spawns on round count 20 and is present when scene is loaded.
 
-Cleanup Process: All file management is done via a script which will manually sort files, and this will only work on Linux.
+Cleanup Process: All cleanup is done via the 'clean.sh' bash script which will clean the tests directory. This script will ony work on Linux
 
 Reporting Process: Checks will be updated as passed or failed in an XML via a test log.
 
@@ -270,7 +269,7 @@ Scripts/Arguments: UI00 test script is using the upgrades module to acquire the 
 
 Expected Results/Output: Player is spawned with base stats which are stored, player is given Rocket Boosters upgrade, players new stats are checked and compared to base stats to ensure upgrade is giving 10% increased move speed.
 
-Cleanup Process: All file management is done via a script which will manually sort files, and this will only work on Linux.
+Cleanup Process: All cleanup is done via the 'clean.sh' bash script which will clean the tests directory. This script will ony work on Linux
 
 Reporting Process: Checks will be updated as passed or failed in an XML via a test log.
 
@@ -294,7 +293,7 @@ Scripts/Arguments: UI04 test script is using the upgrades module to acquire the 
 
 Expected Results/Output: Player acquires shield, player IS NOT damaged with shield active, shield deactivates upon blocking, player IS damaged when the shield is on cooldown, and that the shield is refreshed and can block damage once again.
 
-Cleanup Process: All file management is done via a script which will manually sort files, and this will only work on Linux.
+Cleanup Process: All cleanup is done via the 'clean.sh' bash script which will clean the tests directory. This script will ony work on Linux
 
 Reporting Process: Checks will be updated as passed or failed in an XML via a test log.
 
@@ -318,7 +317,7 @@ Scripts/Arguments: UI02 test script is using the UIX Module and receiving input 
 
 Expected Results/Output: Player takes damage, UI for health bar is decreased by amount of damage taken
 
-Cleanup Process: All file management is done via a script which will manually sort files, and this will only work on Linux.
+Cleanup Process: All cleanup is done via the 'clean.sh' bash script which will clean the tests directory. This script will ony work on Linux
 
 Reporting Process: Checks will be updated as passed or failed in an XML via a test log.
 
@@ -342,6 +341,6 @@ Scripts/Arguments: UI07 test script is using the UIX Module to acquire and use t
 
 Expected Results/Output: Player presses ESC, menu opens and game is paused
 
-Cleanup Process: All file management is done via a script which will manually sort files, and this will only work on Linux.
+Cleanup Process: All cleanup is done via the 'clean.sh' bash script which will clean the tests directory. This script will ony work on Linux
 
 Reporting Process: Checks will be updated as passed or failed in an XML via a test log.
