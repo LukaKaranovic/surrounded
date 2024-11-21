@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 using GameControl;
 using Player;
 using Enemy;
-
+using Round;
 
 namespace Tests
 {
@@ -30,18 +30,13 @@ namespace Tests
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             PlayerController pc = player.GetComponent<PlayerController>();
             Assert.That(player, !Is.Null);
-            GameObject RT = GameObject.Find("Canvas/Timer");
-            RoundTimer timer = RT.GetComponent<RoundTimer>();
-            Enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            Assert.That(player, !Is.Null);
-            if (Enemies != null) 
-            {
-                enemiesAlive = true;
-                Assert.IsNotNull(Enemy);
-            }
+            GameObject spawns = GameObject.Find("ShipSpawns");
+            ShipSpawner pos = spawns.GetComponent<ShipSpawner>();
             yield return new WaitForSeconds(5);
-            Assert.That(Enemies = null);
-
+            GameObject[] Enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach(GameObject enemy in Enemies){
+                Assert.AreEqual(pos.spawnPosition, enemy.transform.position);
+            }
         }
 
     }
