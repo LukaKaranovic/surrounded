@@ -572,13 +572,13 @@ The Test Runner tool will be used in the process of setting up and evaluating te
 
 Tests will return pass/fail to the Test Runner. All tests must pass for the run to be considered successful. Failing at least ONE test renders the whole test run as a failure.
 
-A cleanup script located in the project root named ‘clean.sh’, will be used to do all cleanup after each test case. As all scripts are run the same way, all of them will have the same cleanup process. This process is simply just deleting the garbage Scene files created by the Test Runner located in the ‘surrounded/Assets/Test’ directory
+A cleanup script located in the project root named ‘clean.sh’, will be used to do all cleanup after each test case. As all scripts are run the same way, all of them will have the same cleanup process. This process is simply just deleting the garbage Scene files created by the Test Runner located in the ‘surrounded/Assets’ directory
 
-Test directories are grouped under the directory `surrounded/Assets/Test`, and under their own assembly definition. Tests will only be compiled as-needed, and are not compiled with regular release builds.
+Test directories are grouped under the directory `surrounded/Assets/Tests`, and under their own assembly definition. Tests will only be compiled as-needed, and are not compiled with regular release builds.
 
 #### This information is the same for all test scripts:
 
-Setup actions: No prior setup needed, use the Unity Test Runner tool and select the script.
+Setup actions: No prior setup needed, use the Unity Test Runner tool and select the script. This is how scripts will be executed.
 
 Tester actions: Open the Test Runner tool through Unity by going to Window > General > Test Runner in the options. When the tool opens up, go into ‘Play Mode’ select the test script you want to use. The Test Runner will then display visual feedback via a checkmark or an ‘X’ whether the test has passed or failed.
 
@@ -588,43 +588,45 @@ Cleanup: The `clean.sh` script will handle all test script cleanup after the tes
 
 #### Here is the list of each specific test script (to date):
 
-Name:
-Location:
+Last updated November 21, 2024.
+
+Name: PCC00.cs
+Location: surrounded/Assets/Tests/PCC00.cs
+[Link to source code](../surrounded/Assets/Scripts/Bullet.cs)
+Overview:
+
+Name: PCC01.cs
+Location: surrounded/Assets/Tests/PCC01.cs
 [Link to source code]()
 Overview:
 
-Name:
-Location:
+Name: PCC03.cs
+Location: surrounded/Assets/Tests/PCC03.cs
 [Link to source code]()
 Overview:
 
-Name:
-Location:
+Name: MAT01.cs
+Location: surrounded/Assets/Tests/MAT01.cs
 [Link to source code]()
 Overview:
 
-Name:
-Location:
+Name: MAT05.cs
+Location: surrounded/Assets/Tests/MAT05.cs
 [Link to source code]()
 Overview:
 
-Name:
-Location:
+Name: XPL00.cs
+Location: surrounded/Assets/Tests/XPL00.cs
 [Link to source code]()
 Overview:
 
-Name:
-Location:
+Name: RND01.cs
+Location: surrounded/Assets/Tests/RND01.cs
 [Link to source code]()
 Overview:
 
-Name:
-Location:
-[Link to source code]()
-Overview:
-
-Name:
-Location:
+Name: ENY01.cs
+Location: surrounded/Assets/Tests/ENY01.cs
 [Link to source code]()
 Overview:
 
