@@ -7,7 +7,7 @@ namespace Round {
     public class RoundTimer : MonoBehaviour
     {
         private float roundDuration = 55f;
-        private float timer;
+        public float timer;
         public int round = 1;
         public TMP_Text timerText;
         public TMP_Text roundText;
