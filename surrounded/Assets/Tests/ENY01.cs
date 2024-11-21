@@ -11,7 +11,8 @@ using Enemy;
 
 namespace Tests
 {
-    public class ENY01 
+    public class ENY01 : InputTestFixture
+
     {
         private Keyboard keyboard;
         private Mouse mouse;
@@ -25,8 +26,10 @@ namespace Tests
             mouse = InputSystem.AddDevice<Mouse>();
 
         }
+
         [UnityTest]
-        public IEnumerator ENY01WithEnumeratorPasses() {
+        public IEnumerator ENY01WithEnumeratorPasses() 
+        {
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             PlayerController pc = player.GetComponent<PlayerController>();
             Assert.That(player, !Is.Null);
