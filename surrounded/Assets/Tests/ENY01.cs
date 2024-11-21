@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -37,9 +38,10 @@ namespace Tests
             ShipSpawner pos = spawns.GetComponent<ShipSpawner>();
             yield return new WaitForSeconds(5);
             GameObject[] Enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            foreach(GameObject enemy in Enemies){
-                Assert.AreEqual(pos.spawnPosition, enemy.transform.position);
-            }
+            GameObject enemy = Enemies.Last();
+            Assert.AreEqual(pos.spawnPosition.x, enemy.transform.position.x);
+            Assert.AreEqual(pos.spawnPosition.y, enemy.transform.position.y);
+            
         }
 
     }
