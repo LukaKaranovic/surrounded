@@ -37,7 +37,7 @@ namespace Tests
             Release(keyboard.wKey);
             Vector3 finalpos = player.transform.position;
             
-            Assert.That(initpos, Is.Not.EqualTo(finalpos));
+            Assert.That(initpos.y, Is.LessThan(finalpos.y));
         }
     }
 }
