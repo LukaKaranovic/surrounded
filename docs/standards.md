@@ -44,6 +44,8 @@ List of phase documents:
 [Logical Design](logicaldesign.md): the logical design deliverable (phase 3)
 [Project Update](update.md): the project update deliverable for the most recent phase (currently phase 4)
 [Proof of Concept](proofconcept.md): the proof of concept deliverable (phase 4)
+[User Acceptance Test Process](uatesting.md): the user acceptance test process deliverable (phase 5)
+[Detailed Test Case Descriptions](testcases.md): the detailed user acceptance test case description appendix (phase 5)
 
 More to be added later.
 
@@ -79,16 +81,23 @@ All code must be finalised and ready for testing atleast two days before a submi
 
 ## <a name=”vc”></a>Version control standards and processes
 
-Version control will be set up on GitHub [here](https://github.com/wehaventdecided/surrounded) and will be maintained by Version Control Grandmaster Connor McDermid and apprentice Anmol Baidwan.
+Version control will be set up on GitHub [here](https://github.com/wehaventdecided/surrounded) and will be maintained by Version Control Lead Connor McDermid and Apprentice Anmol Baidwan.
 
 We will be using multiple branches to ensure proper version control. There will be individual branches for each feature to be worked on, which, once the feature is deemed complete, it will be pushed to a “testing” branch, where it will be tested for integration with the main code. Once everything works on the “testing” branch, it will be pushed to main.
 Only code that works properly will be allowed on the main branch (more on that below). 
 
-GitHub provides limited tools for access control within a specific repository to users who do not pay for higher tiers, which limits our ability to restrict pushes to specific branches. 
+Information on the testing branch:
+
+* The ‘Testing’ branch remains the total integration branch for all playtesting and beta build distribution.
+* GitHub Actions automated testing will be incorporated into the merge checks for the ‘testing’ and ‘main’ branches.
+* GitHub configurations, information, and scripts will be held in ‘.github’ in our project root.
+* GitHub Actions scripts will run all of the tests defined for the game on each pull request of the branch, checking if code changes alter the existing test results.
+
+Codebase changes being merged into main from testing must run through all of our user acceptance tests, located in the `surrounded/Assets/Tests` directory. They will also be tested on a Linux Virtual Machine as part of the GitHub Actions CI/CD, so when we merge additional code changes, they will be tested alongside their integration to make sure all old tests still pass, ensuring our game's features still work as intended.
 
 When applicable, branch protection will be applied (to main and testing) requiring code reviews by at least one other member before a merge can continue (described in coding standards and processes). 
 
-The branch protection process for merging feature branches to testing is as follows:
+**The branch protection process for merging feature branches to testing is as follows:**
 * The code writer creates a pull request when they are ready to commit changes. A comment is left on the pull-request describing the changes.
 * We have a GitHub bot linked to our repository in our team project discord server. When a pull request is made, it will send a message in the #github channel notifying others of this request.
 * The code writer must then request a review officially on GitHub, where a reviewer must accept this request and look at the changes.

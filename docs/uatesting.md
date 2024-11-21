@@ -1,4 +1,4 @@
-# CSCI 265 User Acceptance Testing Document (Phase 5)
+# CSCI 265 User Acceptance Test Process (Phase 5)
 
 ## Team name: We Haven’t Decided 
 
@@ -561,7 +561,7 @@ The Unity Test Framework will be configured to run the tests for the following p
 * Mac 64-bit
 * Linux 64-bit
 
-For our testing, our group members will use their laptops, giving us a variety of different operating systems to test on to ensure that all tests are passing across all of our required operating systems. They will also be tested on a Linux Virtual Machine as part of the GitHub Actions CI/CD, so when we merge additional code changes, they will be tested alongside their integration to make sure all old tests still pass, ensuring our game still works as intended.
+For our testing, our group members will use their laptops, giving us a variety of different operating systems to test on to ensure that all tests are passing across all of our required operating systems. They will also be tested on a Linux Virtual Machine as part of the GitHub Actions CI/CD, so when we merge additional code changes, they will be tested alongside their integration to make sure all old tests still pass, ensuring our game's features still work as intended.
 
 Our tests are 100% behaviour-driven and will not be using any “user action scripts”, however, they will simulate said ‘user action scripts’ in an automated fashion. Unity’s Test Framework allows us to pre-define user actions and the expected results to check if features are behaving as intended. This removes the need for us to manually test features every single time, allowing all tests to be done automatically (for CI/CD).
 
