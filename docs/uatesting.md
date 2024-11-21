@@ -158,7 +158,7 @@ Description: Checks that the WASD keys make the player ship move, and that the p
 
 ID: PCC01
 Name: Player Aim and Weapon 
-Description:Checks that the player ship looks towards the mouse cursor and that left click makes you fire + holding left click makes you fire. 
+Description: Checks that the player ship looks towards the mouse cursor and that left click makes you fire + holding left click makes you fire. 
 
 ID: PCC02
 Name: Enemy Take Damage
@@ -592,43 +592,43 @@ Last updated November 21, 2024.
 
 Name: PCC00.cs
 Location: surrounded/Assets/Tests/PCC00.cs
-[Link to source code](../surrounded/Assets/Scripts/Bullet.cs)
-Overview:
+[Link to source code](../surrounded/Assets/Tests/PCC00.cs)
+Overview: Checks that the WASD keys make the player ship move, and that the player has velocity.
 
 Name: PCC01.cs
 Location: surrounded/Assets/Tests/PCC01.cs
-[Link to source code]()
-Overview:
+[Link to source code](../surrounded/Assets/Tests/PCC01.cs)
+Overview: Checks that the player ship looks towards the mouse cursor and that left click makes you fire + holding left click makes you fire. 
 
 Name: PCC03.cs
 Location: surrounded/Assets/Tests/PCC03.cs
-[Link to source code]()
-Overview:
+[Link to source code](../surrounded/Assets/Tests/PCC03.cs)
+Overview: Checks that the player takes appropriate damage from an enemy bullet.
 
 Name: MAT01.cs
 Location: surrounded/Assets/Tests/MAT01.cs
-[Link to source code]()
-Overview:
+[Link to source code](../surrounded/Assets/Tests/MAT01.cs)
+Overview: Checks that the on-screen countdown for the comet appears when the player is out of bounds, and that the comet appears and chases the player when the timer reaches 0.
 
 Name: MAT05.cs
 Location: surrounded/Assets/Tests/MAT05.cs
-[Link to source code]()
-Overview:
+[Link to source code](../surrounded/Assets/Tests/MAT05.cs)
+Overview: Check if the camera tracks the player’s movement.
 
 Name: XPL00.cs
 Location: surrounded/Assets/Tests/XPL00.cs
-[Link to source code]()
-Overview:
+[Link to source code](../surrounded/Assets/Tests/XPL00.cs)
+Overview: Checks that the player gains the correct amount of XP when killing an enemy.
 
 Name: RND01.cs
 Location: surrounded/Assets/Tests/RND01.cs
-[Link to source code]()
-Overview:
+[Link to source code](../surrounded/Assets/Tests/RND01.cs)
+Overview: Make sure enemies spawn when the timer reaches 50 seconds, and every 5 seconds after that. Also checks that 90% of credits for the round are remaining after the first spawn, and 10% less after each spawn.
 
 Name: ENY01.cs
 Location: surrounded/Assets/Tests/ENY01.cs
-[Link to source code]()
-Overview:
+[Link to source code](../surrounded/Assets/Tests/ENY01.cs)
+Overview: Checks that enemies don’t spawn on-screen.
 
 ### <a name="vc"></a>3.3 Version Control and Branch Structure 
 
