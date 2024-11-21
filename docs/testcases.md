@@ -8,7 +8,7 @@ Overview/Purpose:
 This test is intended to check whether player movement has been properly implemented and x  and y coordinates of player ships vectors are being updated appropriately. The purpose of this test is to check if the player ship is running for gameplay functionality to work. 
 Test Approach: 
 This test will be performed by creating a new scene in which the player ship is spawned at (0,0) of our map and if the player ship is moving and we can observe changes then it passes the test. This test really only needs one person to check if the player's ship movement is implemented properly and vectors are shifting when all four keys are pressed. When this check has passed we also want to make sure it's being updated with our speed stats as well as soon as our implementation is merged. 
-[Link to where it is in requirements] (here)
+[Link to where it is in requirements](./requirements.md#player)
 Amount of Testers: Currently, we will have group members review the test case implementation via Discord. No testers are required to run the test as it is automated.
 Scripts/Arguments: The script for the player movement can be found in the player controller module. For our test case we have a PCC00 script that exists in a tests folder.
 Expected Results/Output: Player ship will move across the map and have its x and y updated accordingly.
