@@ -11,26 +11,35 @@
 ## Table of Contents
 
 1. [Known Issues](#issues)
+
 2. [Test Plan](#tplan)
+
     2.1 [Testing Overview](#toverview)
+
     2.2 [Key Testing Challenges](#tchallenges)
+
     2.3 [Testing Timeline](#ttimeline)
+
     2.4 [Test Process](#tprocess)
+
     2.5 [Test Cases Summary and Organization](#tcases)
+
     2.6 [Test Case List](#tlist)
+
 3. [Test Infrastructure](#infra)
+
     3.1 [Software Tools and Environmen](#tools)
+
     3.2 [Executables](#exec)
+
     3.3 [Version Control and Branch Structure](#vc)
+
     3.4 [Directory, File Structure, and Content](#content)
+
     3.5 [Independent Subsystems and External Resources](#external)
+
 4. [Appendix: Detailed Test Case Descriptions](#appendix)
 
-The document will have four key sections:
-known issues,
-the test plan to be followed,
-the test infrastructure to be used,
-detailed descriptions of all the individual test cases.
 ## <a name="issues"></a>1. Known issues 
 
 This is likely to be a large and highly detailed document, describing many scripts, files, and other resources on the team repo (and possibly elsewhere). It is likely that the team will not have the time to fully complete all the various repo-side test content, so the known issues section should clearly and precisely identify what is incomplete (along with any other known errors/omissions in the document).
