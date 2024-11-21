@@ -21,6 +21,7 @@ Almost nothing from past documents has changed other than the implementation of 
 ### Changes and updates to the product requirements (requirements.md)
 * Organized the 'Map and Terrain' subsection into 3 sections to improve readability.
 * Replaced world boundary section that talks about asteroid belt to talk about our new would boundary system with the comet.
+* Added a blurb about a portal feature we added that transitions you to the boss rounds.
 
 ### Changes and updates to the logical design (logicaldesign.md)
 No changes or updates were made to the logical design this phase.

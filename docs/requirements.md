@@ -219,8 +219,10 @@ The game will consist of moving through 2D space and piloting a base ship throug
 * At the start of a new round, the player’s health will be replenished to full and the player will spawn in at the center of the map.
 
 #### 5.4.1: Boss Rounds
-* Every 10 rounds, a boss will spawn instead of enemies. 
+* Every 10 rounds, a boss round will occur, meaning a boss will spawn instead of enemies. 
 	* The function for spawning enemies will not be called.
+* A portal (similar to a black hole), will spawn in the center of the map and will suck the player in. 
+* When the player enters the portal, the screen will fade and the game will transition into the 'boss round' scene. The following will happen in a boss round:
 * A boss health bar and name will appear underneath the player health bar in the top left.
 * There is no timer in a boss round and the player MUST defeat the boss (by depleting its health to 0) to progress.
 * The credit amount will still update, so the rounds after the boss rounds have the proper amount of credits (credits won’t be used on boss rounds though).
