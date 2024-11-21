@@ -36,8 +36,8 @@ namespace Player
         private Action onTimeOut;
         public GameObject rouletteBall;
 
-        Vector2 moveDirection;
-        Vector2 mousePosition;
+        public Vector2 moveDirection;
+        public Vector2 mousePosition;
         
         Keyboard keyboard;
 

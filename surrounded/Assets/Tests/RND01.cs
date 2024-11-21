@@ -42,6 +42,7 @@ namespace Tests
             yield return new WaitForSeconds(5);
             Enemies = GameObject.FindGameObjectsWithTag("Enemy");
             Assert.AreEqual(Enemies.Length, 3);
+            Time.timeScale = 1;
         }
     }
 }
