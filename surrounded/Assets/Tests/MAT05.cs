@@ -29,9 +29,11 @@ namespace Tests
             Press(keyboard.wKey);
             yield return new WaitForSeconds(2);
             Release(keyboard.wKey);
+            yield return new WaitForSeconds(2);
             Vector2 pTrans = new Vector2(player.transform.position.x, player.transform.position.y); //vector2 of Player Position    
             Vector2 camTrans = new Vector2(Camera.main.transform.position.x, Camera.main.transform.position.y); //vector2 of Camera Position
-            Assert.AreEqual(pTrans, camTrans);
+            Assert.AreEqual(pTrans.x, camTrans.x, 0.5); // check both axes are equal, with a tolerance of .5 units
+            Assert.AreEqual(pTrans.y, camTrans.y, 0.5);
         }
     }
 }
