@@ -42,7 +42,10 @@
 
 ## <a name="issues"></a>1. Known issues 
 
-This is likely to be a large and highly detailed document, describing many scripts, files, and other resources on the team repo (and possibly elsewhere). It is likely that the team will not have the time to fully complete all the various repo-side test content, so the known issues section should clearly and precisely identify what is incomplete (along with any other known errors/omissions in the document).
+* Many detailed test case descriptions in the appendix haven't been done due to time restraints.
+* Many test scripts haven't been done due to time restraints, including some test cases that have detailed descriptions.
+* Some features in requirements could possibly not be covered in our current test cases.
+* We aren't sure yet, but we may not be able to successfully check all of our product's features with our current testing method, as the testing environment is pretty restrictive.
 
 ## <a name="tplan"></a>2. Test Plan
 
