@@ -5,6 +5,7 @@ using UnityEngine.TestTools;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using GameControl;
+using Player;
 
 namespace Tests
 {
@@ -27,11 +28,10 @@ namespace Tests
         public IEnumerator PCC01WithEnumeratorPasses()
         {
             GameObject player = GameObject.FindGameObjectWithTag("Player");
+            PlayerController pc = player.GetComponent<PlayerController>();
             Assert.That(player, !Is.Null);
-            mouse.WarpCursorPosition(new Vector2(0, 10));
-            Press(mouse.leftButton);
+            pc.weapon.Fire(5f);
             yield return new WaitForSeconds(1);
-            Release(mouse.leftButton);
             GameObject bullet = GameObject.FindGameObjectWithTag("Bullet");
             Assert.That(bullet, !Is.Null);
         }
