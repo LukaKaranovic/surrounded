@@ -46,6 +46,8 @@
 * Many test scripts haven't been done due to time restraints, including some test cases that have detailed descriptions.
 * Some features in requirements could possibly not be covered in our current test cases.
 * We aren't sure yet, but we may not be able to successfully check all of our product's features with our current testing method, as the testing environment is pretty restrictive.
+* Haven't implemented the XML file and test log with Github Actions yet.
+* Haven't implemeneted automated testing and CI/CD stuff just yet.
 
 ## <a name="tplan"></a>2. Test Plan
 
