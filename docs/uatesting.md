@@ -46,8 +46,9 @@
 * Many test scripts haven't been done due to time restraints, including some test cases that have detailed descriptions.
 * Some features in requirements could possibly not be covered in our current test cases.
 * We aren't sure yet, but we may not be able to successfully check all of our product's features with our current testing method, as the testing environment is pretty restrictive.
-* Haven't implemented the XML file and test log with Github Actions yet.
+* Haven't implemented the XML file and test log with Github Action*s yet.
 * Haven't implemeneted automated testing and CI/CD stuff just yet.
+* We think the test log may not be enough for the end user to know if the product is working or not, so we may add user action scripts so the user can recreate the tests themself.
 
 ## <a name="tplan"></a>2. Test Plan
 
@@ -141,6 +142,7 @@ To run a test case, open Unity and go to Window > General > Test Runner in the o
 To check that the expected results match the actual results, we compare the actual results to the predefined results. If the behaviour matches, the test has passed. If the behaviour doesn’t match, the test has failed. If all of the tests are run, just one test failure causes the whole test run to be a failure.
 
 Our test results will then be output in a machine-readable XML file which can be read by Unity and GitHub Actions giving us a log of how the tests were run and if they either passed or failed.
+* This will be the user's way of seeing if the tests work or not.
 
 To ensure that our test process adheres to the version control process, all test scripts must be added to the testing branch immediately after being reviewed and verified to work properly.
 

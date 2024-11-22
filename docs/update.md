@@ -24,4 +24,4 @@ Almost nothing from past documents has changed other than the implementation of 
 * Added a blurb about a portal feature we added that transitions you to the boss rounds.
 
 ### Changes and updates to the logical design (logicaldesign.md)
-No changes or updates were made to the logical design this phase.
+* Added a line about how we make different bullet projectile game objects for piercing bullets, as before it said they were the same object.
