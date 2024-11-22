@@ -4,10 +4,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 using UnityEngine.InputSystem;
+using Player;
 
 namespace Tests
 {
-    public class PCC00 : InputTestFixture
+    public class MAT05 : InputTestFixture
     {
         private Keyboard keyboard;
         
@@ -19,25 +20,20 @@ namespace Tests
             var mouse = InputSystem.AddDevice<Mouse>(); // if this is removed, things break
         }
 
-        [Test]
-        public void TestPlayerInstantiation()
-        {
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            Assert.That(player, !Is.Null);
-        }
-
-        // PCC00: Player Movement Test
+        //MAT05
         [UnityTest]
-        public IEnumerator PCC00Passes()
+        public IEnumerator MAT05WithEnumeratorPasses()
         {
             GameObject player = GameObject.FindGameObjectWithTag("Player");
-            Vector3 initpos = player.transform.position;
+            PlayerController pc = player.GetComponent<PlayerController>();
             Press(keyboard.wKey);
             yield return new WaitForSeconds(2);
             Release(keyboard.wKey);
-            Vector3 finalpos = player.transform.position;
-            
-            Assert.That(initpos.y, Is.LessThan(finalpos.y));
+            yield return new WaitForSeconds(2);
+            Vector2 pTrans = new Vector2(player.transform.position.x, player.transform.position.y); //vector2 of Player Position    
+            Vector2 camTrans = new Vector2(Camera.main.transform.position.x, Camera.main.transform.position.y); //vector2 of Camera Position
+            Assert.AreEqual(pTrans.x, camTrans.x, 0.5); // check both axes are equal, with a tolerance of .5 units
+            Assert.AreEqual(pTrans.y, camTrans.y, 0.5);
         }
     }
 }

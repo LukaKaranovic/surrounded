@@ -7,6 +7,7 @@ using UIX;
 using Unity.VisualScripting;
 using Object = UnityEngine.Object;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
+using UnityEngine.InputSystem;
 
 namespace Player
 {
@@ -35,11 +36,17 @@ namespace Player
         private Action onTimeOut;
         public GameObject rouletteBall;
 
-        Vector2 moveDirection;
-        Vector2 mousePosition;
+        public Vector2 moveDirection;
+        public Vector2 mousePosition;
+        
+        Keyboard keyboard;
+
+        private InputAction moveAction;
 
         void Start()
         {
+            keyboard = Keyboard.current;
+            moveAction = InputSystem.actions.FindAction("Move");
             stats.forceFieldActivated = stats.forcefieldCount > 0;
             LoadRoulette();
         }
@@ -56,8 +63,10 @@ namespace Player
                 pauseMenu.Pause();
             }
 
-            float moveX = Input.GetAxisRaw("Horizontal");
-            float moveY = Input.GetAxisRaw("Vertical");
+            //float moveX = Input.GetAxisRaw("Horizontal");
+            //float moveY = Input.GetAxisRaw("Vertical");
+            Vector2 moveValue = moveAction.ReadValue<Vector2>();
+            
 
             if (Input.GetMouseButton(0))
             {
@@ -73,7 +82,7 @@ namespace Player
                 }
             }
 
-            moveDirection = new Vector2(moveX, moveY).normalized;
+            moveDirection = moveValue.normalized;
             mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             stats.score = stats.XP;
             if (stats.XP >= levelReq)

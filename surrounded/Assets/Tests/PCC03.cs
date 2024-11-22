@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 namespace Tests
 {
-    public class DamageTest
+    public class PCC03
     {
 
         [SetUp]
@@ -19,7 +19,7 @@ namespace Tests
         // A UnityTest behaves like a coroutine in PlayMode
         // and allows you to yield null to skip a frame in EditMode
         [UnityEngine.TestTools.UnityTest]
-        public System.Collections.IEnumerator DamageTestWithEnumeratorPasses()
+        public System.Collections.IEnumerator PCC03TestWithEnumeratorPasses()
         {
              // only necessary for play mode tests
             /*GameObject newcam = new GameObject("newMainCam");
