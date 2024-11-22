@@ -151,15 +151,7 @@ namespace Enemy
                 if (health <= 0 && p != null)
                 {
                     Debug.Log("Enemy destroyed!");
-                    if (!destroyedByAsteroid)
-                    {
-                        p.stats.XP += XPdropped;
-                    }
-                    else
-                    {
-                        destroyedByAsteroid = false;
-                    }
-
+                    p.stats.XP += XPdropped;
                     Destroy(gameObject);
                 }
             }
