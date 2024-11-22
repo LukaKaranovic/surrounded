@@ -47,7 +47,7 @@ namespace Tests
                     Vector2 aimDirection = e.transform.position - player.transform.position;
                     float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
                     player.transform.rotation = Quaternion.Euler(0, 0, aimAngle);
-                    pc.weapon.Fire(5f);
+                    pc.weapon.Fire(50f);
                     yield return new WaitForSeconds(0.2f);
                 }
             }

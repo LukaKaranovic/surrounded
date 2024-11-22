@@ -2,13 +2,12 @@ using UnityEngine;
 using Player;
 using GameControl;
 using NUnit.Framework;
-using TMPro;
-using UnityEditor.SceneManagement;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 namespace Tests
 {
-    public class PCC03
+    public class PCC03 : InputTestFixture
     {
 
         [SetUp]
@@ -21,12 +20,6 @@ namespace Tests
         [UnityEngine.TestTools.UnityTest]
         public System.Collections.IEnumerator PCC03TestWithEnumeratorPasses()
         {
-             // only necessary for play mode tests
-            /*GameObject newcam = new GameObject("newMainCam");
-            newcam.AddComponent<Camera>();
-            newcam.tag = "MainCamera";
-            PlayerStats s = ScriptableObject.CreateInstance<PlayerStats>();
-            s.ResetStats(); // give player a Stats object*/
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             Assert.That(player, !Is.Null);
             GameObject bullet = GameObject.Instantiate(Resources.Load("Prefab/PiercingBullet"),

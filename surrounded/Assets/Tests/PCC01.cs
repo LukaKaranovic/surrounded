@@ -11,15 +11,11 @@ namespace Tests
 {
     public class PCC01 : InputTestFixture
     {
-        private Keyboard keyboard;
-        private Mouse mouse;
         
         [SetUp]
         public new void Setup()
         {
             SceneManager.LoadScene("Scenes/Game"); // load game scene
-            keyboard = InputSystem.AddDevice<Keyboard>();
-            mouse = InputSystem.AddDevice<Mouse>();
         }
 
         // A UnityTest behaves like a coroutine in PlayMode
@@ -35,5 +31,13 @@ namespace Tests
             GameObject bullet = GameObject.FindGameObjectWithTag("Bullet");
             Assert.That(bullet, !Is.Null);
         }
+
+        [TearDown]
+        public override void TearDown()
+        {
+            base.TearDown();
+        }
     }
+    
+        
 }
