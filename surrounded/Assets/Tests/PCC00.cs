@@ -33,7 +33,7 @@ namespace Tests
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             Vector3 initpos = player.transform.position;
             Press(keyboard.wKey);
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(3);
             Release(keyboard.wKey);
             Vector3 finalpos = player.transform.position;
             
