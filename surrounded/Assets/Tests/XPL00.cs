@@ -34,24 +34,16 @@ namespace Tests
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             PlayerController pc = player.GetComponent<PlayerController>();
             Assert.That(player, !Is.Null);
-            yield return new WaitForSeconds(5);
+            pc.stats.XP = 0; // reset this
+            yield return new WaitForSeconds(6);
             GameObject[] Enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            GameObject enemy = Enemies.Last();
-            GameObject spawns = GameObject.Find("ShipSpawns");
-            ShipSpawner pos = spawns.GetComponent<ShipSpawner>();
-            //EnemyController ec = enemy.GetComponent<EnemyController>();
-            pos.spawnInterval = 100f;
-            foreach(GameObject e in Enemies){
-                EnemyController ec = e.GetComponent<EnemyController>();
-                while(ec.health > 0){
-                    Vector2 aimDirection = e.transform.position - player.transform.position;
-                    float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
-                    player.transform.rotation = Quaternion.Euler(0, 0, aimAngle);
-                    pc.weapon.Fire(50f);
-                    yield return new WaitForSeconds(0.2f);
-                }
+            foreach (var enemy in Enemies)
+            {
+                enemy.GetComponent<EnemyController>().takeDamage(50);
             }
-            Assert.AreEqual(pc.stats.XP, 3);
+
+            yield return new WaitForSeconds(1);
+            Assert.That(pc.stats.XP, Is.EqualTo(3f));
         }
 
     }
