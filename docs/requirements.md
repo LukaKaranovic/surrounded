@@ -163,20 +163,28 @@ The game will consist of moving through 2D space and piloting a base ship throug
 * Player and enemy stats will increase by a flat amount throughout the game, details on this are in the XP and Levelling System and Enemy Design sections.
 
 ### <a name="map"></a>5.2: Map and Terrain
+
+#### 5.2.1 World Boundary:
 * The map will be finite and not randomly generated, having floating asteroids that spawn in with the ships as the player is fighting for their life.
-* The background of the map has an assortment of stars and a nebulous mist is layered above it. The nebula will change colours each round (with a few preset options) to give the player a more interesting visual experience.
-* There will be an asteroid belt surrounding the edge of the map preventing the player from going out of bounds. The player will be killed on impact with the asteroid belt.
+* The map will be 8 times the screen width and 8 times the screen height (assuming the user is using a 1920x1080 resolution).
+* If a player leaves this 8x8 screen length map, they have exited the world boundary.
+* Upon exiting the world boundary, the player will be presented with giant red text in the middle of the screen stating "WARNING: Out of Bounds. 5 seconds until comet deployment". And a 5 second timer will begin to countdown to 0.
+* When the timer reaches 0, a heatseeking comet object will be instantiated that will chase the player, eliminating them in one devastating blow. The comet moves slightly faster than the player's current speed (1.1 * player speed), meaning the player cannot outrun the comet once it spawns.
+
+#### 5.2.2 Asteroids:
 * There will be floating asteroids throughout the map, typically in clusters of 3-5.
 	* There will be a maximum of 16 clusters of asteroids on the map at once. Every time enemies spawn (every 10 seconds), asteroids will spawn randomly throughout the map until there are 16 clusters.
 	* The asteroids will move at a slow rate, probably at half of the player’s base speed at level 1 (speed is 5).
-	* The asteroids will move in a predetermined, straight direction until they leave the map, which they will killed by the asteroid belt at the world boundary.
+	* The asteroids will move in a predetermined, straight direction until they leave the screen, in which they will despawn when off screen.
 	* The asteroids will have collision boxes meaning the player, enemies, and projectiles cannot pass through them.
 	* Running into them will harm the player and enemies, damaging them for 50 health. Be careful!
-	* If something collides with an asteroid, the individual asteroid will be destroyed. \
+	* If something collides with an asteroid, the individual asteroid will be destroyed. 
 	* Asteroids will always take 3 hits for the player to destroy as their health will be 3 * (player damage).
 		* This is so they aren't too easy to destroy whilst in combat, allowing them to pose a threat.
+
+#### 5.2.3 Other Information
+* The background of the map has an assortment of stars and a nebulous mist is layered above it. The nebula will change colours each round (with a few preset options) to give the player a more interesting visual experience.
 * The camera that is following the player will be about 1/64 of the size of the entire map, this camera will be centred onto the player at all times (except boss rounds).
-	* In other words, the map will be 8 times the screen width and 8 times the screen height (assuming the user is using a 1920x1080 resolution).
 * The players will be able to traverse all the map freely, as long as they don’t run into any obstacles, with enemies spawning just outside of the player camera randomly.
 
 ### <a name="xp"></a>5.3: XP and Levelling System
@@ -193,7 +201,7 @@ The game will consist of moving through 2D space and piloting a base ship throug
 * Each round will have 5 seconds of grace time at the start to let the player get ready (part of the 55 seconds).
 * Each round, the game will be given an amount of total credits for that round.
 * The round’s total credit amount will start at 30 and be increased by 10% from the past round. The round credit amount formula will be 30 * (1.1)^(x-1) where x is the current round number.
-* Every 5 seconds (starting at 100 seconds), the game will get 10% of that round’s total credits to spawn enemies.
+* Every 5 seconds (starting at 50 seconds), the game will get 10% of that round’s total credits to spawn enemies.
 	* The reason for this is to not let higher level enemies spawn in lower rounds.
 	* At the same time, the game will spawn asteroid clusters until there are 16 of them on the map
 		* If there are already 16, will not spawn any.
@@ -211,8 +219,10 @@ The game will consist of moving through 2D space and piloting a base ship throug
 * At the start of a new round, the player’s health will be replenished to full and the player will spawn in at the center of the map.
 
 #### 5.4.1: Boss Rounds
-* Every 10 rounds, a boss will spawn instead of enemies. 
+* Every 10 rounds, a boss round will occur, meaning a boss will spawn instead of enemies. 
 	* The function for spawning enemies will not be called.
+* A portal (similar to a black hole), will spawn in the center of the map and will suck the player in. 
+* When the player enters the portal, the screen will fade and the game will transition into the 'boss round' scene. The following will happen in a boss round:
 * A boss health bar and name will appear underneath the player health bar in the top left.
 * There is no timer in a boss round and the player MUST defeat the boss (by depleting its health to 0) to progress.
 * The credit amount will still update, so the rounds after the boss rounds have the proper amount of credits (credits won’t be used on boss rounds though).

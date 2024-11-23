@@ -1,4 +1,4 @@
-# CSCI 265 Design Document (Phase 4)
+# CSCI 265 Proof of Concept (Phase 4)
 
 ## Team name: We Haven’t Decided 
 

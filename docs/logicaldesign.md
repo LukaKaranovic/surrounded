@@ -311,7 +311,7 @@ The input process is for user commands such as keyboard, mouse, esc, etc. It wil
 The output process will be the main UI which feature main HUD elements and menus, different processes or actions for output in the local display include:
 
 * Going from menu to menu (through main menu and pause menu).
-* Adjustments to projectiles based on upgrades on player.
+* Adjustments to projectiles based on upgrades on player (in the case of piercing rounds upgrade, a new projectile object is created that can pierce through enemies/asteroids).
 * Adjustments to enemy and player sprites (briefly) when taking damage.
 * Adjustments to position of ship on the map.
 * Adjustments to player health bar.
