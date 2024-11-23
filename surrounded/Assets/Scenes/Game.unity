@@ -2994,6 +2994,7 @@ MonoBehaviour:
   targetPoint: {fileID: 816382866}
   Timer: {fileID: 1289865444}
   player: {fileID: 816382867}
+  spawnPosition: {x: 0, y: 0}
 --- !u!4 &436016452
 Transform:
   m_ObjectHideFlags: 0
@@ -4246,7 +4247,7 @@ MonoBehaviour:
   gameOverScreen: {fileID: 1085984028738968807}
   pauseMenu: {fileID: 1009200859}
   stats: {fileID: 11400000, guid: 7c75433bcc845c144b96dfbdbb91ab24, type: 2}
-  health: 20000
+  health: 50
   levelReq: 30
   sprite: {fileID: 816382865}
   spritefield: {fileID: 927477663}
@@ -6021,7 +6022,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f8c193061344574ea6056667198472c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  round: 10
+  timer: 0
+  round: 1
   timerText: {fileID: 1289865446}
   roundText: {fileID: 1672225154}
   gameOverScreen: {fileID: 1085984028738968807}
@@ -7158,6 +7160,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 433040385}
   - {fileID: 1289865445}
   - {fileID: 1672225152}
   - {fileID: 609890261}
@@ -7169,7 +7172,6 @@ RectTransform:
   - {fileID: 227461968}
   - {fileID: 6507252822543032013}
   - {fileID: 132278364}
-  - {fileID: 433040385}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

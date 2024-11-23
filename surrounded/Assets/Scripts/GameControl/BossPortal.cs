@@ -1,37 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
+using Player;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class BossPortal : MonoBehaviour
+namespace GameControl
 {
-    public float rotationSpeed;
-    private Animator crossfade;
-    private float transitionTime = 3f;
-    void Start()
+    public class BossPortal : MonoBehaviour
     {
-        crossfade = GameObject.FindGameObjectWithTag("Crossfade").GetComponent<Animator>();
-    }
+        public float rotationSpeed;
+        private Animator crossfade;
+        private float transitionTime = 3f;
 
-    // Update is called once per frame
-    void Update()
-    {
-        transform.Rotate(0, 0, rotationSpeed);
-    }
-
-    private void OnTriggerEnter2D(Collider2D collider)
-    {
-        if (collider.CompareTag("Player"))
+        void Start()
         {
-            collider.GetComponent<PlayerController>().enabled = false; //Disable Player Controller on enter
-            StartCoroutine(LoadBossScene());
+            crossfade = GameObject.FindGameObjectWithTag("Crossfade").GetComponent<Animator>();
         }
-    }
 
-    IEnumerator LoadBossScene()
-    {
-        crossfade.SetTrigger("PortalEnter");
-        yield return new WaitForSeconds(transitionTime);
-        SceneManager.LoadScene("Boss");
+        // Update is called once per frame
+        void Update()
+        {
+            transform.Rotate(0, 0, rotationSpeed);
+        }
+
+        private void OnTriggerEnter2D(Collider2D collider)
+        {
+            if (collider.CompareTag("Player"))
+            {
+                collider.GetComponent<PlayerController>().enabled = false; //Disable Player Controller on enter
+                StartCoroutine(LoadBossScene());
+            }
+        }
+
+        IEnumerator LoadBossScene()
+        {
+            crossfade.SetTrigger("PortalEnter");
+            yield return new WaitForSeconds(transitionTime);
+            SceneManager.LoadScene("Boss");
+        }
     }
 }
