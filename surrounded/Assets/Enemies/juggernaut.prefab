@@ -161,7 +161,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 100
-  m_LinearDrag: 0
+  m_LinearDrag: 0.5
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -187,16 +187,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 607a5e184403246678a050ba7ec45cad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 6
+  dmgInc: 4
+  spdInc: 2
+  hpInc: 6
+  maxSpeed: 6
   fireRate: 2
   health: 60
-  bulletPrefab: {fileID: 301942462713169048, guid: 1a2c216a236ea404a9fc946332f0b53f, type: 3}
+  bulletPrefab: {fileID: 301942462713169048, guid: 05e1fc6fa8ef2244cab45285b85e49a9, type: 3}
   firePoint: {fileID: 2713317750801945972}
-  fireForce: 20
+  fireForce: 10
   shootingRange: 10
+  damage: 0
   targetInnerRadius: 7
   targetOuterRadius: 10
   sprite: {fileID: 2084447321122650451}
+  XPdropped: 4
+  destroyedByAsteroid: 0
+  avoidanceRadius: 6
 --- !u!1 &9124661563309619329
 GameObject:
   m_ObjectHideFlags: 0
@@ -222,7 +229,7 @@ Transform:
   m_GameObject: {fileID: 9124661563309619329}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.025905069, w: 0.9996644}
-  m_LocalPosition: {x: 0.008, y: 0.323, z: 0}
+  m_LocalPosition: {x: 0, y: 0.323, z: 0}
   m_LocalScale: {x: 0.025395716, y: 0.055888586, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
