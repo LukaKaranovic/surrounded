@@ -10,5 +10,7 @@ This repository is administered by Connor McDermid. He can be reached on the pro
 Build? ![Build](https://github.com/wehaventdecided/surrounded/actions/workflows/build.yml/badge.svg)  
 Tests? ![Tests](https://github.com/wehaventdecided/surrounded/actions/workflows/test.yml/badge.svg)
 
+Releases and downloads can be found [here](https://github.com/wehaventdecided/surrounded/releases/)
+
 Happy coding!
 
