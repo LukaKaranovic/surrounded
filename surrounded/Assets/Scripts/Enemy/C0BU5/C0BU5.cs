@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using static Cinemachine.CinemachineOrbitalTransposer;
 using Player;
+using GameControl;
 
 namespace Enemy.C0BU5
 {
@@ -11,6 +12,7 @@ namespace Enemy.C0BU5
         public Transform neutralLeft;
         public Transform raisedRight;
         public Transform raisedLeft;
+        private SpriteRenderer sprite;
 
         public GameObject right;
         public GameObject left;
@@ -22,18 +24,22 @@ namespace Enemy.C0BU5
         private Rigidbody2D rb;
         private Vector3 hoverOffset;
         private float maxSpeed;
+        private float health = 5000;
 
-        void Start()
+        public void Start()
         {
             player = GameObject.FindGameObjectWithTag("Player");
             maxSpeed = player.GetComponent<PlayerController>().stats.moveSpeed / 2;
             rightHand = right.GetComponent<CobusHand>();
             leftHand = left.GetComponent<CobusHand>();
+            sprite = GetComponent<SpriteRenderer>();
+            rightHand.cobus = this;
+            leftHand.cobus = this;
             SetHandsNeutral();
             StartCoroutine(Phase1());
         }
 
-        void FixedUpdate()
+        public void FixedUpdate()
         {
             HoverPlayer();
         }
@@ -58,6 +64,12 @@ namespace Enemy.C0BU5
             transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
         }
 
+        public void takeDamage(float damage)
+        {
+            health -= damage;
+            Debug.Log("Enemy health: " + health); // debug message to track health
+        }
+
         IEnumerator Phase1()
         {
             //placehholder for now -- flaps hands from neutral to raised
@@ -71,5 +83,21 @@ namespace Enemy.C0BU5
                 yield return new WaitForSeconds(3);
             }
         }
+
+        public void OnTriggerEnter2D(Collider2D other){
+            if(other.CompareTag("Bullet")){
+                takeDamage(other.GetComponent<Bullet>().damage);
+                StartCoroutine(FlashRed());
+                Destroy(other.gameObject);
+            }
+        }
+
+        IEnumerator FlashRed()
+        {
+            sprite.color = Color.red;
+            yield return new WaitForSeconds(0.1f);
+            sprite.color = Color.white;
+        }
+
     }
 }
