@@ -36,9 +36,10 @@ namespace Enemy {
             if (other.gameObject.CompareTag("Player"))
             {
                 PlayerController player = other.gameObject.GetComponent<PlayerController>();
+                FindObjectOfType<AudioManager>().Play("Explosion", 0.1f);
+                FindObjectOfType<AudioManager>().Play("Metal", 0.1f);
                 player.KillPlayer();
             }
-
             if (other.gameObject.CompareTag("Enemy"))
             {
                 // get enemy

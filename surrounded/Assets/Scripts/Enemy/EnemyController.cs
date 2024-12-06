@@ -118,7 +118,6 @@ namespace Enemy
                                Vector3.Normalize(transform.position - collider.transform.position);
                 }
             }
-
             heading = heading.normalized;
             return heading;
         }
@@ -152,6 +151,7 @@ namespace Enemy
                 {
                     Debug.Log("Enemy destroyed!");
                     p.stats.XP += XPdropped;
+                    FindObjectOfType<AudioManager>().Play("Enemy Death", 1.0f);
                     Destroy(gameObject);
                 }
             }
