@@ -26,9 +26,9 @@ namespace Enemy {
             while (i <= 1)
             {
                 i = i + 0.01;
-                hp += 10;
+                hp += 50;
                 bossBar.fillAmount = (float)i / 1;
-                bossText.text = "C0B-U5: " + hp + "/1000";
+                bossText.text = "C0B-U5: " + hp + "/5000";
                 yield return new WaitForSeconds(.05f);
             }
         }

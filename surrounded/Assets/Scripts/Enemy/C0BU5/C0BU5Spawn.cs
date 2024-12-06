@@ -19,7 +19,7 @@ namespace Enemy.C0BU5
 
         IEnumerator C0BU5Spawn()
         {
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(5.5f);
             Vector3 spawnPosition = new Vector3(0f, 4f, 0f);
             GameObject COBUS = Instantiate(C0BU5, spawnPosition, Quaternion.identity);
             yield break;
