@@ -6,7 +6,7 @@
 
 ## Members and contact email
 
- - Connor McDermid, mcdermidconnor@outlook.com *main contact*
+ - Connor McDermid, mcdermidc@stumail.viu.ca *main contact*
  - Luka Karanovic, lkaranovic88@gmail.com
  - Quetzal Torres, quetzalt05@gmail.com 
  - Anmol Baidwan, anmolbaidwan@gmail.com “do not contact”
@@ -47,7 +47,7 @@ Each of us as individuals have experience playing different genres of video game
 From a team perspective, we want to ensure an environment where all of us can meet deadlines yet also have a good amount of fun with the challenges that may come our way, these being:
 
 Weekly check-ins with each other’s progression and potential problems
-Being able to communicate technical difficulties with each and every programmer’
+Being able to communicate technical difficulties with each and every programmer
 Daily communication within the discord server to take on specific tasks or to discuss ideas
 Reviewing documentation and code base regularly to ensure quality
 Creating a fun environment which doesn’t exclude members and is also effective

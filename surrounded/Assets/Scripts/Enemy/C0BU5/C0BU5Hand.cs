@@ -2,47 +2,92 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using Player;
+using GameControl;
 
-public class CobusHand : EnemyController
+namespace Enemy.C0BU5
 {
-    protected new void RotateTowardsPlayer()
+    public class CobusHand : MonoBehaviour
     {
-        Vector2 aimDirection = player.transform.position - transform.position;
-        float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg + 90;
-        transform.rotation = Quaternion.Euler(0, 0, aimAngle);
-    }
-        void FixedUpdate()
-    {   
-        if (player != null)
+        public C0BU5 cobus;
+        public Transform firePoint;
+        public float ContactDamage;
+        public float maxSpeed;
+
+        private Rigidbody2D rb;
+        private GameObject player;
+        private Transform target;
+        private SpriteRenderer sprite;
+
+        public void Start()
         {
-            float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);  
-            MoveNearPlayer();
-            RotateTowardsPlayer();
-            if (distanceToPlayer <= shootingRange && Time.time >= nextFireTime)
+            sprite = GetComponent<SpriteRenderer>();
+            player = GameObject.FindGameObjectWithTag("Player"); // Assuming the player has the tag "Player"
+            rb = GetComponent<Rigidbody2D>();
+        }
+
+        public void FixedUpdate()
+        {
+            if (player != null)
             {
-                ShootAtPlayer(damage);
-                nextFireTime = Time.time + 1f / fireRate;
+                MoveToTarget();
+                RotateToPlayer();
             }
         }
-    }
-    protected new void MoveNearPlayer()
-    {
-        if (Vector2.Distance(transform.position, player.transform.position + moveTarget) < 1)  //Enemy is near target position
+
+        protected void RotateToPlayer()
         {
-            moveTarget = FindPointNearPlayer();
-        } 
-        Vector3 heading = ((moveTarget + player.transform.position) - transform.position).normalized;   
-        heading = avoidanceAdjustment(heading); 
-       // transform.position += maxSpeed * Time.deltaTime * heading;
-        if(rb.velocity.magnitude > maxSpeed)
-        {
-            rb.AddForce(maxSpeed * -rb.velocity.normalized, ForceMode2D.Force);
+            Vector2 aimDirection = player.transform.position - transform.position;
+            float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg + 90;
+            rb.rotation = aimAngle;
         }
-        Debug.DrawLine(transform.position, player.transform.position + moveTarget);
-        Debug.DrawLine(transform.position, transform.position + heading, Color.red);
-        rb.AddForce(maxSpeed * heading,ForceMode2D.Force);
-    }
-    public new void OnCollisionEnter2D(Collision2D other)
-    {
+
+        public void SetMoveTarget(Transform moveTarget)
+        {
+            target = moveTarget;
+        }
+
+        private void MoveToTarget()
+        {
+            if (Vector3.Distance(transform.position, target.position) < 0.2)
+            {
+                return;
+            }
+
+            Vector3 heading = ((target.position) - transform.position).normalized;
+            if (rb.velocity.magnitude > maxSpeed)
+            {
+                rb.AddForce(maxSpeed * -rb.velocity.normalized, ForceMode2D.Impulse);
+            }
+
+            rb.AddForce(maxSpeed / 2 * heading, ForceMode2D.Impulse);
+        }
+
+
+        public void OnCollisionEnter2D(Collision2D other)
+        {
+            if (other.gameObject.CompareTag("Player"))
+            {
+                // get enemy
+                PlayerController player = other.gameObject.GetComponent<PlayerController>();
+
+                // damage both heavily
+                player.takeDamage(ContactDamage);
+            }
+        }
+        public void OnTriggerEnter2D(Collider2D other){
+            if(other.CompareTag("Bullet")){
+                cobus.takeDamage(other.GetComponent<Bullet>().damage/2);
+                StartCoroutine(FlashRed());
+                Destroy(other.gameObject);
+            }
+        }
+
+        IEnumerator FlashRed()
+        {
+            sprite.color = Color.red;
+            yield return new WaitForSeconds(0.1f);
+            sprite.color = Color.white;
+        }
     }
 }

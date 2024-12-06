@@ -8,6 +8,8 @@ TagManager:
   - Bullet
   - Asteroid
   - Forcefield
+  - Crossfade
+  - CobusBullet
   layers:
   - Default
   - TransparentFX
@@ -50,6 +52,12 @@ TagManager:
     locked: 0
   - name: bg1
     uniqueID: 3199128401
+    locked: 0
+  - name: EnemyBg 1
+    uniqueID: 3608975385
+    locked: 0
+  - name: EnemyBg 2
+    uniqueID: 677109075
     locked: 0
   - name: Default
     uniqueID: 0

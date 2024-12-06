@@ -1,132 +1,185 @@
 using System;
 using System.Collections;
+using GameControl;
 using UnityEngine;
 using TMPro;
+using UIX;
 using Unity.VisualScripting;
 using Object = UnityEngine.Object;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
+using UnityEngine.InputSystem;
 
-public partial class PlayerController : MonoBehaviour
+namespace Player
 {
-    
-    public Rigidbody2D rb;
-    public Weapon weapon;
-    public GameOverScreen gameOverScreen;     // Reference to the GameOverScreen script
-    public PauseMenu pauseMenu;
-    public float damage = 5f, defense = 3, moveSpeed = 10f, baseSpeed = 10f, health = 50, maxHealth = 50, XP = 0, shield = 0, maxShield;
-    public int currentLevel = 1;
-    public float levelReq = 30 * Mathf.Pow(1.1f, 0);
-    public SpriteRenderer sprite, spritefield;
-    private int MachineGunCount = 0, RocketBoosterCount = 0, divergeCount = 0, shieldCount = 0, forcefieldCount = 0, rouletteCount = 0;
-    public TMP_Text sstats, stats; //stats for upgrade page and stats page
-    public bool divergeActivated = false;
-    public bool forceFieldActivated = false;
-    protected float nextFieldTime = 0f;
-    protected int _timer;
-    protected IEnumerator TimerCoroutine;
-    private Action onTimeOut;
-    public GameObject rouletteBall;
-
-    Vector2 moveDirection;
-    Vector2 mousePosition;
-    // Update is called once per frame
-    void Update()
+    public partial class PlayerController : MonoBehaviour
     {
-        Color color = spritefield.color;
-        color.a = forceFieldActivated ? 1f : 0f;  // 1 = fully visible, 0 = fully transparent
-        spritefield.color = color;
-        Stats();
-        if(Input.GetKeyDown(KeyCode.Escape)){
-            pauseMenu.Pause();
-        }
-        float moveX = Input.GetAxisRaw("Horizontal");
-        float moveY = Input.GetAxisRaw("Vertical");
+        public Rigidbody2D rb;
+        public Weapon weapon;
+        public GameOverScreen gameOverScreen; // Reference to the GameOverScreen script
+        public PauseMenu pauseMenu;
+        public PlayerStats stats;
+        public float health = 50f;
+        public float levelReq = 30 * Mathf.Pow(1.1f, 0);
+        public SpriteRenderer sprite, spritefield;
+        public TMP_Text sstats, statsText; //stats for upgrade page and stats page
 
-        if(Input.GetMouseButton(0)){
-            if(divergeActivated){
+        private int MachineGunCount = 0,
+            RocketBoosterCount = 0,
+            divergeCount = 0,
+            shieldCount = 0,
+            forcefieldCount = 0,
+            rouletteCount = 0;
 
-                weapon.Diverge(divergeCount, damage);
+        protected float nextFieldTime = 0f;
+        protected int _timer;
+        protected IEnumerator TimerCoroutine;
+        private Action onTimeOut;
+        public GameObject rouletteBall;
 
-            } else{
-                weapon.Fire(damage);
-            }
-        }
+        public Vector2 moveDirection;
+        public Vector2 mousePosition;
+        
+        Keyboard keyboard;
 
-        moveDirection = new Vector2(moveX, moveY).normalized;
-        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if (XP >= levelReq) {
-            LevelUp();
+        private InputAction moveAction;
 
-        }
-    }
-
-    private void FixedUpdate(){
-        rb.AddForce(moveSpeed * new Vector2(moveDirection.x, moveDirection.y),ForceMode2D.Impulse);
-        Vector2 aimDirection = mousePosition - rb.position;
-        float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
-        rb.rotation = aimAngle;
-    }
-
-    public void takeDamage(float dam) {
-        float damageTaken = (dam - defense);
-        if (damageTaken <= 1) {
-            damageTaken = 1;
-        }
-        if (forceFieldActivated)
+        void Start()
         {
-            damageTaken = 0;
-            forceFieldActivated = false;
-            float time = 15-(forcefieldCount*1.5f);
-            if(time <= 2){
-                time = 2;
-            }
-            ForceFieldTimerStart((int)time, () =>
+            keyboard = Keyboard.current;
+            moveAction = InputSystem.actions.FindAction("Move", true);
+            stats.forceFieldActivated = stats.forcefieldCount > 0;
+            LoadRoulette();
+        }
+        // Update is called once per frame
+
+        void Update()
+        {
+            Color color = spritefield.color;
+            color.a = stats.forceFieldActivated ? 1f : 0f; // 1 = fully visible, 0 = fully transparent
+            spritefield.color = color;
+            // Stats(); Dumped at the request of Quetzal to avoid a nullreference
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                forceFieldActivated = true;
-                onTimeOut = null;
-                Debug.Log("Callback lambda! Forcefield re-engaged.");
-            });
-        }
-        if(shield-damageTaken < 0){
-            health -= damageTaken - shield;
-            shield = 0;
-        } else{
-            shield -= damageTaken;
-        }
-        StartCoroutine(FlashRed());
+                pauseMenu.Pause();
+            }
 
-        Debug.Log("Player taking damage! Health: " + health);
-        if(health <= 0){
-            gameOverScreen.Setup();
-            FindObjectOfType<AudioManager>().Play("Player Death", 1.0f);
-            Destroy(gameObject);
-        }
-    }
-    public void KillPlayer()
-    {
-        health = 0;
-        shield = 0;
-        gameOverScreen.Setup();
-        Destroy(gameObject);
-    }
-    private void LevelUp() {
-        damage += 1;
-        defense += 1;
-        baseSpeed += 1;
-        moveSpeed += 1;
-        health += 10;
-        maxHealth += 10;
-        if(shieldCount != 0){
-            maxShield = (0.1f+(0.05f*shieldCount))*maxHealth;
-        }
-        XP -= levelReq;
-        currentLevel++;
-        levelReq = 30 * Mathf.Pow(1.1f, (currentLevel-1));
+            //float moveX = Input.GetAxisRaw("Horizontal");
+            //float moveY = Input.GetAxisRaw("Vertical");
+            Vector2 moveValue = moveAction.ReadValue<Vector2>();
+            
 
-    }
+            if (Input.GetMouseButton(0))
+            {
+                if (stats.divergeCount > 0)
+                {
 
-    IEnumerator FlashRed(){
-        sprite.color = Color.red;
-        yield return new WaitForSeconds(0.1f);
-        sprite.color = Color.white;
+                    weapon.Diverge(stats.divergeCount, stats.damage);
+
+                }
+                else
+                {
+                    weapon.Fire(stats.damage);
+                }
+            }
+
+            moveDirection = moveValue.normalized;
+            mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            stats.score = stats.XP;
+            if (stats.XP >= levelReq)
+            {
+                stats.score += stats.XP;
+                LevelUp();
+
+            }
+        }
+
+        private void FixedUpdate()
+        {
+            rb.AddForce(stats.moveSpeed * new Vector2(moveDirection.x, moveDirection.y), ForceMode2D.Impulse);
+            Vector2 aimDirection = mousePosition - rb.position;
+            float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
+            rb.rotation = aimAngle;
+            if (health <= 0)
+            {
+                stats.ResetStats();
+                gameOverScreen.Setup();
+                FindObjectOfType<AudioManager>().Play("Player Death", 1.0f);
+                Destroy(gameObject);
+            }
+        }
+
+        public void takeDamage(float dam)
+        {
+            float damageTaken = (dam - stats.defense);
+            if (damageTaken <= 1)
+            {
+                damageTaken = 1;
+            }
+
+            if (stats.forceFieldActivated)
+            {
+                damageTaken = 0;
+                stats.forceFieldActivated = false;
+                float time = 15 - (stats.forcefieldCount * 1.5f);
+                if (time <= 2)
+                {
+                    time = 2;
+                }
+
+                this.ForceFieldTimerStart((int)time, () =>
+                {
+                    stats.forceFieldActivated = true;
+                    onTimeOut = null;
+                    Debug.Log("Callback lambda! Forcefield re-engaged.");
+                });
+            }
+
+            if (stats.shield - damageTaken < 0)
+            {
+                health -= damageTaken - stats.shield;
+                stats.shield = 0;
+            }
+            else
+            {
+                stats.shield -= damageTaken;
+            }
+
+            StartCoroutine(FlashRed());
+
+            Debug.Log("Player taking damage! Health: " + health);
+        }
+
+        public void KillPlayer()
+        {
+            health = 0;
+            stats.shield = 0;
+        }
+        
+        private void LevelUp()
+        {
+            stats.damage += 1;
+            stats.defense += 1;
+            stats.baseSpeed += 1;
+            stats.moveSpeed += 1;
+            health += 10;
+            stats.maxHealth += 10;
+            if (stats.shieldCount != 0)
+            {
+                stats.maxShield = (0.1f + (0.05f * stats.shieldCount)) * stats.maxHealth;
+            }
+
+            stats.XP -= levelReq;
+            stats.currentLevel++;
+            levelReq = 30 * Mathf.Pow(1.1f, (stats.currentLevel - 1));
+        }
+
+        IEnumerator FlashRed()
+        {
+            sprite.color = Color.red;
+            yield return new WaitForSeconds(0.1f);
+            sprite.color = Color.white;
+        }
+
+
     }
 }
