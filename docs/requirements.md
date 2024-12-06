@@ -301,28 +301,36 @@ For version 1 of our game, we only intend on having 2 specific boss fights that 
 
 ##### 5.6.2: W35-S315
 * At round 10, W35-S315 will spawn and have three different distinct attacks:
+* This is a special boss, the screen camera will NOT be locked.
 
-* Merge Conflict: Sends out walls of >>>>> and ===== and <<<<< at the player. 
+* Charge: W35-S315 will move away from the player to and cut in with a quick movement.
+	* To telegraph the attack, W35-S315 will start to move away from the player for 1s.
+	* W35-S315 will move at twice the player peed, cutting infront of the player's predicted movement pattern.
+		* This is so it's possible to bait out the attack by switching your direction at the right time.
+	* Getting hit by this attack will deal 30 damage to the player.
+
+* Merge Conflict: W35-S315 will circle the player and send out walls of >>>>> and ===== and <<<<< at the player. 
+	* W35-S315 will speed up and encircle the player, trapping the player and will initiate the attack.
 	* These walls will be roughly 1/5 of the screen length long and will move at 50% of the player's speed to allow appropriate time to react and weave through the pattern of walls.
-	* The walls will come from the edges of the screen and will traverse in one direction until they go off-screen.
+	* The walls will come from W35-S315's body and will traverse in one straight direction until they go off-screen.
 	* Being hit by a wall will deal 20 damage to the player.
 
-* Git Branch: Shoots out a random binary tree pattern of nodes that will damage the player.
-	* The tree, including all of its edges and nodes, will be displayed for 1 second with a pink outline. The player can move through this outline and it will not damage them during the 1 second. It is purely to telegraph to the player where the tree will be.
-	* After the 2 seconds are up, the outline will turn from pink to white and will stay there for 3 seconds, if the player collides with any of the white edges or nodes, they will be damaged.
-	* Being hit by a node or edge will deal 40 damage to the player.
+* Git Branch: W35-S315 will split into two smaller worm bodies and attack the player for 10 seconds.
+	* W35-S315 will slow down for 3 seconds and start shaking, telegraphing his attack.
+	* After 3 seconds, W35-S315 will split into two smaller W35-S315 bodies that will do the charge attack at the player.
+	* After 10 seconds, the two bodies will merge back into one.
 
-* Ponytail Whip: W35-S315 will spin quickly, using his ponytail as a whip to damage the player.
+* Ponytail Whip: When close to W35-S315, he will spin quickly, using his ponytail as a whip to damage the player.
 	* To telegraph this attack, W35-S315 will stop moving and flash red for 0.5 seconds.
 	* After the 0.5 seconds are up, he will do a quick 360 degree spin where his ponytail will stick outward, doing a circular slashing motion. 
-	* Being hit by the ponytail will deal 25 damage to the player.
-
+	* Being hit by the ponytail will deal 35 damage to the player.
+	* This attack automatically triggers whenever the player is close to W35-S315's head (within 3 player lengths from the head).
 
 * Movement: W35-S315 will constantly move towards the player through the entire fight while doing attacks. 
-	* He will have 75% of the player's speed, allowing the player to easily outrun him, but not be able to stay still during the fight.
+	* He will have 75% of the player's speed (unless doing certain attacks), allowing the player to easily outrun him, but not be able to stay still during the fight.
 	* If W35-S315 collides with the player, he will deal 25 damage.
 
-* Base stats: 80% of player's speed, 20/40/25/25 damage, 1500 health
+* Base stats: 75% of player's speed, 30/20/35/25 damage, 1500 health
 
 ##### 5.6.3: C0B-U5
 * At round 20, C0B-U5 will spawn and have three different distinct attacks:
@@ -334,22 +342,25 @@ For version 1 of our game, we only intend on having 2 specific boss fights that 
 	* Once the 2 seconds are up, the indicators will become red and stay there for 1 second, damaging the player if they are in the region.
 	* Being hit by this attack will deal 60 damage to the player.
 
-* Matrix Bomb: C0B-U5 will drop a 4x4 matrix from his body/ship, exploding when it hits the bottom of the screen.
-	* C0B-U5 will flash red for 0.5 seconds before dropping the matrix bomb. The bomb will take 1 second to fall to the bottom of the screen and will explode when it reaches the bottom of the screen. If a player runs into the matrix as it is falling, they will take damage.
-	* The explosion will cause the matrix to disappear and will deal damage in a circular area (indicated visually by an explosion animation) around where the matrix hit the bottom (size to be determined). This explosion will be bigger than the matrix and will damage the player if they are within the radius.
+* Matrix Bomb: C0B-U5 will shoot a matrix bomb towards the player from his right arm, exploding when it hits the player or the bottom of the screen.
+	* C0B-U5 will flash red for 0.5 seconds before shooting the matrix bomb. The bomb will travel at the speed of the player, and will explode when it reaches the bottom of the screen. If a player runs into the matrix as it is falling, they will take damage and the bomb will explode.
+	* The explosion will cause the matrix to disappear and will deal damage in a circular area (indicated visually by an explosion animation) around where the matrix hit the bottom (size to be determined). This explosion will be bigger than the matrix and will damage the player if they are within the radius (meaning you can get double hit if you stand still).
 	* This will be C0B-U5's most frequent attack.
-	* Being hit by this attack will deal 75 damage to the player.
+	* Being hit by the flying bomb will deal 35 damage to the player, and being hit by the explosion will deal 75 damage to the player.
 
-* Factorial: C0B-U5 will shoot a barrage of bullets in decrements (factorial decomposition).
-	* A random number N between 5-8 will be selected. Then a spread of N bullets will be shot at the player. After 0.3 seconds, a spread of N-1 bullets will be shot at the player, then N-2, etc. This pattern will continue until C0B-U5 has shot a spread of one bullet.
+* Factorial: C0B-U5 will shoot some exclamation mark shaped bullets in a factorial tree formation.
+	* A random number N between 5-8 will be selected. Then C0B-U5 will shoot bullets from his left arm that will split into a factorial tree of height N (e.g. N = 4 causes each bullet to split into 24 bullets progressively), the bullet will split once every 0.3s seconds, and the bullets will traavel at 1/4 of the player speed.
 	* Being hit by this attack will deal 45 damage to the player.
 
-* Movement: C0B-U5 will never chase the player or deal damage if he collides with the player. Instead, he will move from left to right on the top third of the screen in an inconsistent and unpredictable pattern, making it hard for the player to deal damage.
+* Movement: C0B-U5 will never chase the player or deal damage if he collides with the player. Instead, he will track the player and be positioned right above them at all times, allowing his left arm to always be to the player's left, and right arm to always be to the player's right.
 
-* Desperation phase: When C0B-U5 reaches 0 health, he will try and kill the player with one last desperate attack. He will perform the Cartesian Product attack 5 times in a row in succession. If the player survives this, a cutscene will appear. 
+* Phase 1: C0B-U5 will only do the factorial and matrix bomb attacks until 75% hp.
+* Phase 2: C0B-U5 will do all 3 of his attacks in a slow cycle, and never more than one at a time.
+* Phase 3: C0B-U5 will do all 3 of his attacks in a fast cycle, sometimes multiple at the same time.
+* Phase 4 (Desperation phase): When C0B-U5 reaches 0 health, he will try and kill the player with one last desperate attack. He will perform the Cartesian Product attack 5 times in a row in succession. If the player survives this, a cutscene will appear. 
 	* During the cutscene, the screen will contain C0B-U5 at the top of the screen and nothing else. Text will appear line by line. This text will be a proof by contradiction written by the player (the text will be predetermined and will not take player input) that eliminates C0B-U5 from V1U. Upon the proof being finished, C0B-U5's model at the top of the screen will explode, and the round will end.
 
-* Base stats: 75 speed (left-right movement only), 60/75/45 damage, 5000 health
+* Base stats: player speed (tracks the player), 60/(35/75)/45 damage, 5000 health
 
 ### <a name="items"></a>5.7: Upgrade Items and System 
 
