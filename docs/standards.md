@@ -10,11 +10,11 @@
 
 ## Table of Contents
 
-[Documentation standards and processes](#docs) 
+1. [Documentation standards and processes](#docs) 
 
-[Coding standards and processes](#code) 
+2. [Coding standards and processes](#code) 
 
-[Version control standards and processes](#vc)
+3. [Version control standards and processes](#vc)
 
 ## Document structure
 
@@ -25,7 +25,7 @@ In this document we will be addressing three core areas of standards and process
 
 Each section includes discussion of how those standards/processes will be enforced, and how they will be reviewed for potential updates if/as needed.
 
-## <a name=”docs”></a>Documentation standards and processes
+## 1. <a name=”docs”></a>Documentation standards and processes
 
 Documentation will be kept in a `docs/` directory off the project root, and will contain the proposal, team charter, requirements, standards and processes, design, project update, and other future documents.
 
@@ -42,10 +42,11 @@ List of phase documents:
 [Requirements](requirements.md): the product requirements deliverable (phase 2)
 [Standards and Procedures](standards.md): the standards and processes deliverable (phase 2)
 [Logical Design](logicaldesign.md): the logical design deliverable (phase 3)
-[Project Update](update.md): the project update deliverable for the most recent phase (currently phase 4)
+[Project Update](update.md): the project update deliverable (currently phase 4)
 [Proof of Concept](proofconcept.md): the proof of concept deliverable (phase 4)
 [User Acceptance Test Process](uatesting.md): the user acceptance test process deliverable (phase 5)
 [Detailed Test Case Descriptions](testcases.md): the detailed user acceptance test case description appendix (phase 5)
+[Project Close Out](closeout.md): the project close out deliverable (phase 6)
 
 More to be added later.
 
@@ -53,7 +54,7 @@ Documents are to, as closely as possible, follow the organization/layout structu
 
 To the extent possible, all documents should follow the format and conventions set out in the project template’s documents. Documents are expected to have proper grammar and spelling (Canadian English).
 
-## <a name=”code”></a>Coding standards and processes
+## 2. <a name=”code”></a>Coding standards and processes
 
 Unity uses C# as the engine’s scripting language. When working with C#, we will try to apply Microsoft’s [C# and .NET Coding Conventions](https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/coding-conventions). 
 
@@ -79,7 +80,7 @@ All code must be finalised and ready for testing atleast two days before a submi
 
 *Disclaimer: This section is subject to change when we actually start developing our product in phase 5 as we learn what works better for the group in terms of efficiency and reducing confusion*
 
-## <a name=”vc”></a>Version control standards and processes
+## 3. <a name=”vc”></a>Version control standards and processes
 
 Version control will be set up on GitHub [here](https://github.com/wehaventdecided/surrounded) and will be maintained by Version Control Lead Connor McDermid and Apprentice Anmol Baidwan.
 
