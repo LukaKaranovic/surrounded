@@ -10,10 +10,6 @@
 
 ## Table of Contents
 
-1.[Final Updates](#updates)
-2.[End state of the product](#product)
-3.[Organizational aspects](#organization) 
-4.[Technical aspects](#technical)
 1. [Final Updates](#updates)
 2. [End state of the product](#product)
 3. [Organizational aspects](#organization) 
@@ -21,13 +17,13 @@
 
 ## 1. Final Updates
 
-## <a name="updates"></a> Final Updates
 
 <<<<<<< HEAD
 
 
 ## <a name="product"></a> End State of the Product
 =======
+>>>>>>> f6b6cc056ae1ff45f885f2be65441e0241a7d4bf
 
 ## 2. End State of Project
 Almost all the main features presented in our requirements document were successfully implemented. 
