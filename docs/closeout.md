@@ -14,14 +14,20 @@
 2.[End state of the product](#product)
 3.[Organizational aspects](#organization) 
 4.[Technical aspects](#technical)
+1. [Final Updates](#updates)
+2. [End state of the product](#product)
+3. [Organizational aspects](#organization) 
+4. [Technical aspects](#technical)
 
 ## 1. Final Updates
 
 ## <a name="updates"></a> Final Updates
 
+<<<<<<< HEAD
 
 
 ## <a name="product"></a> End State of the Product
+=======
 
 ## 2. End State of Project
 Almost all the main features presented in our requirements document were successfully implemented. 
