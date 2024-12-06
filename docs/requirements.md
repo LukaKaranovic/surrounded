@@ -128,9 +128,9 @@ More details about the map size, camera, and asteroids can be found in the Map a
 
 ### 4.4: Story
 
-The story is based around a lone survivor traversing an unknown space field referred to as V1U. As the last of their kind from Earth, the player will traverse the V1U field out in the cosmos in hopes to find life. However, the player will only encounter rogue, AI-controlled ships which will try to eliminate the player. Slowly, through in-game text displayed at the end of rounds, they will discover that there is a mastermind unit controlling these AI ships, named W35-S315. Once defeating the W35-S315, the player will discover that W35-S315 was just like the other ships and didn’t have a mind of its own. Instead, it is revealed that W35-S315 is a servant of the great overlord C0B-U5. Overtime, more of the story of the V1U space field will be revealed to the user through completing rounds.
+The story is based around a lone survivor traversing an unknown space field referred to as V1U. As the last of their kind from Earth, the player will traverse the V1U field out in the cosmos in hopes to find life. However, the player will only encounter rogue, AI-controlled ships which will try to eliminate the player. Slowly, through in-game text displayed at the end of rounds, they will discover that there is a mastermind unit controlling these AI ships, named W35-S315. Once defeating the W35-S315, the player will discover that W35-S315 was just like the other ships and didn’t have a mind of its own. Instead, it is revealed that W35-S315 is a servant of the great overlord C0B-U5. Overtime, more of the story of the V1U space field will be revealed to the user through loading the game.
 
-*The cryptic text:* The text will reveal the story to the player through vague statements. It is intended to not be very direct and is something that the user will have to pay attention to and piece together to understand. At the end of each round, the player will disappear and about 1-2 lines of text displaying the cryptic text will appear for about 5 seconds before it disappears and the player is prompted with the [item selection pop-up](#itemselection).
+*The cryptic text:* Typewriter style text will appear in a cutscene will load when the game is started (before the main menu). After the player compeletes a new boss round (as their new best), the next time they load the game, new text will appear on startup, slowing revealing the story to the player.
 
 ## <a name="keyfeat"></a>5. Key features and behaviour
 
@@ -214,7 +214,7 @@ The game will consist of moving through 2D space and piloting a base ship throug
 		* If it has enough credits to spawn that enemy, it will spawn it and subtract the credit amount from the credits in the function.  
 		* If it doesn’t have enough credits to spawn the enemy, it will randomly select another enemy ID until it can spawn it.  
 	* The 5 second loop will then repeat.
-* At the end of each round, all enemies and the player model are wiped from the screen. Then cryptic text revealing the story will appear for 5 seconds. The text will disappear and the player will get prompted with 3 random items. The player must choose 1 item to boost their ship, these items will be described in the Upgrade System section.
+* At the end of each round, all enemies and the player model are wiped from the screen. The player will get prompted with 3 random items. The player must choose 1 item to boost their ship, these items will be described in the Upgrade System section.
 * The next round will not start until an item has been selected.
 * At the start of a new round, the player’s health will be replenished to full and the player will spawn in at the center of the map.
 
@@ -352,6 +352,8 @@ For version 1 of our game, we only intend on having 2 specific boss fights that 
 	* A random number N between 5-8 will be selected. Then C0B-U5 will shoot bullets from his left arm that will split into a factorial tree of height N (e.g. N = 4 causes each bullet to split into 24 bullets progressively), the bullet will split once every 0.3s seconds, and the bullets will traavel at 1/4 of the player speed.
 	* Being hit by this attack will deal 45 damage to the player.
 
+* Hands: Running into C0B-U5's hands will deal 20 damage to the player.
+
 * Movement: C0B-U5 will never chase the player or deal damage if he collides with the player. Instead, he will track the player and be positioned right above them at all times, allowing his left arm to always be to the player's left, and right arm to always be to the player's right.
 
 * Phase 1: C0B-U5 will only do the factorial and matrix bomb attacks until 75% hp.
@@ -360,7 +362,7 @@ For version 1 of our game, we only intend on having 2 specific boss fights that 
 * Phase 4 (Desperation phase): When C0B-U5 reaches 0 health, he will try and kill the player with one last desperate attack. He will perform the Cartesian Product attack 5 times in a row in succession. If the player survives this, a cutscene will appear. 
 	* During the cutscene, the screen will contain C0B-U5 at the top of the screen and nothing else. Text will appear line by line. This text will be a proof by contradiction written by the player (the text will be predetermined and will not take player input) that eliminates C0B-U5 from V1U. Upon the proof being finished, C0B-U5's model at the top of the screen will explode, and the round will end.
 
-* Base stats: player speed (tracks the player), 60/(35/75)/45 damage, 5000 health
+* Base stats: player speed (tracks the player), 60/(35/75)/45/20 damage, 5000 health
 
 ### <a name="items"></a>5.7: Upgrade Items and System 
 
