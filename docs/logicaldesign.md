@@ -191,7 +191,6 @@ The anticipated sequence of events is:
 3. Player chooses to start a new game
 4. Game Logic process is invoked
 
-
 #### 5.1.3: <a name="archgcmproc"></a>Game Logic Processes
 
 The game logic processes are responsible for moment-to-moment game control itself. All core gameplay actions and events are resolved here.
