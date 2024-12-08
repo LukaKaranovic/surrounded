@@ -46,7 +46,7 @@ namespace Player
         void Start()
         {
             keyboard = Keyboard.current;
-            moveAction = InputSystem.actions.FindAction("Move", true);
+            moveAction = InputSystem.actions.FindAction("Move", false);
             stats.forceFieldActivated = stats.forcefieldCount > 0;
             LoadRoulette();
         }

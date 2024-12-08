@@ -13,7 +13,10 @@ namespace GameControl
 
         void Update()
         {
-            isGoofy = myToggle.isOn ? true : false;
+            // goofy mode has been disabled due to not all sounds being present and also 
+            // it being shit
+            // once all available sounds are present you can uncomment this to make the toggle work again
+            // isGoofy = myToggle.isOn ? true : false;
         }
 
         // Ensure there's only one instance of AudioManager

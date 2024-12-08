@@ -1327,7 +1327,7 @@ RectTransform:
   m_LocalScale: {x: 0.2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1827992002}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4405,6 +4405,8 @@ MonoBehaviour:
   sstats: {fileID: 219752457}
   statsText: {fileID: 212559886}
   rouletteBall: {fileID: 6739810025927660360, guid: 4d102170a383b284598aa3784dba149a, type: 3}
+  moveDirection: {x: 0, y: 0}
+  mousePosition: {x: 0, y: 0}
 --- !u!50 &816382868
 Rigidbody2D:
   serializedVersion: 4
@@ -10686,3 +10688,4 @@ SceneRoots:
   - {fileID: 1319657341}
   - {fileID: 1123753039}
   - {fileID: 1762948504}
+  - {fileID: 217199650}
