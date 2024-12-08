@@ -9,6 +9,7 @@ TagManager:
   - Asteroid
   - Forcefield
   - Crossfade
+  - CobusBullet
   layers:
   - Default
   - TransparentFX

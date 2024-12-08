@@ -713,8 +713,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5945ca35746a11409e0b71692b4f0e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cobus: {fileID: 0}
   firePoint: {fileID: 1074772625700979324}
-  ContactDamage: 0
+  ContactDamage: 20
   maxSpeed: 5
 --- !u!114 &1552948077642348402
 MonoBehaviour:
@@ -728,7 +729,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37ca6737dc5579b4482233ac306950d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletFab: {fileID: 301942462713169048, guid: 14d43376011fbaa4f97d40a15c1881ae, type: 3}
+  bulletFab: {fileID: 301942462713169048, guid: 3b59d83e0c3c08c4db221504da53c735, type: 3}
   bulletPos: {fileID: 1074772625700979324}
   force: 5
   fireRate: 2
@@ -980,6 +981,7 @@ GameObject:
   - component: {fileID: 8703970196664978527}
   - component: {fileID: 6000488796595969030}
   - component: {fileID: 5078629248215086463}
+  - component: {fileID: 5487570989380672389}
   m_Layer: 0
   m_Name: hand1
   m_TagString: Untagged
@@ -1154,9 +1156,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5945ca35746a11409e0b71692b4f0e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cobus: {fileID: 0}
   firePoint: {fileID: 4537889620903667778}
-  ContactDamage: 0
+  ContactDamage: 20
   maxSpeed: 5
+--- !u!114 &5487570989380672389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7486117396145003251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37ca6737dc5579b4482233ac306950d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletFab: {fileID: 301942462713169048, guid: 514ef6255077b1b4eb85580abe08a814, type: 3}
+  bulletPos: {fileID: 4537889620903667778}
+  force: 20
+  fireRate: 2
 --- !u!1 &8015095155305892442
 GameObject:
   m_ObjectHideFlags: 0

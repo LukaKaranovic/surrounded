@@ -46,7 +46,7 @@ namespace Player
         void Start()
         {
             keyboard = Keyboard.current;
-            moveAction = InputSystem.actions.FindAction("Move", true);
+            moveAction = InputSystem.actions.FindAction("Move", false);
             stats.forceFieldActivated = stats.forcefieldCount > 0;
             LoadRoulette();
         }
@@ -103,6 +103,7 @@ namespace Player
             {
                 stats.ResetStats();
                 gameOverScreen.Setup();
+                FindObjectOfType<AudioManager>().Play("Player Death", 1.0f);
                 Destroy(gameObject);
             }
         }
@@ -153,7 +154,7 @@ namespace Player
             health = 0;
             stats.shield = 0;
         }
-
+        
         private void LevelUp()
         {
             stats.damage += 1;
@@ -170,7 +171,6 @@ namespace Player
             stats.XP -= levelReq;
             stats.currentLevel++;
             levelReq = 30 * Mathf.Pow(1.1f, (stats.currentLevel - 1));
-
         }
 
         IEnumerator FlashRed()
